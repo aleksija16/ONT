@@ -4,3 +4,32 @@
  ViewData["Title"]="Kviz";
 }
 
+<div class="kviz-kontejner">
+    <div class="redni-broj-pitanja">
+        <h3>Pitanje <span class="pitanje-red-broj">1</span> od 5</h3>
+    </div>   
+     <div class="pitanje">Memorijalni park Bubanj-Sta se desilo tokom Drugog svetskog rata</div>
+        
+     <div class="odgovori">
+         <div id="0" class="netacan" onclick="izabran()">Bitka za Bubanj</div>
+
+         <div id="1" class="tacan" onclick="izabran()">Masovno streljanje zarobljenika</div>
+         <div id="2" class="netacan" onclick="izabran()">Izgradnja spomenika</div>
+     </div>
+    <div class="button">
+        <button type="button" class="btnDalje">Dalje</button>
+    </div>
+</div>
+
+<script>
+function izabran() {
+    var elements = document.getElementsByClassName('tacan'); // get all elements
+	for(var i = 0; i < elements.length; i++){
+		elements[i].style.backgroundColor = "green";
+	}
+     var elements = document.getElementsByClassName('netacan'); // get all elements
+	for(var i = 0; i < elements.length; i++){
+		elements[i].style.backgroundColor = "red";
+	}
+}
+</script>
