@@ -1,4 +1,11 @@
 ﻿@page
 @model Projekat_1.JednaZnamenitostModel
 @{
+
 }
+
+<form method="get">
+    <h3>@Model.TrenutnaZnamenitost.NazivZnamenitosti</h3>
+    <div> Kraci opis o: @Model.TrenutnaZnamenitost.NazivZnamenitosti.</div>
+    <div> Lokacija znamenitosti: @Model.TrenutnaZnamenitost.LokacijaZnamenitosti</div>
+</form>

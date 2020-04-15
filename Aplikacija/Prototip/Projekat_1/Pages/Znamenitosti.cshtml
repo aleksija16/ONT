@@ -1,4 +1,20 @@
 ﻿@page
 @model Projekat_1.ZnamenitostiModel
 @{
+    ViewData["Title"] = "Znamenitosti";
 }
+
+<form> 
+    <a asp-page="./AddZnamenitost/" >Dodaj znamenitost</a>
+</form>
+
+<form method="get">
+    @foreach (var znamenitost in Model.SveZnamenitosti)
+    {
+        <div> 
+            <h3> Ime znamenitosti: @znamenitost.NazivZnamenitosti</h3>
+            <p> Lokacija: @znamenitost.LokacijaZnamenitosti</p>
+            <a asp-page="./JednaZnamenitost/" asp-route-id="@znamenitost.Idznamenitosti">Prikazi detalje</a>
+        </div>
+    }
+</form>
