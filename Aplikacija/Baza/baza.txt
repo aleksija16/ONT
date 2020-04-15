@@ -1,0 +1,63 @@
+CREATE TABLE `korisnici` (
+  `idkorisnika` int(10) unsigned NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idkorisnika`),
+  UNIQUE KEY `idkorisnici_UNIQUE` (`idkorisnika`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `rezervacije` (
+  `idrezervacije` int(10) unsigned NOT NULL,
+  `idturisteRez` int(10) unsigned NOT NULL,
+  `idvodicaRez` int(10) unsigned NOT NULL,
+  `idtureRez` int(10) unsigned NOT NULL,
+  `datumIzvodjenja` datetime(1) DEFAULT NULL,
+  PRIMARY KEY (`idrezervacije`),
+  UNIQUE KEY `idrezervacije_UNIQUE` (`idrezervacije`),
+  UNIQUE KEY `idturiste_UNIQUE` (`idturisteRez`),
+  UNIQUE KEY `idvodica_UNIQUE` (`idvodicaRez`),
+  UNIQUE KEY `idture_UNIQUE` (`idtureRez`),
+  CONSTRAINT `idtureRez` FOREIGN KEY (`idtureRez`) REFERENCES `ture` (`idture`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idturisteRez` FOREIGN KEY (`idturisteRez`) REFERENCES `turisti` (`idturiste`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idvodicaRez` FOREIGN KEY (`idvodicaRez`) REFERENCES `vodici` (`idvodica`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `ture` (
+  `idture` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nazivTure` varchar(45) DEFAULT NULL,
+  `trajanjeTure` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`idture`),
+  UNIQUE KEY `idture_UNIQUE` (`idture`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `turisti` (
+  `idturiste` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `imeTuriste` varchar(45) NOT NULL,
+  `prezimeTuriste` varchar(45) DEFAULT NULL,
+  `pol` char(1) DEFAULT NULL,
+  `datumRodjenja` date DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idturiste`),
+  UNIQUE KEY `idturiste_UNIQUE` (`idturiste`),
+  CONSTRAINT `idturiste` FOREIGN KEY (`idturiste`) REFERENCES `korisnici` (`idkorisnika`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `vodici` (
+  `idvodica` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `imeVodica` varchar(45) DEFAULT NULL,
+  `prezimeVodica` varchar(45) DEFAULT NULL,
+  `pol` char(1) DEFAULT NULL,
+  `brojTelefona` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idvodica`),
+  UNIQUE KEY `idvodica_UNIQUE` (`idvodica`),
+  CONSTRAINT `idvodica` FOREIGN KEY (`idvodica`) REFERENCES `korisnici` (`idkorisnika`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `znamenitosti` (
+  `idznamenitosti` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nazivZnamenitosti` varchar(45) DEFAULT NULL,
+  `lokacijaZnamenitosti` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idznamenitosti`),
+  UNIQUE KEY `idznamenitosti_UNIQUE` (`idznamenitosti`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1

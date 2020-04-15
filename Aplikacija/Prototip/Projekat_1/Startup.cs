@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
+using Projekat_1.Model;
 
 namespace Projekat_1
 {
@@ -24,6 +26,8 @@ namespace Projekat_1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<OrganizacijaContext>(options=>options
+            .UseMySql(Configuration.GetConnectionString("Konekcija")));
             services.AddRazorPages();
         }
 
