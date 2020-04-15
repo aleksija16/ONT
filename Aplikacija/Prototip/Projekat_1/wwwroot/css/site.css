@@ -69,3 +69,19 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.uradi
+{
+  float: right;
+  width: 220px;
+  border: 3px solid paleturquoise;
+  flex-wrap: nowrap;
+  background-color:lightblue;
+  margin-bottom: 20px;
+}
+.btn-uradi{
+  position: absolute;
+  margin-left: 10px;
+  border: 2px solid rgb(105, 196, 238);
+  background-color: rgb(126, 126, 235);
+}

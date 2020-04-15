@@ -1,4 +1,44 @@
 ﻿@page
 @model Projekat_1.HallOfFameModel
 @{
+    ViewData["Title"]="Hall Of Fame";
 }
+
+<div class="text-left">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+
+<div class="uradi">
+    <p>Uradi kviz <button type="button" class="btn-uradi">Započni kviz</button></p>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Redni broj</th>
+      <th scope="col">Ime</th>
+      <th scope="col">Prezime</th>
+      <th scope="col">Broj Poena</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Milica</td>
+      <td>Maletic</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Sanja</td>
+      <td>Arsić</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Milan</td>
+      <td>Marković</td>
+      <td>89</td>
+    </tr>
+  </tbody>
+</table>
