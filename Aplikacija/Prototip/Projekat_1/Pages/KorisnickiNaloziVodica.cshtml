@@ -1,0 +1,30 @@
+﻿@page
+@model MyApp.Namespace.KorisnickiNaloziVodicaModel
+@{
+}
+<form>
+    <button disabled="true" asp-page="./AddVodic">(Ne radi)</button>
+</form>
+
+<form method="post">
+
+    <table> 
+        <thead>
+            <th>Id</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Pol</th>
+            <th>Broj telefona</th>
+        </thead>
+    @foreach(var vodic in Model.SviVodici)
+        {  
+        <td>@vodic.Idvodica</td>
+        <td>@vodic.ImeVodica</td>
+        <td>@vodic.PrezimeVodica</td>
+        <td>@vodic.Pol</td>
+        <td>@vodic.BrojTelefona</td>
+        <button type="submit" asp-route-id="@vodic.Idvodica" asp-page="./Izmeni">Izmeni vodica</button>
+        <button type="submit" asp-route-id="@vodic.Idvodica" asp-page-handler="Obrisi">Obrisi vodica</button>   
+        }
+    </table>
+</form>
