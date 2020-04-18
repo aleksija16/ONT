@@ -1,0 +1,47 @@
+@page
+@model MyApp.Namespace.CustomRezervacijaModel
+@{
+     ViewData["Title"] = "Custom Rezervacija";
+}
+
+<div class="custom kontejner">
+    <div class="form-group">
+         <label>Izaberi znamenitosti</label>
+  <select class="form-control" id="izaberiZnamenitosti" >
+                     <option value="0" selected>Znamenitosti</option>
+                     <option value="1"> Tvrdjava </option>
+                     <option value="2"> Bubanj </option>
+                      <option value="0"> Cele Kula </option>
+ </select>
+    
+     <div class="form-group">
+                 <label>Broj osoba</label>
+                 <select class="form-control" id="room_number" onchange="finalCost()">
+                     <option value="0"> 0 </option>
+                     <option value="1"> 1 </option>
+                     <option value="2"> 2 </option>
+                     <option value="3"> 3 </option>
+                     <option value="4"> 4 </option>
+                     <option value="5"> 5 </option>
+                     <option value="6"> 6 </option>
+                     <option value="7"> 7 </option>
+                    <option value="8"> 8 </option>
+                     <option value="9"> 9 </option>
+                      <option value="10"> 10 </option>
+                 </select>
+             </div>
+
+             <div class="form-group">
+                 <label for="izaberiDatum">Izaberi datum:</label>
+                 <input type="date" id="izaberiDatum" name="izaberiDatum">
+           </div>
+
+           <div class="form-group">
+               <button type="submit">Rezervisi</button>
+           </div>
+    </div>
+</div>
+
+
+
+
