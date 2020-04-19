@@ -8,17 +8,23 @@
         <h1>@ViewData["Title"]</h1>
     </div>
 
-
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID rezervacije</th>
+      <th scope="col">Datum izvodjenja</th>
+    </tr>
+  </thead>
 
 <form method="get">
     @foreach (var rezervacija in Model.SveRezervacije)
     {
-        <div> 
-            <p> Id vodica: @rezervacija.IdvodicaRez</p>
-            <p>Id turiste: @rezervacija.IdturisteRez</p>
-            <p> Broj Osoba: @rezervacija.BrojOsoba</p>
-            <p> Datum izvodjenja: @rezervacija.DatumIzvodjenja</p>
-            <a asp-page="./JednaRezervacija/" asp-route-id="@rezervacija.Idrezervacije">Prikazi detalje</a>
-        </div>
+        <tbody>
+    <tr>
+      <th scope="row"> @rezervacija.Idrezervacije</th>
+      <td>@rezervacija.DatumIzvodjenja</td>
+      <td><a asp-page="./JednaRezervacija/" asp-route-id="@rezervacija.Idrezervacije">Prikazi detalje</a></td>
+    </tr>
+        </tbody>
     }
 </form>
