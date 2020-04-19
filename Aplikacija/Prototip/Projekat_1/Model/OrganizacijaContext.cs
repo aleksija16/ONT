@@ -27,7 +27,7 @@ namespace Projekat_1.Model
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=localhost;port=3307;database=swe;uid=root;pwd=root", x => x.ServerVersion("5.7.17-mysql"));
+                optionsBuilder.UseMySql("server=localhost;port=3306;database=swe;uid=root;pwd=root", x => x.ServerVersion("5.7.17-mysql"));
             }
         }
 
@@ -74,14 +74,10 @@ namespace Projekat_1.Model
                 entity.ToTable("rezervacije");
 
                 entity.HasIndex(e => e.Idrezervacije)
-                    .HasName("idrezervacije_UNIQUE")
+                    .HasName("idrezervacije")
                     .IsUnique();
 
-                entity.HasIndex(e => e.IdtureRez)
-                    .HasName("idture_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.IdturisteRez)
+entity.HasIndex(e => e.IdturisteRez)
                     .HasName("idturiste_UNIQUE")
                     .IsUnique();
 
@@ -93,15 +89,16 @@ namespace Projekat_1.Model
                     .HasColumnName("idrezervacije")
                     .HasColumnType("int(10) unsigned");
 
+                entity.Property(e => e.BrojOsoba)
+                .HasColumnName("brojOsoba")
+                .HasColumnType("int(10) unsigned");
+
+               
                 entity.Property(e => e.DatumIzvodjenja)
                     .HasColumnName("datumIzvodjenja")
                     .HasColumnType("datetime(1)");
 
-                entity.Property(e => e.IdtureRez)
-                    .HasColumnName("idtureRez")
-                    .HasColumnType("int(10) unsigned");
-
-                entity.Property(e => e.IdturisteRez)
+                    entity.Property(e => e.IdturisteRez)
                     .HasColumnName("idturisteRez")
                     .HasColumnType("int(10) unsigned");
 
@@ -109,23 +106,6 @@ namespace Projekat_1.Model
                     .HasColumnName("idvodicaRez")
                     .HasColumnType("int(10) unsigned");
 
-                entity.HasOne(d => d.IdtureRezNavigation)
-                    .WithOne(p => p.Rezervacije)
-                    .HasForeignKey<Rezervacije>(d => d.IdtureRez)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idtureRez");
-
-                entity.HasOne(d => d.IdturisteRezNavigation)
-                    .WithOne(p => p.Rezervacije)
-                    .HasForeignKey<Rezervacije>(d => d.IdturisteRez)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idturisteRez");
-
-                entity.HasOne(d => d.IdvodicaRezNavigation)
-                    .WithOne(p => p.Rezervacije)
-                    .HasForeignKey<Rezervacije>(d => d.IdvodicaRez)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("idvodicaRez");
             });
 
             modelBuilder.Entity<Ture>(entity =>
