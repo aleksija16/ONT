@@ -4,23 +4,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Projekat_1.Model;
 
 namespace MyApp.Namespace
 {
     public class CustomRezervacijaModel : PageModel
     {
+        private readonly OrganizacijaContext dbContext;
 
-        private readonly ILogger<CustomRezervacijaModel> _logger;
+        [BindProperty]
+        public Rezervacije JednaRezervacija {get; set;}
 
-        public CustomRezervacijaModel(ILogger<CustomRezervacijaModel> logger)
+        [BindProperty]
+        public string ErrorMessage {get; set;}
+
+        public CustomRezervacijaModel(OrganizacijaContext db)
         {
-            _logger = logger;
+            dbContext = db;
         }
 
-        
-        public void OnGet()
+        public async Task<IActionResult> OnPostAsync()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            } 
+            else
+            {
+                
+                dbContext.Rezervacije.Add(JednaRezervacija);
+                await dbContext.SaveChangesAsync();
+
+                return RedirectToPage("./Rezervacije");
+                
+            }
         }
     }
 }
