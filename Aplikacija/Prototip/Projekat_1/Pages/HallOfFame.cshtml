@@ -21,24 +21,17 @@
       <th scope="col">Broj Poena</th>
     </tr>
   </thead>
-  <tbody>
+  <form method="get">
+    @foreach (var ucesnik in Model.SviUcesnici)
+    {
+        <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Milica</td>
-      <td>Maletic</td>
-      <td>100</td>
+      <th scope="row"> @ucesnik.RedniBroj</th>
+      <td>@ucesnik.ImeTuriste</td>
+      <td>@ucesnik.PrezimeTuriste</td>
+      <td>@ucesnik.BrojPoena</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Sanja</td>
-      <td>Arsić</td>
-      <td>94</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Milan</td>
-      <td>Marković</td>
-      <td>89</td>
-    </tr>
-  </tbody>
+        </tbody>
+    }
+</form>
 </table>

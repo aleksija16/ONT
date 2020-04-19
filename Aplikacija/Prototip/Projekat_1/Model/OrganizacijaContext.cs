@@ -20,6 +20,7 @@ namespace Projekat_1.Model
         public virtual DbSet<Ture> Ture { get; set; }
         public virtual DbSet<Turisti> Turisti { get; set; }
         public virtual DbSet<Vodici> Vodici { get; set; }
+         public virtual DbSet<HallOfFame> HallOfFame { get; set; }
         public virtual DbSet<Znamenitosti> Znamenitosti { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -105,6 +106,30 @@ entity.HasIndex(e => e.IdturisteRez)
                 entity.Property(e => e.IdvodicaRez)
                     .HasColumnName("idvodicaRez")
                     .HasColumnType("int(10) unsigned");
+
+            });
+
+            modelBuilder.Entity<HallOfFame>(entity =>
+            {
+                entity.HasKey(e => e.RedniBroj)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("halloffame");
+
+                entity.HasIndex(e => e.RedniBroj)
+                    .HasName("rednibroj")
+                    .IsUnique();
+
+                entity.Property(e => e.ImeTuriste)
+                    .HasColumnName("imeturiste")
+                    .HasColumnType("varchar(20)");
+                    entity.Property(e => e.PrezimeTuriste)
+                    .HasColumnName("prezimeturiste")
+                    .HasColumnType("varchar(20)");
+
+                entity.Property(e => e.BrojPoena)
+                .HasColumnName("brojpoena")
+                .HasColumnType("int(10) unsigned");
 
             });
 
