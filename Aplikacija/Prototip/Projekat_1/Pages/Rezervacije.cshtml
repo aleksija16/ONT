@@ -1,0 +1,46 @@
+@page
+@model Projekat_1.RezervacijeModel
+@{
+    ViewData["Title"]="Rezervacije";
+}
+
+<div class="text-left">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID rezervacije</th>
+      <th scope="col">Id ture</th>
+      <th scope="col">Vodic</th>
+      <th scope="col">Korisnik</th>
+      <th scope="col">Datum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>12</td>
+      <td>Milos Markovic</td>
+      <td>Stefan Stefanovic</td>
+      <td>15.01.2020.</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>74</td>
+      <td>Milan Mikic</td>
+      <td>Sanja Aleksic</td>
+      <td>5.03.2020.</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>12</td>
+      <td>Milos Markovic</td>
+      <td>Marko Markovic</td>
+      <td>25.04.2020.</td>
+    </tr>
+  </tbody>
+</table>
