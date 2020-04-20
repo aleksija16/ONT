@@ -1,0 +1,15 @@
+﻿@page
+@model Projekat_1.IzmeniVodicModel
+@{
+}
+
+<p>Izmena naloga vodica</p>
+<form method="post">
+    <input type="hidden" asp-for=TrenutniVodic.IdVodica>
+    <div>Ime vodica: <input type="text" asp-for="TrenutniVodic.ImeVodica" /></div>
+    <div>Prezime vodica: <input type="text" asp-for="TrenutniVodic.PrezimeVodica" /></div>
+    <div>Pol vodica: <input type="text" asp-for="TrenutniVodic.Pol" /></div>
+    <div>Telefon vodica: <input type="text" asp-for="TrenutniVodic.BrojTelefona" /></div>
+
+    <button type="submit" asp-page-handler="Sacuvaj">Sacuvaj izmene</button>
+</form>

@@ -20,9 +20,11 @@ namespace MyApp.Namespace
             dbContext = db;
         }
 
-        public async Task OnGetAsync()
+        public IActionResult OnGet()
         {
             SviVodici = dbContext.Vodici.ToList();
+            return Page();
+    
         }
 
         public async Task<IActionResult> OnPostObrisiAsync(uint id)
@@ -38,9 +40,6 @@ namespace MyApp.Namespace
 
         }
 
-        public async Task<IActionResult> OnPostIzmeniAsync(uint id)
-        {
-            return RedirectToPage();
-        }
+
     }
 }

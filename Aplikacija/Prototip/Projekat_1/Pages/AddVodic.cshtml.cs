@@ -31,12 +31,15 @@ namespace MyApp.Namespace
             }
             else
             {
-                
-                dbContext.Korisnici.Add(NoviKorisnik);
-
                 dbContext.Vodici.Add(NoviVodic);
+                //NoviKorisnik.Password = "nesto";
+                NoviKorisnik.IdTuristeKor = NoviVodic.IdVodica;
+
+                dbContext.Korisnici.Add(NoviKorisnik);
+                
+
                 await dbContext.SaveChangesAsync();
-                return Page();
+                return RedirectToPage("./KorisnickiNaloziVodica");
             }
         }
     }

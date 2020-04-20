@@ -3,28 +3,30 @@
 @{
 }
 <form>
-    <button disabled="true" asp-page="./AddVodic">(Ne radi)</button>
+    <button asp-page="./AddVodic">Dodaj novi nalog vodica</button>
 </form>
 
 <form method="post">
 
-    <table> 
+    <table class="table"> 
         <thead>
-            <th>Id</th>
-            <th>Ime</th>
-            <th>Prezime</th>
-            <th>Pol</th>
-            <th>Broj telefona</th>
+            <th scope="col">Id</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Prezime</th>
+            <th scope="col">Pol</th>
+            <th scope="col">Broj telefona</th>
         </thead>
     @foreach(var vodic in Model.SviVodici)
         {  
-        <td>@vodic.Idvodica</td>
+            <tr>
+        <td>@vodic.IdVodica</td>
         <td>@vodic.ImeVodica</td>
         <td>@vodic.PrezimeVodica</td>
         <td>@vodic.Pol</td>
         <td>@vodic.BrojTelefona</td>
-        <button type="submit" asp-route-id="@vodic.Idvodica" asp-page="./Izmeni">Izmeni vodica</button>
-        <button type="submit" asp-route-id="@vodic.Idvodica" asp-page-handler="Obrisi">Obrisi vodica</button>   
+        <td> <button type="submit" asp-route-id="@vodic.IdVodica" asp-page="./IzmeniVodic">Izmeni vodica</button> </td>
+        <td> <button type="submit" asp-route-id="@vodic.IdVodica" asp-page-handler="Obrisi">Obrisi vodica</button>  </td>
+            </tr> 
         }
     </table>
 </form>
