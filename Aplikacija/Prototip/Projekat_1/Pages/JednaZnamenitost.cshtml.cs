@@ -22,7 +22,7 @@ namespace Projekat_1
 
         public IActionResult OnGet(int id)
         {
-            TrenutnaZnamenitost = dbContext.Znamenitosti.Where(x=>x.Idznamenitosti == id).FirstOrDefault();
+            TrenutnaZnamenitost = dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti == id).FirstOrDefault();
             return Page();
         }
     }

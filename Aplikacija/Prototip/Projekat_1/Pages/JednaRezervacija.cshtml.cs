@@ -22,7 +22,7 @@ namespace Projekat_1
 
         public IActionResult OnGet(int id)
         {
-            TrenutnaRezervacija = dbContext.Rezervacije.Where(x=>x.Idrezervacije == id).FirstOrDefault();
+            TrenutnaRezervacija = dbContext.Rezervacije.Where(x=>x.IdRezervacije == id).FirstOrDefault();
             return Page();
         }
     }
