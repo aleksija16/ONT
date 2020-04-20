@@ -1,0 +1,31 @@
+CREATE TABLE `korisnici` (
+  `idkorisnika` int unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `idturisteKor` int unsigned DEFAULT NULL,
+  `idvodicaKor` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`idkorisnika`),
+  UNIQUE KEY `idkorisnici_UNIQUE` (`idkorisnika`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1
+
+CREATE TABLE `turisti` (
+  `idturiste` int unsigned NOT NULL AUTO_INCREMENT,
+  `imeTuriste` varchar(45) NOT NULL,
+  `prezimeTuriste` varchar(45) DEFAULT NULL,
+  `pol` char(1) DEFAULT NULL,
+  `datumRodjenja` date DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idturiste`),
+  UNIQUE KEY `idturiste_UNIQUE` (`idturiste`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `vodici` (
+  `idvodica` int unsigned NOT NULL AUTO_INCREMENT,
+  `imeVodica` varchar(45) DEFAULT NULL,
+  `prezimeVodica` varchar(45) DEFAULT NULL,
+  `pol` char(1) DEFAULT NULL,
+  `brojTelefona` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idvodica`),
+  UNIQUE KEY `idvodica_UNIQUE` (`idvodica`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1
