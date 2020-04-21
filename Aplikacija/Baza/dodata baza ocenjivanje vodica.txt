@@ -1,0 +1,6 @@
+CREATE TABLE `ocenjivanjevodica` (
+  `idocenjivanjevodica` int unsigned NOT NULL AUTO_INCREMENT,
+  `idvodicaOcenjivanje` int unsigned DEFAULT NULL,
+  `ocena` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`idocenjivanjevodica`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
