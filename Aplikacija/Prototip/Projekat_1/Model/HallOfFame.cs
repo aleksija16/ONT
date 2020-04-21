@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Projekat_1.Model
 {
-    public partial class HallOfFame
+    public partial class HallofFame
     {
         public uint RedniBroj { get; set; }
         public string ImeTuriste { get; set; }

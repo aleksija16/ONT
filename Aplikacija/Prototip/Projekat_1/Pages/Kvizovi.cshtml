@@ -12,25 +12,24 @@
 <button type="button" class="btn btn-primary">Dodaj novi kviz</button>
 </div>
 
-<ul class="list-group">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        Prvi kviz
-        <button type="button" class="btn btn-primary">Prikazi vise</button>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        Drugi kviz
-        <button type="button" class="btn btn-primary">Prikazi vise</button>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        Treci kviz
-        <button type="button" class="btn btn-primary">Prikazi vise</button>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        Cetvrti kviz
-        <button type="button" class="btn btn-primary">Prikazi vise</button>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        Peti kviz
-        <button type="button" class="btn btn-primary">Prikazi vise</button>
-    </li>
-</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID Kviza</th>
+      <th scope="col">Naziv Kviza</th>
+    </tr>
+  </thead>
+
+
+<form method="get">
+    @foreach (var kviz in Model.SviKvizovi)
+    {
+        <tbody>
+    <tr>
+      <th scope="row"> @kviz.Idkviz</th>
+      <td>@kviz.Nazivkviza</td>
+      <td><a asp-page="./JedanKviz/" asp-route-id="@kviz.Idkviz">Prikazi detalje</a></td>
+    </tr>
+        </tbody>
+    }
+</form>
