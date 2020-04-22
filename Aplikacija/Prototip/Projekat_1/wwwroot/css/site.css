@@ -73,52 +73,12 @@ body {
 .uradi
 {
   float: right;
-  width: 220px;
   border: 3px solid paleturquoise;
   flex-wrap: nowrap;
   background-color:lightblue;
   margin-bottom: 20px;
+  align-items: center;
 }
-.btn-uradi{
-  position: absolute;
-  margin-left: 10px;
-  border: 2px solid rgb(105, 196, 238);
-  background-color: rgb(126, 126, 235);
-}
-
-.kviz-kontejner
-{
-  border: 3px solid chartreuse;
-  padding: 5px;
-  width: 500px;
-}
-
-.redni-broj-pitanja{
-  text-align: center;
-  margin: 10px;
- background-color: palegreen;
- margin:auto;
-}
-
-.pitanje{
-  margin-bottom: 5px;
-  text-align: center;
-  color: palevioletred;
-  font-style: initial;
-  font-size: 25px;
-}
-
-.odgovori div
-{
-  width: 300px;
-  border: 2px solid black;
-  margin: 5px;
-
-}
-
-
-
-
 
 .prijava
 {
@@ -180,8 +140,10 @@ input[type=text]:focus {
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
-  color: #cccccc;
+input[type=text]:placeholder 
+{  
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  color: #838282;
 }
 
 .form-control

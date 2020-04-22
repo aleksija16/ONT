@@ -10,6 +10,7 @@
 <form>
     <a asp-page="./AddOdgovor/">Dodaj odgovor</a>
 </form>
+
 <table class="table">
   <thead>
     <tr>
@@ -18,7 +19,7 @@
       <th scope="col">ID kviza</th>
     </tr>
   </thead>
-    <form method="get">
+  <form method="post">
     @foreach (var pitanje in Model.SvaPitanja)
     {
         <tbody>
@@ -27,6 +28,7 @@
       <td>@pitanje.Tekstpitanja</td>
       <td>@pitanje.Kvizid</td>
       <td> <a asp-page="./Odgovori/" asp-route-id="@pitanje.Idpitanje">Prikazi odgovore</a></td>
+      <td> <button type="submit" asp-route-id="@pitanje.Idpitanje" asp-page-handler="Obrisi">Obrisi pitanje</button>  </td>
     </tr>
         </tbody>
     }
