@@ -1,21 +1,17 @@
 @page
-@model MyApp.Namespace.PrijavaModel
+@model MyApp.Namespace.RegistracijaModel
 @{
-     ViewData["Title"] = "Prijava";
+     ViewData["Title"] = "Registracija";
 }
 
-
-<div class="prijava fadeInDown">
-  <div id="formContent">
-    <form>
-         <input type="text" id="ime" class="fadeIn" name="register" placeholder="Ime">
-          <input type="text" id="prezime" class="fadeIn" name="register" placeholder="Prezime">
-      <input type="text" id="korisnickoIme" class="fadeIn" name="register" placeholder="Korisnicko ime">
-      <input type="text" id="email" class="fadeIn" name="register" placeholder="Email">
-      <input type="text" id="lozinka" class="fadeIn" name="register" placeholder="Lozinka">
-      <input type="submit" class="fadeIn" value="Registruj se">
+    <form method="post">
+     <div><input asp-for="NoviTurista.ImeTuriste" placeholder="Ime" /></div> 
+     <div><input asp-for="NoviTurista.PrezimeTuriste" placeholder="Prezime" /></div> 
+      <div><input asp-for="NoviTurista.Pol" placeholder="Pol" /></div>
+      <div><input asp-for="NoviTurista.DatumRodjenja" placeholder="DatumRodjenja" /></div>
+      <div><input asp-for="NoviTurista.Email" placeholder="Email" /></div>
+     <div><input asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" /></div> 
+      <div><input asp-for="NoviKorisnik.Password" placeholder="Lozinka" /></div>
+      <div><button type="submit" class="btn btn-primary">Registruj se</button></div>
     </form>
-
-  </div>
-</div>
 

@@ -79,7 +79,7 @@ namespace Projekat_1.Model
                     .HasName("idkorisnici_UNIQUE")
                     .IsUnique();
                      entity.HasIndex(e => e.IdTuristeKor)
-                    .HasName("iddrugi_idx");
+                    .HasName("idturisteKor_idx");
 
                 entity.HasIndex(e => e.IdVodicaKor)
                     .HasName("idvodicaKor_idx");
