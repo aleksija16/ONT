@@ -14,8 +14,9 @@ namespace Projekat_1
         public OrganizacijaContext dbContext {get; set;}
 
         [BindProperty]
-        public Kviz TrenutniKviz {get; set;}
-
+        public Pitanje TrenutniKviz {get; set;}
+          public IList<Pitanje> SvaPitanja;
+           public IList<Odgovor> SviOdgovori;
         public JedanKvizModel(OrganizacijaContext db)
         {
             dbContext = db;
@@ -23,9 +24,16 @@ namespace Projekat_1
 
         public IActionResult OnGet(int id)
         {
-            TrenutniKviz = dbContext.Kviz.Where(x=>x.Idkviz == id).FirstOrDefault();
+            TrenutniKviz = dbContext.Pitanje.Where(x=>x.Kvizid == id).FirstOrDefault();
+
+            IQueryable<Pitanje> qZnamenitosti = dbContext.Pitanje.Where(x => x.Kvizid==id);
+            SvaPitanja = qZnamenitosti.ToList();
+             IQueryable<Odgovor> qOdg = dbContext.Odgovor;
+            SviOdgovori = qOdg.ToList();
             return Page();
         }
+        
+      
     }
 
 }
