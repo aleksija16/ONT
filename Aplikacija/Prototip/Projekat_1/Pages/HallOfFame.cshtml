@@ -4,15 +4,18 @@
     ViewData["Title"]="Hall Of Fame";
 }
 
+<h1>
+     <p>Hall Of Fame</p>
+  <img src="https://securityintelligence.com/wp-content/uploads/2017/04/thinkstockphotos-612408736-630x330.jpg" style="border-radius: 25%" alt="Hall of fame" width="250" height="200">
+      
+</h1>
 <div>
-        <h1>@ViewData["Title"]</h1>
-    </div>
-
-<form>
+  <form>
     <button class="uradi" asp-page="./Kvizovi">Uradi kviz</button>
 </form>
+</div>
 
-<table class="table halloffame table-striped table-bordered" style="text-align: center" >
+<table class="table halloffame table-striped table-bordered" style="text-align: center">
   <thead>
     <tr>
       <th scope="col">Redni broj</th>
@@ -25,13 +28,14 @@
     @foreach (var ucesnik in Model.SviUcesnici)
     {
         <tbody>
-    <tr>
-      <th scope="row"> @ucesnik.RedniBroj</th>
-      <td>@ucesnik.ImeTuriste</td>
-      <td>@ucesnik.PrezimeTuriste</td>
-      <td>@ucesnik.BrojPoena</td>
-    </tr>
+          <tr>
+            <th scope="row"> @ucesnik.RedniBroj</th>
+            <td>@ucesnik.ImeTuriste</td>
+            <td>@ucesnik.PrezimeTuriste</td>
+            <td>@ucesnik.BrojPoena</td>
+          </tr>
         </tbody>
     }
 </form>
 </table>
+
