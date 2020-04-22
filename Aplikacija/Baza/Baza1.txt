@@ -100,10 +100,12 @@ CREATE TABLE `pitanje` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+
 CREATE TABLE `odgovor` (
   `idodgovor` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `tekstodg` VARCHAR(1000) NOT NULL,
   `pitanjeid` INT UNSIGNED NOT NULL,
+  `tacan` TINYINT NOT NULL,
   PRIMARY KEY (`idodgovor`),
   INDEX `pitanjeid_idx` (`pitanjeid`),
   CONSTRAINT `pitanjeid`
@@ -111,3 +113,4 @@ CREATE TABLE `odgovor` (
     REFERENCES `pitanje` (`idpitanje`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
