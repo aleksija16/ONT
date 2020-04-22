@@ -3,22 +3,11 @@
 @{
 }
 
-<form>
-  <div class="form-group">
-    <label for="tekst pitanja"></label>
-    <input type="text" class="form-control" id="tekst pitanja" placeholder="Unesite tekst pitanja">
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <input type="text" class="form-control" id="tekst pitanja" placeholder="Unesite prvi odgovor">
-  </div>
-   <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <input type="text" class="form-control" id="tekst pitanja" placeholder="Unesite drugi odgovor">
-  </div>
-   <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <input type="text" class="form-control" id="tekst pitanja" placeholder="Unesite treci odgovor">
-  </div>
-  <button type="submit" class="btn btn-primary">Dodaj pitanje</button>
+<p> Unesite informacije o pitanju</p>
+<form method="post"> 
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <label>@Model.ErrorMessage</label>
+    <div>Tekst Pitanja: <input asp-for="JednoPitanje.Tekstpitanja" /></div>
+    <div>Id kviza: <input asp-for="JednoPitanje.Kvizid" /></div>
+    <button type="submit">Dodaj</button>
 </form>

@@ -1,0 +1,31 @@
+@page
+@model Projekat_1.PitanjaModel
+@{
+    ViewData["Title"] = "Pitanja";
+}
+
+<form> 
+    <a asp-page="./AddPitanje/" >Dodaj pitanje</a>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID pitanja</th>
+      <th scope="col">Tekst pitanja</th>
+      <th scope="col">ID kviza</th>
+    </tr>
+  </thead>
+    <form method="get">
+    @foreach (var pitanje in Model.SvaPitanja)
+    {
+        <tbody>
+    <tr>
+      <td>@pitanje.Idpitanje</td>
+      <td>@pitanje.Tekstpitanja</td>
+      <td>@pitanje.Kvizid</td>
+    </tr>
+        </tbody>
+    }
+</form>
+</table>
