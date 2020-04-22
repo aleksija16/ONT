@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Projekat_1.Model
 {
-    public partial class Ocenjivanjevodica
+    public partial class OcenjivanjeVodica
     {
-        public uint Idocenjivanjevodica { get; set; }
-        public uint? IdvodicaOcenjivanje { get; set; }
+        public uint IdOcenjivanjeVodica { get; set; }
+        public uint? IdVodicaOcenjivanje { get; set; }
         public uint? Ocena { get; set; }
     }
 }

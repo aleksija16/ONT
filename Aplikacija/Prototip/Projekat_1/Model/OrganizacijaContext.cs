@@ -18,7 +18,7 @@ namespace Projekat_1.Model
         public virtual DbSet<HallofFame> HallofFame { get; set; }
         public virtual DbSet<Korisnici> Korisnici { get; set; }
         public virtual DbSet<Kviz> Kviz { get; set; }
-        public virtual DbSet<Ocenjivanjevodica> Ocenjivanjevodica { get; set; }
+        public virtual DbSet<OcenjivanjeVodica> OcenjivanjeVodica { get; set; }
         public virtual DbSet<Odgovor> Odgovor { get; set; }
         public virtual DbSet<Pitanje> Pitanje { get; set; }
         public virtual DbSet<Rezervacije> Rezervacije { get; set; }
@@ -144,18 +144,18 @@ namespace Projekat_1.Model
                     .HasCollation("utf8_general_ci");
             });
 
-            modelBuilder.Entity<Ocenjivanjevodica>(entity =>
+            modelBuilder.Entity<OcenjivanjeVodica>(entity =>
             {
-                entity.HasKey(e => e.Idocenjivanjevodica)
+                entity.HasKey(e => e.IdOcenjivanjeVodica)
                     .HasName("PRIMARY");
 
                 entity.ToTable("ocenjivanjevodica");
 
-                entity.Property(e => e.Idocenjivanjevodica)
+                entity.Property(e => e.IdOcenjivanjeVodica)
                     .HasColumnName("idocenjivanjevodica")
                     .HasColumnType("int(10) unsigned");
 
-                entity.Property(e => e.IdvodicaOcenjivanje)
+                entity.Property(e => e.IdVodicaOcenjivanje)
                     .HasColumnName("idvodicaOcenjivanje")
                     .HasColumnType("int(10) unsigned");
 
