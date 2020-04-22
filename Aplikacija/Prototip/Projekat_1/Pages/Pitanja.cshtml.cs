@@ -10,19 +10,33 @@ namespace Projekat_1
 {
     public class PitanjaModel : PageModel
     {
-        public OrganizacijaContext dbContext;
+        public OrganizacijaContext dbContext {get; set;}
 
         public IList<Pitanje> SvaPitanja;
-
+    public IList<Odgovor> SviOdgovori;
         public PitanjaModel(OrganizacijaContext db)
         {
             dbContext = db;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            IQueryable<Pitanje> qPitanje = dbContext.Pitanje;
-            SvaPitanja = qPitanje.ToList();
+            SvaPitanja=dbContext.Pitanje.ToList();
+            return Page();
+        }
+
+         public async Task<IActionResult> OnPostObrisiAsync(uint id)
+        {
+            Pitanje PostojiPitanje = await dbContext.Pitanje.FindAsync(id);
+            
+            if (PostojiPitanje != null)
+            {
+                
+                dbContext.Pitanje.Remove(PostojiPitanje);
+                await dbContext.SaveChangesAsync();
+            }
+            return RedirectToPage();
+
         }
     }
 }
