@@ -114,3 +114,13 @@ CREATE TABLE `odgovor` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+
+ALTER TABLE `odgovor` 
+DROP FOREIGN KEY `pitanjeid`;
+ALTER TABLE `odgovor` 
+ADD CONSTRAINT `pitanjeid`
+  FOREIGN KEY (`pitanjeid`)
+  REFERENCES `pitanje` (`idpitanje`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;
+
