@@ -4,15 +4,15 @@
     ViewData["Title"]="Hall Of Fame";
 }
 
-<div class="text-left">
+<div>
         <h1>@ViewData["Title"]</h1>
     </div>
 
- <div class="uradi">
-<a asp-page="./Kvizovi/">Uradi kviz</a></td>
- </div>
+<form>
+    <button class="uradi" asp-page="./Kvizovi">Uradi kviz</button>
+</form>
 
-<table class="table">
+<table class="table halloffame table-striped table-bordered" style="text-align: center" >
   <thead>
     <tr>
       <th scope="col">Redni broj</th>

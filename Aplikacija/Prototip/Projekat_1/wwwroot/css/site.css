@@ -73,11 +73,20 @@ body {
 .uradi
 {
   float: right;
-  border: 3px solid paleturquoise;
-  flex-wrap: nowrap;
-  background-color:lightblue;
-  margin-bottom: 20px;
+  border-radius: 60%;
+  background-color: #d3d2d2; 
+  color: black;
   align-items: center;
+  transition-duration: 0.4s;
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding: 7px;
+  border-color: #747272;
+}
+.uradi:hover {
+  background-color: rgb(64, 66, 64); /* Green */
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .prijava
@@ -153,4 +162,13 @@ input[type=text]:placeholder
 .custom div
 {
   margin: 5px;
+}
+
+.halloffame
+{
+  background-color: #ffdd9d;
+}
+.halloffame tr:hover {
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }

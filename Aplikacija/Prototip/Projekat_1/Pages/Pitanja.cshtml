@@ -11,12 +11,14 @@
     <a asp-page="./AddOdgovor/">Dodaj odgovor</a>
 </form>
 
-<table class="table">
+<table class="table table-striped table-dark table-bordered" style="text-align: center">
   <thead>
     <tr>
       <th scope="col">ID pitanja</th>
       <th scope="col">Tekst pitanja</th>
-      <th scope="col">ID kviza</th>
+      <th scope="col">ID kviza</th> 
+      <th scope="col">Odgovori</th>
+        <th scope="col">Brisanje</th>
     </tr>
   </thead>
   <form method="post">
@@ -27,8 +29,8 @@
       <td>@pitanje.Idpitanje</td>
       <td>@pitanje.Tekstpitanja</td>
       <td>@pitanje.Kvizid</td>
-      <td> <a asp-page="./Odgovori/" asp-route-id="@pitanje.Idpitanje">Prikazi odgovore</a></td>
-      <td> <button type="submit" asp-route-id="@pitanje.Idpitanje" asp-page-handler="Obrisi">Obrisi pitanje</button>  </td>
+      <td> <button type="submit" class="pitanje" asp-page="./Odgovori/" asp-route-id="@pitanje.Idpitanje">Prikazi odgovore</button></td>
+      <td> <button type="submit" class="pitanje" asp-route-id="@pitanje.Idpitanje" asp-page-handler="Obrisi">Obrisi pitanje</button>  </td>
     </tr>
         </tbody>
     }
