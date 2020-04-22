@@ -1,0 +1,14 @@
+@page
+@model MyApp.Namespace.AddOdgovorModel
+@{
+}
+
+<p> Unesite odgovor </p>
+<form method="post"> 
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <label>@Model.ErrorMessage</label>
+    <div>Tekst odgovora: <input asp-for="JedanOdgovor.Tekstodg" /></div>
+    <div>Id pitanje: <input asp-for="JedanOdgovor.Pitanjeid" /></div>
+     <div>Da li je tacno: <input asp-for="JedanOdgovor.Tacno" /></div>
+    <button type="submit">Dodaj</button>
+</form>

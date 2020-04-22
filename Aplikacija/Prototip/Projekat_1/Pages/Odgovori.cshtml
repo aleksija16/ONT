@@ -1,0 +1,30 @@
+@page
+@model Projekat_1.OdgovoriModel
+@{
+    ViewData["Title"] = "Odgovori";
+}
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID odgovora</th>
+      <th scope="col">Tekst odgovora</th>
+      <th scope="col">ID pitanja</th>
+      <th scope="col">Tacan</th>
+    </tr>
+  </thead>
+    <form method="get">
+    @foreach (var odgovor in Model.SviOdgovori)
+    {
+        <tbody>
+    <tr>
+      <td>@odgovor.Idodgovor</td>
+      <td>@odgovor.Tekstodg</td>
+      <td>@odgovor.Pitanjeid</td>
+      <td>@odgovor.Tacno</td>
+    </tr>
+        </tbody>
+    }
+</form>
+</table>

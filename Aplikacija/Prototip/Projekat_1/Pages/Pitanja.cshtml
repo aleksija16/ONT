@@ -7,7 +7,9 @@
 <form> 
     <a asp-page="./AddPitanje/" >Dodaj pitanje</a>
 </form>
-
+<form>
+    <a asp-page="./AddOdgovor/">Dodaj odgovor</a>
+</form>
 <table class="table">
   <thead>
     <tr>
@@ -24,6 +26,7 @@
       <td>@pitanje.Idpitanje</td>
       <td>@pitanje.Tekstpitanja</td>
       <td>@pitanje.Kvizid</td>
+      <td> <a asp-page="./Odgovori/" asp-route-id="@pitanje.Idpitanje">Prikazi detalje</a></td>
     </tr>
         </tbody>
     }

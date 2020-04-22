@@ -27,8 +27,8 @@ namespace Projekat_1
         {
             TrenutniKviz = dbContext.Pitanje.Where(x=>x.Kvizid == id).FirstOrDefault();
 
-            IQueryable<Pitanje> qZnamenitosti = dbContext.Pitanje.Where(x => x.Kvizid==id);
-            SvaPitanja = qZnamenitosti.ToList();
+            IQueryable<Pitanje> qPitanje = dbContext.Pitanje.Where(x => x.Kvizid==id);
+            SvaPitanja = qPitanje.ToList();
              IQueryable<Odgovor> qOdg = dbContext.Odgovor;
             SviOdgovori = qOdg.ToList();
             return Page();
