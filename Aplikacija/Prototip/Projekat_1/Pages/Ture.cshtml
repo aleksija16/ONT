@@ -1,7 +1,40 @@
 ﻿@page
-@model Projekat_1.TureModel
+@model MyApp.Namespace.TureModel
 @{
     ViewData["Title"] = "Ture";
 }
 
-<p>Ovde treba da stoje liste svih tura :)</p>
+<form>
+    <button class="btn btn-primary" asp-page="./AddTure">Dodaj novu turu</button>
+</form>
+
+<form method="post">
+
+    <table class="table"> 
+        <thead>
+            <th scope="col">Id</th>
+            <th scope="col">Naziv</th>
+            <th scope="col">Znamenitosti</th>
+            <th scope="col">Vodic</th>
+            <th scope="col">Datum odrzavanja</th>
+            <th scope="col">Vreme odrzavanja</th>
+            <th scope="col">Opis</th>
+            <th></th>
+            <th></th>
+        </thead>
+    @foreach(var ture in Model.SveTure)
+        {  
+            <tr>
+                <td>@ture.IdTure</td>
+                <td>@ture.NazivTure</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> <button class="btn btn-primary" type="submit" asp-route-id="@ture.IdTure" asp-page="./IzmeniTuru">Izmeni turu</button> </td>
+                <td> <button class="btn btn-danger" type="submit" asp-route-id="@ture.IdTure" asp-page-handler="Obrisi">Obrisi turu</button>  </td>
+            </tr> 
+        }
+    </table>
+</form>

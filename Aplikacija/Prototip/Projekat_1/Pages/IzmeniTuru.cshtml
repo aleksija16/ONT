@@ -5,55 +5,51 @@
 
 <h1>Izmeni podatke o turi</h2>
 <form method="post">
-    <div>Naziv ture:<input type="text" /></div>
-    <div>
+    <div>Naziv ture:<input type="text" asp-for="TrenutnaTura.NazivTure"/></div>
         <p>Izmenite znamenitosti</p>
-        @* Trebalo bi iz baze da se ucitaju sve znamenitosti u tabelu.
-        Pored svake znamenitosti je dugme i bira se da li ce ta znamenitost da bude deo ture ili ne. *@
         <table class="table" border="1" frame"hsides" rules="rows">
             <thead>
                 <tr>
-                <th scope="col"></th>
                 <th scope="col">Naziv Znamenitosti</th>
                 <th scope="col"></th>
+                <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Cele Kula</td>
-                <td><button type="button" class="btn btn-primary">Izbaci iz ture</button></td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Tvrdjava</td>
-                <td><button type="button" class="btn btn-primary">Dodaj u turu</button></td>
-                </tr>
-            </tbody>
+            <form method="get">
+            @foreach (var znamenitost in Model.SveZnamenitosti){
+                <tbody>
+                    <tr>
+                        <td>@znamenitost.NazivZnamenitosti</td>
+                        <td><button class="btn btn-primary">Dodaj u turu</button></td>
+                        <td><button class="btn btn-danger">Izbaci iz ture</button></td>
+                    </tr>
+                </tbody>
+            }
+            </form>
         </table>
         <p>Izmeni Vodica</p>
-        @* Trebalo bi iz baze da se ucitaju svi vodici u tabelu.
-        Pored svakog vodica je dugme i bira se da li ce on da bude deo ture ili ne. *@
         <table class="table" border="1" frame"hsides" rules="rows">
             <thead>
                 <tr>
-                <th scope="col"></th>
-                <th scope="col">Ime vodica</th>
-                <th scope="col"></th>
+                <th>Ime vodica</th>
+                <th>Prezime vodica</th>
+                <th></th>
+                <th></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Petar Petrovic</td>
-                <td><button type="button" class="btn btn-primary">Izbaci iz ture</button></td>
-                </tr>
-                 <tr>
-                <th scope="row">2</th>
-                <td>Mila Milic</td>
-                <td><button type="button" class="btn btn-primary">Dodaj u turu</button></td>
-                </tr>
-            </tbody>
+            <form method="get">
+           @foreach (var vodic in Model.SviVodici)
+           {
+               <tbody>
+                   <tr>
+                       <td>@vodic.ImeVodica</td>
+                       <td>@vodic.PrezimeVodica</td>
+                       <td><button class="btn btn-primary">Dodaj u turu</button></td>
+                       <td><button class="btn btn-danger">Izbaci iz ture</button></td>
+                   </tr>
+               </tbody>
+           }
+            </form>
         </table>
         <p>Izmeni datum odrzavanja: </p>
         <input type="date">
@@ -61,6 +57,6 @@
         <input type="time">
         <div>Izmeni detalje o turi:<input type="text" /></div>
         <div>
-        <button type="submit" class="btn btn-primary">Sacuvaj izmene</button>
+        <button type="submit" class="btn btn-primary" asp-page-handler="Sacuvaj">Sacuvaj izmene</button>
     </div>
     </form>
