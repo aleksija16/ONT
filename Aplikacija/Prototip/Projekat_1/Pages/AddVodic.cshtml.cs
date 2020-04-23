@@ -32,8 +32,7 @@ namespace MyApp.Namespace
             else
             {
                 dbContext.Vodici.Add(NoviVodic);
-                //NoviKorisnik.Password = "nesto";
-                NoviKorisnik.IdTuristeKor = NoviVodic.IdVodica;
+                NoviKorisnik.IdVodicaKor = NoviVodic.IdVodica;
 
                 dbContext.Korisnici.Add(NoviKorisnik);
                 
