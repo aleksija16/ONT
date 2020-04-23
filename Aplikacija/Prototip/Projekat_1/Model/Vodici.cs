@@ -7,7 +7,7 @@ namespace Projekat_1.Model
     {
         public Vodici()
         {
-            Korisnici = new HashSet<Korisnici>();
+            Ture = new HashSet<Ture>();
         }
 
         public uint IdVodica { get; set; }
@@ -15,7 +15,8 @@ namespace Projekat_1.Model
         public string PrezimeVodica { get; set; }
         public string Pol { get; set; }
         public string BrojTelefona { get; set; }
+        public uint? Ocena { get; set; }
 
-        public virtual ICollection<Korisnici> Korisnici { get; set; }
+        public virtual ICollection<Ture> Ture { get; set; }
     }
 }

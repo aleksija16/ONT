@@ -35,5 +35,25 @@ namespace MyApp.Namespace
             return RedirectToPage();
 
         }
+
+        public async Task<IActionResult> OnPostRezervisiAsync(uint id)
+        {
+            Ture PostojiTura = await dbContext.Ture.FindAsync(id);
+
+            if (PostojiTura != null)
+            {
+                Rezervacije NovaRezervacija = new Rezervacije();
+                NovaRezervacija.DatumIzvodjenja = PostojiTura.DatumOdrzavanja;
+                NovaRezervacija.BrojOsoba++;
+                NovaRezervacija.IdVodicaRez=1;
+                
+                await dbContext.Rezervacije.AddAsync(NovaRezervacija);
+                await dbContext.SaveChangesAsync();
+
+                //return Page(); daje gresku
+                return RedirectToPage("./Rezervacije"); 
+            }
+            else return Page();
+        }
     }
 }
