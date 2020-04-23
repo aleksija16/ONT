@@ -10,9 +10,9 @@ namespace Projekat_1.Model
             Odgovor = new HashSet<Odgovor>();
         }
 
-        public uint Idpitanje { get; set; }
-        public string Tekstpitanja { get; set; }
-        public uint Kvizid { get; set; }
+        public uint IdPitanje { get; set; }
+        public string TekstPitanja { get; set; }
+        public uint KvizId { get; set; }
 
         public virtual Kviz Kviz { get; set; }
         public virtual ICollection<Odgovor> Odgovor { get; set; }

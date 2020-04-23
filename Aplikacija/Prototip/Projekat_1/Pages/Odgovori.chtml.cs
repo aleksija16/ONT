@@ -22,9 +22,9 @@ namespace Projekat_1
 
         public IActionResult OnGet(int id)
         {
-           TrenutnoPitanje = dbContext.Odgovor.Where(x=>x.Pitanjeid == id).FirstOrDefault();
+           TrenutnoPitanje = dbContext.Odgovor.Where(x=>x.PitanjeId == id).FirstOrDefault();
 
-            IQueryable<Odgovor> qOdgovor = dbContext.Odgovor.Where(x => x.Pitanjeid==id);
+            IQueryable<Odgovor> qOdgovor = dbContext.Odgovor.Where(x => x.PitanjeId==id);
             SviOdgovori = qOdgovor.ToList();
             return Page();
         }

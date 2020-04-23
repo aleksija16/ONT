@@ -12,16 +12,16 @@
       
         
          <li>
-           @pitanje.Tekstpitanja
-           <input type="hidden" name="Idpitanje" value="@pitanje.Idpitanje"/>
+           @pitanje.TekstPitanja
+           <input type="hidden" name="IdPitanje" value="@pitanje.IdPitanje"/>
            <ol type="a">
      @foreach (var odgovor in Model.SviOdgovori)
     {
-       if(@odgovor.Pitanjeid==@pitanje.Idpitanje)
+       if(@odgovor.PitanjeId==@pitanje.IdPitanje)
        {
          <li>
-         <input type="radio" name="pitanje_@pitanje.Idpitanje" value="@odgovor.Idodgovor"/>  
-         @odgovor.Tekstodg
+         <input type="radio" name="pitanje_@pitanje.IdPitanje" value="@odgovor.IdOdgovor"/>  
+         @odgovor.TekstOdg
          </li>
        }
               

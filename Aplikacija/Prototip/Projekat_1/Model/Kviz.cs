@@ -10,8 +10,8 @@ namespace Projekat_1.Model
             Pitanje = new HashSet<Pitanje>();
         }
 
-        public uint Idkviz { get; set; }
-        public string Nazivkviza { get; set; }
+        public uint IdKviz { get; set; }
+        public string NazivKviza { get; set; }
 
         public virtual ICollection<Pitanje> Pitanje { get; set; }
     }
