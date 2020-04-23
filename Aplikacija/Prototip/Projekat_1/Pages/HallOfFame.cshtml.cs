@@ -13,7 +13,7 @@ namespace Projekat_1
 
         public OrganizacijaContext dbContext;
 
-        public IList<HallofFame> SviUcesnici;
+        public IList<HallOfFame> SviUcesnici;
 
  public HallOfFameModel(OrganizacijaContext db)
         {
@@ -21,7 +21,7 @@ namespace Projekat_1
         }
         public void OnGet()
         {
-             IQueryable<HallofFame> qHallOfFame = dbContext.HallofFame;
+             IQueryable<HallOfFame> qHallOfFame = dbContext.HallOfFame;
             SviUcesnici = qHallOfFame.ToList();
         }
     }

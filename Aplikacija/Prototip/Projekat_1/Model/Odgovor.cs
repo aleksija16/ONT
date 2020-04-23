@@ -5,9 +5,9 @@ namespace Projekat_1.Model
 {
     public partial class Odgovor
     {
-        public uint Idodgovor { get; set; }
-        public string Tekstodg { get; set; }
-        public uint Pitanjeid { get; set; }
+        public uint IdOdgovor { get; set; }
+        public string TekstOdg { get; set; }
+        public uint PitanjeId { get; set; }
         public sbyte Tacno { get; set; }
 
         public virtual Pitanje Pitanje { get; set; }

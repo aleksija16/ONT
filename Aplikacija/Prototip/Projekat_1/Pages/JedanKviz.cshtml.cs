@@ -25,9 +25,9 @@ namespace Projekat_1
 
         public IActionResult OnGet(int id)
         {
-            TrenutniKviz = dbContext.Pitanje.Where(x=>x.Kvizid == id).FirstOrDefault();
+            TrenutniKviz = dbContext.Pitanje.Where(x=>x.KvizId == id).FirstOrDefault();
 
-            IQueryable<Pitanje> qPitanje = dbContext.Pitanje.Where(x => x.Kvizid==id);
+            IQueryable<Pitanje> qPitanje = dbContext.Pitanje.Where(x => x.KvizId==id);
             SvaPitanja = qPitanje.ToList();
              IQueryable<Odgovor> qOdg = dbContext.Odgovor;
             SviOdgovori = qOdg.ToList();
