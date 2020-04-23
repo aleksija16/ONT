@@ -32,6 +32,16 @@ namespace MyApp.Namespace
                 await dbContext.OcenjivanjeVodica.AddAsync(JednaOcena);
                 await dbContext.SaveChangesAsync();
 
+                var KonacnaOcena = dbContext.OcenjivanjeVodica
+                .Where(x=>x.IdVodicaOcenjivanje == id).Average(y=>y.Ocena);
+
+                var VodicZaOcenjivanje = await dbContext.Vodici
+                .FindAsync(id);
+    
+                VodicZaOcenjivanje.Ocena=(uint)KonacnaOcena;            
+
+                await dbContext.SaveChangesAsync();
+
                 return RedirectToPage("./JedanVodic");
 
             }
