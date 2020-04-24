@@ -1,0 +1,10 @@
+CREATE TABLE `vodici` (
+  `idvodica` int unsigned NOT NULL AUTO_INCREMENT,
+  `imeVodica` varchar(45) DEFAULT NULL,
+  `prezimeVodica` varchar(45) DEFAULT NULL,
+  `pol` char(1) DEFAULT NULL,
+  `brojTelefona` varchar(45) DEFAULT NULL,
+  `ocena` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`idvodica`),
+  UNIQUE KEY `idvodica_UNIQUE` (`idvodica`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1
