@@ -124,3 +124,14 @@ ADD CONSTRAINT `pitanjeid`
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
+
+
+ALTER TABLE `organizacija`.`rezervacije` 
+ADD COLUMN `IdTureRez` INT UNSIGNED NULL AFTER `datumIzvodjenja`,
+ADD INDEX `IdTureRez_idx` (`IdTureRez` ASC);
+ALTER TABLE `organizacija`.`rezervacije` 
+ADD CONSTRAINT `IdTureRez`
+  FOREIGN KEY (`IdTureRez`)
+  REFERENCES `organizacija`.`ture` (`idture`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
