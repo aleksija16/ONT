@@ -4,72 +4,25 @@
     ViewData["Title"] = "Vodiči";
 }
 
-<div class="text-center">
-    <h1>@ViewData["Title"]</h1>
-</div>
-
-<div class="input-group flex-nowrap">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="addon-wrapping">Pretrazi:</span>
-  </div>
-  <input type="text" class="form-control" aria-describedby="addon-wrapping">
-</div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Ime</th>
-      <th scope="col">Prezime</th>
-      <th scope="col">Ocena</th>
-      <th scope='col'></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Petar</td>
-      <td>Petrović</td>
-      <td>10</td>
-      <td>
-	  <form action="/JedanVodic">
-	  <button type="button" class="btn btn-primary">Prikazi više</button>
-	  </form>
-	  </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Ana</td>
-      <td>Antić</td>
-      <td>9,5</td>
-      <td>
-	  <form action="/JedanVodic">
-	  <button type="button" class="btn btn-primary">Prikazi više</button>
-	  </form>
-	  </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Sonja</td>
-      <td>Savić</td>
-      <td>9,1</td>
-      <td>
-	  <form action="/JedanVodic">
-	  <button type="button" class="btn btn-primary">Prikazi više</button>
-	  </form>
-	  </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Milan</td>
-      <td>Mitrović</td>
-      <td>8,3</td>
-      <td>
-	  <form action="/JedanVodic">
-	  <button type="button" class="btn btn-primary">Prikazi više</button>
-	  </form>
-	  </td>
-    </tr>
-  </tbody>
+<table class="table" border="1" frame"hsides" rules="rows">
+            <thead>
+                <tr>
+                <th>Ime vodica</th>
+                <th>Prezime vodica</th>
+                <th></th>
+                </tr>
+            </thead>
+            <form method="get">
+           @foreach (var vodic in Model.SviVodici)
+           {
+               <tbody>
+                   <tr>
+                       <td>@vodic.ImeVodica</td>
+                       <td>@vodic.PrezimeVodica</td>
+                       <td><a asp-route-id="@vodic.IdVodica" asp-page="./JedanVodic">Prikazi vise</a></td>
+                   </tr>
+               </tbody>
+           }
+            </form>
 </table>
 
