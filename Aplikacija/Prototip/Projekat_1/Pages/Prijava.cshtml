@@ -1,18 +1,27 @@
 @page
-@model MyApp.Namespace.PrijavaModel
+@model Projekat_1.PrijavaModel
 @{
      ViewData["Title"] = "Prijava";
 }
 
-
-<div class="prijava fadeInDown">
-  <div id="formContent">
-    <form>
-      <input type="text" id="korisnickoIme" class="fadeIn first" name="login" placeholder="Korisnicko ime" asp-for="TrenutniKorisnik.Username">
-      <input type="text" id="lozinka" class="fadeIn second" name="login" placeholder="Lozinka" asp-for="TrenutniKorisnik.Password">
-      <input type="submit" class="fadeIn third" value="Prijavi se">
-    </form>
-
+<form method="post">
+  <div class="prijava fadeInDown">
+    <div id="formContent">
+      <input type="text" class="fadeIn first" placeholder="Korisnicko ime" asp-for="TrenutniKorisnik.Username">
+      <input type="password" class="fadeIn second" placeholder="Lozinka" asp-for="TrenutniKorisnik.Password">
+      <button type="submit" class="fadeIn third">Prijavi se</button>
+    </div>
   </div>
+</form>
+
+<div>@if (Model.SessionId == -1)
+    {
+      <p>Uneli ste pogresno korisnicko ime ili lozinku.</p>
+    }
+    else if (Model.SessionId != null)
+    {
+       <p> Uspesno ste se ulogovali sa identifikacijom sesije: @Model.SessionId, a uloga u kojoj ste posetilac sajta je: @Model.TipTrenutnogKorisnika.</p> 
+
+    }
 </div>
 
