@@ -15,6 +15,10 @@ namespace MyApp.Namespace
         [BindProperty]
         public Ture JednaTura {get; set;}
 
+        public IList<Znamenitosti> SveZnamenitosti;
+
+        public IList<Vodici> SviVodici;
+
         [BindProperty]
         public string ErrorMessage {get; set;}
 

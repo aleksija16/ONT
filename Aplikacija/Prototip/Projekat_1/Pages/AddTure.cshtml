@@ -14,84 +14,57 @@
     <div>
         <label>Ime ture:<input asp-for="JednaTura.NazivTure"></label>
     </div>
-    <div>
-        <p>Izaberite znamenitosti koje zelite da ova tura sadrzi:</p>
+    <table class="table" border="1" frame"hsides" rules="rows">
+            <thead>
+                <tr>
+                <th scope="col">Naziv Znamenitosti</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <form method="get">
+            @foreach (var znamenitost in Model.SveZnamenitosti){
+                <tbody>
+                    <tr>
+                        <td>@znamenitost.NazivZnamenitosti</td>
+                        <td><button class="btn btn-primary" asp-route-id="@znamenitost.IdZnamenitosti" asp-page-handler="DodajZnamenitost">Dodaj u turu</button></td>
+                    </tr>
+                </tbody>
+            }
+            </form>
+        </table>
+    <p>Izaberite vodica koji ce da vodi turu:</p>
         <table class="table" border="1" frame"hsides" rules="rows">
             <thead>
                 <tr>
+                <th scope="col">Ime Vodica</th>
+                <th scrope="col">Prezime Vodica</th>
                 <th scope="col"></th>
-                <th scope="col">Ime Znamenitosti</th>
-                <th scope='col'></th>
-                <th scope='col'>Izaberi znamenitost</th>
+                <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Cele Kula</td>
-                <td><button type="button" class="btn btn-primary">Prikazi više</button></td>
-                <td><input type="checkbox"></button></td>
-                </tr>
-            </tbody>
+            <form method="get">
+            @foreach (var vodic in Model.SviVodici){
+                <tbody>
+                    <tr>
+                        <td>@vodic.ImeVodica</td>
+                        <td>@vodic.PrezimeVodica</td>
+                        <td><button class="btn btn-primary" asp-route-id="@vodic.IdVodica" asp-page-handler="DodajVodica">Dodaj vodica</button></td>
+                    </tr>
+                </tbody>
+            }
+            </form>
         </table>
-    </div>
-    <div>
-    <p>Izaberite turistu koji ce da vodi turu:</p>
-        <table class="table" border=1 frame=hsides rules=rows>
-            <thead>
-                <tr>
-                <th scope="col"></th>
-                <th scope="col">Ime</th>
-                <th scope="col">Prezime</th>
-                <th scope="col">Ocena</th>
-                <th scope='col'></th>
-                <th scope='col'>Izaberi turistu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Petar</td>
-                <td>Petrović</td>
-                <td>10</td>
-                <td><button type="button" class="btn btn-primary">Prikazi više</button></td>
-                <td><input type="radio" name="radiobtn"></td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Ana</td>
-                <td>Antić</td>
-                <td>9,5</td>
-                <td><button type="button" class="btn btn-primary">Prikazi više</button></td>
-                <td><input type="radio" name="radiobtn"></td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Sonja</td>
-                <td>Savić</td>
-                <td>9,1</td>
-                <td><button type="button" class="btn btn-primary">Prikazi više</button></td>
-                <td><input type="radio" name="radiobtn"></td>
-                </tr>
-                <tr>
-                <th scope="row">4</th>
-                <td>Milan</td>
-                <td>Mitrović</td>
-                <td>8,3</td>
-                <td><button type="button" class="btn btn-primary">Prikazi više</button></td>
-                <td><input type="radio" name="radiobtn"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
     <div>
         <p>Unesite datum kada ce se tura odrzavati: </p>
-        <input type="date">
+        <div>Datum odrzavanja:  <input asp-for="JednaTura.DatumOdrzavanja" /></div>
         <p>Unesite vreme kada ce se tura odrzavati: </p>
-        <input type="time">
+        <div>Vreme odrzavanja: <input asp-for="JednaTura.VremeOdrzavanja"/></div>>
     </div>
-    <div></div>
     <div>
-        <button type="submit" class="btn btn-primary">KREIRAJ TURU</button>
+        <p>Unesite opis ture:</p>
+    </div>
+    <div>
+        <button type="submit" class="btn2 btn-primary">KREIRAJ TURU</button>
     </div>
 </form>
