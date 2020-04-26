@@ -1,0 +1,15 @@
+CREATE TABLE `proba`.`pitanje` (
+  `IdPitanje` INT NOT NULL AUTO_INCREMENT,
+  `PitanjeTekst` VARCHAR(1000) NOT NULL,
+  `OPA` VARCHAR(1000) NULL,
+  `OPB` VARCHAR(1000) NULL,
+  `OPC` VARCHAR(1000) NULL,
+  `Tacan` VARCHAR(45) NULL,
+  `KvizId` INT UNSIGNED NULL,
+  PRIMARY KEY (`IdPitanje`),
+  INDEX `KvizId_idx` (`KvizId` ASC),
+  CONSTRAINT `KvizId`
+    FOREIGN KEY (`KvizId`)
+    REFERENCES `proba`.`kviz` (`idkviz`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
