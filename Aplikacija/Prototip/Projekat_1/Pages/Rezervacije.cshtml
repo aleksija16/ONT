@@ -25,6 +25,7 @@
       <th scope="row"> @rezervacija.IdRezervacije</th>
       <td>@rezervacija.DatumIzvodjenja</td>
       <td><a asp-page="./JednaRezervacija/" asp-route-id="@rezervacija.IdRezervacije">Prikazi detalje</a></td>
+      <td><a asp-page="./ListaTuristaUzRezervaciju/" asp-route-id="@rezervacija.IdRezervacije">Prikazi listu turista</a></td>
     </tr>
         </tbody>
     }

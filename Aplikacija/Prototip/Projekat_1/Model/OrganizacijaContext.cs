@@ -129,8 +129,6 @@ namespace Projekat_1.Model
                 entity.Property(e => e.Ocena).HasColumnName("ocena");
             });
 
-    
-
             modelBuilder.Entity<Pitanje>(entity =>
             {
                 entity.HasKey(e => e.IdPitanje)
@@ -139,44 +137,41 @@ namespace Projekat_1.Model
                 entity.ToTable("pitanje");
 
                 entity.HasIndex(e => e.KvizId)
-                    .HasName("kvizid_idx");
-
-                entity.Property(e => e.IdPitanje).HasColumnType("int(10) unsigned");
-
-                entity.Property(e => e.KvizId).HasColumnType("int(10) unsigned");
+                    .HasName("KvizId_idx");
 
                 entity.Property(e => e.Opa)
                     .HasColumnName("OPA")
                     .HasColumnType("varchar(1000)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Opb)
                     .HasColumnName("OPB")
                     .HasColumnType("varchar(1000)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Opc)
-                    .HasColumnName("opc")
-                    .HasColumnType("varchar(100)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasColumnName("OPC")
+                    .HasColumnType("varchar(1000)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.PitanjeTekst)
+                    .IsRequired()
                     .HasColumnType("varchar(1000)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Tacan)
                     .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.HasOne(d => d.Kviz)
                     .WithMany(p => p.Pitanje)
                     .HasForeignKey(d => d.KvizId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("KvizId");
             });
 
@@ -189,6 +184,12 @@ namespace Projekat_1.Model
 
                 entity.HasIndex(e => e.IdTureRez)
                     .HasName("idTureRez_idx");
+
+                entity.HasIndex(e => e.IdTuristeRez)
+                    .HasName("idTuristeRez_idx");
+
+                entity.HasIndex(e => e.IdVodicaRez)
+                    .HasName("idVodicaRez_idx");
 
                 entity.Property(e => e.IdRezervacije).HasColumnName("idrezervacije");
 
@@ -208,6 +209,18 @@ namespace Projekat_1.Model
                     .WithMany(p => p.Rezervacije)
                     .HasForeignKey(d => d.IdTureRez)
                     .HasConstraintName("idTureRez");
+
+                entity.HasOne(d => d.IdTuristeRezNavigation)
+                    .WithMany(p => p.Rezervacije)
+                    .HasForeignKey(d => d.IdTuristeRez)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("idTuristeRez");
+
+                entity.HasOne(d => d.IdVodicaRezNavigation)
+                    .WithMany(p => p.Rezervacije)
+                    .HasForeignKey(d => d.IdVodicaRez)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("idVodicaRez");
             });
 
             modelBuilder.Entity<Ture>(entity =>

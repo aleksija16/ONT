@@ -7,6 +7,7 @@ namespace Projekat_1.Model
     {
         public Vodici()
         {
+            Rezervacije = new HashSet<Rezervacije>();
             Ture = new HashSet<Ture>();
         }
 
@@ -17,6 +18,7 @@ namespace Projekat_1.Model
         public string BrojTelefona { get; set; }
         public uint? Ocena { get; set; }
 
+        public virtual ICollection<Rezervacije> Rezervacije { get; set; }
         public virtual ICollection<Ture> Ture { get; set; }
     }
 }
