@@ -7,25 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Projekat_1.Model;
 
+
 namespace Projekat_1
 {
-    public class IzmeniTuruModel : PageModel
+    public class IzmeniZnamenitostModel : PageModel
     {
-        private readonly OrganizacijaContext dbContext;
+        public OrganizacijaContext dbContext {get; set;}
 
         [BindProperty]
-        public Ture TrenutnaTura {get; set;}
+        public Znamenitosti TrenutnaZnamenitost {get; set;}
 
-        public IzmeniTuruModel(OrganizacijaContext db)
+        public IzmeniZnamenitostModel(OrganizacijaContext db)
         {
-            dbContext=db;
+            dbContext = db;
         }
-        public async Task<IActionResult> OnPostAsync(uint id)
+
+        public IActionResult OnGet(int id)
         {
-            TrenutnaTura = await dbContext.Ture.Where(x=>x.IdTure == id).FirstOrDefaultAsync();
-            if(TrenutnaTura==null)
+            TrenutnaZnamenitost = dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti == id).FirstOrDefault();
+            if(TrenutnaZnamenitost==null)
             {
-                return RedirectToPage("./Ture");
+                return RedirectToPage("./Znamenitosti");
             }
             return Page();
         }
@@ -38,7 +40,7 @@ namespace Projekat_1
             }
             else
             {
-                dbContext.Ture.Attach(TrenutnaTura).State=EntityState.Modified;
+                dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
                 try
                 {
                     await dbContext.SaveChangesAsync();
@@ -47,9 +49,8 @@ namespace Projekat_1
                 {
                     throw new Exception("Greska: " + e.ToString());
                 }
-                return RedirectToPage("./Ture");
+                return RedirectToPage("./Znamenitosti");
             }
         }
-        
     }
 }

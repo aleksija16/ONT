@@ -32,7 +32,7 @@
                 <td>@ture.DatumOdrzavanja</td>
                 <td>@ture.VremeOdrzavanja</td>
                 <td></td>
-                <td> <a asp-route-id="@ture.IdTure" asp-page="./IzmeniTuru">Izmeni turu</a> </td>                
+                <td> <button class="btn btn-primary" type="submit" asp-route-id="@ture.IdTure" asp-page="./IzmeniTuru">Izmeni turu</button>  </td>               
                 <td> <button class="btn btn-danger" type="submit" asp-route-id="@ture.IdTure" asp-page-handler="Obrisi">Obrisi turu</button>  </td>
                 <td> <button class="btn btn-success" type="submit" asp-route-id="@ture.IdTure" asp-page-handler="Rezervisi">Rezervisi turu</button> </td>
             </tr> 

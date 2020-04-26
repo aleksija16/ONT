@@ -1,62 +1,14 @@
 ﻿@page
-@model MyApp.Namespace.IzmeniTuruModel
+@model Projekat_1.IzmeniTuruModel
 @{
 }
 
-<h1>Izmeni podatke o turi</h2>
+<p>Izmeni informacije o turi</p>
 <form method="post">
-    <div>Naziv ture:<input type="text" asp-for="TrenutnaTura.NazivTure"/></div>
-        <p>Izmenite znamenitosti</p>
-        <table class="table" border="1" frame"hsides" rules="rows">
-            <thead>
-                <tr>
-                <th scope="col">Naziv Znamenitosti</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                </tr>
-            </thead>
-            <form method="get">
-            @foreach (var znamenitost in Model.SveZnamenitosti){
-                <tbody>
-                    <tr>
-                        <td>@znamenitost.NazivZnamenitosti</td>
-                        <td><button class="btn btn-primary">Dodaj u turu</button></td>
-                        <td><button class="btn btn-danger">Izbaci iz ture</button></td>
-                    </tr>
-                </tbody>
-            }
-            </form>
-        </table>
-        <p>Izmeni Vodica</p>
-        <table class="table" border="1" frame"hsides" rules="rows">
-            <thead>
-                <tr>
-                <th>Ime vodica</th>
-                <th>Prezime vodica</th>
-                <th></th>
-                <th></th>
-                </tr>
-            </thead>
-            <form method="get">
-           @foreach (var vodic in Model.SviVodici)
-           {
-               <tbody>
-                   <tr>
-                       <td>@vodic.ImeVodica</td>
-                       <td>@vodic.PrezimeVodica</td>
-                       <td><button class="btn btn-primary">Dodaj u turu</button></td>
-                       <td><button class="btn btn-danger">Izbaci iz ture</button></td>
-                   </tr>
-               </tbody>
-           }
-            </form>
-        </table>
-        <p>Izmeni datum odrzavanja: </p>
-        <input type="date">
-        <p>Izmeni vreme odrzavanja: </p>
-        <input type="time">
-        <div>Izmeni detalje o turi:<input type="text" /></div>
-        <div>
-        <button type="submit" class="btn btn-primary" asp-page-handler="Sacuvaj">Sacuvaj izmene</button>
-    </div>
-    </form>
+    <input type="hidden" asp-for="TrenutnaTura.IdTure">
+    <div>Naziv ture:<input type="text" asp-for="TrenutnaTura.NazivTure" /></div>
+    <div>Datum odrzavanja: <input type="text" asp-for="TrenutnaTura.DatumOdrzavanja" /></div>
+    <div>Vreme odrzavanja: <input type="text" asp-for="TrenutnaTura.VremeOdrzavanja" /></div>
+
+    <button type="submit" asp-page-handler="Sacuvaj">Sacuvaj izmene</button>
+</form>

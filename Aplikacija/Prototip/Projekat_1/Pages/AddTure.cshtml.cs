@@ -15,12 +15,27 @@ namespace MyApp.Namespace
         [BindProperty]
         public Ture JednaTura {get; set;}
 
+        public IList<Znamenitosti> SveZnamenitosti;
+
+        public Ture TrenutnaTura{get;set;}
+
+        public IList<Vodici> SviVodici;
+
         [BindProperty]
         public string ErrorMessage {get; set;}
 
         public AddTureModel(OrganizacijaContext db)
         {
             dbContext = db;
+        }
+
+        public void OnGet()
+        {
+            IQueryable<Vodici> qVodici = dbContext.Vodici;
+            SviVodici=qVodici.ToList();
+            
+            IQueryable<Znamenitosti> qZnamenitosti=dbContext.Znamenitosti;
+            SveZnamenitosti=qZnamenitosti.ToList();
         }
 
         public async Task<IActionResult> OnPostAsync()

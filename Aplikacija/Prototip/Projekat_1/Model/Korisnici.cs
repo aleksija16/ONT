@@ -10,8 +10,5 @@ namespace Projekat_1.Model
         public string Password { get; set; }
         public uint? IdTuristeKor { get; set; }
         public uint? IdVodicaKor { get; set; }
-
-        public virtual Turisti IdTuristeKorNavigation { get; set; }
-        public virtual Vodici IdVodicaKorNavigation { get; set; }
     }
 }

@@ -1,0 +1,19 @@
+@page
+@model Projekat_1.IzmeniZnamenitostModel
+@{
+
+}
+
+<form method="get">
+    <h3>@Model.TrenutnaZnamenitost.NazivZnamenitosti</h3>
+    <div> Kraci opis o: @Model.TrenutnaZnamenitost.NazivZnamenitosti.</div>
+    <div> Lokacija znamenitosti: @Model.TrenutnaZnamenitost.LokacijaZnamenitosti</div>
+</form>
+<p>Izmena znamenitosti: </p>
+<form method="post">
+    <input type="hidden" asp-for="TrenutnaZnamenitost.IdZnamenitosti">
+    <div>Naziv znamenitosti: <input type="text" asp-for="TrenutnaZnamenitost.NazivZnamenitosti" /></div>
+    <div>Lokacija znamenitosti: <input type="text" asp-for="TrenutnaZnamenitost.LokacijaZnamenitosti" /></div> 
+    
+    <button type="submit" asp-page-handler="Sacuvaj">Sacuvaj izmene</button>
+</form>
