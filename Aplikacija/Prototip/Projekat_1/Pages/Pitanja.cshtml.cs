@@ -4,25 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Projekat_1.Model;
 
 namespace Projekat_1
 {
     public class PitanjaModel : PageModel
     {
-        public OrganizacijaContext dbContext {get; set;}
+    private readonly OrganizacijaContext dbContext;
 
-        public IList<Pitanje> SvaPitanja;
-    public IList<Odgovor> SviOdgovori;
-        public PitanjaModel(OrganizacijaContext db)
-        {
-            dbContext = db;
-        }
+    public PitanjaModel (OrganizacijaContext db)
+    {
+        dbContext=db;
+    }
 
-        public IActionResult OnGet()
+    [BindProperty]
+    public IList<Pitanje> Pitanja { get;set; }
+      public async Task OnGetAsync()
         {
-            SvaPitanja=dbContext.Pitanje.ToList();
-            return Page();
+            Pitanja = await dbContext.Pitanje.Include(p => p.Kviz).ToListAsync();
         }
 
          public async Task<IActionResult> OnPostObrisiAsync(uint id)

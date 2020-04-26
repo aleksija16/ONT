@@ -1,38 +1,65 @@
 @page
-@model Projekat_1.PitanjaModel
+@model Projekat_1.PitanjeModel
+
 @{
     ViewData["Title"] = "Pitanja";
 }
 
-<form> 
-    <a asp-page="./AddPitanje/" >Dodaj pitanje</a>
-</form>
-<form>
-    <a asp-page="./AddOdgovor/">Dodaj odgovor</a>
-</form>
+<h1>Lista svih pitanja</h1>
 
-<table class="table table-striped table-dark table-bordered" style="text-align: center">
-  <thead>
-    <tr>
-      <th scope="col">ID pitanja</th>
-      <th scope="col">Tekst pitanja</th>
-      <th scope="col">ID kviza</th> 
-      <th scope="col">Odgovori</th>
-        <th scope="col">Brisanje</th>
-    </tr>
-  </thead>
-  <form method="post">
-    @foreach (var pitanje in Model.SvaPitanja)
-    {
-        <tbody>
-    <tr>
-      <td>@pitanje.IdPitanje</td>
-      <td>@pitanje.TekstPitanja</td>
-      <td>@pitanje.KvizId</td>
-      <td> <a class="pitanje" asp-page="./Odgovori/" asp-route-id="@pitanje.IdPitanje">Prikazi odgovore</a></td>
-      <td> <button type="submit" class="pitanje" asp-route-id="@pitanje.IdPitanje" asp-page-handler="Obrisi">Obrisi pitanje</button>  </td>
-    </tr>
-        </tbody>
-    }
-</form>
+<p>
+    <a asp-page="AddPitanje">Dodaj pitanje</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pitanja[0].PitanjeTekst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pitanja[0].Opa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pitanja[0].Opb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pitanja[0].Opc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pitanja[0].Tacan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pitanja[0].Kviz)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var pitanje in Model.Pitanja) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => pitanje.PitanjeTekst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pitanje.Opa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pitanje.Opb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pitanje.Opc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pitanje.Tacan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pitanje.Kviz.NazivKviza)
+            </td>
+            <td>
+                <a asp-page="./EditPitanje" asp-route-id="@pitanje.IdPitanje">Izmeni</a>
+                <a asp-page="./DeletePitanje" asp-route-id="@pitanje.IdPitanje">Obrisi</a>
+            </td>
+        </tr>
+}
+    </tbody>
 </table>

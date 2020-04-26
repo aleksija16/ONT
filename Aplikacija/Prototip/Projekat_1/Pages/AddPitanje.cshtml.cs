@@ -5,17 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Projekat_1.Model;
 
-namespace MyApp.Namespace
+namespace Projekat_1
 {
     public class AddPitanjeModel : PageModel
     {
         private readonly OrganizacijaContext dbContext;
-
-        [BindProperty]
-        public Pitanje JednoPitanje {get; set;}
-
+      
         [BindProperty]
         public string ErrorMessage {get; set;}
 
@@ -24,23 +22,31 @@ namespace MyApp.Namespace
             dbContext = db;
         }
 
+      
+
+        [BindProperty]
+        public Pitanje Pitanje { get; set; }
+     
+           public IActionResult OnGet()
+        {
+            return Page();
+        }
+      
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
-            } 
-            else
-            {
-                
-                {
-                    dbContext.Pitanje.Add(JednoPitanje);
-                    await dbContext.SaveChangesAsync();
-
-                    return RedirectToPage("./Pitanja");
-                }
             }
+
+            dbContext.Pitanje.Add(Pitanje);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToPage("./Pitanja");
         }
+
+
+        
     }
 }
 

@@ -19,7 +19,6 @@ namespace Projekat_1.Model
         public virtual DbSet<Korisnici> Korisnici { get; set; }
         public virtual DbSet<Kviz> Kviz { get; set; }
         public virtual DbSet<OcenjivanjeVodica> OcenjivanjeVodica { get; set; }
-        public virtual DbSet<Odgovor> Odgovor { get; set; }
         public virtual DbSet<Pitanje> Pitanje { get; set; }
         public virtual DbSet<Rezervacije> Rezervacije { get; set; }
         public virtual DbSet<Ture> Ture { get; set; }
@@ -130,34 +129,7 @@ namespace Projekat_1.Model
                 entity.Property(e => e.Ocena).HasColumnName("ocena");
             });
 
-            modelBuilder.Entity<Odgovor>(entity =>
-            {
-                entity.HasKey(e => e.IdOdgovor)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("odgovor");
-
-                entity.HasIndex(e => e.PitanjeId)
-                    .HasName("pitanjeid_idx");
-
-                entity.Property(e => e.IdOdgovor).HasColumnName("idodgovor");
-
-                entity.Property(e => e.PitanjeId).HasColumnName("pitanjeid");
-
-                entity.Property(e => e.Tacno).HasColumnName("tacno");
-
-                entity.Property(e => e.TekstOdg)
-                    .IsRequired()
-                    .HasColumnName("tekstodg")
-                    .HasColumnType("varchar(1000)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.HasOne(d => d.Pitanje)
-                    .WithMany(p => p.Odgovor)
-                    .HasForeignKey(d => d.PitanjeId)
-                    .HasConstraintName("pitanjeid");
-            });
+    
 
             modelBuilder.Entity<Pitanje>(entity =>
             {
@@ -169,22 +141,43 @@ namespace Projekat_1.Model
                 entity.HasIndex(e => e.KvizId)
                     .HasName("kvizid_idx");
 
-                entity.Property(e => e.IdPitanje).HasColumnName("idpitanje");
+                entity.Property(e => e.IdPitanje).HasColumnType("int(10) unsigned");
 
-                entity.Property(e => e.KvizId).HasColumnName("kvizid");
+                entity.Property(e => e.KvizId).HasColumnType("int(10) unsigned");
 
-                entity.Property(e => e.TekstPitanja)
-                    .IsRequired()
-                    .HasColumnName("tekstpitanja")
+                entity.Property(e => e.Opa)
+                    .HasColumnName("OPA")
                     .HasColumnType("varchar(1000)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.Opb)
+                    .HasColumnName("OPB")
+                    .HasColumnType("varchar(1000)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.Opc)
+                    .HasColumnName("opc")
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.PitanjeTekst)
+                    .HasColumnType("varchar(1000)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.Tacan)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
                 entity.HasOne(d => d.Kviz)
                     .WithMany(p => p.Pitanje)
                     .HasForeignKey(d => d.KvizId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("kvizid");
+                    .HasConstraintName("KvizId");
             });
 
             modelBuilder.Entity<Rezervacije>(entity =>
