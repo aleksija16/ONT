@@ -30,16 +30,16 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.HallOfFame) {
+@foreach (var ucesnik in Model.HallOfFame) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ImeTuriste)
+              @ucesnik.ImeTuriste
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrezimeTuriste)
+              @ucesnik.PrezimeTuriste)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BrojPoena)
+               @ucesnik.BrojPoena)
             </td>
         </tr>
 }

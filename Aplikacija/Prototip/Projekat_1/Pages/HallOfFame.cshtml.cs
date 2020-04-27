@@ -13,7 +13,6 @@ namespace Projekat_1
     {
 
         public readonly OrganizacijaContext dbContext;
-        public int rednibroj;
         public HallOfFameModel(OrganizacijaContext db)
         {
             dbContext = db;
@@ -22,8 +21,6 @@ namespace Projekat_1
         public async Task OnGetAsync()
         {
             HallOfFame = await dbContext.HallOfFame.OrderByDescending(x=>x.BrojPoena).ToListAsync();
-            rednibroj=0;
-
         }
     }
 }
