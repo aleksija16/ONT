@@ -4,17 +4,12 @@
 ViewData["Title"] = "Vodic";
 }
 
-<div class="card" style="width: 18rem;">
-  <img src="https://images.squarespace-cdn.com/content/v1/573610d2cf80a1b5becb9edd/1492634333984-NSZET10PFXWNUG5ILP0L/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/headshot+photographers.jpg?format=2500w" class="card-img-top" alt="...">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Ime:Petar</li>
-    <li class="list-group-item">Prezime:Petrovic</li>
-    <li class="list-group-item">Pol:M</li>
-    <li class="list-group-item">Broj Telefona:225883</li>
-  </ul>
-  <div class="card-body">
-    <form action="/OceniVodica">
-    <button type="submit" class="btn btn-primary">Oceni Vodica</button>
-    </form>
-  </div>
-</div>
+<form method="get">
+    <div>ID vodica: @Model.TrenutniVodic.IdVodica</div>
+    <div>Ime vodica: @Model.TrenutniVodic.ImeVodica</div>
+    <div>Prezime vodica: @Model.TrenutniVodic.PrezimeVodica</div>
+    <div>Pol: @Model.TrenutniVodic.Pol</div>
+    <div> Broj telefona: @Model.TrenutniVodic.BrojTelefona</div>
+
+    <button type="submit" class="btn btn-primary" asp-page="./OceniVodica">Oceni Vodica</button>
+</form>
