@@ -2,40 +2,46 @@
 @model Projekat_1.HallOfFameModel
 @{
     ViewData["Title"]="Hall Of Fame";
+   
 }
 
 <h1>
-     <p>Hall Of Fame</p>
-  <img src="https://securityintelligence.com/wp-content/uploads/2017/04/thinkstockphotos-612408736-630x330.jpg" style="border-radius: 25%" alt="Hall of fame" width="250" height="200">
-      
-</h1>
-<div>
   <form>
     <button class="uradi" asp-page="./Kvizovi">Uradi kviz</button>
-</form>
-</div>
+  </form>
+  <p>Hall Of Fame</p>
+  <img src="https://securityintelligence.com/wp-content/uploads/2017/04/thinkstockphotos-612408736-630x330.jpg" style="border-radius: 25%" alt="Hall of fame" width="250" height="200">
+  
+</h1>
 
-<table class="table halloffame table-striped table-bordered" style="text-align: center">
-  <thead>
-    <tr>
-      <th scope="col">Redni broj</th>
-      <th scope="col">Ime</th>
-      <th scope="col">Prezime</th>
-      <th scope="col">Broj Poena</th>
-    </tr>
-  </thead>
-  <form method="get">
-    @foreach (var ucesnik in Model.SviUcesnici)
-    {
-        <tbody>
-          <tr>
-            <th scope="row"> @ucesnik.RedniBroj</th>
-            <td>@ucesnik.ImeTuriste</td>
-            <td>@ucesnik.PrezimeTuriste</td>
-            <td>@ucesnik.BrojPoena</td>
-          </tr>
-        </tbody>
-    }
-</form>
+
+<table class="table table-striped table-border table-dark">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HallOfFame[0].ImeTuriste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HallOfFame[0].PrezimeTuriste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HallOfFame[0].BrojPoena)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.HallOfFame) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImeTuriste)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrezimeTuriste)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojPoena)
+            </td>
+        </tr>
+}
+    </tbody>
 </table>
-
