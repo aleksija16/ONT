@@ -4,14 +4,16 @@
      ViewData["Title"] = "Registracija";
 }
 
-    <form method="post">
-     <div><input asp-for="NoviTurista.ImeTuriste" placeholder="Ime" /></div> 
-     <div><input asp-for="NoviTurista.PrezimeTuriste" placeholder="Prezime" /></div> 
-      <div><input asp-for="NoviTurista.Pol" placeholder="Pol" /></div>
-      <div><input asp-for="NoviTurista.DatumRodjenja" placeholder="DatumRodjenja" /></div>
-      <div><input asp-for="NoviTurista.Email" placeholder="Email" /></div>
-     <div><input asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" /></div> 
-      <div><input asp-for="NoviKorisnik.Password" placeholder="Lozinka" /></div>
-      <div><button type="submit" class="btn btn-primary">Registruj se</button></div>
-    </form>
-
+<div class="card card-signin my-4">
+<div class="card-body">
+<h5 class="card-title text-center">REGISTRUJ SE</h5>
+     <form method="post">
+          <div style="text-align: center;"> <input asp-for="NoviTurista.ImeTuriste" placeholder="Ime" required /></div> 
+          <div style="text-align: center;"><input asp-for="NoviTurista.PrezimeTuriste" placeholder="Prezime" required /></div>
+          <div style="text-align: center;"><input asp-for="NoviTurista.Email" placeholder="Email" required /></div>
+          <div style="text-align: center;"><input asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" required /></div> 
+          <div style="text-align: center;"><input asp-for="NoviKorisnik.Password" placeholder="Lozinka" required /></div>
+          <div style="text-align: center;"><button type="submit" class="btn btn-primary">Registruj se</button></div>
+     </form> 
+</div>
+</div>
