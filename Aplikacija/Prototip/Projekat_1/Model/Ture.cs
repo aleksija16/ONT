@@ -8,6 +8,7 @@ namespace Projekat_1.Model
         public Ture()
         {
             Rezervacije = new HashSet<Rezervacije>();
+            ZnamenitostiUTurama = new HashSet<ZnamenitostiUTurama>();
         }
 
         public uint IdTure { get; set; }
@@ -19,5 +20,6 @@ namespace Projekat_1.Model
 
         public virtual Vodici IdVodicaTuraNavigation { get; set; }
         public virtual ICollection<Rezervacije> Rezervacije { get; set; }
+         public virtual ICollection<ZnamenitostiUTurama> ZnamenitostiUTurama { get; set; }
     }
 }

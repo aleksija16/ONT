@@ -25,7 +25,7 @@ namespace Projekat_1.Model
         public virtual DbSet<Turisti> Turisti { get; set; }
         public virtual DbSet<Vodici> Vodici { get; set; }
         public virtual DbSet<Znamenitosti> Znamenitosti { get; set; }
-
+         public virtual DbSet<ZnamenitostiUTurama> ZnamenitostiUTurama { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -370,6 +370,36 @@ namespace Projekat_1.Model
                     .HasColumnType("varchar(45)")
                     .HasCharSet("latin1")
                     .HasCollation("latin1_swedish_ci");
+            });
+
+             modelBuilder.Entity<ZnamenitostiUTurama>(entity =>
+            {
+                entity.HasKey(e => new { e.TuraId, e.ZnamenitostId })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("znamenitostiuturama");
+
+                entity.HasIndex(e => e.TuraId)
+                    .HasName("TuraId_idx");
+
+                entity.HasIndex(e => e.ZnamenitostId)
+                    .HasName("ZnamenitostID_idx");
+
+                entity.Property(e => e.TuraId).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.ZnamenitostId).HasColumnType("int(10) unsigned");
+
+                entity.HasOne(d => d.Tura)
+                    .WithMany(p => p.ZnamenitostiUTurama)
+                    .HasForeignKey(d => d.TuraId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("TuraId");
+
+                entity.HasOne(d => d.Znamenitost)
+                    .WithMany(p => p.ZnamenitostiUTurama)
+                    .HasForeignKey(d => d.ZnamenitostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ZnamenitostID");
             });
 
             OnModelCreatingPartial(modelBuilder);

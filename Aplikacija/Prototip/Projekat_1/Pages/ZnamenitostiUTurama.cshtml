@@ -1,0 +1,12 @@
+@page
+@model Projekat_1.ZnamenitostiUTuramaModel
+
+@{
+    ViewData["Title"] = "DetailsTura";
+}
+
+<h1>Lista znamenitosti za turu: @Html.DisplayFor(model => model.ZnamenitostiUTurama[0].Tura.NazivTure)</h1>
+
+@foreach (var item in Model.ZnamenitostiUTurama) {
+        <li> @Html.DisplayFor(modelItem => item.Znamenitost.NazivZnamenitosti)</li>
+}
