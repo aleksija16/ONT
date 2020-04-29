@@ -199,3 +199,40 @@ CREATE TABLE `organizacija`.`korisnici` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+-----BAZA ZA ANKETU-------
+
+CREATE TABLE `organizacija`.`anketa` (
+  `IdAnkete` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `IdTuristeAnk` INT UNSIGNED NOT NULL,
+  `IdTureAnk` INT UNSIGNED NULL,
+  `IdVodicaAnk` INT UNSIGNED NULL,
+  `KonacnaOcena` INT UNSIGNED NULL,
+  `VremenskiUslovi` VARCHAR(45) NULL,
+  `Komentar` VARCHAR(1000) NULL,
+  `OrganizovanostTure` INT UNSIGNED NULL,
+  `InformisanostVodica` INT UNSIGNED NULL,
+  `FizickaZahtevnostTure` INT UNSIGNED NULL,
+  `TipTuriste` VARCHAR(45) NULL,
+  `DrustvenaAtmosfera` VARCHAR(45) NULL,
+  `NajinteresantnijaZnamenitost` VARCHAR(45) NULL,
+  `NajdosadnijaZnamenitost` VARCHAR(45) NULL,
+  PRIMARY KEY (`IdAnkete`),
+  UNIQUE INDEX `idankete_UNIQUE` (`IdAnkete` ASC),
+  INDEX `IdTuristeAnk_idx` (`IdTuristeAnk` ASC),
+  INDEX `IdTureAnk_idx` (`IdTureAnk` ASC),
+  INDEX `IdVodicaAnk_idx` (`IdVodicaAnk` ASC),
+  CONSTRAINT `IdTuristeAnk`
+    FOREIGN KEY (`IdTuristeAnk`)
+    REFERENCES `organizacija`.`turisti` (`IdTuriste`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `IdTureAnk`
+    FOREIGN KEY (`IdTureAnk`)
+    REFERENCES `organizacija`.`ture` (`IdTure`)
+    ON DELETE SET NULL
+    ON UPDATE NO ACTION,
+  CONSTRAINT `IdVodicaAnk`
+    FOREIGN KEY (`IdVodicaAnk`)
+    REFERENCES `organizacija`.`vodici` (`IdVodica`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
