@@ -57,8 +57,15 @@ CREATE TABLE `organizacija`.`znamenitosti` (
 CREATE TABLE `organizacija`.`kvizovi` (
   `IdKviza` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NazivKviza` VARCHAR(45) NOT NULL,
+  `IdZnamenitostiK` int unsigned DEFAULT NULL,
   PRIMARY KEY (`IdKviza`),
-  UNIQUE INDEX `IdKviza_UNIQUE` (`IdKviza` ASC));
+  UNIQUE INDEX `IdKviza_UNIQUE` (`IdKviza` ASC),
+  KEY `IdZnamenitosti_idx` (`IdZnamenitostiK`),
+  CONSTRAINT `IdZnamenitostiK` 
+    FOREIGN KEY (`IdZnamenitostiK`) 
+    REFERENCES `znamenitosti` (`IdZnamenitosti`) 
+    ON DELETE SET NULL
+    ON UPDATE NO ACTION);
 
 CREATE TABLE `organizacija`.`pitanja` (
   `IdPitanja` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -128,6 +135,7 @@ CREATE TABLE `organizacija`.`rezervacije` (
   `IdTureR` INT UNSIGNED NULL,
   `IdVodicaR` INT UNSIGNED NULL,
   `Datum` DATE NULL,
+  `BrojOsoba` int unsigned DEFAULT NULL,
   PRIMARY KEY (`IdRezervacije`),
   UNIQUE INDEX `IdRezervacije_UNIQUE` (`IdRezervacije` ASC),
   UNIQUE INDEX `IdTuristeR_UNIQUE` (`IdTuristeR` ASC),
