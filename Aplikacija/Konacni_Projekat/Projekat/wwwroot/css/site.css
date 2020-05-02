@@ -89,7 +89,7 @@ body {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.registracija {
+.registracija, .prijava {
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -130,7 +130,7 @@ input[type=button], input[type=submit]{
 input[type=button]:hover, input[type=submit]:hover{
   background-color: #39ace7;
 } 
-input[type=text], input[type="date"],label {
+input[type=text], input[type="password"], input[type="date"],label {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
