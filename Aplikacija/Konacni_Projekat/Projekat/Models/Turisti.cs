@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 namespace Projekat.Models
 {
     public partial class Turisti
@@ -14,6 +14,7 @@ namespace Projekat.Models
         public string ImeTuriste { get; set; }
         public string PrezimeTuriste { get; set; }
         public string Pol { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? DatumRodjenja { get; set; }
         public string Email { get; set; }
 

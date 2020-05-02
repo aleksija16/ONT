@@ -89,8 +89,7 @@ body {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.prijava
-{
+.registracija {
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -112,7 +111,7 @@ body {
   text-align: center;
 }
 
-input[type=button], input[type=submit] {
+input[type=button], input[type=submit]{
   background-color: #56baed;
   border: none;
   color: white;
@@ -125,10 +124,13 @@ input[type=button], input[type=submit] {
   box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 40px 20px;
-  transition: all 0.3s ease-in-out;
-}
+  transform: scale(0.95);
 
-input[type=text] {
+}
+input[type=button]:hover, input[type=submit]:hover{
+  background-color: #39ace7;
+} 
+input[type=text], input[type="date"],label {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -154,6 +156,7 @@ input[type=text]:placeholder
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   color: #838282;
 }
+
 
 .form-control
 {
