@@ -1,4 +1,24 @@
 ﻿@page
 @model Projekat.Areas.Vodici.AddModel
 @{
+    ViewData["Title"]="Add";
 }
+ <a href="/Vodici">Vrati se nazad na vodice</a>
+<div class="registracija fadeInDown">
+<div id="formContent">
+<form method="post">
+        <input type="text"  placeholder="Ime" asp-for="NoviVodic.ImeVodica">
+        <input type="text"  placeholder="Prezime" asp-for="NoviVodic.PrezimeVodica">
+        <input type="text"  placeholder="Pol" asp-for="NoviVodic.Pol">
+        <label>Datum rodjenja  <input type="date"  placeholder="Datum rođenja" asp-for="NoviVodic.DatumRodjenja"> </label>
+        <input type="text"  placeholder="Broj telefona" asp-for="NoviVodic.BrojTelefona">
+        <input type="text"  placeholder="Email" asp-for="NoviVodic.Email">
+        <input type="text"  placeholder="Licenca" asp-for="NoviVodic.Licenca">
+        <input type="text"  placeholder="Korisnicko ime" asp-for="NoviKorisnik.Username">
+        <input type="password"  placeholder="Lozinka" asp-for="NoviKorisnik.Password">
+         <button type="text"  type="submit" class="btn btn-primary">Registruj se</button>
+</form>
+</div>
+</div>
+
+

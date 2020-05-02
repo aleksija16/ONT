@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Projekat.Models;
 
 namespace Projekat.Areas.Vodici
@@ -19,11 +20,21 @@ namespace Projekat.Areas.Vodici
             dbContext = db;
             SessionId = null;
         }
-       [BindProperty]
-        public Models.Vodici TrenutniVodic {get; set;}
-        public IActionResult OnGet(int id)
+         public Models.Vodici Vodici { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(uint? id)
         {
-            TrenutniVodic = dbContext.Vodici.Where(x=>x.IdVodica == id).FirstOrDefault();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Vodici = await dbContext.Vodici.FirstOrDefaultAsync(m => m.IdVodica == id);
+
+            if (Vodici == null)
+            {
+                return NotFound();
+            }
             return Page();
         }
     }

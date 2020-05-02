@@ -22,5 +22,34 @@ namespace Projekat.Areas.Vodici
         public void OnGet()
         {
         }
+         [BindProperty]
+        public OcenjivanjeVodica JednaOcena {get; set;}
+         public async Task<IActionResult> OnPostAsync(uint id)
+        {
+            JednaOcena.IdVodicaO = id;
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            else
+            {
+                await dbContext.OcenjivanjeVodica.AddAsync(JednaOcena);
+                await dbContext.SaveChangesAsync();
+
+                var KonacnaOcena = dbContext.OcenjivanjeVodica
+                .Where(x=>x.IdVodicaO == id).Average(y=>y.Ocena);
+
+                var VodicZaOcenjivanje = await dbContext.Vodici
+                .FindAsync(id);
+    
+                VodicZaOcenjivanje.Ocena=(uint)KonacnaOcena;            
+
+                await dbContext.SaveChangesAsync();
+
+               return RedirectToAction("Index");
+
+            }
+        }
     }
 }

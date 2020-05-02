@@ -2,3 +2,27 @@
 @model Projekat.Areas.Vodici.AccountsModel
 @{
 }
+
+<form method="post">
+
+    <table class="table"> 
+        <thead>
+            <th scope="col">Id</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Prezime</th>
+            <th scope="col">Pol</th>
+            <th scope="col">Broj telefona</th>
+        </thead>
+    @foreach(var vodic in Model.SviVodici)
+        {  
+            <tr>
+            <td>@vodic.IdVodica</td>
+            <td>@vodic.ImeVodica</td>
+            <td>@vodic.PrezimeVodica</td>
+            <td>@vodic.Pol</td>
+            <td>@vodic.BrojTelefona</td>
+            <td> <button type="submit" asp-route-id="@vodic.IdVodica" asp-page-handler="Obrisi">Obrisi vodica</button>  </td>
+        </tr> 
+        }
+    </table>
+</form>

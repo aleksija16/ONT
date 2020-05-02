@@ -3,14 +3,58 @@
 @{
     ViewData["Title"] = "Vodic";
 }
-<form method="get">
-    <div>Ime vodica: @Model.TrenutniVodic.ImeVodica</div>
-    <div>Prezime vodica: @Model.TrenutniVodic.PrezimeVodica</div>
-    <div>Pol: @Model.TrenutniVodic.Pol</div>
-    <div> Broj telefona: @Model.TrenutniVodic.BrojTelefona</div>
-    <div>Licenca: @Model.TrenutniVodic.Licenca</div>
-    <div>Datum rođenja: @Model.TrenutniVodic.DatumRodjenja</div>
-   <div>Email: @Model.TrenutniVodic.Email</div>
-   <div>Ocena: @Model.TrenutniVodic.Ocena</div> 
-    <button type="submit" class="btn btn-primary" asp-page="./OceniVodica">Oceni Vodica</button>
-</form>
+
+<div>
+    <h4>Vodici</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.ImeVodica)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.ImeVodica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.PrezimeVodica)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.PrezimeVodica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.Pol)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.Pol)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.BrojTelefona)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.BrojTelefona)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.Licenca)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.Licenca)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.Ocena)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.Ocena)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.DatumRodjenja)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.DatumRodjenja)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vodici.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vodici.Email)
+        </dd>
+    </dl>
+</div>

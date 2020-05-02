@@ -19,8 +19,26 @@ namespace Projekat.Areas.Vodici
             dbContext = db;
             SessionId = null;
         }
-        public void OnGet()
+        public IList<Models.Vodici> SviVodici {get; set;}
+   
+      public IActionResult OnGet()
         {
+            SviVodici = dbContext.Vodici.ToList();
+            return Page();
+    
         }
+         public async Task<IActionResult> OnPostObrisiAsync(uint id)
+        {
+            Models.Vodici PostojiVodic = await dbContext.Vodici.FindAsync(id);
+
+            if (PostojiVodic != null)
+            {
+                dbContext.Vodici.Remove(PostojiVodic);
+                await dbContext.SaveChangesAsync();
+            }
+            return RedirectToPage("./Index");
+
+        }
+
     }
 }

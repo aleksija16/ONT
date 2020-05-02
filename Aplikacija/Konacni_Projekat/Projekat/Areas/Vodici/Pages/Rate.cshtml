@@ -1,4 +1,31 @@
 ﻿@page
 @model Projekat.Areas.Vodici.RateModel
 @{
+     ViewData["Title"] = "Oceni vodica";
 }
+
+
+<form method="post">
+  <div class="oceni fadeInDown">
+    <div id="formContent">
+      <div class="form-group">
+        <label for="ocene">Oceni vodiča</label>
+        <select class="form-control" id="ocene" asp-for="JednaOcena.Ocena">
+          <option>10</option>
+          <option>9</option>
+          <option>8</option>
+          <option>7</option>
+          <option>6</option>
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Oceni</button>
+    </div>
+  </div>
+</form>
+
+ 
