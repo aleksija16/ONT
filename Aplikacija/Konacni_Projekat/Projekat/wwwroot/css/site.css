@@ -176,3 +176,29 @@ input[type=text]:placeholder
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+/*Pocetna stranica*/
+
+.kartice-sa-slikama {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  background-color: rgba(0,0,0,0.10);
+}
+
+.cela-pocetna-stranica * {
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.carousel-inner * {
+  color: antiquewhite;
+  font-style: oblique;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.carousel-caption {
+  background-color: rgba(0,0,0,0.39);
+}
