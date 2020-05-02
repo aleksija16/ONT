@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Projekat.Models;
 
 namespace Projekat.Areas.Vodici
@@ -19,8 +20,12 @@ namespace Projekat.Areas.Vodici
             dbContext = db;
             SessionId = null;
         }
-        public void OnGet()
+      
+        public IList<Models.Vodici> Vodici { get;set; }
+
+        public async Task OnGetAsync()
         {
+            Vodici = await dbContext.Vodici.ToListAsync();
         }
     }
 }

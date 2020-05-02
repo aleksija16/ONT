@@ -19,8 +19,12 @@ namespace Projekat.Areas.Vodici
             dbContext = db;
             SessionId = null;
         }
-        public void OnGet()
+       [BindProperty]
+        public Models.Vodici TrenutniVodic {get; set;}
+        public IActionResult OnGet(int id)
         {
+            TrenutniVodic = dbContext.Vodici.Where(x=>x.IdVodica == id).FirstOrDefault();
+            return Page();
         }
     }
 }

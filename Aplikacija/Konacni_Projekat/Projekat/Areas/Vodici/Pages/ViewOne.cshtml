@@ -1,4 +1,16 @@
 ﻿@page
 @model Projekat.Areas.Vodici.ViewOneModel
 @{
+    ViewData["Title"] = "Vodic";
 }
+<form method="get">
+    <div>Ime vodica: @Model.TrenutniVodic.ImeVodica</div>
+    <div>Prezime vodica: @Model.TrenutniVodic.PrezimeVodica</div>
+    <div>Pol: @Model.TrenutniVodic.Pol</div>
+    <div> Broj telefona: @Model.TrenutniVodic.BrojTelefona</div>
+    <div>Licenca: @Model.TrenutniVodic.Licenca</div>
+    <div>Datum rođenja: @Model.TrenutniVodic.DatumRodjenja</div>
+   <div>Email: @Model.TrenutniVodic.Email</div>
+   <div>Ocena: @Model.TrenutniVodic.Ocena</div> 
+    <button type="submit" class="btn btn-primary" asp-page="./OceniVodica">Oceni Vodica</button>
+</form>
