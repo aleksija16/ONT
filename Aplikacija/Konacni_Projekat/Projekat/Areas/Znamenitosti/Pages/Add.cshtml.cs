@@ -20,8 +20,20 @@ namespace Projekat.Areas.Znamenitosti
             SessionId = null;
         }
         
-        public void OnGet()
-        {
+        [BindProperty]
+        public Models.Znamenitosti NovaZnamenitost{get; set;}
+        public async Task<IActionResult> OnPostAsync(){
+
+            if(!ModelState.IsValid){
+                return Page();
+            }
+            else{
+                
+                dbContext.Znamenitosti.Add(NovaZnamenitost);
+                await dbContext.SaveChangesAsync();
+
+                return RedirectToPage("/Znamenitosti");
+            }
         }
     }
 }

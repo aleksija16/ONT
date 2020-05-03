@@ -1,4 +1,15 @@
 ﻿@page
 @model Projekat.Areas.Znamenitosti.AddModel
 @{
+	ViewData["Title"]="Add";
 }
+
+<form method="post">
+    <input type="text" placeholder="Naziv" asp-for="NovaZnamenitost.Naziv" required>
+    <input type="text" placeholder="Lokacija" asp-for="NovaZnamenitost.Lokacija" required>
+    <input type="text" placeholder="Opis" asp-for="NovaZnamenitost.Opis" required>
+    <input type="text" placeholder="Radno vreme" asp-for="NovaZnamenitost.Radno" required>
+    <input type="text" placeholder="Broj telefona" asp-for="NovaZnamenitost.Broj" required>
+    <input type="text" placeholder="Cena ulaznice" asp-for="NovaZnamenitost.CenaUlaznice" required>
+    <button type="submit" class="btn btn-primary">Dodaj znamenitost</button>
+</form>
