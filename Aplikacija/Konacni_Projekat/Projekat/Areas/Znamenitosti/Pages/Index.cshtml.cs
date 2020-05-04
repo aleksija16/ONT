@@ -19,8 +19,11 @@ namespace Projekat.Areas.Znamenitosti
             dbContext = db;
             SessionId = null;
         }
-        public void OnGet()
-        {
+        
+		public IList<Models.Znamenitosti> Znamenitosti{get;set;}
+
+        public async Task OnGetAsync(){
+            Znamenitosti=await dbContext.Znamenitosti.ToListAsync();
         }
     }
 }

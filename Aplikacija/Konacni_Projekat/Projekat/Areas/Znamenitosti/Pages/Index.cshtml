@@ -8,3 +8,12 @@
 </div>
 
 <a href="/Znamenitosti/Add">Dodaj znamenitost </a>
+
+@foreach(var item in Model.Znamenitosti){
+    <div class="card text-white bg-dark" style="width: 18rem; margin:5px;">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem=>item.NazivZnamenitosti)</h5>
+            <a href="/Znamenitosti/ViewOne?id=@item.IdZnamenitosti">Prikazi detalje</a>
+        </div>
+    </div>
+}

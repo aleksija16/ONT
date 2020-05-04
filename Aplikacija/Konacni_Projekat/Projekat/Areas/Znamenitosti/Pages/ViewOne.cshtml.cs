@@ -19,8 +19,21 @@ namespace Projekat.Areas.Znamenitosti
             dbContext = db;
             SessionId = null;
         }
-        public void OnGet()
-        {
+       
+		public Models.Znamenitosti Znamenitosti{get; set;}
+
+        public async Task<IActionResult> OnGetAsync(uint? id){
+            if(id==null){
+                return NotFound();
+            }
+
+            Znamenitosti=await dbContext.Znamenitosti.FirstOrDefaultAsync(m=>m.IdZnamenitosti==id);
+
+            if(Znamenitosti==null){
+                return NotFound();
+            }
+
+            return Page();
         }
     }
 }
