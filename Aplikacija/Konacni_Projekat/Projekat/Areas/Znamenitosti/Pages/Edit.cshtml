@@ -2,3 +2,16 @@
 @model Projekat.Areas.Znamenitosti.EditModel
 @{
 }
+
+<p>Izmena znamenitosti: </p>
+<form method="post">
+    <input type="hidden" asp-for="TrenutnaZnamenitost.IdZnamenitosti">
+    <div>Naziv: <input type="text" asp-for="TrenutnaZnamenitost.Naziv" /></div>
+    <div>Lokacija: <input type="text" asp-for="TrenutnaZnamenitost.Lokacija" /></div> 
+    <div>Opis: <input type="text" asp-for="TrenutnaZnamenitost.Opis" /></div> 
+    <div>Radno vreme: <input type="text" asp-for="TrenutnaZnamenitost.Radno" /></div> 
+    <div>Broj telefona: <input type="text" asp-for="TrenutnaZnamenitost.Broj" /></div> 
+    <div>Cena ulaznice: <input type="text" asp-for="TrenutnaZnamenitost.Cena" /></div> 
+    
+    <button type="submit" asp-page-handler="Sacuvaj">Sacuvaj izmene</button>
+</form>

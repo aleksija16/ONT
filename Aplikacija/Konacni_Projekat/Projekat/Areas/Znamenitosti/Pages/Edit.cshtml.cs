@@ -19,8 +19,39 @@ namespace Projekat.Areas.Znamenitosti
             dbContext = db;
             SessionId = null;
         }
-        public void OnGet()
+       
+	    [BindProperty]
+        public Models.Znamenitosti TrenutnaZnamenitost {get; set;}
+
+         public IActionResult OnGet(int id)
         {
+            TrenutnaZnamenitost = dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti == id).FirstOrDefault();
+            if(TrenutnaZnamenitost==null)
+            {
+                return RedirectToPage("/Znamenitosti");
+            }
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostSacuvajAsync()
+        {
+            if(!ModelState.IsValid)
+            {
+                return Page();
+            }
+            else
+            {
+                dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
+                try
+                {
+                    await dbContext.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw new Exception("Greska: " + e.ToString());
+                }
+                return RedirectToPage("/Znamenitosti");
+            }
         }
     }
 }
