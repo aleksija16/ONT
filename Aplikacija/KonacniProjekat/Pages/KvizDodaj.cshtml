@@ -1,4 +1,18 @@
 ﻿@page
 @model KonacniProjekat.KvizDodajModel
 @{
+    ViewData["Title"]="Novi kviz";
 }
+
+<div class="text-center">
+    <h2 class="display 4">Novi kviz</h2>
+</div>
+
+<form method="post">
+    <label>Naziv kviza:</label> <input asp-for="NoviKviz.NazivKviza" class="form-control" placeholder="Naziv kviza" />
+    <label>Znamenitost:</label> <select asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
+                                    <option value="">Bez znamenitosti</option>
+                                </select>
+
+    <button type="submit">Dodaj novi kviz</button>
+</form>
