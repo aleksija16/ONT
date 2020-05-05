@@ -32,7 +32,7 @@ namespace Projekat.Areas.Znamenitosti
                 dbContext.Znamenitosti.Add(NovaZnamenitost);
                 await dbContext.SaveChangesAsync();
 
-                return RedirectToPage("/Znamenitosti");
+                return Page();
             }
         }
     }
