@@ -17,8 +17,20 @@ namespace KonacniProjekat
         {
             dbContext = db;
         }
-                public void OnGet()
-        {
+        
+		[BindProperty]
+        public Znamenitosti NovaZnamenitost{get;set;}
+
+        public async Task<IActionResult> OnPostAsync(){
+            if(!ModelState.IsValid){
+                return Page();
+            }
+            else{
+                dbContext.Znamenitosti.Add(NovaZnamenitost);
+                await dbContext.SaveChangesAsync();
+
+                return RedirectToPage("./ZnamenitostSve");
+            }
         }
     }
 }

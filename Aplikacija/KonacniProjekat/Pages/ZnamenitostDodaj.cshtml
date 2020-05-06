@@ -1,4 +1,22 @@
 ﻿@page
 @model KonacniProjekat.ZnamenitostDodajModel
 @{
+ViewData["Title"]="Nova znamenitost";
 }
+
+<div class="text-center">
+    <h2 class="display 4">Nova znamenitost</h2>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-control">Naziv:</label> <input asp-for="NovaZnamenitost.NazivZnamenitosti" class="form-control" placeholder="Naziv" required />
+        <label class="form-control">Lokacija:</label> <input asp-for="NovaZnamenitost.Lokacija" class="form-control" placeholder="Lokacija" required />
+        <label class="form-control">Opis:</label> <input asp-for="NovaZnamenitost.Opis" class="form-control" placeholder="Opis" required />
+        <label class="form-control">Radno vreme:</label> <input asp-for="NovaZnamenitost.RadnoVreme" class="form-control" placeholder="Radno vreme" required />
+        <label class="form-control">Broj telefona:</label> <input asp-for="NovaZnamenitost.BrojTelefona" class="form-control" placeholder="Broj telefona" />
+        <label class="form-control">Cena ulaznice:</label> <input asp-for="NovaZnamenitost.CenaUlaznice" class="form-control" placeholder="Cena ulaznice" />
+
+        <button type="submit">Dodaj novu znamenitost</button>
+    </div>
+</form>

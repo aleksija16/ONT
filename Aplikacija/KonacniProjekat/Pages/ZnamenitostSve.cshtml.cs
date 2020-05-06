@@ -18,8 +18,14 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public void OnGet()
-        {
+        public IList<Znamenitosti> SveZnamenitosti{get;set;}
+
+        public async Task OnGetAsync(int? id){
+
+            SessionId=id;
+
+            IQueryable<Znamenitosti> qZnamenitosti=dbContext.Znamenitosti;
+            SveZnamenitosti=await qZnamenitosti.ToListAsync();
         }
     }
 }
