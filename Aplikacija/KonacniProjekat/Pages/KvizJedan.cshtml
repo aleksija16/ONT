@@ -1,4 +1,40 @@
 ﻿@page
 @model KonacniProjekat.KvizJedanModel
 @{
+    ViewData["Title"] = "Kviz";
 }
+
+<div class=text-center>
+    <h1 class="display-4">@Model.OvajKviz.NazivKviza</h1>
+</div>
+
+<div class="text-right">
+    <h2><a asp-page="./KvizDOdajPitanje" asp-route-id="@Model.SessionId" asp-route-kviz="@Model.OvajKviz.IdKviza">Dodaj pitanje u kviz</a></h2>
+</div>
+
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th></th>
+            <th>Pitanje</th>
+            <th>Tacan odgovor</th>
+            <th>Svi odgovori</th>
+        </thead>
+        
+        @foreach (var pitanje in Model.PitanjaUzKviz)
+        {
+            <tr>
+                <td>@Model.PitanjaUzKviz.IndexOf(pitanje)</td>
+                <td>@pitanje.TekstPitanja</td>
+                <td>@pitanje.TacanOdgovor</td>
+                <td>@pitanje.OdgovorA
+                    ;
+                    @pitanje.OdgovorB
+                    ;
+                    @pitanje.OdgovorC
+                </td>
+            </tr>
+        }
+    </table>
+</div>

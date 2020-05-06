@@ -16,6 +16,9 @@ namespace KonacniProjekat
 
         public IList<Kvizovi> SviKvizovi {get; set;}
 
+        [BindProperty]
+        public IList<int> BrojPitanjaPoKvizu {get; set;}
+
         public KvizSviModel(OrganizacijaContext db)
         {
             dbContext = db;
@@ -24,8 +27,21 @@ namespace KonacniProjekat
         {
             SessionId = id;
 
-            IQueryable<Kvizovi> qKvizovi = dbContext.Kvizovi.Include(x=>x.IdZnamenitostiKNavigation);
+            IQueryable<Kvizovi> qKvizovi = dbContext.Kvizovi.Include(x=>x.IdZnamenitostiKNavigation).OrderBy(x=>x.IdKviza);
             SviKvizovi = await qKvizovi.ToListAsync();
+
+            BrojPitanjaPoKvizu = new List<int>();
+            foreach(var line in dbContext.Pitanja.ToList().GroupBy(x => x.IdKviza)
+                        .Select(group => new { 
+                                Metric = group.Key, 
+                                Count = group.Count() 
+                            })
+                        .OrderBy(x => x.Metric))
+                {
+                    BrojPitanjaPoKvizu.Add(line.Count);
+                }
+            
+
         }
     }
 }

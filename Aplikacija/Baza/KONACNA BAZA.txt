@@ -73,13 +73,13 @@ CREATE TABLE `organizacija`.`pitanja` (
   `OdgovorA` VARCHAR(1000) NOT NULL,
   `OdgovorB` VARCHAR(1000) NOT NULL,
   `OdgovorC` VARCHAR(1000) NOT NULL,
-  `TacanOdgovor` VARCHAR(1) NOT NULL,
+  `TacanOdgovor` VARCHAR(1000) NOT NULL,
   `IdZnamenitosti` INT UNSIGNED NULL,
   `IdKviza` INT UNSIGNED NULL,
   PRIMARY KEY (`IdPitanja`),
   UNIQUE INDEX `IdPitanja_UNIQUE` (`IdPitanja` ASC),
-  UNIQUE INDEX `IdZnamenitosti_UNIQUE` (`IdZnamenitosti` ASC),
-  UNIQUE INDEX `IdKviza_UNIQUE` (`IdKviza` ASC),
+  KEY `IdKviza_idx` (`IdKviza`),
+  KEY `IdZnamenitosti_idx` (`IdZnamenitosti`),
   CONSTRAINT `IdZnamenitosti`
     FOREIGN KEY (`IdZnamenitosti`)
     REFERENCES `organizacija`.`znamenitosti` (`IdZnamenitosti`)

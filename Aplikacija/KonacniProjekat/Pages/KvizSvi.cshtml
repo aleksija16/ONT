@@ -39,7 +39,14 @@
                                 @kviz.IdZnamenitostiKNavigation.NazivZnamenitosti
                             }
                         </td>
-                        <td></td>
+                        <td>@if ((int)kviz.IdKviza > Model.BrojPitanjaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojPitanjaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                        </td>
                         <td></td>
                         <td></td>
                         <td><a asp-page="./KvizUradi" asp-route-id="@Model.SessionId" asp-route-kviz="@kviz.IdKviza">Uradi kviz</a></td>

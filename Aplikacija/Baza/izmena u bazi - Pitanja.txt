@@ -1,0 +1,44 @@
+----Izmena TABELA PITANJA
+ALTER TABLE `organizacija`.`pitanja` 
+
+CHANGE COLUMN `TacanOdgovor` `TacanOdgovor` VARCHAR(1000) NOT NULL ;
+ALTER TABLE `organizacija`.`pitanja` 
+
+DROP FOREIGN KEY `IdZnamenitosti`,
+
+DROP FOREIGN KEY `IdKviza`;
+
+ALTER TABLE `organizacija`.`pitanja` 
+
+DROP INDEX `IdKviza_UNIQUE` ,
+
+DROP INDEX `IdZnamenitosti_UNIQUE` ;
+
+
+ALTER TABLE `organizacija`.`pitanja` 
+
+ADD INDEX `IdKviza_idx` (`IdKviza` ASC),
+
+ADD INDEX `IdZnamenitosti_idx` (`IdZnamenitosti` ASC);
+
+ALTER TABLE `organizacija`.`pitanja` 
+
+ADD CONSTRAINT `IdZnamenitosti`
+  
+FOREIGN KEY (`IdZnamenitosti`)
+  
+REFERENCES `organizacija`.`znamenitosti` (`IdZnamenitosti`)
+  
+ON DELETE SET NULL
+  
+ON UPDATE NO ACTION,
+
+ADD CONSTRAINT `IdKviza`
+  
+FOREIGN KEY (`IdKviza`)
+  
+REFERENCES `organizacija`.`kvizovi` (`IdKviza`)
+  
+ON DELETE CASCADE
+  
+ON UPDATE NO ACTION;
