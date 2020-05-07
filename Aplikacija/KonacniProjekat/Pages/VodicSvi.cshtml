@@ -2,3 +2,25 @@
 @model KonacniProjekat.VodicSviModel
 @{
 }
+
+<div class="text-center">
+    <h1 class="display-4">Vodici</h1>
+</div>
+<div style="display: grid;  grid-template-columns: auto auto auto;">
+@foreach (var vodic in Model.Vodici) 
+{
+ <div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="https://i.redd.it/rn1se5zkikkz.png" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  ">
+    </div>
+    <div class="flip-card-back">
+      <h2>@vodic.ImeVodica @vodic.PrezimeVodica</h2>
+      <p>Kontakt: @vodic.Email</p>
+      <p>Ocena: @vodic.Ocena</p>
+      <a href="/Vodici/ViewOne?id=@vodic.IdVodica">Prikazi detalje</a>
+    </div>
+  </div>
+ </div>
+}
+</div>
