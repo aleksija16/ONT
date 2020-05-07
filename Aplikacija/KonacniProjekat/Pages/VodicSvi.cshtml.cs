@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using KonacniProjekat.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
@@ -16,10 +18,15 @@ namespace KonacniProjekat
         public VodicSviModel(OrganizacijaContext db)
         {
             dbContext = db;
+            SessionId = null;
         }
         
-        public void OnGet()
+    [BindProperty]
+     public IList<Models.Vodici> Vodici { get;set; }
+
+        public async Task OnGetAsync()
         {
+            Vodici = await dbContext.Vodici.ToListAsync();
         }
     }
 }
