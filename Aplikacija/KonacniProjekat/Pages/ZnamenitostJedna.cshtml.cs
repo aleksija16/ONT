@@ -18,8 +18,19 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public void OnGet()
-        {
+        [BindProperty]
+        public Znamenitosti TrenutnaZnamenitost{get;set;}
+        
+        public async Task<IActionResult> OnGetAsync(int? id, int znamenitost){
+
+            SessionId = id;
+
+            TrenutnaZnamenitost=await dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==(uint)znamenitost).FirstOrDefaultAsync();
+
+            if(TrenutnaZnamenitost==null){
+                return NotFound();
+            }
+            return Page();
         }
     }
 }
