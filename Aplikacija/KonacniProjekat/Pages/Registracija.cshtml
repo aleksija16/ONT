@@ -2,3 +2,19 @@
 @model KonacniProjekat.RegistracijaModel
 @{
 }
+
+<div class="registracija fadeInDown">
+<div id="formContent">
+<form method="post">
+            <input type="text" asp-for="NoviTurista.ImeTuriste" placeholder="Ime" required />
+            <input type="text" asp-for="NoviTurista.PrezimeTuriste" placeholder="Prezime" required />
+          <input type="text" asp-for="NoviTurista.Pol" placeholder="Pol" required />
+         <label>Datum rodjenja <input type="date" asp-for="NoviTurista.DatumRodjenja" required /></label>
+          <input type="text" asp-for="NoviTurista.Email" placeholder="Email" required />
+         <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" required />
+          <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
+         <button type="submit">Registruj se</button>
+     </form> 
+     </div>
+</div>
+

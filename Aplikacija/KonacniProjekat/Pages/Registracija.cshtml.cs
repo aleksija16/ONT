@@ -11,15 +11,34 @@ namespace KonacniProjekat
     public class RegistracijaModel : PageModel
     {
         public int? SessionId {get; set;}
+        [BindProperty]
+        public Turisti NoviTurista{ get; set;}
+        [BindProperty]
+        public Korisnici NoviKorisnik{ get; set;}
         public readonly OrganizacijaContext dbContext;
 
         public RegistracijaModel(OrganizacijaContext db)
         {
             dbContext = db;
+            SessionId=null;
         }
 
-        public void OnGet()
-        {
-        }
+         public async Task<IActionResult> OnPostAsync()
+       {
+           if(!ModelState.IsValid)
+           {
+               return Page();
+           }
+           else{
+                dbContext.Turisti.Add(NoviTurista);
+                await dbContext.SaveChangesAsync();
+                NoviKorisnik.IdTuristeK=NoviTurista.IdTuriste;
+                NoviKorisnik.TipKorisnika=Convert.ToString("T");
+                dbContext.Korisnici.Add(NoviKorisnik);
+               
+                await dbContext.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+       }
     }
 }
