@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
@@ -18,8 +19,25 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public void OnGet()
+    [BindProperty]
+     public IList<Vodici> Vodici { get;set; }
+
+        public async Task OnGetAsync()
         {
+            Vodici = await dbContext.Vodici.ToListAsync();
         }
-    }
+    
+    public async Task<IActionResult> OnPostObrisiAsync(uint id)
+        {
+            Vodici PostojiVodic = await dbContext.Vodici.FindAsync(id);
+
+            if (PostojiVodic != null)
+            {
+                dbContext.Vodici.Remove(PostojiVodic);
+                await dbContext.SaveChangesAsync();
+            }
+            return RedirectToPage();
+
+        }
+    }   
 }

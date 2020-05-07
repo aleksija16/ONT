@@ -13,7 +13,7 @@ namespace KonacniProjekat
     {
         public int? SessionId {get; set;}
         [BindProperty]
-        public Models.Vodici Vodici { get; set; }
+        public Vodici Vodici { get; set; }
         public readonly OrganizacijaContext dbContext;
 
         public VodicJedanModel(OrganizacijaContext db)

@@ -18,8 +18,29 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public void OnGet()
-        {
-        }
+        [BindProperty]
+        public Vodici NoviVodic {get; set;}
+
+        [BindProperty]
+        public Korisnici NoviKorisnik {get; set;}
+
+
+         public async Task<IActionResult> OnPostAsync()
+       {
+           if(!ModelState.IsValid)
+           {
+               return Page();
+           }
+           else{
+                dbContext.Vodici.Add(NoviVodic);
+                await dbContext.SaveChangesAsync();
+                NoviKorisnik.IdTuristeK=NoviVodic.IdVodica;
+                NoviKorisnik.TipKorisnika=Convert.ToString("V");
+                dbContext.Korisnici.Add(NoviKorisnik);
+               
+                await dbContext.SaveChangesAsync();
+                return RedirectToPage("./VodicSviNalozi");
+            }
+       }
     }
 }

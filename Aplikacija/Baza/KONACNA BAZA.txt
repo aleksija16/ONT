@@ -244,3 +244,14 @@ CREATE TABLE `organizacija`.`anketa` (
     REFERENCES `organizacija`.`vodici` (`IdVodica`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
+
+---
+ALTER TABLE `organizacija`.`korisnici` 
+DROP FOREIGN KEY `IdVodicaK`;
+ALTER TABLE `organizacija`.`korisnici` 
+ADD CONSTRAINT `IdVodicaK`
+  FOREIGN KEY (`IdVodicaK`)
+  REFERENCES `organizacija`.`vodici` (`IdVodica`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;
+

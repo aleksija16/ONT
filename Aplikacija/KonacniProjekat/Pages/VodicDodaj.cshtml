@@ -2,3 +2,21 @@
 @model KonacniProjekat.VodicDodajModel
 @{
 }
+<div class="text-center">
+    <h1 class="display-4">Kreiranje naloga</h1>
+</div>
+<div class="registracija fadeInDown">
+<div id="formContent">
+<form method="post">
+            <input type="text" asp-for="NoviVodic.ImeVodica" placeholder="Ime" required />
+            <input type="text" asp-for="NoviVodic.PrezimeVodica" placeholder="Prezime" required />
+          <input type="text" asp-for="NoviVodic.Pol" placeholder="Pol" required />
+         <label>Datum rodjenja <input type="date" asp-for="NoviVodic.DatumRodjenja" required /></label>
+          <input type="text" asp-for="NoviVodic.BrojTelefona" placeholder="BrojTelefona" required />
+          <input type="text" asp-for="NoviVodic.Email" placeholder="Email" required />
+         <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" required />
+          <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
+         <button type="submit">Registruj se</button>
+     </form> 
+     </div>
+</div>

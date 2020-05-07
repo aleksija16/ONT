@@ -21,7 +21,7 @@ namespace KonacniProjekat
         }
         
     [BindProperty]
-     public IList<Models.Vodici> Vodici { get;set; }
+     public IList<Vodici> Vodici { get;set; }
 
         public async Task OnGetAsync()
         {
