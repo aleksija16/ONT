@@ -33,7 +33,7 @@ namespace KonacniProjekat
             SessionId = id;
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
 
-            IzborZnamenitostiLista = new SelectList(qZnamenitosti.ToList());
+            IzborZnamenitostiLista = new SelectList(await qZnamenitosti.ToListAsync());
            
         }
 

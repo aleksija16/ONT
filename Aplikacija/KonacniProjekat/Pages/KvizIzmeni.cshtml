@@ -1,4 +1,26 @@
 ﻿@page
 @model KonacniProjekat.KvizIzmeniModel
 @{
+    ViewData["Title"]="Izmena kviza";
 }
+
+<div class="text-center">
+    <h1 class="display-4">Izmena kviza: @Model.OvajKviz.NazivKviza</h1>
+</div>
+
+<div class="text-left">
+    <h3><a asp-page="./KvizSvi" asp-route-id="@Model.SessionId">Prikaži listu svih kvizova</a></h3>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <input type="hidden" asp-for="KvizId" />
+        <input type="hidden" asp-for="SessionId" />
+        <label class="form-control">Naziv kviza:</label> <input asp-for="OvajKviz.NazivKviza" class="form-control" placeholder="OvajKviz.Naziv kviza" />
+        <label class="form-control">Znamenitost:</label>    <select class="form-control" asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
+                                                                <option value="">Bez znamenitosti</option>
+                                                            </select>
+
+        <button type="submit">Izmeni kviz</button>
+    </div>
+</form>

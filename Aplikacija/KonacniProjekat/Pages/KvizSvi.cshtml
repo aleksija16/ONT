@@ -22,6 +22,7 @@
             <th>Broj učesnika</th>
             <th></th>
             <th></th>
+            <th></th>
         </thead>
 
         <tbody>
@@ -51,6 +52,7 @@
                         <td></td>
                         <td><a asp-page="./KvizUradi" asp-route-id="@Model.SessionId" asp-route-kviz="@kviz.IdKviza">Uradi kviz</a></td>
                         <td><a asp-page="./KvizJedan" asp-route-id="@Model.SessionId" asp-route-kviz="@kviz.IdKviza">Vidi kviz</a></td>
+                        <td><a asp-page="./KvizIzmeni" asp-route-id="@Model.SessionId" asp-route-kviz="@kviz.IdKviza">Izmeni kviz</a></td>
                     </tr>
                 }
             </form>

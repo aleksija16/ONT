@@ -202,3 +202,15 @@ input[type=text]:placeholder
 .carousel-caption {
   background-color: rgba(0,0,0,0.39);
 }
+
+/*Forme oko kvizova */
+.select-fit-text {
+  width: fit-content;
+  height: fit-content;
+}
+
+.div-obrisi-pitanje {
+  display: flex; 
+  flex-wrap:wrap; 
+  align-items:center;
+}
