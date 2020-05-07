@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KonacniProjekat.Models
 {
@@ -17,6 +18,7 @@ namespace KonacniProjekat.Models
         public string BrojTelefona { get; set; }
         public string Licenca { get; set; }
         public decimal? Ocena { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? DatumRodjenja { get; set; }
         public string Email { get; set; }
 
