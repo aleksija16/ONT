@@ -10,6 +10,7 @@ namespace KonacniProjekat
 {
     public class KvizDodajPitanjeModel : PageModel
     {
+        [BindProperty]
         public int? SessionId {get; set;}
 
         [BindProperty(SupportsGet=true)]
@@ -28,7 +29,7 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public async Task<IActionResult> OnGetAsync(int? id, int kviz)
+        public PageResult OnGet(int? id, int kviz)
         {
             SessionId = id;
             KvizId = kviz;

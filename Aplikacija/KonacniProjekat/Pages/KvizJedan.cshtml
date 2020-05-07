@@ -9,17 +9,22 @@
 </div>
 
 <div class="text-right">
-    <h2><a asp-page="./KvizDOdajPitanje" asp-route-id="@Model.SessionId" asp-route-kviz="@Model.OvajKviz.IdKviza">Dodaj pitanje u kviz</a></h2>
+    <h2><a asp-page="./KvizDodajPitanje" asp-route-id="@Model.SessionId" asp-route-kviz="@Model.OvajKviz.IdKviza">Dodaj pitanje u kviz</a></h2>
 </div>
 
+<div class="text-left">
+    <h3><a asp-page="./KvizSvi" asp-route-id="@Model.SessionId">Prikaži listu svih kvizova</a></h3>
+</div>
 
 <div>
     <table class="table table-bordered">
         <thead>
             <th></th>
             <th>Pitanje</th>
-            <th>Tacan odgovor</th>
+            <th>Tačan odgovor</th>
             <th>Svi odgovori</th>
+            <th></th>
+            <th></th>
         </thead>
         
         @foreach (var pitanje in Model.PitanjaUzKviz)
@@ -28,13 +33,18 @@
                 <td>@Model.PitanjaUzKviz.IndexOf(pitanje)</td>
                 <td>@pitanje.TekstPitanja</td>
                 <td>@pitanje.TacanOdgovor</td>
-                <td>@pitanje.OdgovorA
-                    ;
-                    @pitanje.OdgovorB
-                    ;
-                    @pitanje.OdgovorC
+                <td>
+                    <ul>
+                        <li>@pitanje.OdgovorA</li>   
+                        <li>@pitanje.OdgovorB</li>
+                        <li>@pitanje.OdgovorC</li>
+                    </ul>
                 </td>
+                <td><a asp-page="./KvizIzmeniPitanje" asp-route-id="@Model.SessionId" asp-route-pitanje="@pitanje.IdPitanja">Izmeni pitanje</a></td>
+                <td><a asp-page="./KvizObrisiPitanje" asp-route-id="@Model.SessionId" asp-route-pitanje="@pitanje.IdPitanja">Obriši pitanje</a></td>
             </tr>
         }
     </table>
 </div>
+
+

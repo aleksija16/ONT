@@ -30,7 +30,16 @@ namespace KonacniProjekat
             IQueryable<Kvizovi> qKvizovi = dbContext.Kvizovi.Include(x=>x.IdZnamenitostiKNavigation).OrderBy(x=>x.IdKviza);
             SviKvizovi = await qKvizovi.ToListAsync();
 
+
+            int NajveciIdKvizova = (int)(await qKvizovi.OrderByDescending(x=>x.IdKviza).FirstOrDefaultAsync()).IdKviza;
+
             BrojPitanjaPoKvizu = new List<int>();
+
+            for (int i=0; i<NajveciIdKvizova; i++)
+            {
+                BrojPitanjaPoKvizu.Add(0);
+            }
+
             foreach(var line in dbContext.Pitanja.ToList().GroupBy(x => x.IdKviza)
                         .Select(group => new { 
                                 Metric = group.Key, 
@@ -38,9 +47,11 @@ namespace KonacniProjekat
                             })
                         .OrderBy(x => x.Metric))
                 {
-                    BrojPitanjaPoKvizu.Add(line.Count);
+                    BrojPitanjaPoKvizu[(int)line.Metric -1] = line.Count;
                 }
+
             
+            // da li mozda moze da se javi greska ako pitanje ima IdKviza=null ? - treba proveriti
 
         }
     }

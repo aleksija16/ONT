@@ -8,14 +8,19 @@
     <h1 class="display-4">Novo pitanje</h1>
 </div>
 
+<div class="text-left">
+    <h3><a asp-page="./KvizJedan" asp-route-id="@Model.SessionId" asp-route-kviz="@Model.KvizId">Vrati se na prikaz kviza</a></h3>
+</div>
+
 <form method="post">
     <div class="form-group" >
         <input type="hidden" asp-for="KvizId" />
+        <input type="hidden" asp-for="SessionId" />
         <label class="form-control">Pitanje:</label> <input asp-for="NovoPitanje.TekstPitanja" placeholder="Unesite tekst pitanja" />
         <label class="form-control">Odgovor A:</label> <input asp-for="NovoPitanje.OdgovorA" placeholder="A" />
         <label class="form-control">Odgovor B:</label> <input asp-for="NovoPitanje.OdgovorB" placeholder="B" />
         <label class="form-control">Odgovor C:</label> <input asp-for="NovoPitanje.OdgovorC" placeholder="C" />
-        <label class="form-control select-fit-text">Tacan odgovor je pod:</label>    <select class="form-control" asp-for="IzborTacnogOdgovoraInt">
+        <label class="form-control select-fit-text">Tačan odgovor je pod:</label>    <select class="form-control" asp-for="IzborTacnogOdgovoraInt">
                                                                         <option value="1">A</option>
                                                                         <option value="2">B</option>
                                                                         <option value="3">C</option>

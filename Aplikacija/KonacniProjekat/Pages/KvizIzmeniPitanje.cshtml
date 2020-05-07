@@ -1,4 +1,30 @@
 ﻿@page
 @model KonacniProjekat.KvizIzmeniPitanjeModel
 @{
+    ViewData["Title"]="Izmena pitanja";
 }
+
+<div class="text-center">
+    <h1 class="display-4">Izmena pitanja u kvizu: @Model.OvoPitanje.IdKvizaNavigation.NazivKviza</h1>
+</div>
+
+<div class="text-left">
+    <h3><a asp-page="./KvizJedan" asp-route-id="@Model.SessionId" asp-route-kviz="@Model.KvizId">Vrati se na prikaz kviza</a></h3>
+</div>
+
+<form method=post>
+    <div class="form-group">
+        <input type="hidden" asp-for="KvizId" />
+        <input type="hidden" asp-for="PitanjeId" />
+        <label class="form-control select-fit-text">Unesite novo pitanje:</label> <input asp-for="OvoPitanje.TekstPitanja" value="@Model.OvoPitanje.TekstPitanja" placeholder="@Model.OvoPitanje.TekstPitanja" />
+        <label class="form-control">Odgovor A:</label> <input asp-for="OvoPitanje.OdgovorA" value="@Model.OvoPitanje.OdgovorA" placeholder="@Model.OvoPitanje.OdgovorA" />
+        <label class="form-control">Odgovor B:</label> <input asp-for="OvoPitanje.OdgovorB" value="@Model.OvoPitanje.OdgovorB" placeholder="@Model.OvoPitanje.OdgovorB" />
+        <label class="form-control">Odgovor C:</label> <input asp-for="OvoPitanje.OdgovorC" value="@Model.OvoPitanje.OdgovorC" placeholder="@Model.OvoPitanje.OdgovorC" />
+        <label class="form-control select-fit-text">Tačan odgovor je pod:</label>   <select class="form-control" asp-for="IzborTacnogOdgovoraInt">
+                                                                                            <option value="1">A</option>
+                                                                                            <option value="2">B</option>
+                                                                                            <option value="3">C</option>
+                                                                                        </select>
+        <button type="submit">Izmeni pitanje</button>
+    </div>
+</form>
