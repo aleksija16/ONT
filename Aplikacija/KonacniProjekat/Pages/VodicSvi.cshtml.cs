@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using KonacniProjekat.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
