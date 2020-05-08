@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
@@ -18,8 +19,28 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public void OnGet()
-        {
-        }
+        [BindProperty]
+       public Znamenitosti TrenutnaZnamenitost{get;set;}
+
+       public IActionResult OnGet(int id){
+
+           TrenutnaZnamenitost=dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==id).FirstOrDefault();
+           if(TrenutnaZnamenitost==null){
+               return RedirectToPage("./ZnamenitostSve");
+           }
+           return Page();
+       }
+
+
+       public async Task<IActionResult> OnPostSacuvajAsync(){
+           if(!ModelState.IsValid){
+               return Page();
+           }
+           else{
+               dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
+               await dbContext.SaveChangesAsync();
+               return RedirectToPage("./ZnamenitostSve");
+           }
+       }
     }
 }
