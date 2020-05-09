@@ -1,4 +1,37 @@
 ﻿@page
 @model KonacniProjekat.TuraSveModel
 @{
+ViewData["Title"]="Ture";
 }
+
+<div class="text-center">
+    <h1 class="display-4">Ture</h1>
+</div>
+
+<div class="text-right">
+    <h3><a asp-page="./TuraDodaj">Dodaj turu</a></h3>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID ture</th>
+            <th>Naziv ture</th>
+            <th>Tip ture</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var tura in Model.SveTure)
+                {
+                    <tr>
+                        <td>@tura.IdTure</td>
+                        <td>@tura.NazivTure</td>
+                        <td>@tura.TipTure</td>
+                        <td><a asp-page="./RezervacijaSve" asp-route-id="@Model.SessionId" asp-route-znamenitost="@tura.IdTure">Rezervisi turu</a></td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>

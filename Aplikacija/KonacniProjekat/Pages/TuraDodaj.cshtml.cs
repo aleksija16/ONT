@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
@@ -18,8 +19,18 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-        public void OnGet()
-        {
+         public Ture NovaTura{get;set;}
+
+        public async Task<IActionResult> OnPostAsync(){
+            if(!ModelState.IsValid){
+                return Page();
+            }
+            else{
+                dbContext.Ture.Add(NovaTura);
+                await dbContext.SaveChangesAsync();
+
+                return RedirectToPage("./TuraSve");
+            }
         }
     }
 }

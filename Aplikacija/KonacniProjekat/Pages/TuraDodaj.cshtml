@@ -1,4 +1,17 @@
 ﻿@page
 @model KonacniProjekat.TuraDodajModel
 @{
+ViewData["Title"]="Nova tura";
 }
+
+<div class="text-center">
+    <h2 class="display 4">Nova tura</h2>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-control">Naziv:</label> <input asp-for="NovaTura.NazivTure" class="form-control" placeholder="Naziv" required />
+        <label class="form-control">Tip:</label> <input asp-for="NovaTura.TipTure" class="form-control" placeholder="Tip" required />
+        <button type="submit">Dodaj novu turu</button>
+    </div>
+</form>
