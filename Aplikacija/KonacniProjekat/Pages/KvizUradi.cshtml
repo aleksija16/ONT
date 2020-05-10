@@ -1,4 +1,62 @@
 ﻿@page
 @model KonacniProjekat.KvizUradiModel
 @{
+    ViewData["Title"]="Radi kviz";
 }
+
+@if (Model.BrojTacnihOdgovora == null)
+{
+<form method="post">
+    
+    <input type="hidden" asp-for="@Model.SessionId" />
+    <input type="hidden" asp-for="@Model.KvizId" />
+    <input type="hidden" asp-for="@Model.BrojTacnihOdgovora" />
+
+    <div>
+        <ol type="1">
+            @for(var i=0; i<Model.PitanjaZaIzradu.Count(); i++)
+            {
+                <li>
+                    @Model.PitanjaZaIzradu[i].TekstPitanja
+                    <ol type="a">
+                        <li>
+                            <input type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorA" asp-for="KorisnikoviOdgovori[i]" />
+                            @Model.PitanjaZaIzradu[i].OdgovorA
+                        </li>
+                        <li>
+                            <input type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorB" asp-for="KorisnikoviOdgovori[i]" />
+                            @Model.PitanjaZaIzradu[i].OdgovorB
+                        </li>
+                        <li>
+                            <input type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" />
+                            @Model.PitanjaZaIzradu[i].OdgovorC
+                        </li>
+                    </ol>
+
+                </li>
+            }
+        </ol>
+    </div>
+
+    <div>
+        <button type="submit">Završi kviz</button>
+    </div>
+
+</form>
+}
+else
+{
+    @if(Model.BrojTacnihOdgovora != 11 && Model.BrojTacnihOdgovora%10 != 1)
+    {
+        <div class="form-control select-fit-text">
+            Odgovorili ste tačno na @Model.BrojTacnihOdgovora pitanja.
+        </div>
+    }
+    else
+    {
+        <div class="form-control select-fit-text">
+            Odgovorili ste tačno na @Model.BrojTacnihOdgovora pitanje.
+        </div>
+    }   
+}
+
