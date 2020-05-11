@@ -19,6 +19,7 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
+		[BindProperty]
          public Ture NovaTura{get;set;}
 
         public async Task<IActionResult> OnPostAsync(){

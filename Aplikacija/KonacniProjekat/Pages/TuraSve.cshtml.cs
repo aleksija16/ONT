@@ -19,6 +19,7 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
+		 [BindProperty]
          public IList<Ture> SveTure{get;set;}
 
         public async Task OnGetAsync(int? id){
@@ -26,6 +27,25 @@ namespace KonacniProjekat
 
             IQueryable<Ture> qTure=dbContext.Ture;
             SveTure=await qTure.ToListAsync();
+        }
+		
+		public async Task<IActionResult> OnPostRezervisiAsync(uint tura)
+        {
+            Ture PostojiTura = await dbContext.Ture.FindAsync(tura);
+
+            if (PostojiTura != null)
+            {
+                Rezervacije NovaRezervacija = new Rezervacije();
+
+                NovaRezervacija.IdTureR=PostojiTura.IdTure;
+                
+                await dbContext.Rezervacije.AddAsync(NovaRezervacija);
+                await dbContext.SaveChangesAsync();
+
+                
+                return RedirectToPage("./RezervacijaSve"); 
+            }
+            else return Page();
         }
     }
 }

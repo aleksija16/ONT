@@ -11,6 +11,12 @@ ViewData["Title"]="Nova tura";
 <form method="post">
     <div class="form-group">
         <label class="form-control">Naziv:</label> <input asp-for="NovaTura.NazivTure" class="form-control" placeholder="Naziv" required />
+		<label class="form-control">Dan odrzavanja:</label> <input asp-for="NovaTura.DanOdrzavanja" class="form-control" placeholder="Dan odrzavanja" required />
+        <label class="form-control">Vreme odrzavanja:</label> <input asp-for="NovaTura.VremeOdrzavanja" class="form-control" placeholder="Vreme odrzavanja" required />
+        <label class="form-control">Mesto polaska:</label> <input asp-for="NovaTura.MestoPolaska" class="form-control" placeholder="Mesto polaska" required />
+        <label class="form-control">Kapacitet:</label> <input asp-for="NovaTura.Kapacitet" class="form-control" placeholder="Kapacitet" required />
+        <label class="form-control">Id vodica:</label> <input asp-for="NovaTura.IdVodica" class="form-control" placeholder="Id vodica" required />
+        <label class="form-control">Opis:</label> <input asp-for="NovaTura.Opis" class="form-control" placeholder="Opis" required />
         <label class="form-control">Tip:</label> <input asp-for="NovaTura.TipTure" class="form-control" placeholder="Tip" required />
         <button type="submit">Dodaj novu turu</button>
     </div>

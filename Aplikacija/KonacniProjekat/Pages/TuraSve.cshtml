@@ -17,18 +17,16 @@ ViewData["Title"]="Ture";
         <thead>
             <th>ID ture</th>
             <th>Naziv ture</th>
-            <th>Tip ture</th>
             <th></th>
         </thead>
         <tbody>
-            <form method="get">
+            <form method="post">
                 @foreach (var tura in Model.SveTure)
                 {
                     <tr>
                         <td>@tura.IdTure</td>
                         <td>@tura.NazivTure</td>
-                        <td>@tura.TipTure</td>
-                        <td><a asp-page="./RezervacijaSve" asp-route-id="@Model.SessionId" asp-route-znamenitost="@tura.IdTure">Rezervisi turu</a></td>
+						 <td><button type="submit" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure" asp-page-handler="Rezervisi">Rezervisi turu</button></td>
                     </tr>
                 }
             </form>
