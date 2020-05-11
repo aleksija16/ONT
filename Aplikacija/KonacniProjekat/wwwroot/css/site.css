@@ -271,9 +271,21 @@ input[type=text]:placeholder
   width: fit-content;
   height: fit-content;
 }
-
 .div-obrisi-pitanje {
   display: flex; 
   flex-wrap:wrap; 
   align-items:center;
+}
+
+/*mozda ne radi u svim verzijama nekih browsera?*/
+.disabledKviz {
+  pointer-events: none;
+}
+
+.correctAnswer {
+  background-color: lightgreen;
+}
+
+.incorrectAnswer {
+  background-color: lightcoral;
 }
