@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
@@ -18,8 +19,14 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-        public void OnGet()
-        {
+        public IList<Rezervacije> SveRezervacije{get;set;}
+
+        public async Task OnGetAsync(int? id){
+
+            SessionId=id;
+
+            IQueryable<Rezervacije> qRezervacije=dbContext.Rezervacije;
+            SveRezervacije=await qRezervacije.ToListAsync();
         }
     }
 }

@@ -1,4 +1,33 @@
 ﻿@page
 @model KonacniProjekat.RezervacijaSveModel
 @{
+ViewData["Title"]="Rezervacije";
 }
+
+<div class="text-center">
+    <h1 class="display-4">Rezervacije</h1>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID rezervacije</th>
+            <th>Id ture</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var rezervacija in Model.SveRezervacije)
+                {
+                    <tr>
+                        <td>@rezervacija.IdRezervacije</td>
+                        <td>@rezervacija.IdTureR</td>
+                        <td><a asp-page="./RezervacijaJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@rezervacija.IdRezervacije">Vidi rezervaciju</a></td>
+                        <td></td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
