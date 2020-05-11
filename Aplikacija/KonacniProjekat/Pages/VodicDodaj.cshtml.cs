@@ -34,7 +34,7 @@ namespace KonacniProjekat
            else{
                 dbContext.Vodici.Add(NoviVodic);
                 await dbContext.SaveChangesAsync();
-                NoviKorisnik.IdTuristeK=NoviVodic.IdVodica;
+                NoviKorisnik.IdVodicaK=NoviVodic.IdVodica;
                 NoviKorisnik.TipKorisnika=Convert.ToString("V");
                 dbContext.Korisnici.Add(NoviKorisnik);
                
