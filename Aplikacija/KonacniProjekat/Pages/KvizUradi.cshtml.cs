@@ -31,6 +31,12 @@ namespace KonacniProjekat
 
         public HallOfFame RezultatIzradeKviza {get; set;}
 
+        [BindProperty]
+        public bool DostupanPrikaz {get; set;}
+
+        [BindProperty]
+        public bool ZavrsenKviz {get; set;}
+
         public KvizUradiModel(OrganizacijaContext db)
         {
             dbContext = db;
@@ -41,6 +47,23 @@ namespace KonacniProjekat
             SessionId = (int?)id;
             KvizId = kviz;
 
+
+            //Privilegije za radjenje kviza
+            /* if(SessionId != null)
+            {
+                Korisnici PostojiKorisnik = await dbContext.Korisnici.FindAsync((uint)id);
+                if(PostojiKorisnik != null){
+                    if(PostojiKorisnik.TipKorisnika == "T" )
+                        DostupanPrikaz = true;
+                    else DostupanPrikaz = false;
+                }
+                else DostupanPrikaz = false;
+            }
+            else DostupanPrikaz = false;
+            
+            if (!DostupanPrikaz) return NotFound(); */
+
+
             KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)kviz);
 
             if (KvizZaIzradu == null)
@@ -50,6 +73,7 @@ namespace KonacniProjekat
 
             PitanjaZaIzradu = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint) kviz).ToListAsync();
 
+            ZavrsenKviz = false;
 
             KorisnikoviOdgovori = new List<string>();
             for(int i=0; i<PitanjaZaIzradu.Count(); i++)
@@ -73,6 +97,8 @@ namespace KonacniProjekat
                     BrojTacnihOdgovora++;
                 }
             }
+
+            ZavrsenKviz = true;
 
             /*
             //Dodavanje u HOF tabelu

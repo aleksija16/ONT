@@ -4,13 +4,22 @@
     ViewData["Title"]="Radi kviz";
 }
 
-@if (Model.BrojTacnihOdgovora == null)
-{
+
+
 <form method="post">
     
+    @{
+        string Disabled="";
+        if (Model.ZavrsenKviz)
+        {
+            Disabled = "disabledKviz";
+        }
+    } 
+
     <input type="hidden" asp-for="@Model.SessionId" />
     <input type="hidden" asp-for="@Model.KvizId" />
     <input type="hidden" asp-for="@Model.BrojTacnihOdgovora" />
+    <input type="hidden" asp-for="@Model.ZavrsenKviz" />
 
     <div>
         <ol type="1">
@@ -19,18 +28,49 @@
                 <li>
                     @Model.PitanjaZaIzradu[i].TekstPitanja
                     <ol type="a">
-                        <li>
-                            <input type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorA" asp-for="KorisnikoviOdgovori[i]" />
+
+                        @{
+                            string CorrectA="";
+                            if(Model.ZavrsenKviz)
+                            {
+                                if(Model.PitanjaZaIzradu[i].OdgovorA == Model.PitanjaZaIzradu[i].TacanOdgovor)
+                                    CorrectA="correctAnswer";
+                                else CorrectA = "incorrectAnswer";
+                            }
+                        }
+                        <li class="@CorrectA">                            
+                            <input class="@Disabled @CorrectA" type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorA" asp-for="KorisnikoviOdgovori[i]" />
                             @Model.PitanjaZaIzradu[i].OdgovorA
                         </li>
-                        <li>
-                            <input type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorB" asp-for="KorisnikoviOdgovori[i]" />
+
+                        @{
+                            string CorrectB="";
+                            if(Model.ZavrsenKviz)
+                            {
+                                if(Model.PitanjaZaIzradu[i].OdgovorB == Model.PitanjaZaIzradu[i].TacanOdgovor)
+                                    CorrectB="correctAnswer";
+                                else CorrectB = "incorrectAnswer";
+                            }
+                        }
+                        <li class="@CorrectB">
+                            <input class="@Disabled @CorrectB" type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorB" asp-for="KorisnikoviOdgovori[i]" />
                             @Model.PitanjaZaIzradu[i].OdgovorB
                         </li>
-                        <li>
-                            <input type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" />
+ 
+                        @{
+                            string CorrectC="";
+                            if(Model.ZavrsenKviz)
+                            {
+                                if(Model.PitanjaZaIzradu[i].OdgovorC == Model.PitanjaZaIzradu[i].TacanOdgovor)
+                                    CorrectC="correctAnswer";
+                                else CorrectC = "incorrectAnswer";
+                            }
+                        }
+                        <li class="@CorrectC">
+                            <input class="@Disabled @CorrectC" type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" />
                             @Model.PitanjaZaIzradu[i].OdgovorC
                         </li>
+            
                     </ol>
 
                 </li>
@@ -38,13 +78,18 @@
         </ol>
     </div>
 
-    <div>
-        <button type="submit">Završi kviz</button>
-    </div>
+    @if(!Model.ZavrsenKviz)
+    {
+        <div>
+            <button type="submit" >Završi kviz</button>
+        </div>
+    }
+    
 
 </form>
-}
-else
+
+
+@if(Model.BrojTacnihOdgovora != null)
 {
     @if(Model.BrojTacnihOdgovora != 11 && Model.BrojTacnihOdgovora%10 != 1)
     {
@@ -60,3 +105,6 @@ else
     }   
 }
 
+<div class="text-center">
+    <h6 class="display-6"><a asp-page="./KvizSvi" asp-route-id="@Model.SessionId">Vrati se na listu svih kvizova</a></h6>
+</div>
