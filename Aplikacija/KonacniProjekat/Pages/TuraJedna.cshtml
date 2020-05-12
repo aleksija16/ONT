@@ -2,3 +2,12 @@
 @model KonacniProjekat.TuraJednaModel
 @{
 }
+<div class="card">
+    <h1>@Html.DisplayFor(model => model.Ture.NazivTure)</h1>
+    <p>@Html.DisplayFor(model => model.Ture.DanOdrzavanja)</p>
+    <p>@Html.DisplayFor(model => model.Ture.VremeOdrzavanja)</p>
+    <p>@Html.DisplayFor(model => model.Ture.MestoPolaska)</p>
+    <p>@Html.DisplayFor(model => model.Ture.Kapacitet)</p>
+    <p>@Html.DisplayFor(model => model.Ture.Opis)</p>
+    <p>@Html.DisplayFor(model => model.Ture.TipTure)</p>
+</div>

@@ -27,6 +27,7 @@ ViewData["Title"]="Ture";
                         <td>@tura.IdTure</td>
                         <td>@tura.NazivTure</td>
 						 <td><button type="submit" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure" asp-page-handler="Rezervisi">Rezervisi turu</button></td>
+                         <td><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikazi detalje</a></td>
                     </tr>
                 }
             </form>
