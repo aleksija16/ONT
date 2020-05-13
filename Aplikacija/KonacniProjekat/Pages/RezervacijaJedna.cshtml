@@ -1,4 +1,16 @@
 ﻿@page
 @model KonacniProjekat.RezervacijaJednaModel
 @{
+ViewData["Title"] = "Rezervacije";
 }
+
+<div class="card">
+  <div class="container">
+<form method="get">
+    <div><h4>Id rezervacije</h4>@Model.TrenutnaRezervacija.IdRezervacije</div>
+    <div><h4>Id ture</h4>@Model.TrenutnaRezervacija.IdTureR</div>
+    <div><h4>Id vodica</h4>@Model.TrenutnaRezervacija.IdVodicaR</div>
+    <div><h4>Broj osoba</h4>@Model.TrenutnaRezervacija.BrojOsoba</div>
+</form>
+ </div>
+</div>

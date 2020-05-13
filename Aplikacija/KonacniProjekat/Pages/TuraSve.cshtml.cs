@@ -38,6 +38,8 @@ namespace KonacniProjekat
                 Rezervacije NovaRezervacija = new Rezervacije();
 
                 NovaRezervacija.IdTureR=PostojiTura.IdTure;
+				NovaRezervacija.IdVodicaR=PostojiTura.IdVodica;
+                NovaRezervacija.BrojOsoba=PostojiTura.Kapacitet;
                 
                 await dbContext.Rezervacije.AddAsync(NovaRezervacija);
                 await dbContext.SaveChangesAsync();

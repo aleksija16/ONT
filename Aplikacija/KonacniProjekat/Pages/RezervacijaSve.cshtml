@@ -23,7 +23,7 @@ ViewData["Title"]="Rezervacije";
                     <tr>
                         <td>@rezervacija.IdRezervacije</td>
                         <td>@rezervacija.IdTureR</td>
-                        <td><a asp-page="./RezervacijaJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@rezervacija.IdRezervacije">Vidi rezervaciju</a></td>
+                        <td><a asp-page="./RezervacijaJedna" asp-route-id="@Model.SessionId" asp-route-rezervacija="@rezervacija.IdRezervacije">Vidi rezervaciju</a></td>
                         <td></td>
                     </tr>
                 }
