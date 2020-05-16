@@ -1,4 +1,41 @@
 ﻿@page
 @model KonacniProjekat.HallOfFameModel
 @{
+
 }
+
+<ul class="nav nav-tabs">
+      @foreach (var item in Model.sviKvizovi)
+      {
+  <li class="nav-item">
+    <a class="nav-link" id="pills-@item.NazivKviza-tab" data-toggle="pill" href="#@item.NazivKviza" role="tab"
+      aria-controls="pills-@item.NazivKviza" aria-selected="true">@item.NazivKviza</a>
+  </li>
+      }
+</ul>
+<div class="tab-content">
+  @foreach (var item in Model.HallOfFame)
+      { @foreach (var kviz in Model.sviKvizovi)
+      {
+          if(item.IdKvizaHof==kviz.IdKviza)
+          {
+        <div class="tab-pane fade" id="@kviz.NazivKviza">
+   <table class="table">
+    <thead>
+      <tr>
+        <th>id turiste</th>
+        <th>Poeni</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@item.IdTuristeHof</td>
+            <td>@item.Poeni</td>
+        </tr>  
+    </tbody>
+  </table>
+  </div>
+}
+      }
+      }
+</div>

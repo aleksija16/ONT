@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
@@ -18,8 +19,14 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public void OnGet()
+        public IList<HallOfFame> HallOfFame { get;set; }
+        public IList<Turisti> Turisti {get;set;}
+        public IList<Kvizovi> sviKvizovi {get;set;}
+        public async Task OnGetAsync()
         {
+            sviKvizovi = await dbContext.Kvizovi.ToListAsync();      
+          
+            HallOfFame = await dbContext.HallOfFame.ToListAsync();
         }
     }
 }
