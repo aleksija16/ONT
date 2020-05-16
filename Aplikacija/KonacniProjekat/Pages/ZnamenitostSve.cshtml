@@ -12,26 +12,22 @@ ViewData["Title"]="Znamenitosti";
     <h3><a asp-page="./ZnamenitostDodaj">Dodaj znamenitost</a></h3>
 </div>
 
-<div>
-    <table class="table table-bordered">
-        <thead>
-            <th>ID znamenitosti</th>
-            <th>Naziv znamenitosti</th>
-            <th></th>
-			<th></th>
-        </thead>
-        <tbody>
-            <form method="get">
-                @foreach (var znamenitost in Model.SveZnamenitosti)
-                {
-                    <tr>
-                        <td>@znamenitost.IdZnamenitosti</td>
-                        <td>@znamenitost.NazivZnamenitosti</td>
-                        <td><a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitost.IdZnamenitosti">Vidi znamenitost</a></td>
-						 <td><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost</a></td>
-                    </tr>
-                }
-            </form>
-        </tbody>
-    </table>
+<div style="display: grid;  grid-template-columns: auto auto auto;">
+@foreach (var znamenitost in Model.SveZnamenitosti) 
+{
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="https://i.redd.it/rn1se5zkikkz.png" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  ">
+            </div>
+            <div class="flip-card-back">
+                <div class="text-center">
+                    <div><h2>@znamenitost.NazivZnamenitosti</h2></div>
+                    <div><a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitost.IdZnamenitosti">Vidi znamenitost</a></div>
+                    <div><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 </div>

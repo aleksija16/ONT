@@ -8,11 +8,26 @@ ViewData["Title"] = "Znamenitosti";
     <h1 class="display-4">@Model.TrenutnaZnamenitost.NazivZnamenitosti</h1>
 </div>
 
-<form method="get">
-    <div><h4>Naziv:</h4> @Model.TrenutnaZnamenitost.NazivZnamenitosti</div>
-    <div><h4>Lokacija:</h4> @Model.TrenutnaZnamenitost.Lokacija</div>
-    <div><h4>Opis:</h4> @Model.TrenutnaZnamenitost.Opis</div>
-    <div><h4>Radno vreme:</h4> @Model.TrenutnaZnamenitost.RadnoVreme</div>
-    <div><h4>Broj telefona:</h4> @Model.TrenutnaZnamenitost.BrojTelefona</div>
-    <div><h4>Cena ulaznice:</h4> @Model.TrenutnaZnamenitost.CenaUlaznice</div>
-</form>
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostSve">Prikazi listu znamenitosti</a></li>
+  </ul>
+</nav>
+
+<div class="row">
+  <div class="col-md-7">
+    <form method="get">
+      <div><h4>Naziv:</h4> @Model.TrenutnaZnamenitost.NazivZnamenitosti</div>
+      <div><h4>Lokacija:</h4> @Model.TrenutnaZnamenitost.Lokacija</div>
+      <div><h4>Opis:</h4> @Model.TrenutnaZnamenitost.Opis</div>
+      <div><h4>Radno vreme:</h4> @Model.TrenutnaZnamenitost.RadnoVreme</div>
+      <div><h4>Broj telefona:</h4> @Model.TrenutnaZnamenitost.BrojTelefona</div>
+      <div><h4>Cena ulaznice:</h4> @Model.TrenutnaZnamenitost.CenaUlaznice</div>
+    </form>
+  </div>
+  <div class="col-md-5">
+    <img class="img-fluid rounded mb-5 mb-md-0" src="http://placehold.it/700x300" alt="">
+    <img class="img-fluid rounded mb-5 mb-md-0" src="http://placehold.it/700x300" alt="">
+    <img class="img-fluid rounded mb-5 mb-md-0" src="http://placehold.it/700x300" alt="">
+  </div>
+</div>
