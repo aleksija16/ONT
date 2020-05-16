@@ -24,9 +24,9 @@ namespace KonacniProjekat
         public IList<Kvizovi> sviKvizovi {get;set;}
         public async Task OnGetAsync()
         {
-            sviKvizovi = await dbContext.Kvizovi.ToListAsync();      
-          
-            HallOfFame = await dbContext.HallOfFame.ToListAsync();
+            sviKvizovi = await dbContext.Kvizovi.ToListAsync();   
+            Turisti = await dbContext.Turisti.ToListAsync();
+             HallOfFame = await dbContext.HallOfFame.ToListAsync();
         }
     }
 }

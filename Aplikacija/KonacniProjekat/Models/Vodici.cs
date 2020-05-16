@@ -21,6 +21,8 @@ namespace KonacniProjekat.Models
         [DataType(DataType.Date)]
         public DateTime? DatumRodjenja { get; set; }
         public string Email { get; set; }
+        public string Slika { get; set; }
+
 
         public virtual Korisnici Korisnici { get; set; }
         public virtual OcenjivanjeVodica OcenjivanjeVodica { get; set; }

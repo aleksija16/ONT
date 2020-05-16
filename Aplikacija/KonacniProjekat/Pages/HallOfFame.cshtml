@@ -4,6 +4,26 @@
 
 }
 
+@*
+<div class="container">
+  
+  <ul class="nav nav-pills" id="pills-tab" role="tablist">
+      @foreach (var item in Model.sviKvizovi)
+      {
+    <li class="nav-item"><a data-toggle="pill" href="#@item.NazivKviza">@item.NazivKviza</a></li>
+    
+    }
+  </ul>
+   <div class="tab-content"></div>
+   @foreach (var item in Model.sviKvizovi)
+      {
+     <div id="@item.NazivKviza" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-@item.NazivKviza-tab"> 
+      <h3>@item.NazivKviza</h3>
+    </div>
+      }
+       </div>
+</div>
+*@
 <ul class="nav nav-tabs">
       @foreach (var item in Model.sviKvizovi)
       {
@@ -14,28 +34,31 @@
       }
 </ul>
 <div class="tab-content">
-  @foreach (var item in Model.HallOfFame)
-      { @foreach (var kviz in Model.sviKvizovi)
+     @foreach (var kviz in Model.sviKvizovi)
       {
-          if(item.IdKvizaHof==kviz.IdKviza)
-          {
-        <div class="tab-pane fade" id="@kviz.NazivKviza">
-   <table class="table">
+          <div class="tab-pane fade" id="@kviz.NazivKviza">
+  <table class="table">
     <thead>
       <tr>
-        <th>id turiste</th>
+        <th>Ime</th>
+        <th>Prezime</th>
         <th>Poeni</th>
       </tr>
-    </thead>
+    </thead> 
+         @foreach (var item in Model.HallOfFame)
+        {
+          if(item.IdKvizaHof==kviz.IdKviza)
+          {   
+
     <tbody>
         <tr>
-            <td>@item.IdTuristeHof</td>
-            <td>@item.Poeni</td>
-        </tr>  
+        <td>@item.IdTuristeHof</td>
+        <td> @Html.DisplayFor(modelItem => item.IdTuristeHofNavigation.ImeTuriste)</td>
+        <td>@item.Poeni</td>
+         </tr>  
     </tbody>
+          }}
   </table>
   </div>
-}
-      }
       }
 </div>
