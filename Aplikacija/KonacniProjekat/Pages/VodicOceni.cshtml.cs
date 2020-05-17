@@ -17,9 +17,32 @@ namespace KonacniProjekat
         {
             dbContext = db;
         }
-        
-        public void OnGet()
-        {
-        }
+        [BindProperty]
+         public OcenjivanjeVodica JednaOcena {get; set;}
+
+         public async Task<IActionResult> OnPostAsync(int id)
+       {
+           if(!ModelState.IsValid)
+           {
+               return Page();
+           }
+           else{
+
+                JednaOcena.IdVodicaO=(uint)id;
+                dbContext.OcenjivanjeVodica.Add(JednaOcena);
+                await dbContext.SaveChangesAsync();
+      
+                var KonacnaOcena = dbContext.OcenjivanjeVodica.Where(x=>x.IdVodicaO==(uint)id).ToList();
+
+                var VodicZaOcenjivanje = await dbContext.Vodici.FindAsync((uint)id);
+            
+                VodicZaOcenjivanje.Ocena=(decimal)KonacnaOcena.Average(y=>y.Ocena);          
+
+                await dbContext.SaveChangesAsync();
+
+                return RedirectToPage("./VodicSvi");
+
+            }
+       }
     }
 }

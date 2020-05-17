@@ -13,7 +13,7 @@ namespace KonacniProjekat
     {
         public int? SessionId {get; set;}
         [BindProperty]
-        public Vodici Vodici { get; set; }
+        public Vodici TrenutniVodic { get; set; }
         public readonly OrganizacijaContext dbContext;
 
         public VodicJedanModel(OrganizacijaContext db)
@@ -22,19 +22,9 @@ namespace KonacniProjekat
             SessionId = null;
         }
         
-         public async Task<IActionResult> OnGetAsync(uint? id)
+           public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Vodici = await dbContext.Vodici.FirstOrDefaultAsync(m => m.IdVodica == id);
-
-            if (Vodici == null)
-            {
-                return NotFound();
-            }
+            TrenutniVodic = dbContext.Vodici.Where(x=>x.IdVodica == id).FirstOrDefault();
             return Page();
         }
     }
