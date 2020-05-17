@@ -31,8 +31,16 @@ namespace KonacniProjekat
             {
                 Korisnici PostojiKorisnik = dbContext.Korisnici.Where(x=>x.Username == TrenutniKorisnik.Username).FirstOrDefault();
                 if (PostojiKorisnik != null && PostojiKorisnik.Password == TrenutniKorisnik.Password)
-                {
-                    
+                { 
+                    SessionClass.TipKorisnika=PostojiKorisnik.TipKorisnika;
+                    if(PostojiKorisnik.TipKorisnika=="V")
+                    {
+                          SessionClass.SessionId=(int)PostojiKorisnik.IdVodicaK;
+                    }
+                    else if(PostojiKorisnik.TipKorisnika=="T")
+                    {
+                         SessionClass.SessionId=(int)PostojiKorisnik.IdTuristeK;
+                    }
                     return RedirectToPage("./Index");
                 }
                 else
