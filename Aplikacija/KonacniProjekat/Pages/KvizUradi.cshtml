@@ -7,6 +7,10 @@
 
 
 <form method="post">
+
+    <div class="text-center">
+        <h2 class="display-4">Kviz: @Model.KvizZaIzradu.NazivKviza</h2>
+    </div>
     
     @{
         string Disabled="";
@@ -20,6 +24,7 @@
     <input type="hidden" asp-for="@Model.KvizId" />
     <input type="hidden" asp-for="@Model.BrojTacnihOdgovora" />
     <input type="hidden" asp-for="@Model.ZavrsenKviz" />
+    <input type="hidden" asp-for="@Model.PorukaZaKorisnikaNepopunjenKviz" />
 
     <div>
         <ol type="1">
@@ -39,7 +44,9 @@
                             }
                         }
                         <li class="@CorrectA">                            
-                            <input class="@Disabled @CorrectA" type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorA" asp-for="KorisnikoviOdgovori[i]" />
+                            <input class="@Disabled @CorrectA" type="radio" name="KorisnikoviOdgovori[@i]"
+                                value="@Model.PitanjaZaIzradu[i].OdgovorA" asp-for="KorisnikoviOdgovori[i]" required 
+                                oninvalid="nepopunjenKviz();" />
                             @Model.PitanjaZaIzradu[i].OdgovorA
                         </li>
 
@@ -53,9 +60,10 @@
                             }
                         }
                         <li class="@CorrectB">
-                            <input class="@Disabled @CorrectB" type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorB" asp-for="KorisnikoviOdgovori[i]" />
+                            <input class="@Disabled @CorrectB" type="radio" name="KorisnikoviOdgovori[@i]"
+                            value="@Model.PitanjaZaIzradu[i].OdgovorB" asp-for="KorisnikoviOdgovori[i]" required />
                             @Model.PitanjaZaIzradu[i].OdgovorB
-                        </li>
+                        </li> 
  
                         @{
                             string CorrectC="";
@@ -67,7 +75,8 @@
                             }
                         }
                         <li class="@CorrectC">
-                            <input class="@Disabled @CorrectC" type="radio" name="KorisnikoviOdgovori[@i]" value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" />
+                            <input class="@Disabled @CorrectC" type="radio" name="KorisnikoviOdgovori[@i]"
+                            value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" required  />
                             @Model.PitanjaZaIzradu[i].OdgovorC
                         </li>
             
@@ -81,6 +90,10 @@
     @if(!Model.ZavrsenKviz)
     {
         <div>
+            <output style="color:red; background-color:lightred;" id="ObavestenjeONepopunjenomKvizu" />
+        </div>
+
+        <div>
             <button type="submit" >Završi kviz</button>
         </div>
     }
@@ -89,7 +102,7 @@
 </form>
 
 
-@if(Model.BrojTacnihOdgovora != null)
+@if(Model.BrojTacnihOdgovora != null) 
 {
     @if(Model.BrojTacnihOdgovora != 11 && Model.BrojTacnihOdgovora%10 != 1)
     {

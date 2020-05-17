@@ -21,4 +21,19 @@ function updateTextInputRangeDrustvenaAtmosfera(val) {
 
 function updateTextInputRangeKonacnaOcena(val) {
     document.getElementById('inputRangeKonacnaOcena').value=val; 
+} 
+
+function nepopunjenKviz() {
+    document.getElementById('ObavestenjeONepopunjenomKvizu').value="Morate odgovoriti na sva pitanja.";
 }
+
+// function proveriTacanOdgovor(id, correctAnswer) {
+//     var element = document.getElementById('#id');
+//     if (element.is(":checked"))
+//     {
+//         if (element.value != correctAnswer)
+//             element.classList.add("IncorrectAnswer");
+//         else element.classList.add("CorrectAnswer");
+//     }    
+
+// }
