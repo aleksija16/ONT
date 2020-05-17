@@ -18,7 +18,9 @@ ViewData["Title"]="Znamenitosti";
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="https://i.redd.it/rn1se5zkikkz.png" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  ">
+                  @if(@znamenitost.Slika!=null)
+      {
+                <img src="images/@znamenitost.Slika" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  "> }
             </div>
             <div class="flip-card-back">
                 <div class="text-center">

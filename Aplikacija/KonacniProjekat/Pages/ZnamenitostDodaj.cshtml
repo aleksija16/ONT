@@ -16,7 +16,8 @@ ViewData["Title"]="Nova znamenitost";
         <label class="form-control">Radno vreme:</label> <input asp-for="NovaZnamenitost.RadnoVreme" class="form-control" placeholder="Radno vreme" required />
         <label class="form-control">Broj telefona:</label> <input asp-for="NovaZnamenitost.BrojTelefona" class="form-control" placeholder="Broj telefona" />
         <label class="form-control">Cena ulaznice:</label> <input asp-for="NovaZnamenitost.CenaUlaznice" class="form-control" placeholder="Cena ulaznice" />
-
+        <label class="form-control">Dodajte sliku:</label> <input type="file" asp-for="NovaZnamenitost.Slika"  placeholder="Slika" required />
+        </br>
         <button type="submit">Dodaj novu znamenitost</button>
     </div>
 </form>
