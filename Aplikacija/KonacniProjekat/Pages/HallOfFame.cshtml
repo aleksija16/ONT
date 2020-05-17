@@ -3,40 +3,15 @@
 @{
 
 }
-
-@*
-<div class="container">
-  
-  <ul class="nav nav-pills" id="pills-tab" role="tablist">
-      @foreach (var item in Model.sviKvizovi)
-      {
-    <li class="nav-item"><a data-toggle="pill" href="#@item.NazivKviza">@item.NazivKviza</a></li>
-    
-    }
-  </ul>
-   <div class="tab-content"></div>
-   @foreach (var item in Model.sviKvizovi)
-      {
-     <div id="@item.NazivKviza" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-@item.NazivKviza-tab"> 
-      <h3>@item.NazivKviza</h3>
-    </div>
-      }
-       </div>
-</div>
-*@
-<ul class="nav nav-tabs">
-      @foreach (var item in Model.sviKvizovi)
+<ul class="nav nav-pills grey">
+      @foreach (var kviz in Model.sviKvizovi)
       {
   <li class="nav-item">
-    <a class="nav-link" id="pills-@item.NazivKviza-tab" data-toggle="pill" href="#@item.NazivKviza" role="tab"
-      aria-controls="pills-@item.NazivKviza" aria-selected="true">@item.NazivKviza</a>
+    <div class="hof"> <a  class="nav-link" asp-page="./HallOfFame" asp-route-id="@kviz.IdKviza">@kviz.NazivKviza</a></div>
   </li>
       }
 </ul>
-<div class="tab-content">
-     @foreach (var kviz in Model.sviKvizovi)
-      {
-          <div class="tab-pane fade" id="@kviz.NazivKviza">
+
   <table class="table">
     <thead>
       <tr>
@@ -45,20 +20,19 @@
         <th>Poeni</th>
       </tr>
     </thead> 
-         @foreach (var item in Model.HallOfFame)
-        {
-          if(item.IdKvizaHof==kviz.IdKviza)
-          {   
-
     <tbody>
-        <tr>
-        <td>@item.IdTuristeHof</td>
-        <td> @Html.DisplayFor(modelItem => item.IdTuristeHofNavigation.ImeTuriste)</td>
-        <td>@item.Poeni</td>
-         </tr>  
-    </tbody>
-          }}
-  </table>
-  </div>
-      }
-</div>
+@foreach (var hof in Model.HallOfFame)
+{
+  @foreach (var ucesnik in Model.Turisti)
+  {
+    if(ucesnik.IdTuriste==hof.IdTuristeHof)
+    {  <tr>
+        <td>@ucesnik.ImeTuriste</td>
+        <td>@ucesnik.PrezimeTuriste</td>
+        <td>@hof.Poeni</td>
+      </tr>
+  }
+  }
+}
+</tbody>
+</table>

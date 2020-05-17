@@ -22,11 +22,16 @@ namespace KonacniProjekat
         public IList<HallOfFame> HallOfFame { get;set; }
         public IList<Turisti> Turisti {get;set;}
         public IList<Kvizovi> sviKvizovi {get;set;}
-        public async Task OnGetAsync()
+        public IList<Kvizovi> trenutniKviz {get;set;}
+        public async Task OnGetAsync(int id)
         {
+            var trenutniId=id;
             sviKvizovi = await dbContext.Kvizovi.ToListAsync();   
             Turisti = await dbContext.Turisti.ToListAsync();
-             HallOfFame = await dbContext.HallOfFame.ToListAsync();
+             HallOfFame = await dbContext.HallOfFame.Where(x=>x.IdKvizaHof==id).ToListAsync();
         }
+
+
+
     }
 }
