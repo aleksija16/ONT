@@ -27,6 +27,7 @@ namespace KonacniProjekat.Models
         public virtual DbSet<Vodici> Vodici { get; set; }
         public virtual DbSet<Znamenitosti> Znamenitosti { get; set; }
         public virtual DbSet<ZnamenitostiUTurama> ZnamenitostiUTurama { get; set; }
+        public virtual DbSet<Slike> Slike { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -360,6 +361,31 @@ namespace KonacniProjekat.Models
                     .WithOne(p => p.Rezervacije)
                     .HasForeignKey<Rezervacije>(d => d.IdVodicaR)
                     .HasConstraintName("IdVodicaR");
+            });
+
+             modelBuilder.Entity<Slike>(entity =>
+            {
+                entity.HasKey(e => e.IdSlike)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("slike");
+
+                entity.HasIndex(e => e.IdZnamenitost)
+                    .HasName("IdZnamenitost_idx");
+
+                entity.Property(e => e.IdSlike).HasColumnType("int(11)");
+
+                entity.Property(e => e.IdZnamenitost).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.Slika)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.HasOne(d => d.IdZnamenitostNavigation)
+                    .WithMany(p => p.Slike)
+                    .HasForeignKey(d => d.IdZnamenitost)
+                    .HasConstraintName("IdZnamenitost");
             });
 
             modelBuilder.Entity<Ture>(entity =>

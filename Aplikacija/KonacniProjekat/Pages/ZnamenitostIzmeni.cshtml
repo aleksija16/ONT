@@ -11,13 +11,14 @@ ViewData["Title"]="Izmena znamenitosti";
 <form method="post">
     <div class="form-group">
         <input type="hidden" asp-for="TrenutnaZnamenitost.IdZnamenitosti" />
-        <label class="form-control">Naziv:</label> <input asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" />
+        <label class="form-control">Naziv: </label> <input asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" />
         <label class="form-control">Lokacija:</label> <input asp-for="TrenutnaZnamenitost.Lokacija" class="form-control" />
         <label class="form-control">Opis:</label> <input asp-for="TrenutnaZnamenitost.Opis" class="form-control" />
         <label class="form-control">Radno vreme:</label> <input asp-for="TrenutnaZnamenitost.RadnoVreme" class="form-control" />
         <label class="form-control">Broj telefona:</label> <input asp-for="TrenutnaZnamenitost.BrojTelefona" class="form-control" />
         <label class="form-control">Cena ulaznice:</label> <input asp-for="TrenutnaZnamenitost.CenaUlaznice" class="form-control" />
-
+         <label class="form-control">Naslovna slika:</label> <input asp-for="TrenutnaZnamenitost.Slika" class="form-control" />
+         <label class="form-control">Dodajte sliku:</label> <input type="file" asp-for="NovaSlika.Slika"  placeholder="Slika" required />
         <button type="submit" asp-page-handler="Sacuvaj">Sacuvaj izmene</button>
     </div>
 </form>

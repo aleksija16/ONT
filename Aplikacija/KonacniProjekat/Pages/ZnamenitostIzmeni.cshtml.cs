@@ -21,9 +21,10 @@ namespace KonacniProjekat
         
         [BindProperty]
        public Znamenitosti TrenutnaZnamenitost{get;set;}
-
+         [BindProperty]
+        public Slike NovaSlika{get;set;}
+         int zid;
        public IActionResult OnGet(int id){
-
            TrenutnaZnamenitost=dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==id).FirstOrDefault();
            if(TrenutnaZnamenitost==null){
                return RedirectToPage("./ZnamenitostSve");
@@ -39,6 +40,11 @@ namespace KonacniProjekat
            else{
                dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
                await dbContext.SaveChangesAsync();
+              
+               NovaSlika.IdZnamenitost= TrenutnaZnamenitost.IdZnamenitosti;
+                dbContext.Slike.Add(NovaSlika);
+                await dbContext.SaveChangesAsync();
+
                return RedirectToPage("./ZnamenitostSve");
            }
        }

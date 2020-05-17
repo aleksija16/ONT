@@ -21,12 +21,15 @@ namespace KonacniProjekat
         
         [BindProperty]
         public Znamenitosti TrenutnaZnamenitost{get;set;}
+          [BindProperty]
+        public IList<Slike> Slike{get;set;}
         
         public async Task<IActionResult> OnGetAsync(int? id, int znamenitost){
 
             SessionId = id;
 
             TrenutnaZnamenitost=await dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==(uint)znamenitost).FirstOrDefaultAsync();
+           Slike = await dbContext.Slike.Where(x=>x.IdZnamenitost==znamenitost).ToListAsync();
 
             if(TrenutnaZnamenitost==null){
                 return NotFound();
