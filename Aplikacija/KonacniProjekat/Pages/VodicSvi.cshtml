@@ -12,7 +12,9 @@
  <div class="flip-card">
   <div class="flip-card-inner">
     <div class="flip-card-front">
-      <img src="@vodic.Slika" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  ">
+      @if(@vodic.Slika!=null)
+      {
+      <img src="images/@vodic.Slika" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  ">}
     </div>
     <div class="flip-card-back">
       <h2>@vodic.ImeVodica @vodic.PrezimeVodica</h2>
