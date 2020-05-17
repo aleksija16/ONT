@@ -32,6 +32,9 @@ namespace KonacniProjekat
         public HallOfFame RezultatIzradeKviza {get; set;}
 
         [BindProperty]
+        public string PorukaZaKorisnikaNepopunjenKviz {get; set;}
+
+        [BindProperty]
         public bool DostupanPrikaz {get; set;}
 
         [BindProperty]
@@ -86,6 +89,8 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnPost()
         {
+            KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)KvizId);
+
             PitanjaZaIzradu = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint)KvizId).ToListAsync();
 
             BrojTacnihOdgovora = 0;
