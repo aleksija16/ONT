@@ -12,25 +12,22 @@ ViewData["Title"]="Ture";
     <h3><a asp-page="./TuraDodaj">Dodaj turu</a></h3>
 </div>
 
-<div>
-    <table class="table table-bordered">
-        <thead>
-            <th>ID ture</th>
-            <th>Naziv ture</th>
-            <th></th>
-        </thead>
-        <tbody>
-            <form method="post">
-                @foreach (var tura in Model.SveTure)
-                {
-                    <tr>
-                        <td>@tura.IdTure</td>
-                        <td>@tura.NazivTure</td>
-						 <td><button type="submit" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure" asp-page-handler="Rezervisi">Rezervisi turu</button></td>
-                         <td><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikazi detalje</a></td>
-                    </tr>
-                }
-            </form>
-        </tbody>
-    </table>
+<div style="display: grid;  grid-template-columns: auto auto auto;">
+@foreach (var  tura in Model.SveTure) 
+{
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="https://i.redd.it/rn1se5zkikkz.png" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  ">
+            </div>
+            <div class="flip-card-back">
+                <div class="text-center">
+                    <div><h2>@tura.NazivTure</h2></div>
+                    <div><button type="submit" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure" asp-page-handler="Rezervisi">Rezervisi turu</button></div>
+                    <div><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikazi detalje</a></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+}
 </div>
