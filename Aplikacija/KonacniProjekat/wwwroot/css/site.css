@@ -289,3 +289,32 @@ input[type=text]:placeholder
 .incorrectAnswer {
   background-color: lightcoral;
 }
+
+/*Anketa*/
+.centerAnketa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.rangeAnketa {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+  align-items: center;
+  color: darkblue;
+}
+
+.rangeAnketa * {
+  margin:1%;
+}
+
+.inputUzRangeAnketa {
+  border: groove white;
+  text-align: center;
+  font-weight: bolder;
+  color: #0366d6;
+  background-color: whitesmoke;
+  max-width: 100px;
+}
