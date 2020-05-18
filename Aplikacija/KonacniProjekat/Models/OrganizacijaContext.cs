@@ -584,29 +584,31 @@ namespace KonacniProjekat.Models
 
             modelBuilder.Entity<ZnamenitostiUTurama>(entity =>
             {
-                entity.HasKey(e => new { e.IdZnamenitostiZut, e.IdTureZut })
+                entity.HasKey(e => e.IdZnamenitostiUTurama )
                     .HasName("PRIMARY");
 
                 entity.ToTable("znamenitostiuturama");
 
-                entity.HasIndex(e => e.IdTureZut)
-                    .HasName("IdTure_UNIQUE")
+                entity.HasIndex(e => e.IdZnamenitostiUTurama)
+                    .HasName("IdZnamenitostiUTurama_UNQUE")
                     .IsUnique();
 
+                entity.HasIndex(e => e.IdTureZut)
+                    .HasName("IdTure_idx");
+
                 entity.HasIndex(e => e.IdZnamenitostiZut)
-                    .HasName("IdZnamenitosti_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdZnamenitosti_idx");
 
                 entity.HasOne(d => d.IdTureZutNavigation)
                     .WithOne(p => p.ZnamenitostiUTurama)
                     .HasForeignKey<ZnamenitostiUTurama>(d => d.IdTureZut)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("IdTureZut");
 
                 entity.HasOne(d => d.IdZnamenitostiZutNavigation)
                     .WithOne(p => p.ZnamenitostiUTurama)
                     .HasForeignKey<ZnamenitostiUTurama>(d => d.IdZnamenitostiZut)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("IdZnamenitostiZut");
             });
 

@@ -1,4 +1,55 @@
 ﻿@page
 @model KonacniProjekat.TuraIzmeniModel
 @{
+    ViewData["Title"] = "Izmeni turu";
 }
+
+<div class="text-center">
+    <h2 class="display-4">Izmena ture: @Model.OvaTura.NazivTure</h2>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="SessionId" />
+    <input type="hidden" asp-for="TuraId" />
+
+    <label class="form-control">Naziv ture:</label> <input asp-for="OvaTura.NazivTure" class="form-control margin-input-izmena" placeholder="OvaTura.Naziv" />
+    <label class="form-control">Dan održavanja:</label> 
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="3" /> <h6>Sreda</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="4" /> <h6>Četvrtak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="5" /> <h6>Petak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="6" /> <h6>Subota</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
+        
+    <label class="form-control select-fit-text">Vreme održavanja:</label>    
+        <input type="time" class="form-control select-fit-text margin-input-izmena" asp-for="OvaTura.VremeOdrzavanja" />                                                   
+
+    <label class="form-control">Mesto polaska:</label>     
+        <input type="text" asp-for="OvaTura.MestoPolaska" class="form-control margin-input-izmena" placeholder="OvaTura.MestoPolaska" />                                                  
+
+    <label class="form-control">Kapacitet:</label>    
+        <input type="number" class="form-control margin-input-izmena" min="1" max="100" asp-for="OvaTura.Kapacitet" />
+
+    <label class="form-control">Vodič:</label>
+        <select class="form-control select-fit-text margin-input-izmena" id="izborVodicaIzmena" asp-for="@Model.IzabraniVodic" asp-items="@Model.SviVodici">
+            <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
+        </select>
+
+    <label class="form-control">Opis</label> 
+        <textarea class="form-control text-area-fit" asp-for="OvaTura.Opis"> </textarea> 
+
+    <label class="form-control">Znamenitosti:</label> 
+        @foreach (var znamenitost in Model.SveZnamenitostiLista)
+        {
+            <div class="forma-check">
+                <input type="checkbox" name="IzabraneZnamenitosti[]" value="@znamenitost.IdZnamenitosti" /> <h6>@znamenitost.NazivZnamenitosti</h6>
+            </div>
+        }                                                      
+                                                  
+                                                       
+    <div>
+        <button type="submit">Sačuvajte izmene</button>
+    </div>                                              
+                                                        
+</form>
