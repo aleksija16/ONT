@@ -199,12 +199,6 @@ input[type=text]:placeholder
   backface-visibility: hidden;
   border-radius: 50px 20px;
 }
-
-li:hover
-{
-    background-color:papayawhip;
-}
-
 .card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -323,4 +317,25 @@ li:hover
   color: #0366d6;
   background-color: whitesmoke;
   max-width: 100px;
+}
+
+/*Forma za izmenu ture*/
+.forma-check {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-left: 3%;
+}
+
+.forma-check * {
+  margin-left: 1%;
+}
+
+.text-area-fit {
+  width: 80%;
+  margin-left: 3%;
+}
+
+.margin-input-izmena {
+  margin-left:3%;
 }

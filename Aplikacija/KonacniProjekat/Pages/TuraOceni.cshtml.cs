@@ -40,15 +40,15 @@ namespace KonacniProjekat
         
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            SessionId = SessionClass.SessionId;
+            SessionId = 1 ; //SessionClass.SessionId;
             TuraId = id;
 
-            if (SessionId == null || SessionClass.TipKorisnika != "Turista")
-            {
-                return NotFound();
-            }
+            //if (SessionId == null || SessionClass.TipKorisnika != "Turista")
+            //{
+            //    return NotFound();
+            //}
 
-            OvaTura = await dbContext.Ture.FindAsync((uint)TuraId);
+            OvaTura = await dbContext.Ture.Where( x => x.IdTure == (uint)TuraId).FirstOrDefaultAsync();
 
             if(OvaTura == null)
             {
