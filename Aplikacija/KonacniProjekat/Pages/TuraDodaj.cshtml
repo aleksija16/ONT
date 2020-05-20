@@ -8,16 +8,46 @@ ViewData["Title"]="Nova tura";
     <h2 class="display 4">Nova tura</h2>
 </div>
 
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./TuraSve">Vrati se nazad</a></li>
+  </ul>
+</nav>
+
 <form method="post">
     <div class="form-group">
-        <label class="form-control">Naziv:</label> <input asp-for="NovaTura.NazivTure" class="form-control" placeholder="Naziv" required />
-		<label class="form-control">Dan odrzavanja:</label> <input asp-for="NovaTura.DanOdrzavanja" class="form-control" placeholder="Dan odrzavanja" required />
-        <label class="form-control">Vreme odrzavanja:</label> <input asp-for="NovaTura.VremeOdrzavanja" class="form-control" placeholder="Vreme odrzavanja" required />
-        <label class="form-control">Mesto polaska:</label> <input asp-for="NovaTura.MestoPolaska" class="form-control" placeholder="Mesto polaska" required />
-        <label class="form-control">Kapacitet:</label> <input asp-for="NovaTura.Kapacitet" class="form-control" placeholder="Kapacitet" required />
-        <label class="form-control">Id vodica:</label> <input asp-for="NovaTura.IdVodica" class="form-control" placeholder="Id vodica" required />
-        <label class="form-control">Opis:</label> <input asp-for="NovaTura.Opis" class="form-control" placeholder="Opis" required />
-        <label class="form-control">Tip:</label> <input asp-for="NovaTura.TipTure" class="form-control" placeholder="Tip" required />
+        <label class="form-control">Naziv:</label>
+        <input asp-for="NovaTura.NazivTure" class="form-control" placeholder="Naziv" required  />
+
+        <label class="form-control">Dan odrzavanja:</label>
+        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Ponedeljak" /> <h6>Ponedeljak</h6> </div>
+        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Utorak" /> <h6>Utorak</h6> </div>
+        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Sreda" /> <h6>Sreda</h6> </div>
+        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Cetvrtak" /> <h6>Četvrtak</h6> </div>
+        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Petak" /> <h6>Petak</h6> </div>
+        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Pubota" /> <h6>Subota</h6> </div>
+        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Nedelja" /> <h6>Nedelja</h6> </div>
+        
+        
+        <label class="form-control">Vreme odrzavanja:</label> 
+        <input type="time" class="form-control" asp-for="NovaTura.VremeOdrzavanja" />                                                   
+
+        <label class="form-control">Mesto polaska:</label> 
+        <input asp-for="NovaTura.MestoPolaska" class="form-control" placeholder="Mesto polaska" required />
+
+        <label class="form-control">Kapacitet:</label> 
+        <input asp-for="NovaTura.Kapacitet" class="form-control" min="1" max="100" placeholder="Kapacitet" required />
+
+        <label class="form-control">Opis:</label> 
+        <textarea class="form-control text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>
+
+        <label class="form-control">Tip:</label> 
+        <div class="forma-check"><input type="checkbox" value="T" asp-for="NovaTura.TipTure" /> <h6>T (klasicna)</h6> </div>
+        <div class="forma-check"><input type="checkbox" value="C" asp-for="NovaTura.TipTure" /> <h6>C (custom)</h6> </div>
+
+        <label class="form-control">Id vodica:</label>
+        <input asp-for="NovaTura.IdVodica" class="form-control" placeholder="Id vodica" required  />
+         
         <button type="submit">Dodaj novu turu</button>
     </div>
 </form>
