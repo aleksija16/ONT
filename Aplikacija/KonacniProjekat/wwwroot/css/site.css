@@ -211,13 +211,25 @@ input[type=text]:placeholder
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+
+.cardVodic {
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2);
+  transition: 0.8s;
+  width:400px; height:600px; margin: auto;
+}
+
+/* On mouse-over, add a deeper shadow */
+.cardVodic:hover {
+  box-shadow: 0 20px 20px 0 rgba(0,0,0,0.5);
+}
+
 /* Add some padding inside the card container */
 .container {
   padding: 2px 16px;
 }
 
 .title {
-  color: grey;
+  color: #262626;
   font-size: 18px;
 }
 
@@ -246,10 +258,22 @@ input[type=text]:placeholder
 /* Style the back side */
 .flip-card-back {
   background-color: #bbb;
-  color: white;
+  color: black;
   transform: rotateY(180deg);
+  align-items: center;
 }
 
+.column {
+  float: left;
+}
+
+.row {margin: 0 -55px;}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 .cela-pocetna-stranica * {
   margin-bottom: 1%;

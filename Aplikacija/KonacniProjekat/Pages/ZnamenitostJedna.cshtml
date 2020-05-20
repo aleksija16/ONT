@@ -25,7 +25,7 @@ ViewData["Title"] = "Znamenitosti";
       <div><h4>Cena ulaznice:</h4> @Model.TrenutnaZnamenitost.CenaUlaznice</div>
     </form>
   </div>
-  <div class="col-md-5" style="overflow-y: scroll;  height: 300px;">
+  <div class="col-md-5" style="overflow-y: scroll;  height: 400px;">
     @foreach (var slika in Model.Slike)
     {
          <img class="img-fluid rounded mb-5 mb-md-0" src="images/@slika.Slika" alt="">

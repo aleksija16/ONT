@@ -6,21 +6,24 @@
 <div class="text-center">
     <h1 class="display-4">Vodici</h1>
 </div>
-  <a asp-page="./VodicDodaj">Dodaj vodica</a>
+  <a asp-page="./VodicDodaj" style="color: black; font-size:20px;">Dodaj vodica<i class='fas fa-user-plus'></i></a>
 <form method="post">
+  <div class="row">
     @foreach (var vodic in Model.Vodici) 
 {
-<div class="card">
-  <div class="container">
+<div class="cardVodic" style="height: 320px; background-color: #c2ccff; margin-bottom:5px;">
+  <div class="column">
    <h3>Id: @vodic.IdVodica</h3>
     <p>Ime i prezime: @vodic.ImeVodica @vodic.PrezimeVodica</p>
-    <p>Datum rođenja: @vodic.DatumRodjenja</p>
+    <p>Datum rođenja: @vodic.DatumRodjenja.ToString()</p>
     <p>Pol: @vodic.Pol</p>
     <p>Broj telefona: @vodic.BrojTelefona</p>
     <p>Email: @vodic.Email</p>
     <p>Ocena: @vodic.Ocena</p>
-    <button type="submit" asp-route-id="@vodic.IdVodica" asp-page-handler="Obrisi">Obrisi vodica</button> 
+    <button type="submit" asp-route-id="@vodic.IdVodica" asp-page-handler="Obrisi">Obrisi vodica <i class='fas fa-user-alt-slash'></i></button> 
   </div>
 </div>
 }
 </form>
+</div>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

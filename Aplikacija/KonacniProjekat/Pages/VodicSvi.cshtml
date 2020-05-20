@@ -3,6 +3,7 @@
 @{
 }
 
+<form method="get">
 <div class="text-center">
     <h1 class="display-4">Vodici</h1>
 </div>
@@ -18,9 +19,13 @@
     </div>
     <div class="flip-card-back">
       <h2>@vodic.ImeVodica @vodic.PrezimeVodica</h2>
- <a asp-page="./VodicJedan" asp-route-id="@vodic.IdVodica">Prikazi detalje</a>
+ <a asp-page="./VodicJedan" asp-route-id="@vodic.IdVodica" style="color:#262626; font-size:18px;">Prikazi detalje</a><i class='fas fa-id-card-alt' style="color: black;"></i>
     </div>
   </div>
  </div>
 }
 </div>
+</form>
+
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

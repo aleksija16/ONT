@@ -4,13 +4,21 @@
 }
 
 <form method="get">
-<div class="card">
+<div class="cardVodic" style="text-align: center ">
+  <img src="images/@Model.TrenutniVodic.Slika" style="width:70%; display: block; margin-left: auto; margin-right: auto;">
   <h1>@Model.TrenutniVodic.ImeVodica @Model.TrenutniVodic.PrezimeVodica</h1>
    </br>
-  <p>Licenca: @Model.TrenutniVodic.Licenca</p>
-  <p class="title">@Model.TrenutniVodic.Ocena<img src="https://livewatchstore.com/wp-content/uploads/2019/10/like.png" style="width: 20px; height:20px"/></p>
+  <p class="title">Licenca: @Model.TrenutniVodic.Licenca</p>
+  <p class="title">Ocena: @Model.TrenutniVodic.Ocena <img src="https://livewatchstore.com/wp-content/uploads/2019/10/like.png" style="width: 20px; height:20px"/></p>
   </br>
-  <p class="title">Kontakt: @Model.TrenutniVodic.BrojTelefona) | @Model.TrenutniVodic.Email)</p>
-   <a asp-page="./VodicOceni" asp-route-id="@Model.TrenutniVodic.IdVodica">Oceni</a>
+  </br>
+  <p class="title" style="background-color:#f2f2f2; color: #8c8c8c">Kontakt: @Model.TrenutniVodic.BrojTelefona) | @Model.TrenutniVodic.Email)</p>
+   </br>
+  <a asp-page="./VodicOceni" asp-route-id="@Model.TrenutniVodic.IdVodica" style="color:#ff66a3; font-size:18px">Oceni</a>
 </div>
 </form>
+
+<div>
+ <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#ff66a3;">Lista vodiča</a>
+</div>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
