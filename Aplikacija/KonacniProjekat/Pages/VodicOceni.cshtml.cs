@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KonacniProjekat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
@@ -19,7 +20,22 @@ namespace KonacniProjekat
         }
         [BindProperty]
          public OcenjivanjeVodica JednaOcena {get; set;}
+        [BindProperty]
+        public IList<Rezervacije> TuristaRezervacije{get;set;}
+        public int provera=0;
+        public async Task OnGetAsync(int id)
+        {
+             IQueryable<Rezervacije> qTure = dbContext.Rezervacije.Include(x => x.IdTureRNavigation).Where(Y=>Y.IdTuristeR == SessionClass.SessionId);
+             TuristaRezervacije= await qTure.Where(a =>a.IdVodicaR==(uint)id).ToListAsync();
+             foreach(var item in TuristaRezervacije)
+             {
+                 if(item.IdVodicaR==(uint)id)
+                 {
+                    provera=1;
+                 }
+             }
 
+        }
          public async Task<IActionResult> OnPostAsync(int id)
        {
            if(!ModelState.IsValid)
@@ -27,7 +43,7 @@ namespace KonacniProjekat
                return Page();
            }
            else{
-               JednaOcena.IdTuristeO=(uint)SessionClass.SessionId;
+                JednaOcena.IdTuristeO=(uint)SessionClass.SessionId;
                 JednaOcena.IdVodicaO=(uint)id;
                 dbContext.OcenjivanjeVodica.Add(JednaOcena);
                 await dbContext.SaveChangesAsync();

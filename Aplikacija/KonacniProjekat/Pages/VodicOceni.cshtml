@@ -6,6 +6,8 @@
 <div class="cardVodic" style="text-align: center; height:200px">
  
 <form method="post">
+  @if(@Model.provera==1)
+  {
         <label for="ocene">Oceni vodiča</label>
         <select class="form-control" id="ocene" asp-for="JednaOcena.Ocena" style="display: block;margin: 0 auto;">
           <option>10</option>
@@ -19,8 +21,25 @@
           <option>2</option>
           <option>1</option>
         </select>
+        <select class="form-control" id="ture" asp-for="JednaOcena.IdTureO" style="display: block;margin: 0 auto;">
+        @foreach (var item in Model.TuristaRezervacije)
+        {
+         <option value="@item.IdTureR">@item.IdTureRNavigation.NazivTure</option> 
+        }
+        </select>
       <button type="submit" class="btn btn-primary">Oceni</button>
+  }
+  else{
+    <label style="color:red">Ne mozete da ocenite vodica s kojim niste bili na turi!</label>
+    
+<div>
+ <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#ff66a3;">Lista vodiča</a>
+</div>
+  }
 </form>
 </div>
+
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
  
