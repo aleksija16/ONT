@@ -8,15 +8,15 @@
   <img src="images/@Model.TrenutniVodic.Slika" style="width:70%; display: block; margin-left: auto; margin-right: auto;">
   <h1>@Model.TrenutniVodic.ImeVodica @Model.TrenutniVodic.PrezimeVodica</h1>
    </br>
-  <p class="title">Licenca: @Model.TrenutniVodic.Licenca</p>
-  <p class="title">Ocena: @Model.TrenutniVodic.Ocena <img src="https://livewatchstore.com/wp-content/uploads/2019/10/like.png" style="width: 20px; height:20px"/></p>
+  <p class="title"> <img src="https://image.flaticon.com/icons/svg/1/1700.svg" style="width: 20px; height:20px">Licenca: @Model.TrenutniVodic.Licenca</p>
+  <p class="title">Ocena: @Model.TrenutniVodic.Ocena <i class="fas fa-hand-holding-heart"></i></p>
   </br>
   </br>
-  <p class="title" style="background-color:#f2f2f2; color: #8c8c8c">Kontakt: @Model.TrenutniVodic.BrojTelefona) | @Model.TrenutniVodic.Email)</p>
+  <p class="title" style="background-color:#f2f2f2; color: #8c8c8c"><i class="fas fa-phone-square-alt"></i> @Model.TrenutniVodic.BrojTelefona | <i class="fas fa-envelope-open-text"></i> @Model.TrenutniVodic.Email</p>
    </br>
   @if(SessionClass.TipKorisnika=="T")
   {
-  <a asp-page="./VodicOceni" asp-route-id="@Model.TrenutniVodic.IdVodica" style="color:#ff66a3; font-size:18px">Oceni</a>
+  <a asp-page="./VodicOceni" asp-route-id="@Model.TrenutniVodic.IdVodica" style="color:#ff66a3; font-size:18px">Oceni <i class="fas fa-thumbs-up"></i> <i class="fas fa-thumbs-down"></i></a>
   }
 </div>
 </form>

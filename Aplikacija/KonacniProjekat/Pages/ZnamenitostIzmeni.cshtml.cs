@@ -23,7 +23,7 @@ namespace KonacniProjekat
        public Znamenitosti TrenutnaZnamenitost{get;set;}
          [BindProperty]
         public Slike NovaSlika{get;set;}
-         int zid;
+
        public IActionResult OnGet(int id){
            TrenutnaZnamenitost=dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==id).FirstOrDefault();
            if(TrenutnaZnamenitost==null){
