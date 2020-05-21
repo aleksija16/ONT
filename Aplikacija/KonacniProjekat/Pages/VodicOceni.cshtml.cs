@@ -27,7 +27,7 @@ namespace KonacniProjekat
                return Page();
            }
            else{
-
+               JednaOcena.IdTuristeO=(uint)SessionClass.SessionId;
                 JednaOcena.IdVodicaO=(uint)id;
                 dbContext.OcenjivanjeVodica.Add(JednaOcena);
                 await dbContext.SaveChangesAsync();
