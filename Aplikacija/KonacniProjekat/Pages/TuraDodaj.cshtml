@@ -1,7 +1,7 @@
 ﻿@page
 @model KonacniProjekat.TuraDodajModel
 @{
-ViewData["Title"]="Nova tura";
+    ViewData["Title"]="Nova tura";
 }
 
 <div class="text-center">
@@ -20,13 +20,13 @@ ViewData["Title"]="Nova tura";
         <input asp-for="NovaTura.NazivTure" class="form-control" placeholder="Naziv" required  />
 
         <label class="form-control">Dan odrzavanja:</label>
-        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Ponedeljak" /> <h6>Ponedeljak</h6> </div>
-        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Utorak" /> <h6>Utorak</h6> </div>
-        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Sreda" /> <h6>Sreda</h6> </div>
-        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Cetvrtak" /> <h6>Četvrtak</h6> </div>
-        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Petak" /> <h6>Petak</h6> </div>
-        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Pubota" /> <h6>Subota</h6> </div>
-        <div class="forma-check"><input type="checkbox" asp-for="NovaTura.DanOdrzavanja" value="Nedelja" /> <h6>Nedelja</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="3" /> <h6>Sreda</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="4" /> <h6>Četvrtak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="5" /> <h6>Petak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="6" /> <h6>Subota</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
         
         
         <label class="form-control">Vreme odrzavanja:</label> 
@@ -42,13 +42,21 @@ ViewData["Title"]="Nova tura";
         <textarea class="form-control text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>
 
         <label class="form-control">Tip:</label> 
-        <div class="forma-check"><input type="checkbox" value="T" asp-for="NovaTura.TipTure" /> <h6>T (klasicna)</h6> </div>
-        <div class="forma-check"><input type="checkbox" value="C" asp-for="NovaTura.TipTure" /> <h6>C (custom)</h6> </div>
+        <div class="forma-check"><input type="checkbox" value="T" asp-for="NovaTura.TipTure" /> <h6>T (Klasicna)</h6> </div>
 
-        <label class="form-control">Id vodica:</label>
-        <input asp-for="NovaTura.IdVodica" class="form-control" placeholder="Id vodica" required  />
-		
-		<label class="form-control">Znamenitosti:</label>
+
+        <label class="form-control">Vodič:</label>
+        <select class="form-control"  asp-for="IzabraniVodic" asp-items="@Model.SviVodici">
+            <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
+        </select>
+
+        <label class="form-control">Znamenitosti:</label> 
+        @foreach (var znamenitost in Model.SveZnamenitosti)
+        {
+            <div class="forma-check">
+                <input type="checkbox" name="IzabraneZnamenitosti[]" value="@znamenitost.IdZnamenitosti" /> <h6>@znamenitost.NazivZnamenitosti</h6>
+            </div>
+        } 
          
         <button type="submit">Dodaj novu turu</button>
     </div>
