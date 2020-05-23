@@ -173,6 +173,7 @@ input[type=text]:placeholder
   perspective: 1000px;
   background-color: rgba(255, 255, 255, 0.8);
   margin-top: 20px;
+  margin: 5px;
 }
 
 /* This container is needed to position the front and back side */
@@ -247,15 +248,14 @@ input[type=text]:placeholder
 .oceni:hover{
   opacity: 0.7;
 }
-/* Style the front side (fallback if image is missing) */
+
 .flip-card-front {
-  background-color: #bbb;
+  background-color: #c2ccff;
   color: black;
 }
 
-/* Style the back side */
 .flip-card-back {
-  background-color: #bbb;
+  background-color: #c2ccff;
   color: black;
   transform: rotateY(180deg);
   align-items: center;
