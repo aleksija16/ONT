@@ -57,6 +57,8 @@ namespace KonacniProjekat
             {
                 return this.Page();
             }
+			
+			 NovaTura.TipTure="T";
 
             string daniOdrzavanjaTure = "";
             foreach (int i in IzabraniDani)
@@ -94,16 +96,16 @@ namespace KonacniProjekat
             IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.ImeVodica==IzabraniVodic);
             NovaTura.IdVodicaNavigation=await qIzabraniVodic.FirstOrDefaultAsync();
 
-            /*
-            for(int i=IzabraneZnamenitosti.Count()-1; i>0; i--){
-            ZnamenitostiUTurama novaZut=new ZnamenitostiUTurama();
+       
+            dbContext.Ture.Add(NovaTura);
+            await dbContext.SaveChangesAsync();
+			
+			for(int i=IzabraneZnamenitosti.Count()-1; i>=0; i--){
+            ZnamenitostiUTurama novaZut = new ZnamenitostiUTurama();
             novaZut.IdTureZut=NovaTura.IdTure;
             novaZut.IdZnamenitostiZut=(uint)IzabraneZnamenitosti[i];
 
-            dbContext.ZnamenitostiUTurama.Add(novaZut);
-            }
-*/
-            dbContext.Ture.Add(NovaTura);
+            await dbContext.ZnamenitostiUTurama.AddAsync(novaZut);
             await dbContext.SaveChangesAsync();
 
             return RedirectToPage("./TuraSve");

@@ -41,10 +41,6 @@
         <label class="form-control">Opis:</label> 
         <textarea class="form-control text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>
 
-        <label class="form-control">Tip:</label> 
-        <div class="forma-check"><input type="checkbox" value="T" asp-for="NovaTura.TipTure" /> <h6>T (Klasicna)</h6> </div>
-
-
         <label class="form-control">Vodič:</label>
         <select class="form-control"  asp-for="IzabraniVodic" asp-items="@Model.SviVodici">
             <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
