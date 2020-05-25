@@ -29,25 +29,5 @@ namespace KonacniProjekat
             SveTure=await qTure.ToListAsync();
         }
 		
-		public async Task<IActionResult> OnPostRezervisiAsync(uint tura)
-        {
-            Ture PostojiTura = await dbContext.Ture.FindAsync(tura);
-
-            if (PostojiTura != null)
-            {
-                Rezervacije NovaRezervacija = new Rezervacije();
-
-                NovaRezervacija.IdTureR=PostojiTura.IdTure;
-				NovaRezervacija.IdVodicaR=PostojiTura.IdVodica;
-                NovaRezervacija.BrojOsoba=PostojiTura.Kapacitet;
-                
-                await dbContext.Rezervacije.AddAsync(NovaRezervacija);
-                await dbContext.SaveChangesAsync();
-
-                
-                return RedirectToPage("./RezervacijaSve"); 
-            }
-            else return Page();
-        }
     }
 }

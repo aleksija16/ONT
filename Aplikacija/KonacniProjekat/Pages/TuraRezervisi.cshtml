@@ -1,0 +1,30 @@
+﻿@page
+@model KonacniProjekat.TuraRezervisiModel
+@{
+    ViewData["Title"] = "Rezervisi turu";
+}
+
+<div class="text-center">
+    <h1 class="=display-4">Rezervacija za turu: @Model.OvaTura.NazivTure</h1>
+</div>
+
+<div class="rezervacija fadeInDown">
+<div id="formContent">
+<form method="post">
+
+    <input type="hidden" asp-for="@Model.SessionId" />
+    <input type="hidden" asp-for="@Model.TuraId" />
+
+    <label class="form-control select-fit-text">Datum odrzavanja:</label>
+        <input type="date" asp-for="RezervacijaTure.Datum" class="form-control" placeholder="Datum odrzavanja"  />
+
+    <label class="form-control">Broj osoba:</label>
+        <input asp-for="RezervacijaTure.BrojOsoba" class="form-control" min="1"; max="100"; placeholder="Broj osoba" required  />
+
+     <div>
+        <button type="submit">Rezervisi turu</button>
+    </div>
+    
+</form>
+</div>
+</div>

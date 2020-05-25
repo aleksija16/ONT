@@ -361,3 +361,57 @@ input[type=text]:placeholder
 .margin-input-izmena {
   margin-left:3%;
 }
+
+/*ZA TURE*/
+.flip-card-ture {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+  margin-top: 20px;
+  margin: 5px;  
+}
+.flip-card-ture .inner-ture {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; 
+}
+
+.flip-card-ture .inner-ture .front-ture,
+.flip-card-ture .inner-ture .back-ture {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 50px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+}
+
+.flip-card-ture .inner-ture .front-ture {
+  background-color: rgb(222, 222, 222);
+}
+.flip-card-ture .inner-ture .back-ture {
+  background-color: rgb(222, 222, 222);
+  transform: rotateY(180deg);
+}
+
+.flip-card-ture:hover .inner-ture {
+  transform: rotateY(180deg);
+}
+
+/*ZA REZERVACIJU*/
+.rezervacija{
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
