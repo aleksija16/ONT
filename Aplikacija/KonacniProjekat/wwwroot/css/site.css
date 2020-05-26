@@ -405,6 +405,16 @@ input[type=text]:placeholder
   transform: rotateY(180deg);
 }
 
+.brisi-turu{
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+
 /*ZA REZERVACIJU*/
 .rezervacija{
   display: flex;
