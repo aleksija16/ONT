@@ -425,3 +425,56 @@ input[type=text]:placeholder
   min-height: 100%;
   padding: 20px;
 }
+
+/*ZA ZNAMENITOSTI*/
+.flip-card-znamenitosti {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+  margin-top: 20px;
+  margin: 5px;  
+}
+.flip-card-znamenitosti .inner-znamenitosti {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; 
+}
+
+.flip-card-znamenitosti .inner-znamenitosti .front-znamenitosti,
+.flip-card-znamenitosti .inner-znamenitosti .back-znamenitosti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 50px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+}
+
+.flip-card-znamenitosti .inner-znamenitosti .front-znamenitosti {
+  background-color: rgb(222, 222, 222);
+}
+.flip-card-znamenitosti .inner-znamenitosti .back-znamenitosti {
+  background-color: rgb(222, 222, 222);
+  transform: rotateY(180deg);
+}
+
+.flip-card-znamenitosti:hover .inner-znamenitosti {
+  transform: rotateY(180deg);
+}
+
+.brisi-znamenitosti{
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}

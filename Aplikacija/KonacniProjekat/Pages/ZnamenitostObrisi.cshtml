@@ -1,0 +1,23 @@
+﻿@page
+@model KonacniProjekat.ZnamenitostObrisiModel
+@{
+     ViewData["Title"]="Brisanje znamenitosti";
+}
+
+<div class="brisi-znamenitosti fadeInDown">
+<div id="formContent">
+<form method="post">
+
+    <input type="hidden" asp-for="@Model.SessionId" />
+    <input type="hidden" asp-for="@Model.ZnamenitostId" />
+
+    <label class="form-control select-fit-text" >
+            <h5>Da li ste sigurni da želite da obrišete sledeću znamenitosti: @Model.ZnamenitostZaBrisanje.NazivZnamenitosti ?</h5>
+    </label>
+
+    <button type="submit" class="btn btn-danger">Da</button>
+    <a asp-page="./ZnamenitostSve" >Ne</a>
+
+</form>
+</div>
+</div>
