@@ -10,15 +10,15 @@
 <div class="row" style="margin: 0 -70px;">
 @foreach (var vodic in Model.Vodici) 
 {
-  <div class="column">
- <div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
+<div class="column">
+ <div class="flip-card-vodic">
+  <div class="flip-card-inner-vodic">
+    <div class="flip-card-front-vodic">
       @if(@vodic.Slika!=null)
       {
-      <img src="images/@vodic.Slika" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;  ">}
+      <img src="images/@vodic.Slika" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;">}
     </div>
-    <div class="flip-card-back">
+    <div class="flip-card-back-vodic">
       <h2>@vodic.ImeVodica @vodic.PrezimeVodica</h2>
  <a asp-page="./VodicJedan" asp-route-id="@vodic.IdVodica" style="color:#262626; font-size:18px; position: absolute;left: 0; right: 0; bottom:2px">Prikazi detalje <i class='fas fa-id-card-alt' style="color: black;" ></i></a>
     </div>

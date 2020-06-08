@@ -49,7 +49,7 @@ namespace KonacniProjekat
 
             RezervacijaTure.IdTureRNavigation=await dbContext.Ture.FindAsync((uint)TuraId);
             RezervacijaTure.IdTureR=RezervacijaTure.IdTureRNavigation.IdTure;
-
+            RezervacijaTure.IdTuristeR=(uint)SessionClass.SessionId;
             RezervacijaTure.IdVodicaR = await dbContext.Ture.Where(x=>x.IdTure==(uint)TuraId).Select(x=>x.IdVodica).FirstOrDefaultAsync();
             
             await dbContext.Rezervacije.AddAsync(RezervacijaTure);

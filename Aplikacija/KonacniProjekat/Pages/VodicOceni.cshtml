@@ -22,9 +22,14 @@
           <option>1</option>
         </select>
         <select class="form-control" id="ture" asp-for="JednaOcena.IdTureO" style="display: block;margin: 0 auto;">
-        @foreach (var item in Model.TuristaRezervacije)
+        @foreach (var rezervacija in Model.TuristaRezervacije)
+        { @foreach (var tura in Model.SveTure)
         {
-         <option value="@item.IdTureR">@item.IdTureRNavigation.NazivTure</option> 
+          @if(rezervacija.IdTureR==tura.IdTure)
+          {
+         <option value="@rezervacija.IdTureR">@rezervacija.IdTureRNavigation.NazivTure</option> 
+          }
+        }
         }
         </select>
       <button type="submit" class="btn btn-primary">Oceni</button>

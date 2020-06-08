@@ -107,9 +107,10 @@ namespace KonacniProjekat
 
             await dbContext.ZnamenitostiUTurama.AddAsync(novaZut);
             await dbContext.SaveChangesAsync();
-
+            }
             return RedirectToPage("./TuraSve");
 
         }
     }
 }
+

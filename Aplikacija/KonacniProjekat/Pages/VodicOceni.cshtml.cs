@@ -19,14 +19,18 @@ namespace KonacniProjekat
             dbContext = db;
         }
         [BindProperty]
-         public OcenjivanjeVodica JednaOcena {get; set;}
+        public OcenjivanjeVodica JednaOcena {get; set;}
         [BindProperty]
         public IList<Rezervacije> TuristaRezervacije{get;set;}
+        public IList<Ture> SveTure{get;set;}
         public int provera=0;
         public async Task OnGetAsync(int id)
-        {
-             IQueryable<Rezervacije> qTure = dbContext.Rezervacije.Include(x => x.IdTureRNavigation).Where(Y=>Y.IdTuristeR == SessionClass.SessionId);
-             TuristaRezervacije= await qTure.Where(a =>a.IdVodicaR==(uint)id).ToListAsync();
+        {   
+            IQueryable<Ture> qTure=dbContext.Ture;
+            SveTure=await qTure.ToListAsync();
+
+             IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(Y=>Y.IdTuristeR == SessionClass.SessionId);
+             TuristaRezervacije= await qRezervacije.Where(a =>a.IdVodicaR==(uint)id).Where(x=>x.Datum<DateTime.Now).ToListAsync();
              foreach(var item in TuristaRezervacije)
              {
                  if(item.IdVodicaR==(uint)id)
