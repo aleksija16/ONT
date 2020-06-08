@@ -3,7 +3,7 @@
 @{
      ViewData["Title"]="Brisanje znamenitosti";
 }
-
+   @if(SessionClass.TipKorisnika=="A"){
 <div class="brisi-znamenitosti fadeInDown">
 <div id="formContent">
 <form method="post">
@@ -21,3 +21,7 @@
 </form>
 </div>
 </div>
+   }
+ else{
+    <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici</div> 
+}

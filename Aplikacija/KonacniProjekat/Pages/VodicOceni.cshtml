@@ -2,9 +2,8 @@
 @model KonacniProjekat.VodicOceniModel
 @{
 }
-
+@if(SessionClass.TipKorisnika=="T"){
 <div class="cardVodic" style="text-align: center; height:200px">
- 
 <form method="post">
   @if(@Model.provera==1)
   {
@@ -43,6 +42,10 @@
   }
 </form>
 </div>
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;">Niste prijavljeni kao turista, ne možete da ocenite vodiča</div> 
+}
 
 
  

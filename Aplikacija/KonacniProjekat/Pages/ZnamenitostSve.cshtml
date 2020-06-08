@@ -29,8 +29,10 @@ ViewData["Title"]="Znamenitosti";
             <div class="back-znamenitosti">
                     <div class="text-center"><h2>@znamenitost.NazivZnamenitosti</h2></div>
                     <div><a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitost.IdZnamenitosti">Vidi znamenitost</a></div>
+                      @if(SessionClass.TipKorisnika=="A"){
                     <div><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost</a></div>
                     <div><a asp-page="./ZnamenitostObrisi" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitost.IdZnamenitosti">Obrisi znamenitost</a></div>
+                      }
             </div>
         </div>
     </div>

@@ -4,8 +4,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Vodici</h1>
+    <h1 class="display-4">Vodiči</h1>
 </div>
+@if(SessionClass.TipKorisnika!="A")
+{
+ <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici</div> 
+}
+else{
   <a asp-page="./VodicDodaj" style="color: black; font-size:20px;">Dodaj vodica<i class='fas fa-user-plus'></i></a>
 <form method="post">
   <div class="row">
@@ -25,5 +30,5 @@
 </div>
 }
 </form>
-</div>
+}
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>

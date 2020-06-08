@@ -3,8 +3,9 @@
 @{
 }
 <div class="text-center">
-    <h1 class="display-4">Kreiranje naloga</h1>
+    <h1 class="display-4">Kreiranje naloga - Vodič</h1>
 </div>
+@if(SessionClass.TipKorisnika=="A"){
 <div class="registracija fadeInDown">
 <div id="formContent">
 <form method="post">
@@ -22,4 +23,8 @@
      </form>
      </div>
 </div>
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici, samo admin može da kreira nalog</div> 
+}
 
