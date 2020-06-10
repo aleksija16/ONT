@@ -249,12 +249,13 @@ input[type=text]:placeholder
 }
 
 .flip-card-front-vodic {
-  background-color: #1745ff;
-  color: black;
+  background-color: #c3c3c3;
+background-image: linear-gradient(315deg, #6c6c6c 0%, #dfdfdf 74%);
 }
 
 .flip-card-back-vodic {
-  background-color: #1745ff;
+  background-color: #c3c3c3;
+background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
   color: black;
   transform: rotateY(180deg);
   align-items: center;
@@ -347,48 +348,50 @@ input[type=text]:placeholder
 }
 
 /*ZA TURE*/
+
 .flip-card-ture {
   background-color: transparent;
   width: 300px;
   height: 200px;
   perspective: 1000px;
   margin-top: 20px;
-  margin: 5px;  
+  margin: 5px;
 }
-.flip-card-ture .inner-ture {
+
+.flip-card-inner-ture {
   position: relative;
   width: 100%;
   height: 100%;
   transition: transform 0.8s;
-  transform-style: preserve-3d; 
+  transform-style: preserve-3d;
 }
 
-.flip-card-ture .inner-ture .front-ture,
-.flip-card-ture .inner-ture .back-ture {
+.flip-card-ture:hover .flip-card-inner-ture {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front-ture, .flip-card-back-ture {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 50px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; 
+}
+.flip-card-front-ture {
+  background-color: #c3c3c3;
+background-image: linear-gradient(315deg, #6c6c6c 0%, #dfdfdf 74%);
 }
 
-.flip-card-ture .inner-ture .front-ture {
-  background-color:  #dd0000;
-}
-.flip-card-ture .inner-ture .back-ture {
-  background-color:  #dd0000;
+.flip-card-back-ture {
+  background-color: #c3c3c3;
+background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
+  color: black;
   transform: rotateY(180deg);
+  align-items: center;
 }
-
-.flip-card-ture:hover .inner-ture {
-  transform: rotateY(180deg);
-}
-
 .brisi-turu{
   display: flex;
   align-items: center;
@@ -442,10 +445,12 @@ input[type=text]:placeholder
 }
 
 .flip-card-znamenitosti .inner-znamenitosti .front-znamenitosti {
-  background-color: rgb(222, 222, 222);
+  background-color: #c3c3c3;
+  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
 }
 .flip-card-znamenitosti .inner-znamenitosti .back-znamenitosti {
-  background-color: rgb(222, 222, 222);
+  background-color: #c3c3c3;
+  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
   transform: rotateY(180deg);
 }
 

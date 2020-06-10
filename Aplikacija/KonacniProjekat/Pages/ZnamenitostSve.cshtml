@@ -14,10 +14,9 @@ ViewData["Title"]="Znamenitosti";
     </ul>
 </nav>
 
-<div style="overflow-y: scroll;  height: 450px;">
-<div style="display: grid;  grid-template-columns: auto auto auto;">
+<div class="row" style="margin: 0 -70px;">
 @foreach (var znamenitost in Model.SveZnamenitosti) 
-{
+{<div class="column">
     <div class="flip-card-znamenitosti">
         <div class="inner-znamenitosti">
             <div class="front-znamenitosti">
@@ -36,6 +35,6 @@ ViewData["Title"]="Znamenitosti";
             </div>
         </div>
     </div>
+    </div>
 }
-</div>
 </div>

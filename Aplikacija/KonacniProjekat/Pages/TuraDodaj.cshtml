@@ -13,7 +13,8 @@
     <li class="page-item"><a class="page-link" asp-page="./TuraSve">Vrati se nazad</a></li>
   </ul>
 </nav>
-
+@if(SessionClass.TipKorisnika=="A")
+{
 <form method="post">
     <div class="form-group">
         <label class="form-control">Naziv:</label>
@@ -57,3 +58,7 @@
         <button type="submit">Dodaj novu turu</button>
     </div>
 </form>
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici, samo admin može da kreira novu turu</div> 
+}

@@ -15,16 +15,15 @@ ViewData["Title"]="Ture";
     </ul>
 </nav>
 }
-<div style="overflow-y: scroll;  height: 450px;">
-<div style="display: grid;  grid-template-columns: auto auto auto;">
+<div class="row" style="margin: 0 -70px;">
 @foreach (var  tura in Model.SveTure) 
-{
+{<div class="column">
     <div class="flip-card-ture">
-        <div class="inner-ture">
-            <div class="front-ture">
+        <div class="flip-card-inner-ture">
+            <div class="flip-card-front-ture">
                  <h1> @tura.NazivTure  </h1> 
             </div>
-            <div class="back-ture">
+            <div class="flip-card-back-ture">
                 @if(SessionClass.TipKorisnika=="T")
                 {
                 <div><a asp-page="./TuraRezervisi" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Rezervisi turu</a></div>
@@ -39,6 +38,7 @@ ViewData["Title"]="Ture";
             </div>
         </div>
     </div>
+ </div>
 }
 </div>
-</div>
+
