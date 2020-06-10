@@ -84,7 +84,6 @@ body {
 
 #formContent {
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
   padding: 30px;
   width: 90%;
   max-width: 450px;
@@ -92,31 +91,27 @@ body {
   padding: 0px;
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+  background: #e2e8ee;
+  background-image: linear-gradient(315deg, #e2e8ee 0%, #d0b8b8 74%);
 }
 
 input[type=button], input[type=submit]{
-  background-color: #56baed;
-  border: none;
-  color: white;
-  padding: 15px 80px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 13px;
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 40px 20px;
-  transform: scale(0.95);
-
+  height: 50px;
+  border-radius: .5em;
+  background-image:
+  linear-gradient(180deg, rgb(208, 208, 208)  0%, 
+    #fde7f9 47%, 
+    #fde7f9 53%,
+    rgb(138, 138, 138)100%);
 }
 input[type=button]:hover, input[type=submit]:hover{
   background-color: #39ace7;
 } 
 input[type=text], input[type="password"], input[type="date"],label {
-  background-color: #f6f6f6;
+  background-color: #fde7f9;
+  background-image: linear-gradient(315deg, #fde7f9 0%, #e6e6e6 74%);
   border: none;
-  color: #0d0d0d;
+  color: #5a5959;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -137,7 +132,7 @@ input[type=text]:focus {
 input[type=text]:placeholder 
 {  
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  color: #838282;
+  color: #5a5959;
 }
 
 
@@ -151,13 +146,10 @@ input[type=text]:placeholder
 }
 
 /*Hall of fame*/
-.halloffame
+.hof
 {
-  background-color: #ffdd9d;
-}
-.halloffame tr:hover {
-  color: white;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: #fbfbfb;
+  background-image: linear-gradient(315deg, #fbfbfb  0%, #dcdcdc 72%);
 }
 
 /*Pocetna stranica*/

@@ -5,18 +5,18 @@
 
 
 <form method="post">
-  <div class="prijava fadeInDown">
+  <div class="prijava">
     <div id="formContent">
       <input type="text"  placeholder="Korisnicko ime" asp-for="TrenutniKorisnik.Username">
       <input type="password"  placeholder="Lozinka" asp-for="TrenutniKorisnik.Password">
-      <button type="submit">Prijavi se</button>
+      <input type="submit" value="Prijavi se"/>
     </div>
   </div>
 </form>
 
 @if (Model.SessionId == -1)
 {
-  <div class="prijava fadeInDown">
+  <div class="prijava">
    <div class="alert alert-danger" role="alert">
      Uneli ste pogresno korisnicko ime ili lozinku.
    </div>
