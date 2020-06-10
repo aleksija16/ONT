@@ -104,6 +104,13 @@ input[type=button], input[type=submit]{
     #fde7f9 53%,
     rgb(138, 138, 138)100%);
 }
+input[type=submit]:active
+{
+  color: hsl(333, 37%, 48%);
+  box-shadow: inset hsl(333, 37%, 48%) 0  0px 0px 2px,
+
+    hsl(0, 0%, 100%) 0  0px 10px 10px; /* outer HL */
+}
 input[type=button]:hover, input[type=submit]:hover{
   background-color: #39ace7;
 } 

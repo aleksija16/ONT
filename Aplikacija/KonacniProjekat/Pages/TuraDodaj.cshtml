@@ -4,10 +4,6 @@
     ViewData["Title"]="Nova tura";
 }
 
-<div class="text-center">
-    <h2 class="display 4">Nova tura</h2>
-</div>
-
 <nav aria-label="Page navigation">
   <ul class="pagination">
     <li class="page-item"><a class="page-link" asp-page="./TuraSve">Vrati se nazad</a></li>
@@ -16,10 +12,12 @@
 @if(SessionClass.TipKorisnika=="A")
 {
 <form method="post">
-    <div class="form-group">
-        <label class="form-control">Naziv:</label>
-        <input asp-for="NovaTura.NazivTure" class="form-control" placeholder="Naziv" required  />
-
+   <div class="registracija">
+       <div class="text-center">
+    <h2 class="display 4">Nova tura</h2>
+    </div>
+    <div id="formContent">
+        <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
         <label class="form-control">Dan odrzavanja:</label>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
@@ -28,26 +26,19 @@
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="5" /> <h6>Petak</h6> </div>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="6" /> <h6>Subota</h6> </div>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
-        
-        
-        <label class="form-control">Vreme odrzavanja:</label> 
-        <input type="time" class="form-control" asp-for="NovaTura.VremeOdrzavanja" />                                                   
+    
+       <label>Vreme odrzavanja: <input type="time" asp-for="NovaTura.VremeOdrzavanja" required /></label>
+                                                        
+        <input asp-for="NovaTura.MestoPolaska" placeholder="Mesto polaska" required />
 
-        <label class="form-control">Mesto polaska:</label> 
-        <input asp-for="NovaTura.MestoPolaska" class="form-control" placeholder="Mesto polaska" required />
+        <input asp-for="NovaTura.Kapacitet" min="1" max="100" placeholder="Kapacitet" required />
 
-        <label class="form-control">Kapacitet:</label> 
-        <input asp-for="NovaTura.Kapacitet" class="form-control" min="1" max="100" placeholder="Kapacitet" required />
+        <textarea class="text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>
 
-        <label class="form-control">Opis:</label> 
-        <textarea class="form-control text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>
-
-        <label class="form-control">Vodič:</label>
-        <select class="form-control"  asp-for="IzabraniVodic" asp-items="@Model.SviVodici">
+        <select asp-for="IzabraniVodic" asp-items="@Model.SviVodici">
             <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
         </select>
 
-        <label class="form-control">Znamenitosti:</label> 
         @foreach (var znamenitost in Model.SveZnamenitosti)
         {
             <div class="forma-check">
@@ -55,7 +46,7 @@
             </div>
         } 
          
-        <button type="submit">Dodaj novu turu</button>
+        <input type="submit" value="Dodaj novu turu"/>
     </div>
 </form>
 }

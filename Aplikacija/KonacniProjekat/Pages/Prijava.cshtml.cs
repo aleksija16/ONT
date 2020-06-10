@@ -41,6 +41,10 @@ namespace KonacniProjekat
                     {
                          SessionClass.SessionId=(int)PostojiKorisnik.IdTuristeK;
                     }
+                     else if(PostojiKorisnik.TipKorisnika=="A")
+                    {
+                         SessionClass.SessionId=(int)PostojiKorisnik.IdKorisnika;
+                    }
                     return RedirectToPage("./Index");
                 }
                 else
