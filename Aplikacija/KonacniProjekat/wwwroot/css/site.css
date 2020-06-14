@@ -347,51 +347,53 @@ background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
 }
 
 /*ZA TURE*/
-
 .flip-card-ture {
   background-color: transparent;
   width: 300px;
   height: 200px;
   perspective: 1000px;
   margin-top: 20px;
-  margin: 5px;
+  margin: 5px;  
 }
 
-.flip-card-inner-ture {
+.flip-card-ture .inner-ture {
   position: relative;
   width: 100%;
   height: 100%;
   transition: transform 0.8s;
-  transform-style: preserve-3d;
+  transform-style: preserve-3d; 
 }
 
-.flip-card-ture:hover .flip-card-inner-ture {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front-ture, .flip-card-back-ture {
+.flip-card-ture .inner-ture .front-ture,
+.flip-card-ture .inner-ture .back-ture {
   position: absolute;
   width: 100%;
   height: 100%;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 50px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.flip-card-front-ture {
-  background-color: #c3c3c3;
-background-image: linear-gradient(315deg, #6c6c6c 0%, #dfdfdf 74%);
+  flex-direction: column; 
 }
 
-.flip-card-back-ture {
+.flip-card-ture .inner-ture .front-ture {
   background-color: #c3c3c3;
-background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
-  color: black;
-  transform: rotateY(180deg);
-  align-items: center;
+  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
 }
-.brisi-turu{
+
+.flip-card-ture .inner-ture .back-ture {
+  background-color: #c3c3c3;
+  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
+  transform: rotateY(180deg);
+}
+
+.flip-card-ture:hover .inner-ture {
+  transform: rotateY(180deg);
+}
+
+.brisi-ture{
   display: flex;
   align-items: center;
   flex-direction: column; 

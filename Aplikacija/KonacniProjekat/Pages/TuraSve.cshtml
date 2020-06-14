@@ -19,11 +19,12 @@ ViewData["Title"]="Ture";
 @foreach (var  tura in Model.SveTure) 
 {<div class="column">
     <div class="flip-card-ture">
-        <div class="flip-card-inner-ture">
-            <div class="flip-card-front-ture">
+        <div class="inner-ture">
+            <div class="front-ture">
                  <h1> @tura.NazivTure  </h1> 
             </div>
-            <div class="flip-card-back-ture">
+            <div class="back-ture">
+                <div><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikazi detalje</a></div>
                 @if(SessionClass.TipKorisnika=="T")
                 {
                 <div><a asp-page="./TuraRezervisi" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Rezervisi turu</a></div>
@@ -34,7 +35,6 @@ ViewData["Title"]="Ture";
                 <div><a asp-page="./TuraIzmeni" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Izmeni turu</a></div>
 				<div><a asp-page="./TuraObrisi" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Obrisi turu</a></div>
               }
-              <div><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikazi detalje</a></div>
             </div>
         </div>
     </div>

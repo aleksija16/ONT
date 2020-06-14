@@ -18,7 +18,7 @@
     </div>
     <div id="formContent">
         <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
-        <label class="form-control">Dan odrzavanja:</label>
+        <label class="form-control select-fit-text">Dan odrzavanja:</label>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="3" /> <h6>Sreda</h6> </div>
@@ -31,7 +31,8 @@
                                                         
         <input asp-for="NovaTura.MestoPolaska" placeholder="Mesto polaska" required />
 
-        <input asp-for="NovaTura.Kapacitet" min="1" max="100" placeholder="Kapacitet" required />
+        <label class="form-control select-fit-text">Kapacitet:</label>
+        <input asp-for="NovaTura.Kapacitet" min="1" max="100" required />
 
         <textarea class="text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>
 
@@ -39,6 +40,7 @@
             <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
         </select>
 
+        <label class="form-control select-fit-text">Izaberite znamenitosti:</label>
         @foreach (var znamenitost in Model.SveZnamenitosti)
         {
             <div class="forma-check">
@@ -46,7 +48,9 @@
             </div>
         } 
          
-        <input type="submit" value="Dodaj novu turu"/>
+        <button type="submit">
+          Dodaj novu turu
+        </button>
     </div>
 </form>
 }
