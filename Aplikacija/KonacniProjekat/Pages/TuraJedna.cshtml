@@ -25,16 +25,20 @@
       <div><h4>Opis:</h4> @Model.Ture.Opis</div>
       <div>
         <h4>Vodic:</h4> 
-        <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica</a>
+        <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica @Model.VodicTure.PrezimeVodica</a>
       </div>
       <div>
         <h4>Znamenitosti:</h4> 
+        @foreach (var znamenitosti in Model.ZnamenitostiUTuri)
+        {
+            <a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitosti.IdZnamenitosti"> @znamenitosti.NazivZnamenitosti</a>
+        }
       </div>
 
     </form>
   </div>
   <div class="col-md-7">
-    <img class="img-fluid rounded mb-5 mb-md-0" src="http://placehold.it/700x300" alt=""> 
+    @* <img class="img-fluid rounded mb-5 mb-md-0" src="http://placehold.it/700x300" alt="">  *@
     <form method="get">
       <div><h4>Organizovanost ture: </h4>@Model.RezultatiAnkete.OrganizovanostTure</div>
       <div><h4>Fizička zahtevnost:</h4>@Model.RezultatiAnkete.FizickaZahtevnostTure</div>
@@ -43,6 +47,9 @@
       <div><h4>Najmanje zanimljiva znamenitost:</h4>@Model.RezultatiAnkete.NajdosadnijaZnamenitost</div>
       <div><h4>Srednja ocena ture:</h4>@Model.RezultatiAnkete.KonacnaOcena</div>
     </form>
+  </div>
+  <div div class="col-md-5" style="overflow-x: scroll; width:800px;">
+  <img class="img-fluid rounded mb-7 mb-md-0" src="http://placehold.it/700x300" alt=""> 
   </div>
 </div>
 
