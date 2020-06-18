@@ -30,6 +30,9 @@ namespace KonacniProjekat
         [BindProperty]
         public Vodici VodicTure{get;set;}
 
+        [BindProperty]
+        public IList<Znamenitosti> ZnamenitostiUTuri{get;set;}
+
          public async Task<IActionResult> OnGetAsync(uint? id)
         {
             if (id == null)
@@ -38,8 +41,13 @@ namespace KonacniProjekat
             }
 
             Ture = await dbContext.Ture.FirstOrDefaultAsync(m => m.IdTure == id);
+            
             RezultatiAnkete=await dbContext.Anketa.FirstOrDefaultAsync(r=>r.IdTureAnk==id);
+
             VodicTure=await dbContext.Vodici.FirstOrDefaultAsync(e=>e.IdVodica==Ture.IdVodica);
+
+            IQueryable<ZnamenitostiUTurama> qZnamenitosti=dbContext.ZnamenitostiUTurama.Include(x=>x.IdZnamenitostiZutNavigation).Where(x=>x.IdTureZut==id);
+            ZnamenitostiUTuri=await qZnamenitosti.Select(x=>x.IdZnamenitostiZutNavigation).ToListAsync();
 
 
             if (Ture == null)
