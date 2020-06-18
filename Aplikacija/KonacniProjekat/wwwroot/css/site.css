@@ -248,13 +248,13 @@ input[type=text]:placeholder
 }
 
 .flip-card-front-vodic {
-  background-color: #c3c3c3;
-background-image: linear-gradient(315deg, #6c6c6c 0%, #dfdfdf 74%);
+  background-color: #84c1ff   ;
+background-image: linear-gradient(315deg, #84c1ff    0%, #eaf4ff   74%);
 }
 
 .flip-card-back-vodic {
   background-color: #c3c3c3;
-background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
+background-image: linear-gradient(315deg, #eaf4ff   0%, #84c1ff  79%);
   color: black;
   transform: rotateY(180deg);
   align-items: center;
@@ -379,13 +379,13 @@ background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
 }
 
 .flip-card-ture .inner-ture .front-ture {
-  background-color: #c3c3c3;
-  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
+  background-color: #add6ff ;
+  background-image: linear-gradient(315deg, #add6ff  0%, #f8fbff 79%);
 }
 
 .flip-card-ture .inner-ture .back-ture {
   background-color: #c3c3c3;
-  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
+  background-image: linear-gradient(315deg, #f8fbff 0%, #add6ff  79%);
   transform: rotateY(180deg);
 }
 
@@ -446,12 +446,12 @@ background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
 }
 
 .flip-card-znamenitosti .inner-znamenitosti .front-znamenitosti {
-  background-color: #c3c3c3;
-  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
+  background-color: #d6eaff ;
+  background-image: linear-gradient(315deg, #d6eaff  0%, #f8fbff 79%);
 }
 .flip-card-znamenitosti .inner-znamenitosti .back-znamenitosti {
-  background-color: #c3c3c3;
-  background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
+  background-color: #f8fbff;
+  background-image: linear-gradient(315deg, #f8fbff  0%, #d6eaff  79%);
   transform: rotateY(180deg);
 }
 
@@ -478,3 +478,133 @@ background-image: linear-gradient(315deg, #dfdfdf 0%, #6c6c6c 79%);
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+
+
+/*O NAMA*/
+
+
+.timeline {
+  position: relative;
+  padding: 0;
+  list-style: none;
+}
+.timeline:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  width: 2px;
+  margin-left: -1.5px;
+  content: "";
+  background-color: #e9ecef;
+}
+.timeline > li {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 50px;
+}
+.timeline > li:after, .timeline > li:before {
+  display: table;
+  content: " ";
+}
+.timeline > li:after {
+  clear: both;
+}
+.timeline > li .timeline-panel {
+  position: relative;
+  float: right;
+  width: 100%;
+  padding: 0 20px 0 100px;
+  text-align: left;
+}
+.timeline > li .timeline-panel:before {
+  right: auto;
+  left: -15px;
+  border-right-width: 15px;
+  border-left-width: 0;
+}
+.timeline > li .timeline-panel:after {
+  right: auto;
+  left: -14px;
+  border-right-width: 14px;
+  border-left-width: 0;
+}
+.timeline > li .timeline-image {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  margin-left: 0;
+  text-align: center;
+  color: #eaf4ff ;
+  border: 7px solid #d6eaff ;
+  border-radius: 100%;
+  background-color: #84c1ff ;
+}
+.timeline > li .timeline-image h4 {
+  font-size: 10px;
+  line-height: 14px;
+  margin-top: 12px;
+}
+.timeline > li.timeline-inverted > .timeline-panel {
+  float: right;
+  padding: 0 20px 0 100px;
+  text-align: left;
+}
+.timeline > li.timeline-inverted > .timeline-panel:before {
+  right: auto;
+  left: -15px;
+  border-right-width: 15px;
+  border-left-width: 0;
+}
+.timeline > li.timeline-inverted > .timeline-panel:after {
+  right: auto;
+  left: -14px;
+  border-right-width: 14px;
+  border-left-width: 0;
+}
+.timeline > li:last-child {
+  margin-bottom: 0;
+}
+.timeline .timeline-heading h4 {
+  margin-top: 0;
+  color: inherit;
+}
+.timeline .timeline-heading h4.subheading {
+  text-transform: none;
+}
+.timeline .timeline-body > ul,
+.timeline .timeline-body > p {
+  margin-bottom: 0;
+}
+
+  .timeline:before {
+    left: 52%;
+  }
+  .timeline > li {
+    min-height: 150px;
+    margin-bottom: 150px;
+  }
+  .timeline > li .timeline-panel {
+    float: left;
+    width: 41%;
+    padding: 0 20px 20px 30px;
+    text-align: right;
+  }
+  .timeline > li .timeline-image {
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    margin-left: -50px;
+  }
+  .timeline > li .timeline-image h4 {
+    font-size: 13px;
+    line-height: 18px;
+    margin-top: 16px;
+  }
+  .timeline > li.timeline-inverted > .timeline-panel {
+    float: right;
+    padding: 0 30px 20px 20px;
+    text-align: left;
+  }
