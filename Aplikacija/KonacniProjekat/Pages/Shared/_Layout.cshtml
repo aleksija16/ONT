@@ -6,7 +6,7 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-<link rel="icon" type="image/png" href="images/logic.png">
+<link rel="icon" href="images/logic.png">
 </head>
 <body>
     <header>
@@ -31,9 +31,19 @@
                         </li>
                         @if(SessionClass.TipKorisnika!="" && SessionClass.SessionId!=null)
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Odjava">Odjavi se</a>
-                        </li>
+                  <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="@SessionClass.SessionId" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">@SessionClass.ImeKorisnika</span>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="@SessionClass.SessionId">
+                <a class="nav-link text-dark" asp-area="" asp-page="/Profil">Profil <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i></a>
+                <a class="nav-link text-dark" asp-area="" asp-page="/Odjava">Odjavi se <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i></a>
+               
+              </div>
+            </li>
+
+                      
                         }
                          else
                          {
@@ -64,7 +74,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
