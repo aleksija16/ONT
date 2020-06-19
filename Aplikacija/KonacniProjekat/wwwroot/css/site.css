@@ -571,11 +571,11 @@ background-image: linear-gradient(315deg, #eaf4ff   0%, #84c1ff  79%);
 }
 
   .timeline:before {
-    left: 52%;
+    left: 51%;
   }
   .timeline > li {
-    min-height: 150px;
-    margin-bottom: 150px;
+    min-height: 120px;
+    margin-bottom: 120px;
   }
   .timeline > li .timeline-panel {
     float: left;
@@ -585,14 +585,19 @@ background-image: linear-gradient(315deg, #eaf4ff   0%, #84c1ff  79%);
   }
   .timeline > li .timeline-image {
     left: 50%;
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     margin-left: -50px;
   }
   .timeline > li .timeline-image h4 {
-    font-size: 13px;
-    line-height: 18px;
-    margin-top: 16px;
+    font-size: 10px;
+    line-height: 15px;
+    margin-top: 30px;
+  }
+  .timeline > li .timeline-image h3 {
+    font-size: 30x;
+    font-family: "Times New Roman", Times, serif;
+    margin-top: 35px;
   }
   .timeline > li.timeline-inverted > .timeline-panel {
     float: right;
