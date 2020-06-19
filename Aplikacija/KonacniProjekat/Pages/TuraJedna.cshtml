@@ -13,8 +13,70 @@
   </ul>
 </nav>
 
-<div class="row">
-  <div class="col-md-5">
+@* <div class="row"> *@
+  <div class="card shadow mb-4">
+ 
+@*MOZDA NOVO-PODACI O TURI*@
+<form method="get">
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Podaci o turi</h6>
+    </div>
+    <div class="card-body">
+      
+      <div class="naziv-rezAnk">Naziv</div>
+      <div class="vrednost-rezAnk">@Model.Ture.NazivTure</div>
+                  
+      <div class="naziv-rezAnk">Dan održavanja</div>
+      <div class="vrednost-rezAnk">@Model.Ture.DanOdrzavanja</div>
+
+      <div class="naziv-rezAnk">Vreme održavanja</div>
+      <div class="vrednost-rezAnk">@Model.Ture.VremeOdrzavanja</div>
+
+      <div class="naziv-rezAnk">Mesto polaska</div>
+      <div class="vrednost-rezAnk">@Model.Ture.MestoPolaska</div>
+
+      <div class="naziv-rezAnk">Opis</div>
+      <div class="vrednost-rezAnk">@Model.Ture.Opis</div>
+
+      <div class="naziv-rezAnk">Vodic</div>
+      <div class="vrednost-rezAnk">
+        <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica @Model.VodicTure.PrezimeVodica</a>
+      </div>
+    </div>
+  </div>                  
+  </form>
+
+@*MOZDA NOVO-REZULTATI ANKETE*@
+  <form method="get">
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Rezultati ankete</h6>
+    </div>
+    <div class="card-body">
+      
+      <div class="naziv-rezAnk">Organizovanost ture</div>
+      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.OrganizovanostTure</div>
+                  
+      <div class="naziv-rezAnk">Fizicka zahtevnost</div>
+      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.FizickaZahtevnostTure</div>
+
+      <div class="naziv-rezAnk">Najinteresantnija znamenitost</div>
+      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.NajinteresantnijaZnamenitost</div>
+
+      <div class="naziv-rezAnk">Najdosadnija znamenitost</div>
+      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.NajdosadnijaZnamenitost</div>
+
+      <div class="naziv-rezAnk">Srednja ocena ture</div>
+      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.KonacnaOcena</div>
+    </div>
+  </div>                  
+  </form>
+
+@*STARO*@
+  @* <div class="col-md-5">
     <form method="get">
 
       <div><h4>Naziv:</h4> @Model.Ture.NazivTure</div>
@@ -39,17 +101,39 @@
         </div>
       </div>
     </form>
-  </div>
-  <div class="col-md-7">
-    <form method="get">
-      <div><h4>Organizovanost ture: </h4>@Model.RezultatiAnkete.OrganizovanostTure</div>
+  </div> *@
+
+@*STARO*@
+@* <div class="col-md-7">
+    <form method="get"> 
+       <div><h4>Organizovanost ture: </h4>@Model.RezultatiAnkete.OrganizovanostTure</div>
       <div><h4>Fizička zahtevnost:</h4>@Model.RezultatiAnkete.FizickaZahtevnostTure</div>
       <div><h4>Društvena atmosfera:</h4>@Model.RezultatiAnkete.DrustvenaAtmosfera</div>
       <div><h4>Najzanimljivija znamenitost:</h4>@Model.RezultatiAnkete.NajinteresantnijaZnamenitost</div>
       <div><h4>Najmanje zanimljiva znamenitost:</h4>@Model.RezultatiAnkete.NajdosadnijaZnamenitost</div>
-      <div><h4>Srednja ocena ture:</h4>@Model.RezultatiAnkete.KonacnaOcena</div>
+      <div><h4>Srednja ocena ture:</h4>@Model.RezultatiAnkete.KonacnaOcena</div> 
     </form>
+  </div> *@
+
+<form method="get"> 
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Znamenitosti u turi</h6>
+    </div>
+    <div class="card-body">
+        @* <div  style="width: 1300px; height:450px; overflow-x: auto; white-space: nowrap; "> *@
+        @foreach (var znamenitosti in Model.ZnamenitostiUTuri)
+        {
+          <a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitosti.IdZnamenitosti">   
+            <img class="img-fluid rounded mb-7 mb-md-0" src="images/znamenitosti/@znamenitosti.Slika" alt="" style="width:1000px;height:600px;">
+          </a>  
+        }
+        @* </div> *@
+    </div>
   </div>
-</div>
+</form>
+</div>       
+
+
 
 
