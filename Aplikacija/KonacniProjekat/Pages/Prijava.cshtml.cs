@@ -31,7 +31,6 @@ namespace KonacniProjekat
             else
             {
                 Korisnici PostojiKorisnik = dbContext.Korisnici.Where(x=>x.Username == TrenutniKorisnik.Username).FirstOrDefault();
-              //  Turisti PostojiTurista = dbContext.Turisti.Where(x=>x.IdTuriste == TrenutniKorisnik.IdTuristeK).FirstOrDefault();
                 if (PostojiKorisnik != null && PostojiKorisnik.Password == TrenutniKorisnik.Password)
                 { 
                     SessionClass.TipKorisnika=PostojiKorisnik.TipKorisnika;

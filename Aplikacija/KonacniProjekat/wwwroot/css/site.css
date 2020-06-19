@@ -91,32 +91,23 @@ body {
   padding: 0px;
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
-  background: #e2e8ee;
-  background-image: linear-gradient(315deg, #e2e8ee 0%, #d0b8b8 74%);
+  background: #84c1ff ;
+  background-image: linear-gradient(315deg, #84c1ff  0%, #eaf4ff  74%);
 }
 
 input[type=button], input[type=submit]{
-  height: 50px;
-  border-radius: .5em;
-  background-image:
-  linear-gradient(180deg, rgb(208, 208, 208)  0%, 
-    #fde7f9 47%, 
-    #fde7f9 53%,
-    rgb(138, 138, 138)100%);
+
 }
 input[type=submit]:active
 {
-  color: hsl(333, 37%, 48%);
-  box-shadow: inset hsl(333, 37%, 48%) 0  0px 0px 2px,
-
-    hsl(0, 0%, 100%) 0  0px 10px 10px; /* outer HL */
+  
 }
 input[type=button]:hover, input[type=submit]:hover{
-  background-color: #39ace7;
+  background-color: #84c1ff ;
 } 
 input[type=text], input[type="password"], input[type="date"],label {
-  background-color: #fde7f9;
-  background-image: linear-gradient(315deg, #fde7f9 0%, #e6e6e6 74%);
+  background-color: #f8fbff ;
+  background-image: linear-gradient(315deg, #f8fbff  0%, #d6eaff 74%);
   border: none;
   color: #5a5959;
   padding: 15px 32px;
@@ -126,7 +117,7 @@ input[type=text], input[type="password"], input[type="date"],label {
   font-size: 16px;
   margin: 5px;
   width: 85%;
-  border: 2px solid #f6f6f6;
+  border: 2px solid #84c1ff;
   transition: all 0.5s ease-in-out;
   border-radius: 5px 5px 5px 5px;
 }
