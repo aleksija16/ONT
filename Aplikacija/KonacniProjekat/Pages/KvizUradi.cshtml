@@ -26,7 +26,7 @@
     <input type="hidden" asp-for="@Model.ZavrsenKviz" />
     <input type="hidden" asp-for="@Model.PorukaZaKorisnikaNepopunjenKviz" />
 
-    <div>
+    <div class="kvizUradi">
         <ol type="1">
             
             @for(var i=0; i<Model.PitanjaZaIzradu.Count(); i++)
@@ -101,7 +101,7 @@
         </div>
 
         <div>
-            <button type="submit" >Završi kviz</button>
+            <button type="submit" style=" position: relative; margin-left: 45%;">Završi kviz</button>
         </div>
     }
     
