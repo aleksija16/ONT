@@ -29,10 +29,17 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public PageResult OnGet(int? id, int kviz)
+        public IActionResult OnGet(int id)
         {
-            SessionId = id;
-            KvizId = kviz;
+            if (SessionClass.TipKorisnika != "A")
+            {
+                
+                return this.StatusCode(403);
+            }
+
+            KvizId = id;
+
+          
 
             return this.Page();
         }

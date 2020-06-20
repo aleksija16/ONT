@@ -19,13 +19,19 @@ namespace KonacniProjekat
         [BindProperty]
         public IList<int> BrojPitanjaPoKvizu {get; set;}
 
+        [BindProperty]
+        public IList<int> BrojUcesnikaPoKvizu {get; set;}
+
+        [BindProperty]
+        public IList<string> NajboljiRezultatPoKvizuString {get; set;}
+
         public KvizSviModel(OrganizacijaContext db)
         {
             dbContext = db;
         }
-        public async Task OnGetAsync(int? id)
+        public async Task OnGetAsync()
         {
-            SessionId = id;
+            SessionId = SessionClass.SessionId;
 
             IQueryable<Kvizovi> qKvizovi = dbContext.Kvizovi.Include(x=>x.IdZnamenitostiKNavigation).OrderBy(x=>x.IdKviza);
             SviKvizovi = await qKvizovi.ToListAsync();
@@ -34,10 +40,14 @@ namespace KonacniProjekat
             int NajveciIdKvizova = (int)(await qKvizovi.OrderByDescending(x=>x.IdKviza).FirstOrDefaultAsync()).IdKviza;
 
             BrojPitanjaPoKvizu = new List<int>();
+            BrojUcesnikaPoKvizu = new List<int>();
+            NajboljiRezultatPoKvizuString = new List<string>();
 
             for (int i=0; i<NajveciIdKvizova; i++)
             {
                 BrojPitanjaPoKvizu.Add(0);
+                BrojUcesnikaPoKvizu.Add(0);
+                NajboljiRezultatPoKvizuString.Add("Ovaj kviz niko još uvek nije radio.");
             }
 
             foreach(var line in dbContext.Pitanja.ToList().GroupBy(x => x.IdKviza)
@@ -46,12 +56,31 @@ namespace KonacniProjekat
                                 Count = group.Count() 
                             })
                         .OrderBy(x => x.Metric))
-                {
-                    BrojPitanjaPoKvizu[(int)line.Metric -1] = line.Count;
-                }
+                        {
+                            BrojPitanjaPoKvizu[(int)line.Metric -1] = line.Count;
+                        }
+
+            foreach(var line in dbContext.HallOfFame.Select(x=> new {x.IdKvizaHof, x.IdTuristeHof}).Distinct().ToList().GroupBy( x => x.IdKvizaHof)
+                        .Select(group => new  {
+                                Metric = group.Key,
+                                Count = group.Count()
+                        })
+                        .OrderBy(x => x.Metric))
+                        {
+                            BrojUcesnikaPoKvizu[(int)line.Metric - 1] = line.Count;
+                        }
 
             
-            // da li mozda moze da se javi greska ako pitanje ima IdKviza=null ? - treba proveriti
+            foreach(var line in dbContext.HallOfFame.Select(x => new { x.IdKvizaHof, /*x.IdTuristeHof,*/ x.Poeni}).ToList().GroupBy(x => x.IdKvizaHof)
+                        .Select(group => new {
+                                Metric = group.Key,
+                                MaxValue = group.Max(x => x.Poeni)
+                        })
+                        .OrderBy(x => x.Metric))
+                        {
+                            NajboljiRezultatPoKvizuString[(int)line.Metric - 1] = line.MaxValue.ToString();
+                        } 
+
 
         }
     }

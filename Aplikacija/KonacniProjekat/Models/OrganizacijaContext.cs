@@ -115,19 +115,14 @@ namespace KonacniProjekat.Models
                     .HasName("PRIMARY");
 
                 entity.ToTable("halloffame");
-
-                entity.HasIndex(e => e.IdHallOfFame)
-                    .HasName("IdHallOfFame_UNIQUE")
-                    .IsUnique();
-
+				
                 entity.HasIndex(e => e.IdKvizaHof)
-                    .HasName("IdKviza_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdKviza_idx");
+								
 
                 entity.HasIndex(e => e.IdTuristeHof)
-                    .HasName("IdTuriste_UNIQUE")
-                    .IsUnique();
-
+                    .HasName("IdTuriste_idx");
+				
                 entity.Property(e => e.DatumRadjenja).HasColumnType("date");
 
                 entity.HasOne(d => d.IdKvizaHofNavigation)

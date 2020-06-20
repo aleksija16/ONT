@@ -32,20 +32,24 @@ namespace KonacniProjekat
 
         public SelectList IzborZnamenitostiLista {get; set;}
         
-        public async Task<IActionResult> OnGetAsync(int? id, int kviz)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            SessionId = id;
-            KvizId = kviz;
+            if (SessionClass.TipKorisnika != "A")
+            {
+                return StatusCode(403);
+            }
+
+            KvizId = id;
             OvajKviz = await dbContext.Kvizovi.FindAsync((uint)KvizId);
 
-            // if(OvajKviz == null)
-            // {
-            //     return RedirectToPage("./KvizSvi", new { id = SessionId});
-            // }
+            if(OvajKviz == null)
+            {
+                 return NotFound();
+            }
 
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
             IzborZnamenitostiLista = new SelectList(qZnamenitosti.ToList());
-            return Page();
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync()

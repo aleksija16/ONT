@@ -27,11 +27,18 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-        public async Task OnGetAsync(int? id, int pitanje)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            PitanjeId = pitanje;
-            PitanjeZaBrisanje = await dbContext.Pitanja.Include(x=>x.IdKvizaNavigation).Where(x=>x.IdPitanja == (uint)PitanjeId).FirstOrDefaultAsync();
-
+            if (SessionClass.TipKorisnika == "A")
+            {
+                PitanjeId = id;
+                PitanjeZaBrisanje = await dbContext.Pitanja.Include(x=>x.IdKvizaNavigation).Where(x=>x.IdPitanja == (uint)PitanjeId).FirstOrDefaultAsync();
+                if (PitanjeZaBrisanje == null) return NotFound();
+                
+                return this.Page();
+            }
+            
+            return this.StatusCode(403);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -47,7 +54,8 @@ namespace KonacniProjekat
             dbContext.Pitanja.Remove(PitanjeZaBrisanje);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToPage("./KvizJedan", new { id = SessionId, kviz = IdKviza});
+            return RedirectToPage("./KvizJedan", new { id = IdKviza});
+        
         }
     }
 }

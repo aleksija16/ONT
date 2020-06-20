@@ -9,11 +9,11 @@
 </div>
 
 <div class="text-right">
-    <h2><a asp-page="./KvizDodajPitanje" asp-route-id="@Model.SessionId" asp-route-kviz="@Model.OvajKviz.IdKviza">Dodaj pitanje u kviz</a></h2>
+    <h2><a asp-page="./KvizDodajPitanje" asp-route-id="@Model.OvajKviz.IdKviza">Dodaj pitanje u kviz</a></h2>
 </div>
 
 <div class="text-left">
-    <h3><a asp-page="./KvizSvi" asp-route-id="@Model.SessionId">Prikaži listu svih kvizova</a></h3>
+    <h3><a asp-page="./KvizSvi" >Prikaži listu svih kvizova</a></h3>
 </div>
 
 <div>
@@ -40,8 +40,8 @@
                         <li>@pitanje.OdgovorC</li>
                     </ul>
                 </td>
-                <td><a asp-page="./KvizIzmeniPitanje" asp-route-id="@Model.SessionId" asp-route-pitanje="@pitanje.IdPitanja">Izmeni pitanje</a></td>
-                <td><a asp-page="./KvizObrisiPitanje" asp-route-id="@Model.SessionId" asp-route-pitanje="@pitanje.IdPitanja">Obriši pitanje</a></td>
+                <td><a asp-page="./KvizIzmeniPitanje" asp-route-id="@pitanje.IdPitanja">Izmeni pitanje</a></td>
+                <td><a asp-page="./KvizObrisiPitanje" asp-route-id="@pitanje.IdPitanja">Obriši pitanje</a></td>
             </tr>
         }
     </table>

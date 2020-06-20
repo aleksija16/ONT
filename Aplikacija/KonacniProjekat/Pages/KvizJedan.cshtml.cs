@@ -25,18 +25,21 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-        public async Task<IActionResult> OnGetAsync(int? id, int kviz)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            SessionId = id;
+            if (SessionClass.TipKorisnika != "A")
+            {
+                return StatusCode(403);
+            }
 
-            OvajKviz = await dbContext.Kvizovi.Where(x=>x.IdKviza == (uint)kviz).FirstOrDefaultAsync();
+            OvajKviz = await dbContext.Kvizovi.Where(x=>x.IdKviza == (uint)id).FirstOrDefaultAsync();
 
             if(OvajKviz == null)
             {
                 return NotFound();
             }
 
-            PitanjaUzKviz = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint)kviz).OrderBy(x=>x.IdPitanja).ToListAsync();
+            PitanjaUzKviz = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint)id).OrderBy(x=>x.IdPitanja).ToListAsync();
 
             return Page();
         }

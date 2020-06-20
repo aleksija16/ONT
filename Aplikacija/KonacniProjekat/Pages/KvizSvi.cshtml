@@ -7,9 +7,12 @@
     <h1 class="display-4">Kvizovi</h1>
 </div>
 
-<div class="text-right">
-    <h3><a asp-page="./KvizDodaj">Dodaj kviz</a></h3>
-</div>
+@if(SessionClass.TipKorisnika == "A") 
+{
+    <div class="text-right">
+        <h3><a asp-page="./KvizDodaj">Dodaj kviz</a></h3>
+    </div>
+}
 
 <div>
     <table class="table table-bordered">
@@ -20,9 +23,15 @@
             <th>Broj pitanja</th>
             <th>Najbolji rezultat</th>
             <th>Broj učesnika</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            @if (SessionClass.TipKorisnika == "A")
+            {
+                <th></th>
+                <th></th>  
+            }
+            else if (SessionClass.TipKorisnika == "T")
+            {
+                <th></th> 
+            }
         </thead>
 
         <tbody>
@@ -48,11 +57,33 @@
                                 @Model.BrojPitanjaPoKvizu[(int)kviz.IdKviza-1]
                             }
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td><a asp-page="./KvizUradi" asp-route-id="@Model.SessionId" asp-route-kviz="@kviz.IdKviza">Uradi kviz</a></td>
-                        <td><a asp-page="./KvizJedan" asp-route-id="@Model.SessionId" asp-route-kviz="@kviz.IdKviza">Vidi kviz</a></td>
-                        <td><a asp-page="./KvizIzmeni" asp-route-id="@Model.SessionId" asp-route-kviz="@kviz.IdKviza">Izmeni kviz</a></td>
+                        <td>
+                            @if ((int)kviz.IdKviza > Model.NajboljiRezultatPoKvizuString.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.NajboljiRezultatPoKvizuString[(int)kviz.IdKviza - 1]
+                            }
+                        </td>
+                        <td>
+                            @if ((int)kviz.IdKviza > Model.BrojUcesnikaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojUcesnikaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                        </td>
+                        @if (SessionClass.TipKorisnika == "A")
+                        {
+                            <td><a asp-page="./KvizJedan" asp-route-id="@kviz.IdKviza">Vidi kviz</a></td>
+                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kviz.IdKviza">Izmeni kviz</a></td>
+                        }
+                        else if (SessionClass.TipKorisnika == "T")
+                        {
+                            <td><a asp-page="./KvizUradi" asp-route-id="@kviz.IdKviza">Uradi kviz</a></td>
+                        }                        
                     </tr>
                 }
             </form>

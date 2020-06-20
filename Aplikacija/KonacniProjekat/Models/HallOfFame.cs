@@ -7,8 +7,8 @@ namespace KonacniProjekat.Models
     public partial class HallOfFame
     {
         public uint IdHallOfFame { get; set; }
-        public uint? IdTuristeHof { get; set; }
-        public uint? IdKvizaHof { get; set; }
+        public uint IdTuristeHof { get; set; }
+        public uint IdKvizaHof { get; set; }
         public int Poeni { get; set; }
         [DataType(DataType.Date)]
         public DateTime? DatumRadjenja { get; set; }

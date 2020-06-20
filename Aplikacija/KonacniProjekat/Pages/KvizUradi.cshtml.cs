@@ -45,36 +45,32 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-        public async Task<IActionResult> OnGetAsync(uint? id, int kviz)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            SessionId = (int?)id;
-            KvizId = kviz;
+            SessionId = SessionClass.SessionId;
+            KvizId = id;
 
 
-            //Privilegije za radjenje kviza
-            /* if(SessionId != null)
-            {
-                Korisnici PostojiKorisnik = await dbContext.Korisnici.FindAsync((uint)id);
-                if(PostojiKorisnik != null){
-                    if(PostojiKorisnik.TipKorisnika == "T" )
-                        DostupanPrikaz = true;
-                    else DostupanPrikaz = false;
-                }
+ 
+            if(SessionId != null)
+            {                
+                if(SessionClass.TipKorisnika == "T" )
+                    DostupanPrikaz = true;
                 else DostupanPrikaz = false;
             }
             else DostupanPrikaz = false;
             
-            if (!DostupanPrikaz) return NotFound(); */
+            if (!DostupanPrikaz) return StatusCode(403);
 
 
-            KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)kviz);
+            KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)id);
 
             if (KvizZaIzradu == null)
             {
                 return NotFound();
             }
 
-            PitanjaZaIzradu = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint) kviz).ToListAsync();
+            PitanjaZaIzradu = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint) id).ToListAsync();
 
             ZavrsenKviz = false;
 
@@ -105,20 +101,18 @@ namespace KonacniProjekat
 
             ZavrsenKviz = true;
 
-            /*
-            //Dodavanje u HOF tabelu
+            
+            RezultatIzradeKviza = new HallOfFame();
+
             RezultatIzradeKviza.DatumRadjenja = DateTime.Now;
             RezultatIzradeKviza.IdKvizaHof = (uint)KvizId;
             RezultatIzradeKviza.IdTuristeHof = (uint)SessionId;
             RezultatIzradeKviza.Poeni = ((int) BrojTacnihOdgovora) * 100 / KorisnikoviOdgovori.Count(); //Racuna se u %, mozda da budu konkretno poeni?
-            dbContext.HallOfFame.Add(RezultatIzradeKviza);*/
+            dbContext.HallOfFame.Add(RezultatIzradeKviza);
 
+            await dbContext.SaveChangesAsync();
 
-            return this.Page();
-
-            //return RedirectToPage("./KvizJedan", new { id = SessionId, kviz = KvizId}); 
-            //Mozda kad se zavrsi kviz da se korisniku prikaze lista svih tacnih odgovora?
-            //Mozda da se samo prikaze rezultat na ovoj stranici?
+            return this.Page();    								 
         }
     }
 }

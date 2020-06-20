@@ -28,13 +28,18 @@ namespace KonacniProjekat
 
         public SelectList IzborZnamenitostiLista {get; set;}
 
-        public async Task OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync()
         {
-            SessionId = id;
+            if (SessionClass.TipKorisnika != "A")
+            {
+                return this.StatusCode(403);
+            }    
+            
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
 
             IzborZnamenitostiLista = new SelectList(await qZnamenitosti.ToListAsync());
            
+           return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync()

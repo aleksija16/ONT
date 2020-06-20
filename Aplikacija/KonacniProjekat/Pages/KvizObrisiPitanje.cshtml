@@ -6,7 +6,6 @@
 
 <form method="post">
     <input type="hidden" asp-for="@Model.PitanjeId" />
-    <input type="hidden" asp-for="@Model.SessionId" />
     <label class="form-control select-fit-text" >
         <div class="div-obrisi-pitanje"> <h5>Da li ste sigurni da želite da obrišete sledeće pitanje:</h5>
             <label class="form-control select-fit-text">
@@ -20,5 +19,5 @@
         </div> 
     </label>
         <button type="submit" class="btn btn-danger">Obriši pitanje</button>    
-        <a asp-page="./KvizJedan" asp-route-id="@Model.SessionId" asp-route-kviz="@Model.PitanjeZaBrisanje.IdKviza">Vrati se na prikaz kviza</a>
+        <a asp-page="./KvizJedan" asp-route-id="@Model.PitanjeZaBrisanje.IdKviza">Vrati se na prikaz kviza</a>
 </form>

@@ -31,13 +31,19 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-        public async Task OnGetAsync(int? id, int pitanje)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            SessionId = id;
-            PitanjeId = pitanje;
+            if (SessionClass.TipKorisnika != "A")
+            {
+                return this.StatusCode(403);
+            }
+            
+            PitanjeId = id;
 
             OvoPitanje = await dbContext.Pitanja.Include(x=>x.IdKvizaNavigation).Where(x=>x.IdPitanja == (uint)PitanjeId).FirstOrDefaultAsync();
             KvizId = (int)OvoPitanje.IdKviza;
+
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
