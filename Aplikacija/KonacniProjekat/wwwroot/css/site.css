@@ -781,22 +781,3 @@ background-image: linear-gradient(315deg, #eaf4ff   0%, #84c1ff  79%);
   83%      { -ms-transform: rotateX(90deg); transform: rotateX(90deg); }
 }*/
 =======
-
-/*KVIZ-URADI*/
-.PitanjeDiv{
-  color: #0366d6;
-}
-
-.PUnutrasnjiDiv
-{
-  /*color: #00AAFF;*/
-}
-
-.PitanjeBorder
-{
-  border: thick solid;
-  border-color: #a4dbdd;
-  border-style: ridge;
-}
-  
->>>>>>> 1cea0224760f7f5d1003a4b4fd95316a51ab9407
