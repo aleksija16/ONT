@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KonacniProjekat.Models
 {
@@ -15,7 +16,11 @@ namespace KonacniProjekat.Models
         public string PrezimeTuriste { get; set; }
         public string Pol { get; set; }
         public DateTime? DatumRodjenja { get; set; }
-        public string Email { get; set; }
+         [Required]
+   [Display(Name = "Email")]
+   [EmailAddress]
+
+        public string Email { get; set; }  
 
         public virtual HallOfFame HallOfFame { get; set; }
         public virtual Korisnici Korisnici { get; set; }
