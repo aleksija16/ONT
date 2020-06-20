@@ -10,8 +10,6 @@
 @if(SessionClass.TipKorisnika=="A")
 {
 <form method="post">
-    <input type="hidden" asp-for="SessionId" />
-    <input type="hidden" asp-for="TuraId" />
 
     <label class="form-control">Naziv ture:</label> <input asp-for="OvaTura.NazivTure" class="form-control margin-input-izmena" placeholder="OvaTura.Naziv" />
     <label class="form-control">Dan održavanja:</label> 

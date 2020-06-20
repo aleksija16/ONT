@@ -23,9 +23,10 @@ namespace KonacniProjekat
         public TuraObrisiModel(OrganizacijaContext db){
             dbContext=db;
         }
-        public async Task<IActionResult>OnGetAsync(int tura)
+        public async Task<IActionResult>OnGetAsync(int id)
         {
-            TuraId=tura;
+            SessionId = SessionClass.SessionId;
+            TuraId=id;
 
             TuraZaBrisanje=await dbContext.Ture.Where( x => x.IdTure == (uint)TuraId).FirstOrDefaultAsync();
 
