@@ -28,10 +28,10 @@ namespace KonacniProjekat
             dbContext=db;
         }
 
-        public async Task<IActionResult>OnGetAsync(int tura)
+        public async Task<IActionResult>OnGetAsync(int id)
         {
-            SessionId=1;
-            TuraId=tura;
+            SessionId = SessionClass.SessionId;
+            TuraId=id;
 
             OvaTura=await dbContext.Ture.Where( x => x.IdTure == (uint)TuraId).FirstOrDefaultAsync();
 

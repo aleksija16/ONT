@@ -27,13 +27,13 @@ ViewData["Title"]="Ture";
                 <div><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikazi detalje</a></div>
                 @if(SessionClass.TipKorisnika=="T")
                 {
-                <div><a asp-page="./TuraRezervisi" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Rezervisi turu</a></div>
-                <div><a asp-page="./TuraOceni" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Oceni turu</a></div>
+                <div><a asp-page="./TuraRezervisi" asp-route-id="@tura.IdTure">Rezervisi turu</a></div>
+                <div><a asp-page="./TuraOceni" asp-route-id="@tura.IdTure">Oceni turu</a></div>
                 }
               @if(SessionClass.TipKorisnika=="A")
               {
-                <div><a asp-page="./TuraIzmeni" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Izmeni turu</a></div>
-				<div><a asp-page="./TuraObrisi" asp-route-id="@Model.SessionId" asp-route-tura="@tura.IdTure">Obrisi turu</a></div>
+                <div><a asp-page="./TuraIzmeni" asp-route-id="@tura.IdTure">Izmeni turu</a></div>
+				<div><a asp-page="./TuraObrisi"  asp-route-id="@tura.IdTure">Obrisi turu</a></div>
               }
             </div>
         </div>

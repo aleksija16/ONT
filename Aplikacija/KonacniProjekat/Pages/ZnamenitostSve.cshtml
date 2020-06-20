@@ -18,6 +18,12 @@ ViewData["Title"]="Znamenitosti";
 </nav> 
 }
 
+<div>  
+<select class="js-example-basic-single js-states form-control" name="state" asp-for="IzabraniTip" asp-items="Model.SviTipovi">
+  <option>Prikazi sve</option>
+</select>
+</div>
+
 <div class="row" style="margin: 0 -70px;">
 @foreach (var znamenitost in Model.SveZnamenitosti) 
 {
@@ -32,10 +38,10 @@ ViewData["Title"]="Znamenitosti";
             </div>
             <div class="back-znamenitosti">
                     <div class="text-center"><h2>@znamenitost.NazivZnamenitosti</h2></div>
-                    <div><a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitost.IdZnamenitosti">Vidi znamenitost</a></div>
+                    <div><a asp-page="./ZnamenitostJedna" asp-route-id="@znamenitost.IdZnamenitosti">Vidi znamenitost</a></div>
                       @if(SessionClass.TipKorisnika=="A"){
                     <div><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost</a></div>
-                    <div><a asp-page="./ZnamenitostObrisi" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitost.IdZnamenitosti">Obrisi znamenitost</a></div>
+                    <div><a asp-page="./ZnamenitostObrisi" asp-route-id="@znamenitost.IdZnamenitosti">Obrisi znamenitost</a></div>
                       }
             </div>
         </div>
@@ -43,3 +49,6 @@ ViewData["Title"]="Znamenitosti";
     </div> 
 }
 </div>
+
+<link href="path/to/select2.min.css" rel="stylesheet" />
+<script src="path/to/select2.min.js"></script>

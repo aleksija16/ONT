@@ -19,15 +19,15 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-		 [BindProperty]
-         public IList<Ture> SveTure{get;set;}
+        [BindProperty]
+        public IList<Ture> SveTure{get;set;}
 
-        public async Task OnGetAsync(int? id){
-            SessionId=id;
+        public async Task OnGetAsync(){
+            SessionId = SessionClass.SessionId;
 
             IQueryable<Ture> qTure=dbContext.Ture;
             SveTure=await qTure.ToListAsync();
         }
-		
+        
     }
 }

@@ -23,9 +23,10 @@ ViewData["Title"] = "Znamenitosti";
       <div><h4>Radno vreme:</h4> @Model.TrenutnaZnamenitost.RadnoVreme</div>
       <div><h4>Broj telefona:</h4> @Model.TrenutnaZnamenitost.BrojTelefona</div>
       <div><h4>Cena ulaznice:</h4> @Model.TrenutnaZnamenitost.CenaUlaznice</div>
+      <div><h4>Tip:</h4> @Model.TrenutnaZnamenitost.Tip</div>
     </form>
   </div>
-  <div class="col-md-5" style="overflow-y: scroll;  height: 400px;">
+  <div class="col-md-5" style="overflow-y: scroll;  height: 500px;">
     @foreach (var slika in Model.Slike)
     {
          <img class="img-fluid rounded mb-5 mb-md-0" src="images/znamenitosti/@slika.Slika" alt="">

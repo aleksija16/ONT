@@ -22,9 +22,11 @@ namespace KonacniProjekat
         public ZnamenitostObrisiModel(OrganizacijaContext db){
             dbContext=db;
         }
-        public async Task<IActionResult>OnGetAsync(int znamenitost)
+        public async Task<IActionResult>OnGetAsync(int id)
         {
-            ZnamenitostId=znamenitost;
+            SessionId = SessionClass.SessionId;
+
+            ZnamenitostId=id;
 
             ZnamenitostZaBrisanje=await dbContext.Znamenitosti.Where( x => x.IdZnamenitosti == (uint)ZnamenitostId).FirstOrDefaultAsync();
 

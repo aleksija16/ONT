@@ -37,9 +37,9 @@ namespace KonacniProjekat
         [BindProperty]
         public IList<int> IzabraneZnamenitosti {get; set;}
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync()
         {
-            SessionId=id;
+            SessionId = SessionClass.SessionId;
 
             IQueryable<string> qVodici=dbContext.Vodici.Select(x=>x.ImeVodica);
             SviVodici=new SelectList(await qVodici.ToListAsync());
