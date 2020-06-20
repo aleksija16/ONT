@@ -28,12 +28,16 @@
 
     <div>
         <ol type="1">
+            
             @for(var i=0; i<Model.PitanjaZaIzradu.Count(); i++)
             {
+                <div class="PitanjeBorder">
                 <li>
-                    @Model.PitanjaZaIzradu[i].TekstPitanja
+                    <div class="PitanjeDiv"><h3><b>@Model.PitanjaZaIzradu[i].TekstPitanja</b></h3></div>
                     <ol type="a">
-
+                        <div class="PUnutrasnjiDiv">
+                
+                        
                         @{
                             string CorrectA="";
                             if(Model.ZavrsenKviz)
@@ -79,11 +83,14 @@
                             value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" required  />
                             @Model.PitanjaZaIzradu[i].OdgovorC
                         </li>
-            
+                        </div>
                     </ol>
 
                 </li>
+                </div>
+                
             }
+            
         </ol>
     </div>
 
