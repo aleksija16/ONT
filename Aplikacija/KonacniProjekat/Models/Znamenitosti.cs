@@ -19,6 +19,7 @@ namespace KonacniProjekat.Models
         public string BrojTelefona { get; set; }
         public string CenaUlaznice { get; set; }
          public string Slika { get; set; }
+		  public string Tip { get; set; }
 
         public virtual Pitanja Pitanja { get; set; }
         public virtual ZnamenitostiUTurama ZnamenitostiUTurama { get; set; }
