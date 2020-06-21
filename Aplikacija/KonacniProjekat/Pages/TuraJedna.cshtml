@@ -4,7 +4,7 @@
 }
 
 <div class=text-center>
-    <h1 class="display-4">@Model.Ture.NazivTure</h1>
+    <h1 class="display-4">@Model.Tura.NazivTure</h1>
 </div>
 
 <nav aria-label="Page navigation">
@@ -13,109 +13,189 @@
   </ul>
 </nav>
 
-@* <div class="row"> *@
-  <div class="card shadow mb-4">
- 
-@*MOZDA NOVO-PODACI O TURI*@
-<form method="get">
+  @* <div class="row"> *@
+<div class="card shadow mb-4 ">
 
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Podaci o turi</h6>
-    </div>
-    <div class="card-body">
-      
-      <div class="naziv-rezAnk">Naziv</div>
-      <div class="vrednost-rezAnk">@Model.Ture.NazivTure</div>
-                  
-      <div class="naziv-rezAnk">Dan održavanja</div>
-      <div class="vrednost-rezAnk">@Model.Ture.DanOdrzavanja</div>
 
-      <div class="naziv-rezAnk">Vreme održavanja</div>
-      <div class="vrednost-rezAnk">@Model.Ture.VremeOdrzavanja</div>
-
-      <div class="naziv-rezAnk">Mesto polaska</div>
-      <div class="vrednost-rezAnk">@Model.Ture.MestoPolaska</div>
-
-      <div class="naziv-rezAnk">Opis</div>
-      <div class="vrednost-rezAnk">@Model.Ture.Opis</div>
-
-      <div class="naziv-rezAnk">Vodic</div>
-      <div class="vrednost-rezAnk">
-        <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica @Model.VodicTure.PrezimeVodica</a>
+  <div class="TuraJednaGlavniDiv">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Podaci o turi</h6>
       </div>
-    </div>
-  </div>                  
-  </form>
-
-@*MOZDA NOVO-REZULTATI ANKETE*@
-  <form method="get">
-
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Rezultati ankete</h6>
-    </div>
-    <div class="card-body">
+      <div class="card-body">
       
-      <div class="naziv-rezAnk">Organizovanost ture</div>
-      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.OrganizovanostTure</div>
+        <div class="naziv-rezAnk">Naziv</div>
+        <div class="vrednost-rezAnk">@Model.Tura.NazivTure</div>
                   
-      <div class="naziv-rezAnk">Fizicka zahtevnost</div>
-      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.FizickaZahtevnostTure</div>
+        <div class="naziv-rezAnk">Dan održavanja</div>
+        <div class="vrednost-rezAnk">@Model.Tura.DanOdrzavanja</div>
 
-      <div class="naziv-rezAnk">Najinteresantnija znamenitost</div>
-      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.NajinteresantnijaZnamenitost</div>
+        <div class="naziv-rezAnk">Vreme održavanja</div>
+        <div class="vrednost-rezAnk">@Model.Tura.VremeOdrzavanja</div>
 
-      <div class="naziv-rezAnk">Najdosadnija znamenitost</div>
-      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.NajdosadnijaZnamenitost</div>
+        <div class="naziv-rezAnk">Mesto polaska</div>
+        <div class="vrednost-rezAnk">@Model.Tura.MestoPolaska</div>
 
-      <div class="naziv-rezAnk">Srednja ocena ture</div>
-      <div class="vrednost-rezAnk">@Model.RezultatiAnkete.KonacnaOcena</div>
-    </div>
-  </div>                  
-  </form>
+        <div class="naziv-rezAnk">Opis</div>
+        <div class="vrednost-rezAnk">@Model.Tura.Opis</div>
 
-@*STARO*@
-  @* <div class="col-md-5">
-    <form method="get">
-
-      <div><h4>Naziv:</h4> @Model.Ture.NazivTure</div>
-      <div><h4>Dan održavanja:</h4> @Model.Ture.DanOdrzavanja</div>
-      <div><h4>Vreme održavanja:</h4> @Model.Ture.VremeOdrzavanja</div>
-      <div><h4>Mesto polaska:</h4> @Model.Ture.MestoPolaska</div>
-      <div><h4>Kapacitet:</h4> @Model.Ture.Kapacitet</div>
-      <div><h4>Opis:</h4> @Model.Ture.Opis</div>
-      <div>
-        <h4>Vodic:</h4> 
-        <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica @Model.VodicTure.PrezimeVodica</a>
-      </div>
-      <div>
-        <h4>Znamenitosti:</h4>
-        <div  style="width: 1300px; height:450px; overflow-x: auto; white-space: nowrap; ">
-        @foreach (var znamenitosti in Model.ZnamenitostiUTuri)
-        {
-          <a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitosti.IdZnamenitosti">   
-            <img class="img-fluid rounded mb-7 mb-md-0" src="images/znamenitosti/@znamenitosti.Slika" alt="" style="width:650px;height:400px;">
-          </a>  
-        }
+        <div class="naziv-rezAnk">Vodič</div>
+        <div class="vrednost-rezAnk">
+          <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica @Model.VodicTure.PrezimeVodica</a>
         </div>
       </div>
-    </form>
-  </div> *@
+    </div>                  
 
-@*STARO*@
-@* <div class="col-md-7">
-    <form method="get"> 
-       <div><h4>Organizovanost ture: </h4>@Model.RezultatiAnkete.OrganizovanostTure</div>
-      <div><h4>Fizička zahtevnost:</h4>@Model.RezultatiAnkete.FizickaZahtevnostTure</div>
-      <div><h4>Društvena atmosfera:</h4>@Model.RezultatiAnkete.DrustvenaAtmosfera</div>
-      <div><h4>Najzanimljivija znamenitost:</h4>@Model.RezultatiAnkete.NajinteresantnijaZnamenitost</div>
-      <div><h4>Najmanje zanimljiva znamenitost:</h4>@Model.RezultatiAnkete.NajdosadnijaZnamenitost</div>
-      <div><h4>Srednja ocena ture:</h4>@Model.RezultatiAnkete.KonacnaOcena</div> 
-    </form>
-  </div> *@
 
-<form method="get"> 
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Rezultati ankete</h6>
+      </div>
+      <div class="card-body">
+      
+        <div class="naziv-rezAnk">Tip ture</div>
+        @{
+          if(Model.TipTuristeNaziv == null || Model.TipTuristeNaziv.Count() == 0)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          { 
+            <div>Korisnici najčešće biraju ovu turu za:</div>
+            <ol type="1">
+            @foreach(var tip in Model.TipTuristeNaziv)
+              if(tip != null)
+              {
+                <li>@tip</li>
+              }
+          </ol> 
+          }
+        }
+
+        <div class="naziv-rezAnk">Organizovanost ture</div>
+        @{
+          String Organizovanost;
+        
+
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.OrganizovanostTure == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+         
+          Organizovanost = Model.RezultatiAnkete.OrganizovanostTure.ToString() + "%";
+          
+          <div class="vrednost-rezAnk">@Model.RezultatiAnkete.OrganizovanostTure</div>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-info" style="width:@Organizovanost;" role="progressbar" aria-valuemin="0" aria-valuemax="100" >
+            </div>
+          </div>
+          }
+
+        }       
+        <hr class="hr-ONT" />
+
+        <div class="naziv-rezAnk">Fizička zahtevnost</div>
+        @{
+          String Zahtevnost;
+
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.FizickaZahtevnostTure == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+            Zahtevnost = Model.RezultatiAnkete.FizickaZahtevnostTure.ToString() + "%";
+            <div class="vrednost-rezAnk">@Model.RezultatiAnkete.FizickaZahtevnostTure</div>
+            <div class="progress mb-4">
+              <div class="progress-bar bg-info" style="width:@Zahtevnost;" role="progressbar" aria-valuemin="0" aria-valuemax="100" >
+              </div>
+            </div>
+          }
+        }
+        <hr class="hr-ONT"/>
+
+        <div class="naziv-rezAnk">Informisanost vodiča</div>
+        @{
+          String Informisanost;
+
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.InformisanostVodica == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+            Informisanost = Model.RezultatiAnkete.InformisanostVodica.ToString() + "%";
+            <div class="vrednost-rezAnk">@Model.RezultatiAnkete.InformisanostVodica</div>
+            <div class="progress mb-4">
+              <div class="progress-bar bg-info" style="width:@Informisanost;" role="progressbar" aria-valuemin="0" aria-valuemax="100" >
+              </div>
+            </div>
+          }
+        }
+        <hr class="hr-ONT"/>
+
+        <div class="naziv-rezAnk">Najinteresantnije znamenitosti</div>
+        @if(Model.NajinteresantnijeZnamenitostiNaziv == null || Model.NajinteresantnijeZnamenitostiNaziv.Count() == 0)
+        {
+          <div class="vrednost-rezAnk">Nema podataka.</div>
+        }
+        else 
+        {
+          <ol type="1">
+            @foreach(var znam in Model.NajinteresantnijeZnamenitostiNaziv)
+              if(znam!= null)
+              {
+                <li>@znam</li>
+              }
+          </ol>
+        }
+        <hr class="hr-ONT"/>
+
+        <div class="naziv-rezAnk">Najmanje interesantne znamenitosti</div>
+        @if(Model.NajdosadnijeZnamenitostiNaziv == null || Model.NajdosadnijeZnamenitostiNaziv.Count() == 0)
+        {
+          <div class="vrednost-rezAnk">Nema podataka.</div>
+        }
+        else
+        {
+          <ol type="1">
+            @foreach(var znam in Model.NajdosadnijeZnamenitostiNaziv)
+              if(znam!= null)
+              {
+                <li>@znam</li>
+              }
+          </ol> 
+        }
+        <hr class="hr-ONT"/>
+      
+        <div class="naziv-rezAnk">Srednja ocena ture</div>
+        @{
+          String Ocena;
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.KonacnaOcena == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+            Ocena = (Model.RezultatiAnkete.KonacnaOcena/0.1).ToString() + "%";
+            <div class="vrednost-rezAnk">@Model.RezultatiAnkete.KonacnaOcena</div>
+            <div class="progress mb-4">
+              <div class="progress-bar bg-info" style="width:@Ocena;" role="progressbar" aria-valuemin="0" aria-valuemax="10" >
+              </div>
+            </div>
+          }
+        }
+        <hr class="hr-ONT"/>
+
+      </div>
+    </div>  
+  </div>                
+  
+
+
+ 
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Znamenitosti u turi</h6>
@@ -131,7 +211,6 @@
         @* </div> *@
     </div>
   </div>
-</form>
 </div>       
 
 
