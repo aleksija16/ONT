@@ -7,19 +7,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+@if(SessionClass.TipKorisnika=="T")
+{
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#podaci">Podaci</a></li>
-    <li><a data-toggle="tab" href="#menu1">Rezervacije</a></li>
-    <li><a data-toggle="tab" href="#menu2">Ocenjivanje</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#rezervacije">Rezervacije</a></li>
+    <li><a data-toggle="tab" href="#ocenjivanje">Ocenjivanje</a></li>
+    <li><a data-toggle="tab" href="#hof">Kvizovi</a></li>
   </ul>
 
   <div class="tab-content">
     <div id="podaci" class="tab-pane fade in active">
       <p>@SessionClass.ImeKorisnika</p>
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
+    <div id="rezervacije" class="tab-pane fade">
+      <h3>Rezervacije</h3>
       
 <div>
     <table class="table table-bordered">
@@ -27,7 +29,7 @@
             <th>ID rezervacije</th>
             <th>Id ture</th>
             <th>ID turiste</th>
-            <th></th>
+            <th>Datum</th>
         </thead>
         <tbody>
             <form method="get">
@@ -37,6 +39,7 @@
                         <td>@rezervacija.IdRezervacije</td>
                         <td>@rezervacija.IdTureR</td>
                         <td>@rezervacija.IdTuristeR</td>
+                        <td>@rezervacija.Datum</td>
                     </tr>
                 }
             </form>
@@ -45,7 +48,7 @@
 </div>
 
     </div>
-    <div id="menu2" class="tab-pane fade">
+    <div id="ocenjivanje" class="tab-pane fade">
       <h3>Ocene koje ste dali vodicima</h3>
      
 <div>
@@ -53,8 +56,9 @@
         <thead>
             <th>ID ocene</th>
             <th>Id vodica</th>
+             <th>Id ture</th>
             <th>Ocene</th>
-            <th></th>
+           
         </thead>
         <tbody>
             <form method="get">
@@ -63,6 +67,7 @@
                     <tr>
                         <td>@ocene.IdOcenjivanja</td>
                         <td>@ocene.IdVodicaO</td>
+                        <td>@ocene.IdTureO</td>
                         <td>@ocene.Ocena</td>
                     </tr>
                 }
@@ -71,8 +76,127 @@
     </table>
 </div>
     </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    <div id="hof" class="tab-pane fade">
+      <h3>HOF</h3>    
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID kviza</th>
+            <th>Poeni</th>
+            <th>datum radjenja</th>
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var hof in Model.SviHOF)
+                {
+                    <tr>
+                        <td>@hof.IdKvizaHof</td>
+                        <td>@hof.Poeni</td>
+                        <td>@hof.DatumRadjenja</td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+}
+else if(SessionClass.TipKorisnika=="V")
+{
+    
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#podaci">Podaci</a></li>
+    <li><a data-toggle="tab" href="#rezervacije">Rezervacije</a></li>
+    <li><a data-toggle="tab" href="#ocenjivanje">Ocenjivanje</a></li>
+    <li><a data-toggle="tab" href="#ture">Ture</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="podaci" class="tab-pane fade in active">
+      <p>@SessionClass.ImeKorisnika</p>
     </div>
-  </div>
+    <div id="rezervacije" class="tab-pane fade">
+      <h3>Rezervacije</h3>
+      
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID rezervacije</th>
+            <th>Id ture</th>
+            <th>ID turiste</th>
+            <th>Datum</th>
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var rezervacija in Model.SveRezervacije)
+                {
+                    <tr>
+                        <td>@rezervacija.IdRezervacije</td>
+                        <td>@rezervacija.IdTureR</td>
+                        <td>@rezervacija.IdTuristeR</td>
+                        <td>@rezervacija.Datum</td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+
+    </div>
+    <div id="ocenjivanje" class="tab-pane fade">
+      <h3>Ocene koje ste dobili</h3>
+     
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID ocene</th>
+             <th>Id ture</th>
+            <th>Ocene</th>
+           
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var ocene in Model.SveOcene)
+                {
+                    <tr>
+                        <td>@ocene.IdOcenjivanja</td>
+                        <td>@ocene.IdTureO</td>
+                        <td>@ocene.Ocena</td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+    </div>
+    <div id="ture" class="tab-pane fade">
+      <h3>Ture</h3>    
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID ture</th>
+            <th>Naziv Ture</th>
+            <th>Dan odrzavanja</th>
+            <th>Vreme odrzavanja</th>
+            <th>Mesto polaska</th>
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var ture in Model.SveTure)
+                {
+                    <tr>
+                        <td>@ture.IdTure</td>
+                        <td>@ture.NazivTure</td>
+                        <td>@ture.DanOdrzavanja</td>
+                        <td>@ture.VremeOdrzavanja</td>
+                        <td>@ture.MestoPolaska</td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+}
