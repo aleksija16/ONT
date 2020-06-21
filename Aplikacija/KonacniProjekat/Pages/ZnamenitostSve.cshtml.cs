@@ -15,7 +15,10 @@ namespace KonacniProjekat
         public int? SessionId {get; set;}
         public readonly OrganizacijaContext dbContext;
 
-       public SelectList SviTipovi { get; set; }
+        public IList<Znamenitosti> SveZnamenitosti{get;set;}
+
+        
+        public SelectList SviTipovi { get; set; }
 
         [BindProperty]
         public string IzabraniTip { get; set; }
@@ -24,8 +27,6 @@ namespace KonacniProjekat
         {
             dbContext = db;
         }
-        
-        public IList<Znamenitosti> SveZnamenitosti{get;set;}
 
         public async Task OnGetAsync()
         {
@@ -37,6 +38,37 @@ namespace KonacniProjekat
             IQueryable<string> qZnamTip=dbContext.Znamenitosti.Select(x=>x.Tip).Distinct();
             SviTipovi=new SelectList(await qZnamTip.ToListAsync());
             
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+
+            IQueryable<string> qZnamTip=dbContext.Znamenitosti.Select(x=>x.Tip).Distinct();
+            SviTipovi=new SelectList(await qZnamTip.ToListAsync());
+
+            IQueryable<Znamenitosti> qZnamenitosti=dbContext.Znamenitosti;
+            IQueryable<Znamenitosti> qIzabranaZnamenitost=dbContext.Znamenitosti.Where(x=>x.Tip==IzabraniTip);
+
+            
+            if(IzabraniTip=="Atrakcije"){
+                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
+            }
+            else if(IzabraniTip=="Muzeji"){
+                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
+            }
+            else if(IzabraniTip=="Spomenici"){
+                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
+            }
+            else if(IzabraniTip=="Okolina Nisa"){
+                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
+            }
+            else if(IzabraniTip=="Prikazi sve")
+            {
+                SveZnamenitosti=await qZnamenitosti.ToListAsync();
+            }
+            return Page();
+            
+
         }
     }
 }

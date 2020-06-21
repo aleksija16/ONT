@@ -18,10 +18,12 @@ ViewData["Title"]="Znamenitosti";
 </nav> 
 }
 
+<form method="post">
 <div>  
-<select class="js-example-basic-single js-states form-control" name="state" asp-for="IzabraniTip" asp-items="Model.SviTipovi">
+<select class="js-example-basic-single js-states form-control" asp-for="IzabraniTip" asp-items="Model.SviTipovi">
   <option>Prikazi sve</option>
 </select>
+<button type="submit">Prikazi</button>
 </div>
 
 <div class="row" style="margin: 0 -70px;">
@@ -49,6 +51,7 @@ ViewData["Title"]="Znamenitosti";
     </div> 
 }
 </div>
+</form>
 
 <link href="path/to/select2.min.css" rel="stylesheet" />
 <script src="path/to/select2.min.js"></script>
