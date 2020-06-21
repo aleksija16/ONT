@@ -33,7 +33,8 @@ namespace KonacniProjekat
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(){
+        public async Task<IActionResult> OnPostAsync(int id){
+            ZnamenitostId=id;
     
             ZnamenitostZaBrisanje=await dbContext.Znamenitosti.FindAsync((uint)ZnamenitostId);
 
