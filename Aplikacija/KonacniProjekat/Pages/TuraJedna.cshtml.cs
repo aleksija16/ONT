@@ -131,8 +131,6 @@ namespace KonacniProjekat
                 
             }
             
-            
-
             VodicTure=await dbContext.Vodici.FirstOrDefaultAsync(e=>e.IdVodica==Tura.IdVodica);
 
             IQueryable<ZnamenitostiUTurama> qZnamenitosti=dbContext.ZnamenitostiUTurama.Include(x=>x.IdZnamenitostiZutNavigation).Where(x=>x.IdTureZut==id);

@@ -40,9 +40,17 @@
         <div class="vrednost-rezAnk">@Model.Tura.Opis</div>
 
         <div class="naziv-rezAnk">Vodič</div>
+
         <div class="vrednost-rezAnk">
           <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica @Model.VodicTure.PrezimeVodica</a>
         </div>
+
+        <div class="naziv-rezAnk">Znamenitosti</div>
+        @foreach (var znamenitost in @Model.ZnamenitostiUTuri)
+        {
+        <div class="vrednost-rezAnk">@znamenitost.NazivZnamenitosti</div>      
+        }
+      
       </div>
     </div>                  
 
