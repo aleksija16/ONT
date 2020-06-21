@@ -42,9 +42,6 @@ namespace KonacniProjekat
         {
             SessionId = SessionClass.SessionId;
             TuraId = id;
-
-            
-
             OvaTura = await dbContext.Ture.Where( x => x.IdTure == (uint)TuraId).FirstOrDefaultAsync();
 
             if(OvaTura == null)
@@ -59,7 +56,7 @@ namespace KonacniProjekat
             return this.Page();            
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (OcenaTure == null)
             {
@@ -68,14 +65,12 @@ namespace KonacniProjekat
 
             IQueryable<Turisti> qTurista = dbContext.Korisnici.Include(x => x.IdTuristeKNavigation).Where(x => x.IdKorisnika == (uint) SessionId).Select(x => x.IdTuristeKNavigation);
 
-            OcenaTure.IdTuristeAnkNavigation = await qTurista.FirstOrDefaultAsync();
-            OcenaTure.IdTuristeAnk = OcenaTure.IdTuristeAnkNavigation.IdTuriste;
+            OcenaTure.IdTuristeAnk =(uint) SessionClass.SessionId;
 
-            OcenaTure.IdTureAnkNavigation = await dbContext.Ture.FindAsync((uint)TuraId);
-            OcenaTure.IdTureAnk = OcenaTure.IdTureAnkNavigation.IdTure;
-
-            OcenaTure.IdVodicaAnk = OcenaTure.IdTureAnkNavigation.IdVodica;
-            OcenaTure.IdVodicaAnkNavigation = await dbContext.Vodici.FindAsync((uint)OcenaTure.IdTuristeAnk);
+            OcenaTure.IdTureAnk =(uint)id;
+            OvaTura = await dbContext.Ture.Where( x => x.IdTure == (uint)id).FirstOrDefaultAsync();
+            OcenaTure.IdVodicaAnk = OvaTura.IdVodica;
+           
 
             OcenaTure.NajinteresantnijaZnamenitost = IzabranaNajzanimljivijaZnamenitostString;
             OcenaTure.NajdosadnijaZnamenitost = IzabranaNajdosadnijaZnamenitostString;
@@ -83,7 +78,7 @@ namespace KonacniProjekat
             await dbContext.Anketa.AddAsync(OcenaTure);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToPage("./TuraJedna", new {id = TuraId});
+            return RedirectToPage("./TuraJedna", new {id = id});
         }
     }
 }

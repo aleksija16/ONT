@@ -30,10 +30,8 @@ namespace KonacniProjekat
 
         public async Task<IActionResult>OnGetAsync(int id)
         {
-            SessionId = SessionClass.SessionId;
-            TuraId=id;
-
-            OvaTura=await dbContext.Ture.Where( x => x.IdTure == (uint)TuraId).FirstOrDefaultAsync();
+          
+            OvaTura=await dbContext.Ture.Where( x => x.IdTure == (uint)id).FirstOrDefaultAsync();
 
             if(OvaTura==null){
                 return NotFound();
@@ -42,15 +40,15 @@ namespace KonacniProjekat
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(){
+        public async Task<IActionResult> OnPostAsync(int id){
             if(RezervacijaTure==null){
                 return this.Page();
             }
 
-            RezervacijaTure.IdTureRNavigation=await dbContext.Ture.FindAsync((uint)TuraId);
+            RezervacijaTure.IdTureRNavigation=await dbContext.Ture.FindAsync((uint)id);
             RezervacijaTure.IdTureR=RezervacijaTure.IdTureRNavigation.IdTure;
             RezervacijaTure.IdTuristeR=(uint)SessionClass.SessionId;
-            RezervacijaTure.IdVodicaR = await dbContext.Ture.Where(x=>x.IdTure==(uint)TuraId).Select(x=>x.IdVodica).FirstOrDefaultAsync();
+            RezervacijaTure.IdVodicaR = await dbContext.Ture.Where(x=>x.IdTure==(uint)id).Select(x=>x.IdVodica).FirstOrDefaultAsync();
             
             await dbContext.Rezervacije.AddAsync(RezervacijaTure);
             await dbContext.SaveChangesAsync();
