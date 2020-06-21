@@ -21,34 +21,48 @@ namespace KonacniProjekat
         
         [BindProperty]
        public Znamenitosti TrenutnaZnamenitost{get;set;}
+
          [BindProperty]
+        public int ZnamenitostId{get;set;}
+
+        [BindProperty]
         public Slike NovaSlika{get;set;}
          //int zid;
-       public IActionResult OnGet(int id){
-           SessionId = SessionClass.SessionId;
+       public async Task<IActionResult> OnGetAsync(int id){
+
+        SessionId = SessionClass.SessionId;
+
+        ZnamenitostId=id;
            
-           TrenutnaZnamenitost=dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==id).FirstOrDefault();
-           if(TrenutnaZnamenitost==null){
+         TrenutnaZnamenitost = await dbContext.Znamenitosti.FindAsync((uint)ZnamenitostId);
+
+           if(TrenutnaZnamenitost==null)
+           {
                return RedirectToPage("./ZnamenitostSve");
            }
            return Page();
        }
 
 
-       public async Task<IActionResult> OnPostSacuvajAsync(){
-           if(!ModelState.IsValid){
+       public async Task<IActionResult> OnPostAsync()
+       {
+        
+           if(!ModelState.IsValid)
+           {
                return Page();
            }
-           else{
-               dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
-               await dbContext.SaveChangesAsync();
+
+           TrenutnaZnamenitost.IdZnamenitosti=(uint)ZnamenitostId;
+           
+           dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
+           await dbContext.SaveChangesAsync();
               
-               NovaSlika.IdZnamenitost= TrenutnaZnamenitost.IdZnamenitosti;
-                dbContext.Slike.Add(NovaSlika);
-                await dbContext.SaveChangesAsync();
+            NovaSlika.IdZnamenitost= TrenutnaZnamenitost.IdZnamenitosti;
+            dbContext.Slike.Add(NovaSlika);
+            await dbContext.SaveChangesAsync();
 
                return RedirectToPage("./ZnamenitostSve");
            }
-       }
+       
     }
 }
