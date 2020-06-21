@@ -47,9 +47,8 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            SessionId = SessionClass.SessionId;
-            TuraId = id;
-            OvaTura = await dbContext.Ture.FindAsync((uint)TuraId);
+          
+            OvaTura = await dbContext.Ture.FindAsync((uint)id);
 
             if (OvaTura == null)
             {
@@ -79,21 +78,20 @@ namespace KonacniProjekat
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (!ModelState.IsValid)
             {
                 return this.Page();
             }
 
-            OvaTura.IdTure = (uint) TuraId;
-            OvaTura.TipTure = await dbContext.Ture.Where(x => x.IdTure == (uint)TuraId).Select(x => x.TipTure).FirstOrDefaultAsync();
+            OvaTura.IdTure = (uint) id;
+            OvaTura.TipTure = await dbContext.Ture.Where(x => x.IdTure == (uint)id).Select(x => x.TipTure).FirstOrDefaultAsync();
 
             if(IzabraniVodic == null)
             {
-                OvaTura.IdVodica = await dbContext.Ture.Where(x => x.IdTure == (uint)TuraId).Select(x => x.IdVodica).FirstOrDefaultAsync();
+                OvaTura.IdVodica = await dbContext.Ture.Where(x => x.IdTure == (uint)id).Select(x => x.IdVodica).FirstOrDefaultAsync();
             }
-
             string daniOdrzavanjaOveTure = "";
             foreach (int i in IzabraniDani){
                 switch (i)
@@ -126,7 +124,7 @@ namespace KonacniProjekat
             daniOdrzavanjaOveTure = daniOdrzavanjaOveTure.Remove(daniOdrzavanjaOveTure.Length - 2);
             OvaTura.DanOdrzavanja = daniOdrzavanjaOveTure;
 
-            IQueryable<ZnamenitostiUTurama> qZnamenitostiUTuri = dbContext.ZnamenitostiUTurama.Include(x => x.IdZnamenitostiZutNavigation).Where(x => x.IdTureZut == (uint)TuraId);
+            IQueryable<ZnamenitostiUTurama> qZnamenitostiUTuri = dbContext.ZnamenitostiUTurama.Include(x => x.IdZnamenitostiZutNavigation).Where(x => x.IdTureZut == (uint)id);
             VecZnamenitostiUOvojTuri = await qZnamenitostiUTuri.Select(x => x.IdZnamenitostiZutNavigation).ToListAsync();
 
             
@@ -136,7 +134,7 @@ namespace KonacniProjekat
                 Znamenitosti vecJeUtabeliZut = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == IzabraneZnamenitosti[i]).Select(x => x.IdZnamenitostiZutNavigation).FirstOrDefaultAsync();
 
                 ZnamenitostiUTurama novaVezaZut = new ZnamenitostiUTurama();
-                novaVezaZut.IdTureZut = (uint)TuraId;
+                novaVezaZut.IdTureZut = (uint)id;
                 novaVezaZut.IdZnamenitostiZut = (uint)IzabraneZnamenitosti[i];
                 
                 if (vecJeUtabeliZut == null)
@@ -153,7 +151,7 @@ namespace KonacniProjekat
             for (int i=0; i<VecZnamenitostiUOvojTuri.Count(); i++)
             {
                 ZnamenitostiUTurama viseNePostojiVezaZut = new ZnamenitostiUTurama();
-                viseNePostojiVezaZut.IdTureZut = (uint)TuraId;
+                viseNePostojiVezaZut.IdTureZut = (uint)id;
                 viseNePostojiVezaZut.IdZnamenitostiZut = VecZnamenitostiUOvojTuri[i].IdZnamenitosti;
                 viseNePostojiVezaZut.IdZnamenitostiUTurama = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == viseNePostojiVezaZut.IdZnamenitostiZut).Select(x => x.IdZnamenitostiUTurama).FirstOrDefaultAsync();
 
@@ -163,7 +161,7 @@ namespace KonacniProjekat
             dbContext.Ture.Attach(OvaTura).State = EntityState.Modified;
             await dbContext.SaveChangesAsync();
         
-            return RedirectToPage("./TuraJedna", new {id = TuraId});
+            return RedirectToPage("./TuraJedna", new {id = id});
         }
     }
 }
