@@ -60,7 +60,7 @@ namespace KonacniProjekat
 
                 await dbContext.SaveChangesAsync();
 
-                return RedirectToPage("./VodicSvi");
+                 return RedirectToPage("./VodicJedan", new {id = id});
 
             }
        }
