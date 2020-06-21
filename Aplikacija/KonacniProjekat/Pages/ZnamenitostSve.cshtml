@@ -44,6 +44,7 @@ ViewData["Title"]="Znamenitosti";
                       @if(SessionClass.TipKorisnika=="A"){
                     <div><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost</a></div>
                     <div><a asp-page="./ZnamenitostObrisi" asp-route-id="@znamenitost.IdZnamenitosti">Obrisi znamenitost</a></div>
+                            <div><a asp-page="./ZnamenitostSlika" asp-route-id="@znamenitost.IdZnamenitosti">Dodaj sliku</a></div>
                       }
             </div>
         </div>
