@@ -28,12 +28,14 @@ namespace KonacniProjekat
             SessionId = SessionClass.SessionId;
             TuraId=id;
 
-            TuraZaBrisanje=await dbContext.Ture.Where( x => x.IdTure == (uint)TuraId).FirstOrDefaultAsync();
+            TuraZaBrisanje=await dbContext.Ture.Where( x => x.IdTure ==(uint)TuraId).FirstOrDefaultAsync();
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(){
+        public async Task<IActionResult> OnPostAsync(int id){
+            
+            TuraId=id;
     
             TuraZaBrisanje=await dbContext.Ture.FindAsync((uint)TuraId);
 
