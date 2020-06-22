@@ -22,6 +22,9 @@ namespace KonacniProjekat
 		[BindProperty]
         public Rezervacije TrenutnaRezervacija {get; set;}
 
+        [BindProperty]
+        public IList<Znamenitosti> ZnamenitostiUCustomRezervaciji {get; set;}
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             SessionId=SessionClass.SessionId;
@@ -35,7 +38,7 @@ namespace KonacniProjekat
                 }
                 else if (SessionClass.TipKorisnika == "T")
                 {
-                    TrenutnaRezervacija = await dbContext.Rezervacije
+                    TrenutnaRezervacija = await dbContext.Rezervacije.Include(x => x.IdTureRNavigation)
                         .Where(x=>x.IdRezervacije == (uint)id).FirstOrDefaultAsync();
                 }
                 else if (SessionClass.TipKorisnika == "V")
@@ -50,6 +53,14 @@ namespace KonacniProjekat
 
                 if(TrenutnaRezervacija==null){
                     return NotFound();
+                }
+
+                if (TrenutnaRezervacija.IdTureRNavigation.TipTure == "C")
+                {
+                    IQueryable<Znamenitosti> qZnamenitosti = dbContext.ZnamenitostiUTurama
+                        .Where(x => x.IdTureZut == TrenutnaRezervacija.IdTureR).Select(x => x.IdZnamenitostiZutNavigation);
+
+                    ZnamenitostiUCustomRezervaciji = await qZnamenitosti.ToListAsync();
                 }                        
             }
 

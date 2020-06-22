@@ -24,6 +24,9 @@ namespace KonacniProjekat
         public Ture NovaTura { get; set; }
 
         [BindProperty]
+        public Rezervacije NovaRezervacija {get; set;}
+
+        [BindProperty]
         public int[] IzabraniDani { get; set; }
 
         public SelectList SviVodici { get; set; }
@@ -50,7 +53,7 @@ namespace KonacniProjekat
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostTuraAsync()
         {
 
             if (!ModelState.IsValid)
@@ -58,7 +61,7 @@ namespace KonacniProjekat
                 return this.Page();
             }
 			
-			 NovaTura.TipTure="T";
+			NovaTura.TipTure="T";
 
             string daniOdrzavanjaTure = "";
             foreach (int i in IzabraniDani)
@@ -101,15 +104,52 @@ namespace KonacniProjekat
             await dbContext.SaveChangesAsync();
 			
 			for(int i=IzabraneZnamenitosti.Count()-1; i>=0; i--){
-            ZnamenitostiUTurama novaZut = new ZnamenitostiUTurama();
-            novaZut.IdTureZut=NovaTura.IdTure;
-            novaZut.IdZnamenitostiZut=(uint)IzabraneZnamenitosti[i];
+                ZnamenitostiUTurama novaZut = new ZnamenitostiUTurama();
+                novaZut.IdTureZut=NovaTura.IdTure;
+                novaZut.IdZnamenitostiZut=(uint)IzabraneZnamenitosti[i];
 
-            await dbContext.ZnamenitostiUTurama.AddAsync(novaZut);
-            await dbContext.SaveChangesAsync();
+                await dbContext.ZnamenitostiUTurama.AddAsync(novaZut);
+                await dbContext.SaveChangesAsync();
             }
             return RedirectToPage("./TuraSve");
 
+        }
+
+        public async Task<IActionResult> OnPostRezervacijaAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.Page();
+            }
+			
+			NovaTura.TipTure = "C";
+
+            NovaTura.NazivTure = "Custom rezervacija uz nalog: " + SessionClass.ImeKorisnika;
+            
+            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.ImeVodica==IzabraniVodic);
+            NovaTura.IdVodicaNavigation=await qIzabraniVodic.FirstOrDefaultAsync();
+
+            dbContext.Ture.Add(NovaTura);
+            await dbContext.SaveChangesAsync();
+			
+			for(int i=IzabraneZnamenitosti.Count()-1; i>=0; i--){
+                ZnamenitostiUTurama novaZut = new ZnamenitostiUTurama();
+                novaZut.IdTureZut=NovaTura.IdTure;
+                novaZut.IdZnamenitostiZut=(uint)IzabraneZnamenitosti[i];
+
+                await dbContext.ZnamenitostiUTurama.AddAsync(novaZut);
+                await dbContext.SaveChangesAsync();
+            }
+
+            NovaRezervacija.BrojOsoba = NovaTura.Kapacitet;
+            NovaRezervacija.IdTureR = NovaTura.IdTure;
+            NovaRezervacija.IdVodicaR = NovaTura.IdVodica;
+            NovaRezervacija.IdTuristeR = (uint?)SessionClass.SessionId;
+
+            await dbContext.Rezervacije.AddAsync(NovaRezervacija);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToPage("./RezervacijaSve");
         }
     }
 }

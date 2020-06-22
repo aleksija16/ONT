@@ -9,32 +9,54 @@
     <li class="page-item"><a class="page-link" asp-page="./TuraSve">Vrati se nazad</a></li>
   </ul>
 </nav>
-@if(SessionClass.TipKorisnika=="A")
+@if(SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
 {
 <form method="post">
    <div class="registracija">
        <div class="text-center">
-    <h2 class="display 4">Nova tura</h2>
+        @if (SessionClass.TipKorisnika == "A")
+        {
+          <h2 class="display 4">Nova tura</h2>
+        }
+        else
+        {
+          <h2 class="display 4">Custom rezervacija</h2>
+        }
     </div>
-    <div id="formContent">
-        <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
-        <label class="form-control select-fit-text">Dan odrzavanja:</label>
-        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
-        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
-        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="3" /> <h6>Sreda</h6> </div>
-        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="4" /> <h6>Četvrtak</h6> </div>
-        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="5" /> <h6>Petak</h6> </div>
-        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="6" /> <h6>Subota</h6> </div>
-        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
-    
-       <label>Vreme odrzavanja: <input type="time" asp-for="NovaTura.VremeOdrzavanja" required /></label>
+    <div id="formContent">        
+        @if (SessionClass.TipKorisnika == "A")
+        {
+          <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
+          <label class="form-control select-fit-text">Dan odrzavanja:</label>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="3" /> <h6>Sreda</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="4" /> <h6>Četvrtak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="5" /> <h6>Petak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="6" /> <h6>Subota</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
+
+          <textarea class="text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>  
+        }
+        else
+        {
+          <label class="form-control select-fit-text">Datum odrzavanja:</label>
+          <div class="forma-check"><input type="date" asp-for="NovaRezervacija.Datum"/></div>
+        }
+        
+        <label>Vreme odrzavanja: <input type="time" asp-for="NovaTura.VremeOdrzavanja" required /></label>
                                                         
         <input asp-for="NovaTura.MestoPolaska" placeholder="Mesto polaska" required />
 
-        <label class="form-control select-fit-text">Kapacitet:</label>
+        @if (SessionClass.TipKorisnika == "A")
+        {
+          <label class="form-control select-fit-text">Kapacitet:</label>
+        }
+        else
+        {
+          <label class="form-control select-fit-text">Broj osoba:</label>          
+        }
         <input asp-for="NovaTura.Kapacitet" min="1" max="100" required />
-
-        <textarea class="text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>
 
         <select asp-for="IzabraniVodic" asp-items="@Model.SviVodici">
             <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
@@ -48,12 +70,22 @@
             </div>
         } 
          
-        <button type="submit">
-          Dodaj novu turu
-        </button>
+        @if (SessionClass.TipKorisnika == "A")
+        {
+          <button type="submit" asp-page-handler="Tura">
+            Dodaj novu turu
+          </button>
+        }
+        else
+        {
+          <button type="submit" asp-page-handler="Rezervacija">
+            Kreiraj custom rezervaciju
+          </button>
+        }
+        
     </div>
 </form>
 }
 else{
-  <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici, samo admin može da kreira novu turu</div> 
+  <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici. Novu turu može da kreira samo Administrator, a Custom rezervaciju može samo turista da napravi.</div> 
 }

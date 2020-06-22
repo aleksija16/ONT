@@ -14,7 +14,28 @@ ViewData["Title"] = "Rezervacije";
   <div class="container">
 <form method="get">
     <div><h4>Id rezervacije</h4>@Model.TrenutnaRezervacija.IdRezervacije</div>
-    <div><h4>Tura</h4><a asp-page="./TuraJedna" asp-route-id="@Model.TrenutnaRezervacija.IdTureR">@Model.TrenutnaRezervacija.IdTureRNavigation.NazivTure</a></div>
+    <div><h4>Tura</h4>
+      @if (Model.TrenutnaRezervacija.IdTureRNavigation.TipTure == "T")
+      {
+        <a asp-page="./TuraJedna" asp-route-id="@Model.TrenutnaRezervacija.IdTureR">@Model.TrenutnaRezervacija.IdTureRNavigation.NazivTure</a>
+      }
+      else
+      {
+        @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "V")
+        {
+          @Model.TrenutnaRezervacija.IdTureRNavigation.NazivTure
+        }
+
+        <div>Znamenitosti u turi: </div>
+        <ul>
+          @foreach (var znam in Model.ZnamenitostiUCustomRezervaciji)
+          {
+            <li><a asp-page="./ZnamenitostJedna" asp-route-id="@znam.IdZnamenitosti">@znam.NazivZnamenitosti</a></li>    
+          }
+        </ul>
+      }
+    </div>
+
     <div><h4>Datum</h4>@Model.TrenutnaRezervacija.Datum</div>
     @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
     {
