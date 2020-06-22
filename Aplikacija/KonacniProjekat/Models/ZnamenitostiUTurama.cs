@@ -5,7 +5,7 @@ namespace KonacniProjekat.Models
 {
     public partial class ZnamenitostiUTurama
     {
-        public uint IdZnamenitostiUTurama {get; set;}
+        public uint IdZnamenitostiUTurama { get; set; }
         public uint IdZnamenitostiZut { get; set; }
         public uint IdTureZut { get; set; }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace KonacniProjekat.Models
 {
@@ -9,6 +8,9 @@ namespace KonacniProjekat.Models
         public Vodici()
         {
             Anketa = new HashSet<Anketa>();
+            OcenjivanjeVodica = new HashSet<OcenjivanjeVodica>();
+            Rezervacije = new HashSet<Rezervacije>();
+            Ture = new HashSet<Ture>();
         }
 
         public uint IdVodica { get; set; }
@@ -18,16 +20,14 @@ namespace KonacniProjekat.Models
         public string BrojTelefona { get; set; }
         public string Licenca { get; set; }
         public decimal? Ocena { get; set; }
-        [DataType(DataType.Date)]
         public DateTime? DatumRodjenja { get; set; }
         public string Email { get; set; }
         public string Slika { get; set; }
 
-
         public virtual Korisnici Korisnici { get; set; }
-        public virtual OcenjivanjeVodica OcenjivanjeVodica { get; set; }
-        public virtual Rezervacije Rezervacije { get; set; }
-        public virtual Ture Ture { get; set; }
         public virtual ICollection<Anketa> Anketa { get; set; }
+        public virtual ICollection<OcenjivanjeVodica> OcenjivanjeVodica { get; set; }
+        public virtual ICollection<Rezervacije> Rezervacije { get; set; }
+        public virtual ICollection<Ture> Ture { get; set; }
     }
 }

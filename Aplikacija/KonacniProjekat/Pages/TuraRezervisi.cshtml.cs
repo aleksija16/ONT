@@ -32,7 +32,7 @@ namespace KonacniProjekat
         public IList<Rezervacije> RezervacijeUzTuru{get;set;}
 
         
-        public uint TrenutnaPopunjenostTure=0;
+        public uint? TrenutnaPopunjenostTure=0;
 
         [BindProperty]
         public int KapacitetTure{get;set;}

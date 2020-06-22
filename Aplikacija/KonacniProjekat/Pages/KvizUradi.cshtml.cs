@@ -85,7 +85,7 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnPost()
         {
-            KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)KvizId);
+            //KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)KvizId);
 
             PitanjaZaIzradu = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint)KvizId).ToListAsync();
 

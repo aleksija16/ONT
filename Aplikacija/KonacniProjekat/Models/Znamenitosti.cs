@@ -8,7 +8,9 @@ namespace KonacniProjekat.Models
         public Znamenitosti()
         {
             Kvizovi = new HashSet<Kvizovi>();
+            Pitanja = new HashSet<Pitanja>();
             Slike = new HashSet<Slike>();
+            ZnamenitostiUTurama = new HashSet<ZnamenitostiUTurama>();
         }
 
         public uint IdZnamenitosti { get; set; }
@@ -19,11 +21,11 @@ namespace KonacniProjekat.Models
         public string BrojTelefona { get; set; }
         public string CenaUlaznice { get; set; }
         public string Slika { get; set; }
-		public string Tip { get; set; }
+        public string Tip { get; set; }
 
-        public virtual Pitanja Pitanja { get; set; }
-        public virtual ZnamenitostiUTurama ZnamenitostiUTurama { get; set; }
         public virtual ICollection<Kvizovi> Kvizovi { get; set; }
+        public virtual ICollection<Pitanja> Pitanja { get; set; }
         public virtual ICollection<Slike> Slike { get; set; }
+        public virtual ICollection<ZnamenitostiUTurama> ZnamenitostiUTurama { get; set; }
     }
 }

@@ -8,6 +8,10 @@ namespace KonacniProjekat.Models
         public Ture()
         {
             Anketa = new HashSet<Anketa>();
+            Kvizovi = new HashSet<Kvizovi>();
+            OcenjivanjeVodica = new HashSet<OcenjivanjeVodica>();
+            Rezervacije = new HashSet<Rezervacije>();
+            ZnamenitostiUTurama = new HashSet<ZnamenitostiUTurama>();
         }
 
         public uint IdTure { get; set; }
@@ -15,15 +19,16 @@ namespace KonacniProjekat.Models
         public string DanOdrzavanja { get; set; }
         public string VremeOdrzavanja { get; set; }
         public string MestoPolaska { get; set; }
-        public uint Kapacitet { get; set; }
-        public uint IdVodica { get; set; }
+        public uint? Kapacitet { get; set; }
+        public uint? IdVodica { get; set; }
         public string Opis { get; set; }
         public string TipTure { get; set; }
 
         public virtual Vodici IdVodicaNavigation { get; set; }
-        public virtual OcenjivanjeVodica OcenjivanjeVodica { get; set; }
-        public virtual Rezervacije Rezervacije { get; set; }
-        public virtual ZnamenitostiUTurama ZnamenitostiUTurama { get; set; }
         public virtual ICollection<Anketa> Anketa { get; set; }
+        public virtual ICollection<Kvizovi> Kvizovi { get; set; }
+        public virtual ICollection<OcenjivanjeVodica> OcenjivanjeVodica { get; set; }
+        public virtual ICollection<Rezervacije> Rezervacije { get; set; }
+        public virtual ICollection<ZnamenitostiUTurama> ZnamenitostiUTurama { get; set; }
     }
 }

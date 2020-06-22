@@ -22,12 +22,12 @@ namespace KonacniProjekat.Models
         public virtual DbSet<OcenjivanjeVodica> OcenjivanjeVodica { get; set; }
         public virtual DbSet<Pitanja> Pitanja { get; set; }
         public virtual DbSet<Rezervacije> Rezervacije { get; set; }
+        public virtual DbSet<Slike> Slike { get; set; }
         public virtual DbSet<Ture> Ture { get; set; }
         public virtual DbSet<Turisti> Turisti { get; set; }
         public virtual DbSet<Vodici> Vodici { get; set; }
         public virtual DbSet<Znamenitosti> Znamenitosti { get; set; }
         public virtual DbSet<ZnamenitostiUTurama> ZnamenitostiUTurama { get; set; }
-        public virtual DbSet<Slike> Slike { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -46,10 +46,6 @@ namespace KonacniProjekat.Models
                     .HasName("PRIMARY");
 
                 entity.ToTable("anketa");
-
-                entity.HasIndex(e => e.IdAnkete)
-                    .HasName("idankete_UNIQUE")
-                    .IsUnique();
 
                 entity.HasIndex(e => e.IdTureAnk)
                     .HasName("IdTureAnk_idx");
@@ -115,24 +111,25 @@ namespace KonacniProjekat.Models
                     .HasName("PRIMARY");
 
                 entity.ToTable("halloffame");
-				
+
                 entity.HasIndex(e => e.IdKvizaHof)
                     .HasName("IdKviza_idx");
-								
 
                 entity.HasIndex(e => e.IdTuristeHof)
-                    .HasName("IdTuriste_idx");
-				
+                    .HasName("IdTuristeHof_idx");
+
                 entity.Property(e => e.DatumRadjenja).HasColumnType("date");
 
                 entity.HasOne(d => d.IdKvizaHofNavigation)
-                    .WithOne(p => p.HallOfFame)
-                    .HasForeignKey<HallOfFame>(d => d.IdKvizaHof)
+                    .WithMany(p => p.HallOfFame)
+                    .HasForeignKey(d => d.IdKvizaHof)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("IdKvizaHof");
 
                 entity.HasOne(d => d.IdTuristeHofNavigation)
-                    .WithOne(p => p.HallOfFame)
-                    .HasForeignKey<HallOfFame>(d => d.IdTuristeHof)
+                    .WithMany(p => p.HallOfFame)
+                    .HasForeignKey(d => d.IdTuristeHof)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("IdTuristeHof");
             });
 
@@ -142,10 +139,6 @@ namespace KonacniProjekat.Models
                     .HasName("PRIMARY");
 
                 entity.ToTable("korisnici");
-
-                entity.HasIndex(e => e.IdKorisnika)
-                    .HasName("IdKorisnika_UNIQUE")
-                    .IsUnique();
 
                 entity.HasIndex(e => e.IdTuristeK)
                     .HasName("IdTuristeK_UNIQUE")
@@ -185,6 +178,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdVodicaKNavigation)
                     .WithOne(p => p.Korisnici)
                     .HasForeignKey<Korisnici>(d => d.IdVodicaK)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdVodicaK");
             });
 
@@ -195,9 +189,8 @@ namespace KonacniProjekat.Models
 
                 entity.ToTable("kvizovi");
 
-                entity.HasIndex(e => e.IdKviza)
-                    .HasName("IdKviza_UNIQUE")
-                    .IsUnique();
+                entity.HasIndex(e => e.IdTureK)
+                    .HasName("IdTureK_idx");
 
                 entity.HasIndex(e => e.IdZnamenitostiK)
                     .HasName("IdZnamenitosti_idx");
@@ -207,6 +200,12 @@ namespace KonacniProjekat.Models
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.HasOne(d => d.IdTureKNavigation)
+                    .WithMany(p => p.Kvizovi)
+                    .HasForeignKey(d => d.IdTureK)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("IdTureK");
 
                 entity.HasOne(d => d.IdZnamenitostiKNavigation)
                     .WithMany(p => p.Kvizovi)
@@ -223,34 +222,30 @@ namespace KonacniProjekat.Models
                 entity.ToTable("ocenjivanjevodica");
 
                 entity.HasIndex(e => e.IdOcenjivanja)
-                    .HasName("IdOcenjivanja_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdOcenjivanja_idx");
 
                 entity.HasIndex(e => e.IdTureO)
-                    .HasName("IdTureO_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdTureO_idx");
 
                 entity.HasIndex(e => e.IdTuristeO)
-                    .HasName("IdTuristeO_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdTuristeO_idx");
 
                 entity.HasIndex(e => e.IdVodicaO)
-                    .HasName("IdVodicaO_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdVodicaO_idx");
 
                 entity.HasOne(d => d.IdTureONavigation)
-                    .WithOne(p => p.OcenjivanjeVodica)
-                    .HasForeignKey<OcenjivanjeVodica>(d => d.IdTureO)
+                    .WithMany(p => p.OcenjivanjeVodica)
+                    .HasForeignKey(d => d.IdTureO)
                     .HasConstraintName("IdTureO");
 
                 entity.HasOne(d => d.IdTuristeONavigation)
-                    .WithOne(p => p.OcenjivanjeVodica)
-                    .HasForeignKey<OcenjivanjeVodica>(d => d.IdTuristeO)
+                    .WithMany(p => p.OcenjivanjeVodica)
+                    .HasForeignKey(d => d.IdTuristeO)
                     .HasConstraintName("IdTuristeO");
 
                 entity.HasOne(d => d.IdVodicaONavigation)
-                    .WithOne(p => p.OcenjivanjeVodica)
-                    .HasForeignKey<OcenjivanjeVodica>(d => d.IdVodicaO)
+                    .WithMany(p => p.OcenjivanjeVodica)
+                    .HasForeignKey(d => d.IdVodicaO)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdVodicaO");
             });
@@ -263,16 +258,10 @@ namespace KonacniProjekat.Models
                 entity.ToTable("pitanja");
 
                 entity.HasIndex(e => e.IdKviza)
-                    .HasName("IdKviza_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.IdPitanja)
-                    .HasName("IdPitanja_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdKviza_idx");
 
                 entity.HasIndex(e => e.IdZnamenitosti)
-                    .HasName("IdZnamenitosti_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdZnamenitosti_idx");
 
                 entity.Property(e => e.OdgovorA)
                     .IsRequired()
@@ -294,7 +283,7 @@ namespace KonacniProjekat.Models
 
                 entity.Property(e => e.TacanOdgovor)
                     .IsRequired()
-                    .HasColumnType("varchar(1)")
+                    .HasColumnType("varchar(1000)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
@@ -305,14 +294,14 @@ namespace KonacniProjekat.Models
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.HasOne(d => d.IdKvizaNavigation)
-                    .WithOne(p => p.Pitanja)
-                    .HasForeignKey<Pitanja>(d => d.IdKviza)
+                    .WithMany(p => p.Pitanja)
+                    .HasForeignKey(d => d.IdKviza)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdKviza");
 
                 entity.HasOne(d => d.IdZnamenitostiNavigation)
-                    .WithOne(p => p.Pitanja)
-                    .HasForeignKey<Pitanja>(d => d.IdZnamenitosti)
+                    .WithMany(p => p.Pitanja)
+                    .HasForeignKey(d => d.IdZnamenitosti)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("IdZnamenitosti");
             });
@@ -324,41 +313,37 @@ namespace KonacniProjekat.Models
 
                 entity.ToTable("rezervacije");
 
-                entity.HasIndex(e => e.IdRezervacije)
-                    .HasName("IdRezervacije_UNIQUE")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.IdTureR)
-                    .HasName("IdTureR_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdTureR_idx");
 
                 entity.HasIndex(e => e.IdTuristeR)
-                    .HasName("IdTuristeR_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdTuristeR_idx");
 
                 entity.HasIndex(e => e.IdVodicaR)
-                    .HasName("IdVodicaR_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdVodicaR_idx");
 
                 entity.Property(e => e.Datum).HasColumnType("date");
 
                 entity.HasOne(d => d.IdTureRNavigation)
-                    .WithOne(p => p.Rezervacije)
-                    .HasForeignKey<Rezervacije>(d => d.IdTureR)
+                    .WithMany(p => p.Rezervacije)
+                    .HasForeignKey(d => d.IdTureR)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("IdTureR");
 
                 entity.HasOne(d => d.IdTuristeRNavigation)
-                    .WithOne(p => p.Rezervacije)
-                    .HasForeignKey<Rezervacije>(d => d.IdTuristeR)
+                    .WithMany(p => p.Rezervacije)
+                    .HasForeignKey(d => d.IdTuristeR)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("IdTuristeR");
 
                 entity.HasOne(d => d.IdVodicaRNavigation)
-                    .WithOne(p => p.Rezervacije)
-                    .HasForeignKey<Rezervacije>(d => d.IdVodicaR)
+                    .WithMany(p => p.Rezervacije)
+                    .HasForeignKey(d => d.IdVodicaR)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("IdVodicaR");
             });
 
-             modelBuilder.Entity<Slike>(entity =>
+            modelBuilder.Entity<Slike>(entity =>
             {
                 entity.HasKey(e => e.IdSlike)
                     .HasName("PRIMARY");
@@ -368,14 +353,10 @@ namespace KonacniProjekat.Models
                 entity.HasIndex(e => e.IdZnamenitost)
                     .HasName("IdZnamenitost_idx");
 
-                entity.Property(e => e.IdSlike).HasColumnType("int(11)");
-
-                entity.Property(e => e.IdZnamenitost).HasColumnType("int(10) unsigned");
-
                 entity.Property(e => e.Slika)
                     .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.HasOne(d => d.IdZnamenitostNavigation)
                     .WithMany(p => p.Slike)
@@ -390,13 +371,8 @@ namespace KonacniProjekat.Models
 
                 entity.ToTable("ture");
 
-                entity.HasIndex(e => e.IdTure)
-                    .HasName("IdTure_UNIQUE")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.IdVodica)
-                    .HasName("IdVodica_UNIQUE")
-                    .IsUnique();
+                    .HasName("IdVodica_idx");
 
                 entity.Property(e => e.DanOdrzavanja)
                     .HasColumnType("varchar(45)")
@@ -431,8 +407,8 @@ namespace KonacniProjekat.Models
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.HasOne(d => d.IdVodicaNavigation)
-                    .WithOne(p => p.Ture)
-                    .HasForeignKey<Ture>(d => d.IdVodica)
+                    .WithMany(p => p.Ture)
+                    .HasForeignKey(d => d.IdVodica)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("IdVodica");
             });
@@ -443,10 +419,6 @@ namespace KonacniProjekat.Models
                     .HasName("PRIMARY");
 
                 entity.ToTable("turisti");
-
-                entity.HasIndex(e => e.IdTuriste)
-                    .HasName("IdTuriste_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.DatumRodjenja).HasColumnType("date");
 
@@ -481,10 +453,6 @@ namespace KonacniProjekat.Models
 
                 entity.ToTable("vodici");
 
-                entity.HasIndex(e => e.IdVodica)
-                    .HasName("IdVodica_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.BrojTelefona)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
@@ -494,11 +462,6 @@ namespace KonacniProjekat.Models
 
                 entity.Property(e => e.Email)
                     .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-                    
-                entity.Property(e => e.Slika)
-                    .HasColumnType("varchar(1000)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
@@ -513,7 +476,7 @@ namespace KonacniProjekat.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.Ocena).HasColumnType("decimal(2,2)");
+                entity.Property(e => e.Ocena).HasColumnType("decimal(4,2)");
 
                 entity.Property(e => e.Pol)
                     .IsRequired()
@@ -526,6 +489,11 @@ namespace KonacniProjekat.Models
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Slika)
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             modelBuilder.Entity<Znamenitosti>(entity =>
@@ -535,81 +503,71 @@ namespace KonacniProjekat.Models
 
                 entity.ToTable("znamenitosti");
 
-                entity.HasIndex(e => e.IdZnamenitosti)
-                    .HasName("IdZnamenitosti_UNIQUE")
-                    .IsUnique();
-
-                entity.Property(e => e.IdZnamenitosti).HasColumnType("int(10) unsigned");
-
                 entity.Property(e => e.BrojTelefona)
-                    .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.CenaUlaznice)
-                    .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.Lokacija)
-                    .HasColumnType("varchar(100)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.NazivZnamenitosti)
-                    .IsRequired()
-                    .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.Opis)
-                    .HasColumnType("text")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.RadnoVreme)
-                    .HasColumnType("varchar(500)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.Slika)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                 entity.Property(e => e.Tip)
+                entity.Property(e => e.CenaUlaznice)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Lokacija)
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.NazivZnamenitosti)
+                    .IsRequired()
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Opis)
                     .HasColumnType("text")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.RadnoVreme)
+                    .HasColumnType("varchar(500)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Slika)
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Tip)
+                    .HasColumnType("text")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             modelBuilder.Entity<ZnamenitostiUTurama>(entity =>
             {
-                entity.HasKey(e => e.IdZnamenitostiUTurama )
+                entity.HasKey(e => e.IdZnamenitostiUTurama)
                     .HasName("PRIMARY");
 
                 entity.ToTable("znamenitostiuturama");
 
-                entity.HasIndex(e => e.IdZnamenitostiUTurama)
-                    .HasName("IdZnamenitostiUTurama_UNQUE")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.IdTureZut)
-                    .HasName("IdTure_idx");
+                    .HasName("IdTureZut_idx");
 
                 entity.HasIndex(e => e.IdZnamenitostiZut)
-                    .HasName("IdZnamenitosti_idx");
+                    .HasName("IdZnamenitostiZut_idx");
+
+                entity.Property(e => e.IdZnamenitostiUTurama).HasColumnName("IdZnamenitostiUTurama");
 
                 entity.HasOne(d => d.IdTureZutNavigation)
-                    .WithOne(p => p.ZnamenitostiUTurama)
-                    .HasForeignKey<ZnamenitostiUTurama>(d => d.IdTureZut)
-                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .WithMany(p => p.ZnamenitostiUTurama)
+                    .HasForeignKey(d => d.IdTureZut)
                     .HasConstraintName("IdTureZut");
 
                 entity.HasOne(d => d.IdZnamenitostiZutNavigation)
-                    .WithOne(p => p.ZnamenitostiUTurama)
-                    .HasForeignKey<ZnamenitostiUTurama>(d => d.IdZnamenitostiZut)
-                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .WithMany(p => p.ZnamenitostiUTurama)
+                    .HasForeignKey(d => d.IdZnamenitostiZut)
                     .HasConstraintName("IdZnamenitostiZut");
             });
 
