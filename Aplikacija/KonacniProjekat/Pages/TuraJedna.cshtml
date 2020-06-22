@@ -212,7 +212,7 @@
         @* <div  style="width: 1300px; height:450px; overflow-x: auto; white-space: nowrap; "> *@
         @foreach (var znamenitosti in Model.ZnamenitostiUTuri)
         {
-          <a asp-page="./ZnamenitostJedna" asp-route-id="@Model.SessionId" asp-route-znamenitost="@znamenitosti.IdZnamenitosti">   
+          <a asp-page="./ZnamenitostJedna" asp-route-id="@znamenitosti.IdZnamenitosti">   
             <img class="img-fluid rounded mb-7 mb-md-0" src="images/znamenitosti/@znamenitosti.Slika" alt="" style="width:1000px;height:600px;">
           </a>  
         }

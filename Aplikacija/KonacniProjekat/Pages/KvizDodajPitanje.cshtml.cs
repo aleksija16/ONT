@@ -68,7 +68,7 @@ namespace KonacniProjekat
             await dbContext.Pitanja.AddAsync(NovoPitanje);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToPage("./KvizJedan", new {id = SessionId, kviz = KvizId});
+            return RedirectToPage("./KvizJedan", new {id = KvizId});
         }
     }
 }

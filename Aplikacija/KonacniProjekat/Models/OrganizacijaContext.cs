@@ -42,7 +42,7 @@ namespace KonacniProjekat.Models
         {
             modelBuilder.Entity<Anketa>(entity =>
             {
-                entity.HasKey(e => e.IdAnkete)
+               entity.HasKey(e => e.IdAnkete)
                     .HasName("PRIMARY");
 
                 entity.ToTable("anketa");
@@ -56,35 +56,51 @@ namespace KonacniProjekat.Models
                 entity.HasIndex(e => e.IdVodicaAnk)
                     .HasName("IdVodicaAnk_idx");
 
+                entity.Property(e => e.IdAnkete).HasColumnType("int(10) unsigned");
+
                 entity.Property(e => e.DrustvenaAtmosfera)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.FizickaZahtevnostTure).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.IdTureAnk).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.IdTuristeAnk).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.IdVodicaAnk).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.InformisanostVodica).HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.Komentar)
                     .HasColumnType("varchar(1000)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.KonacnaOcena).HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.NajdosadnijaZnamenitost)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCollation("utf8mb4_general_ci");
 
                 entity.Property(e => e.NajinteresantnijaZnamenitost)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.OrganizovanostTure).HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.TipTuriste)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCollation("utf8mb4_general_ci");
 
                 entity.Property(e => e.VremenskiUslovi)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCollation("utf8mb4_general_ci");
 
                 entity.HasOne(d => d.IdTureAnkNavigation)
                     .WithMany(p => p.Anketa)
