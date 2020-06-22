@@ -4,12 +4,27 @@
 ViewData["Title"] = "Rezervacije";
 }
 
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./RezervacijaSve">Prikaži listu svih rezervacija</a></li>
+  </ul>
+</nav>
+
 <div class="card">
   <div class="container">
 <form method="get">
     <div><h4>Id rezervacije</h4>@Model.TrenutnaRezervacija.IdRezervacije</div>
-    <div><h4>Id ture</h4>@Model.TrenutnaRezervacija.IdTureR</div>
-    <div><h4>Id vodica</h4>@Model.TrenutnaRezervacija.IdVodicaR</div>
+    <div><h4>Tura</h4><a asp-page="./TuraJedna" asp-route-id="@Model.TrenutnaRezervacija.IdTureR">@Model.TrenutnaRezervacija.IdTureRNavigation.NazivTure</a></div>
+    <div><h4>Datum</h4>@Model.TrenutnaRezervacija.Datum</div>
+    @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
+    {
+      <div><h4>Vodič</h4><a asp-page="./VodicJedan" asp-route-id="@Model.TrenutnaRezervacija.IdVodicaR">@Model.TrenutnaRezervacija.IdVodicaRNavigation.ImeVodica @Model.TrenutnaRezervacija.IdVodicaRNavigation.PrezimeVodica</a></div>
+    }
+    @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "V")
+    {
+      <div><h4>Turista</h4>@Model.TrenutnaRezervacija.IdTuristeRNavigation.ImeTuriste @Model.TrenutnaRezervacija.IdTuristeRNavigation.PrezimeTuriste</div>
+    }
+    
     <div><h4>Broj osoba</h4>@Model.TrenutnaRezervacija.BrojOsoba</div>
 </form>
  </div>

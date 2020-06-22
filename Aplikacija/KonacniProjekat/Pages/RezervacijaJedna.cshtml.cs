@@ -22,15 +22,37 @@ namespace KonacniProjekat
 		[BindProperty]
         public Rezervacije TrenutnaRezervacija {get; set;}
 
-        public async Task<IActionResult> OnGetAsync(int? id, int rezervacija)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            SessionId=id;
+            SessionId=SessionClass.SessionId;
 
-            TrenutnaRezervacija = await dbContext.Rezervacije.Where(x=>x.IdRezervacije == (uint)rezervacija).FirstOrDefaultAsync();
+            if (SessionId != null)
+            {
+                if (SessionClass.TipKorisnika == "A")
+                {
+                    TrenutnaRezervacija = await dbContext.Rezervacije
+                        .Where(x=>x.IdRezervacije == (uint)id).FirstOrDefaultAsync();  
+                }
+                else if (SessionClass.TipKorisnika == "T")
+                {
+                    TrenutnaRezervacija = await dbContext.Rezervacije
+                        .Where(x=>x.IdRezervacije == (uint)id).FirstOrDefaultAsync();
+                }
+                else if (SessionClass.TipKorisnika == "V")
+                {
+                    TrenutnaRezervacija = await dbContext.Rezervacije
+                        .Where(x=>x.IdRezervacije == (uint)id).FirstOrDefaultAsync();
+                }            
 
-            if(TrenutnaRezervacija==null){
-                return NotFound();
+                TrenutnaRezervacija.IdTureRNavigation = await dbContext.Ture.Where(x => x.IdTure == TrenutnaRezervacija.IdTureR).FirstOrDefaultAsync();
+                TrenutnaRezervacija.IdVodicaRNavigation = await dbContext.Vodici.Where(x => x.IdVodica == TrenutnaRezervacija.IdVodicaR).FirstOrDefaultAsync();
+                TrenutnaRezervacija.IdTuristeRNavigation = await dbContext.Turisti.Where(x => x.IdTuriste == TrenutnaRezervacija.IdTuristeR).FirstOrDefaultAsync();
+
+                if(TrenutnaRezervacija==null){
+                    return NotFound();
+                }                        
             }
+
             return Page();
         }
     }

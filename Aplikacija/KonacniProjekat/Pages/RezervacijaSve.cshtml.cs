@@ -23,10 +23,35 @@ namespace KonacniProjekat
 
         public async Task OnGetAsync(int? id){
 
-            SessionId=id;
+            SessionId=SessionClass.SessionId;
 
-            IQueryable<Rezervacije> qRezervacije=dbContext.Rezervacije;
-            SveRezervacije=await qRezervacije.ToListAsync();
+            if (SessionId != null)
+            {
+                if (SessionClass.TipKorisnika == "A")
+                {
+                    IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije;
+                    SveRezervacije=await qRezervacije.ToListAsync();
+                    return;
+                }
+
+                if (SessionClass.TipKorisnika == "T")
+                {
+                    IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(x => x.IdTuristeR == SessionId);
+                    SveRezervacije = await qRezervacije.ToListAsync();
+                    return;
+                }
+
+                if (SessionClass.TipKorisnika == "V")
+                {
+                    IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(x => x.IdVodicaR == SessionId);
+                    SveRezervacije=await qRezervacije.ToListAsync();
+                    return;
+                }
+
+
+                
+            }
+            
         }
     }
 }

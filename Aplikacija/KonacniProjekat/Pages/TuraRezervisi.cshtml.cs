@@ -32,7 +32,7 @@ namespace KonacniProjekat
         public IList<Rezervacije> RezervacijeUzTuru{get;set;}
 
         
-        public int TrenutnaPopunjenostTure=0;
+        public uint TrenutnaPopunjenostTure=0;
 
         [BindProperty]
         public int KapacitetTure{get;set;}
@@ -80,7 +80,7 @@ namespace KonacniProjekat
             RezervacijaTure.IdTureRNavigation=await dbContext.Ture.FindAsync((uint)id);
             RezervacijaTure.IdTureR=RezervacijaTure.IdTureRNavigation.IdTure;
             RezervacijaTure.IdTuristeR=(uint)SessionClass.SessionId;
-            RezervacijaTure.IdVodicaR = await dbContext.Ture.Where(x=>x.IdTure==(uint)id).Select(x=>x.IdVodica).FirstOrDefaultAsync();
+            RezervacijaTure.IdVodicaR = await dbContext.Ture.Where(x=>x.IdTure==id).Select(x=>x.IdVodica).FirstOrDefaultAsync();
             
             await dbContext.Rezervacije.AddAsync(RezervacijaTure);
             await dbContext.SaveChangesAsync();

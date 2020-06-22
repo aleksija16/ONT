@@ -15,8 +15,8 @@ namespace KonacniProjekat.Models
         public string DanOdrzavanja { get; set; }
         public string VremeOdrzavanja { get; set; }
         public string MestoPolaska { get; set; }
-        public uint? Kapacitet { get; set; }
-        public uint? IdVodica { get; set; }
+        public uint Kapacitet { get; set; }
+        public uint IdVodica { get; set; }
         public string Opis { get; set; }
         public string TipTure { get; set; }
 
