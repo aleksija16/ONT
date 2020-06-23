@@ -56,12 +56,8 @@ namespace KonacniProjekat
            
            dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
            await dbContext.SaveChangesAsync();
-              
-            NovaSlika.IdZnamenitost= TrenutnaZnamenitost.IdZnamenitosti;
-            dbContext.Slike.Add(NovaSlika);
-            await dbContext.SaveChangesAsync();
 
-               return RedirectToPage("./ZnamenitostSve");
+           return RedirectToPage("./ZnamenitostSve");
            }
        
     }
