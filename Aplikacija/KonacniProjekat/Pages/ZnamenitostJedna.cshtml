@@ -14,23 +14,91 @@ ViewData["Title"] = "Znamenitosti";
   </ul>
 </nav>
 
-<div class="row">
-  <div class="col-md-7">
+<div class="card shadow mb-4 ">
+
+  <div class="ZnamenitostGlavniDiv">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Podaci o znamenitosti</h6>
+      </div>
+      <div class="card-body">
+
     <form method="get">
-      <div><h4>Naziv:</h4> @Model.TrenutnaZnamenitost.NazivZnamenitosti</div>
-      <div><h4>Lokacija:</h4> @Model.TrenutnaZnamenitost.Lokacija</div>
-      <div><h4>Opis:</h4> @Model.TrenutnaZnamenitost.Opis</div>
-      <div><h4>Radno vreme:</h4> @Model.TrenutnaZnamenitost.RadnoVreme</div>
-      <div><h4>Broj telefona:</h4> @Model.TrenutnaZnamenitost.BrojTelefona</div>
-      <div><h4>Cena ulaznice:</h4> @Model.TrenutnaZnamenitost.CenaUlaznice</div>
-      <div><h4>Tip:</h4> @Model.TrenutnaZnamenitost.Tip</div>
+      <div class="naziv">Naziv:</div>
+      <div class="vrednost">@Model.TrenutnaZnamenitost.NazivZnamenitosti</div>
+
+      @{
+        <div class="naziv">Lokacija:</div>
+        if(Model.TrenutnaZnamenitost.Lokacija==null){
+          <div class="vrednost">Nema podataka.</div>
+        }
+        else
+        {
+          <div class="vrednost">@Model.TrenutnaZnamenitost.Lokacija</div>
+        }
+
+        <div class="naziv">Opis:</div>
+        if(Model.TrenutnaZnamenitost.Opis==null){
+          <div class="vrednost">Nema podataka.</div>
+        }
+        else
+        {
+          <div class="vrednost">@Model.TrenutnaZnamenitost.Opis</div>
+        }
+
+        <div class="naziv">Radno vreme:</div>
+        if(Model.TrenutnaZnamenitost.RadnoVreme==null){
+          <div class="vrednost">Nema podataka.</div>
+        }
+        else
+        {
+          <div class="vrednost">@Model.TrenutnaZnamenitost.RadnoVreme</div>
+        }
+
+        <div class="naziv">Broj telefona:</div> 
+        if(Model.TrenutnaZnamenitost.BrojTelefona==null){
+          <div class="vrednost">Nema podataka.</div>
+        }
+        else
+        {
+          <div class="vrednost">@Model.TrenutnaZnamenitost.BrojTelefona</div>
+        }
+
+        <div class="naziv">Cena ulaznice:</div>
+        if(Model.TrenutnaZnamenitost.CenaUlaznice==null){
+          <div class="vrednost">Nema podataka.</div>
+        }
+        else
+        {
+          <div class="vrednost">@Model.TrenutnaZnamenitost.CenaUlaznice</div>
+        }
+
+        <div class="naziv">Tip:</div>
+        if(Model.TrenutnaZnamenitost.Tip==null){
+          <div class="vrednost">Nema podataka.</div>
+        }
+        else
+        {
+          <div class="vrednost">@Model.TrenutnaZnamenitost.Tip</div>
+        }
+      }
     </form>
   </div>
-  <div class="col-md-5" style="overflow-y: scroll;  height: 500px;">
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Slike znamenitosti</h6>
+      </div>
+      <div class="card-body">
     @foreach (var slika in Model.Slike)
     {
-         <img class="img-fluid rounded mb-5 mb-md-0" src="images/znamenitosti/@slika.Slika" alt="">
+         <img class="img-fluid rounded mb-5 mb-md-0" src="images/znamenitosti/@slika.Slika" alt="" style="width:1000px;height:600px;">
     }
+    
+      </div>
+    </div>  
+  </div> 
   
   </div>
+    </div>  
+  </div> 
 </div>
