@@ -21,10 +21,11 @@
             <label class="form-control">Odgovor A:</label> <input asp-for="NovoPitanje.OdgovorA" placeholder="A" />
             <label class="form-control">Odgovor B:</label> <input asp-for="NovoPitanje.OdgovorB" placeholder="B" />
             <label class="form-control">Odgovor C:</label> <input asp-for="NovoPitanje.OdgovorC" placeholder="C" />
-            <label class="form-control select-fit-text">Tačan odgovor je pod:</label>    <select class="form-control" asp-for="IzborTacnogOdgovoraInt">
+            <label class="form-control select-fit-text">Tačan odgovor je pod:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzborTacnogOdgovoraInt">
                                                                             <option value="1">A</option>
                                                                             <option value="2">B</option>
                                                                             <option value="3">C</option>
+                                                                            <option value="" selected disabled hidden>Izaberite koji odgovor je tačan.</option>
                                                                         </select>
            <button type="submit">Dodaj pitanje</button>
         </div>

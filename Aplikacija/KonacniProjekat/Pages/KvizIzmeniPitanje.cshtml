@@ -21,10 +21,12 @@
             <label class="form-control">Odgovor A:</label> <input asp-for="OvoPitanje.OdgovorA" value="@Model.OvoPitanje.OdgovorA" placeholder="@Model.OvoPitanje.OdgovorA" />
             <label class="form-control">Odgovor B:</label> <input asp-for="OvoPitanje.OdgovorB" value="@Model.OvoPitanje.OdgovorB" placeholder="@Model.OvoPitanje.OdgovorB" />
             <label class="form-control">Odgovor C:</label> <input asp-for="OvoPitanje.OdgovorC" value="@Model.OvoPitanje.OdgovorC" placeholder="@Model.OvoPitanje.OdgovorC" />
-            <label class="form-control select-fit-text">Tačan odgovor je pod:</label>   <select class="form-control" asp-for="IzborTacnogOdgovoraInt">
+            <label class="form-control select-fit-text">Tačan odgovor je pod:</label>   <select class="form-control select-fit-text margin-input-izmena" asp-for="IzborTacnogOdgovoraInt" required>
+                                                                                                <option value="" selected disabled hidden>Izaberite koji odgovor je tačan.</option>
                                                                                                 <option value="1">A</option>
                                                                                                 <option value="2">B</option>
                                                                                                 <option value="3">C</option>
+                                                                                                
                                                                                             </select>
             <button type="submit">Izmeni pitanje</button>
         </div>
