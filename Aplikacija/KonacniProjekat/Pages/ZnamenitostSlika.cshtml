@@ -8,9 +8,11 @@ ViewData["Title"]="Izmena znamenitosti";
 @if(SessionClass.TipKorisnika=="A")
 {
 <form method="post">
-    <div class="form-group">
+    <div class="dodaj">
+        <div id="formContent">
          <label class="form-control">Dodajte sliku:</label> <input type="file" asp-for="NovaSlika.Slika"  placeholder="Slika" required />
-        <button type="submit">Dodaj Sliku</button>
+         <button type="submit">Dodaj Sliku</button>
+        </div>
     </div>
 </form>
 }

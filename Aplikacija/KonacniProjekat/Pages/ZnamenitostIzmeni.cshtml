@@ -10,7 +10,8 @@ ViewData["Title"]="Izmena znamenitosti";
 @if(SessionClass.TipKorisnika=="A")
 {
 <form method="post">
-    <div class="form-group">
+    <div class="izmeni">
+        <div id="formContent">
         <input type="hidden" asp-for="ZnamenitostId"/>
         <label class="form-control">Naziv: </label> <input asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" />
         <label class="form-control">Lokacija:</label> <input asp-for="TrenutnaZnamenitost.Lokacija" class="form-control" />
@@ -21,7 +22,7 @@ ViewData["Title"]="Izmena znamenitosti";
         <label class="form-control">Tip:</label> <input asp-for="TrenutnaZnamenitost.Tip" class="form-control" />
         <label class="form-control">Naslovna slika:</label> <input asp-for="TrenutnaZnamenitost.Slika" class="form-control" />
         <button type="submit">Sacuvaj izmene</button>
-        
+        </div>
     </div>
 </form>
 }

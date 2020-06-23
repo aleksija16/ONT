@@ -13,14 +13,16 @@
 </div>
 
 <form method="post">
-    <div class="form-group">
-        <input type="hidden" asp-for="KvizId" />
-        <input type="hidden" asp-for="SessionId" />
-        <label class="form-control">Naziv kviza:</label> <input asp-for="OvajKviz.NazivKviza" class="form-control" placeholder="OvajKviz.Naziv kviza" />
-        <label class="form-control">Znamenitost:</label>    <select class="form-control" asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
-                                                                <option value="">Bez znamenitosti</option>
-                                                            </select>
+    <div class="izmeni">
+        <div id="formContent">
+            <input type="hidden" asp-for="KvizId" />
+            <input type="hidden" asp-for="SessionId" />
+            <label class="form-control">Naziv kviza:</label> <input asp-for="OvajKviz.NazivKviza" class="form-control" placeholder="OvajKviz.Naziv kviza" />
+            <label class="form-control">Znamenitost:</label>    <select class="form-control" asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
+                                                                    <option value="">Bez znamenitosti</option>
+                                                                </select>
 
-        <button type="submit">Izmeni kviz</button>
+            <button type="submit">Izmeni kviz</button>
+        </div>
     </div>
 </form>

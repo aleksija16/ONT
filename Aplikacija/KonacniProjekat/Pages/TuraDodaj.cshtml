@@ -12,7 +12,6 @@
 @if(SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
 {
 <form method="post">
-   <div class="registracija">
        <div class="text-center">
         @if (SessionClass.TipKorisnika == "A")
         {
@@ -23,6 +22,8 @@
           <h2 class="display 4">Custom rezervacija</h2>
         }
     </div>
+    
+   <div class="dodaj">
     <div id="formContent">        
         @if (SessionClass.TipKorisnika == "A")
         {
@@ -82,7 +83,7 @@
             Kreiraj custom rezervaciju
           </button>
         }
-        
+    </div>  
     </div>
 </form>
 }

@@ -10,7 +10,8 @@
 @if(SessionClass.TipKorisnika=="A")
 {
 <form method="post">
-
+    <div class="izmeni">
+    <div id="formContent">
     <label class="form-control">Naziv ture:</label> <input asp-for="OvaTura.NazivTure" class="form-control margin-input-izmena" placeholder="OvaTura.Naziv" />
     <label class="form-control">Dan održavanja:</label> 
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
@@ -50,7 +51,8 @@
     <div>
         <button type="submit">Sačuvajte izmene</button>
     </div>                                              
-                                                        
+    </div>
+    </div>                                                
 </form>
 }
 else{

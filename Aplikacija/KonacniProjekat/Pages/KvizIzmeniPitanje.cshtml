@@ -13,18 +13,20 @@
 </div>
 
 <form method=post>
-    <div class="form-group">
-        <input type="hidden" asp-for="KvizId" />
-        <input type="hidden" asp-for="PitanjeId" />
-        <label class="form-control select-fit-text">Unesite novo pitanje:</label> <input asp-for="OvoPitanje.TekstPitanja" value="@Model.OvoPitanje.TekstPitanja" placeholder="@Model.OvoPitanje.TekstPitanja" />
-        <label class="form-control">Odgovor A:</label> <input asp-for="OvoPitanje.OdgovorA" value="@Model.OvoPitanje.OdgovorA" placeholder="@Model.OvoPitanje.OdgovorA" />
-        <label class="form-control">Odgovor B:</label> <input asp-for="OvoPitanje.OdgovorB" value="@Model.OvoPitanje.OdgovorB" placeholder="@Model.OvoPitanje.OdgovorB" />
-        <label class="form-control">Odgovor C:</label> <input asp-for="OvoPitanje.OdgovorC" value="@Model.OvoPitanje.OdgovorC" placeholder="@Model.OvoPitanje.OdgovorC" />
-        <label class="form-control select-fit-text">Tačan odgovor je pod:</label>   <select class="form-control" asp-for="IzborTacnogOdgovoraInt">
-                                                                                            <option value="1">A</option>
-                                                                                            <option value="2">B</option>
-                                                                                            <option value="3">C</option>
-                                                                                        </select>
-        <button type="submit">Izmeni pitanje</button>
+    <div class="izmeni">
+        <div id="formContent">
+            <input type="hidden" asp-for="KvizId" />
+            <input type="hidden" asp-for="PitanjeId" />
+            <label class="form-control select-fit-text">Unesite novo pitanje:</label> <input asp-for="OvoPitanje.TekstPitanja" value="@Model.OvoPitanje.TekstPitanja" placeholder="@Model.OvoPitanje.TekstPitanja" />
+            <label class="form-control">Odgovor A:</label> <input asp-for="OvoPitanje.OdgovorA" value="@Model.OvoPitanje.OdgovorA" placeholder="@Model.OvoPitanje.OdgovorA" />
+            <label class="form-control">Odgovor B:</label> <input asp-for="OvoPitanje.OdgovorB" value="@Model.OvoPitanje.OdgovorB" placeholder="@Model.OvoPitanje.OdgovorB" />
+            <label class="form-control">Odgovor C:</label> <input asp-for="OvoPitanje.OdgovorC" value="@Model.OvoPitanje.OdgovorC" placeholder="@Model.OvoPitanje.OdgovorC" />
+            <label class="form-control select-fit-text">Tačan odgovor je pod:</label>   <select class="form-control" asp-for="IzborTacnogOdgovoraInt">
+                                                                                                <option value="1">A</option>
+                                                                                                <option value="2">B</option>
+                                                                                                <option value="3">C</option>
+                                                                                            </select>
+            <button type="submit">Izmeni pitanje</button>
+        </div>
     </div>
 </form>
