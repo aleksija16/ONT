@@ -11,18 +11,29 @@
 <form method="post">
           <input type="text" asp-for="NoviVodic.ImeVodica" placeholder="Ime" required />
           <input type="text" asp-for="NoviVodic.PrezimeVodica" placeholder="Prezime" required />
-          <input type="text" asp-for="NoviVodic.Pol" placeholder="Pol" required />
-          <label>Datum rodjenja <input type="date" asp-for="NoviVodic.DatumRodjenja" required /></label>
-          <input type="text" asp-for="NoviVodic.BrojTelefona" placeholder="BrojTelefona" required />
+          <label>Pol: 
+          <select asp-for="NoviVodic.Pol" placeholder="Pol" required>
+            <option value="" selected disabled hidden>Pol</option>
+            <option>Ž</option>
+            <option>M</option>
+          </select>
+          </label>
+          <label>Datum rođenja <input type="date" asp-for="NoviVodic.DatumRodjenja" required /></label>
+          <input type="text" asp-for="NoviVodic.BrojTelefona" placeholder="Broj telefona" required />
           <input type="text" asp-for="NoviVodic.Email" placeholder="Email" required />
           <input type="text" asp-for="NoviVodic.Licenca" placeholder="Licenca" required />
-          <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" required />
+          <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisničko ime" required />
           <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
           <input type="file"  asp-for="NoviVodic.Slika" placeholder="Slika" required />
        <button type="submit">Registruj se</button>
      </form>
      </div>
 </div>
+
+@if (Model.PostojiVec)
+{
+        <div class="alert alert-danger" role="alert" style="text-align: center;">Korisnik sa tim korisničkim imenom već postoji.</div> 
+}
 }
 else{
   <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici, samo admin može da kreira nalog</div> 

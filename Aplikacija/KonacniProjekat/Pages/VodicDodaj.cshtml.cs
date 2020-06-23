@@ -24,6 +24,8 @@ namespace KonacniProjekat
         [BindProperty]
         public Korisnici NoviKorisnik {get; set;}
 
+        [BindProperty]
+        public bool PostojiVec {get; set;}
 
          public async Task<IActionResult> OnPostAsync()
        {
@@ -32,6 +34,14 @@ namespace KonacniProjekat
                return Page();
            }
            else{
+
+                Korisnici PostojiUsername = dbContext.Korisnici.Where(x => x.Username == NoviKorisnik.Username).FirstOrDefault();
+                if (PostojiUsername != null)
+                {
+                    PostojiVec = true;
+                    return this.Page();
+                }
+
                 dbContext.Vodici.Add(NoviVodic);
                 await dbContext.SaveChangesAsync();
                 NoviKorisnik.IdVodicaK=NoviVodic.IdVodica;

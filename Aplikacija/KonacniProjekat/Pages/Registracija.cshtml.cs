@@ -15,6 +15,10 @@ namespace KonacniProjekat
         public Turisti NoviTurista{ get; set;}
         [BindProperty]
         public Korisnici NoviKorisnik{ get; set;}
+
+        [BindProperty]
+        public bool PostojiVec {get; set;}
+
         public readonly OrganizacijaContext dbContext;
 
         public RegistracijaModel(OrganizacijaContext db)
@@ -30,6 +34,14 @@ namespace KonacniProjekat
                return Page();
            }
            else{
+
+                Korisnici PostojiUsername = dbContext.Korisnici.Where(x => x.Username == NoviKorisnik.Username).FirstOrDefault();
+                if (PostojiUsername != null)
+                {
+                    PostojiVec = true;
+                    return this.Page();
+                }
+               
                 dbContext.Turisti.Add(NoviTurista);
                 await dbContext.SaveChangesAsync();
                 NoviKorisnik.IdTuristeK=NoviTurista.IdTuriste;
