@@ -27,7 +27,7 @@
   <table class="table tabela-hof">  
 <thead>
       <tr>
-        <th>@Model.trenutniKviz.NazivKviza</th>
+        <th></th>
         <th>Ime</th>
         <th>Prezime</th>
         <th>Poeni</th>
@@ -36,21 +36,15 @@
     </thead> 
   <tbody>
   
-@foreach (var hof in Model.HallOfFame)
+@foreach (var hof in Model.SviHOF)
 { 
-  @foreach (var ucesnik in Model.Turisti)
-  {
-    if(ucesnik.IdTuriste==hof.IdTuristeHof)
-    {  <tr>
+   <tr>
       <td> <i class="fas fa-trophy"></i></td>
-        <td>@ucesnik.ImeTuriste</td>
-        <td>@ucesnik.PrezimeTuriste</td>
+        <td>@hof.IdTuristeHofNavigation.ImeTuriste</td>
+        <td>@hof.IdTuristeHofNavigation.PrezimeTuriste</td>
         <td>@hof.Poeni</td>
         <td> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", hof.DatumRadjenja))</td>
-      </tr>
-  }
-  }
-
+   </tr>
 }
   </tbody>
 </table>

@@ -19,15 +19,18 @@ namespace KonacniProjekat
             dbContext = db;
         }
         
-        public IList<HallOfFame> HallOfFame { get;set; }
-        public IList<Turisti> Turisti {get;set;}
+        public IList<HallOfFame> SviHOF { get;set; }
         public IList<Kvizovi> sviKvizovi {get;set;}
         public Kvizovi trenutniKviz{get;set;}
         public async Task OnGetAsync(int id)
         {
             sviKvizovi = await dbContext.Kvizovi.ToListAsync();   
-            Turisti = await dbContext.Turisti.ToListAsync();
-            HallOfFame = await dbContext.HallOfFame.Where(x=>x.IdKvizaHof==id).OrderByDescending(x=>x.Poeni).ToListAsync();
+            SviHOF = await dbContext.HallOfFame.Where(x=>x.IdKvizaHof==id).ToListAsync();
+            foreach(var hof in SviHOF)
+            {
+                    hof.IdKvizaHofNavigation = await dbContext.Kvizovi.Where(x=>x.IdKviza==hof.IdKvizaHof).FirstOrDefaultAsync();
+                    hof.IdTuristeHofNavigation = await dbContext.Turisti.Where(x=>x.IdTuriste==hof.IdTuristeHof).FirstOrDefaultAsync();
+            }
             trenutniKviz = dbContext.Kvizovi.Where(x=>x.IdKviza == id).FirstOrDefault();
         }
 

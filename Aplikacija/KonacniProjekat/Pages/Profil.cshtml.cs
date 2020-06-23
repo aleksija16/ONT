@@ -20,10 +20,10 @@ namespace KonacniProjekat
 
         public IList<Rezervacije> SveRezervacije{get;set;}
          public IList<OcenjivanjeVodica> SveOcene{get;set;}
-          public IList<Ture> SveTure{get;set;}
+        public IList<Ture> SveTure{get;set;}
         public IList<HallOfFame> SviHOF{get;set;}
         public Korisnici Korisnik {get;set;}
-         public async Task OnGetAsync(){
+        public async Task OnGetAsync(){
              if(SessionClass.TipKorisnika=="T")
              {
                 Korisnik = await dbContext.Korisnici.Where(x=>x.IdTuristeK==SessionClass.SessionId).FirstOrDefaultAsync();
