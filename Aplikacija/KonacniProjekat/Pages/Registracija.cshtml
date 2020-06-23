@@ -6,16 +6,17 @@
 <div class="registracija">
 <div id="formContent">
 <form method="post">
-            <input type="text" asp-for="NoviTurista.ImeTuriste" placeholder="Ime" required />
-            <input type="text" asp-for="NoviTurista.PrezimeTuriste" placeholder="Prezime" required />
-          <input type="text" asp-for="NoviTurista.Pol" placeholder="Pol" required />
-         <label>Datum rodjenja <input type="date" asp-for="NoviTurista.DatumRodjenja" required /></label>
-          <input type="text" asp-for="NoviTurista.Email" placeholder="Email" required />
-         <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" required />
-          <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
-        <div><input type="submit" value="Registruj se"/> </div>
+        <input type="text" asp-for="NoviTurista.ImeTuriste" placeholder="Ime" required />
+        <input type="text" asp-for="NoviTurista.PrezimeTuriste" placeholder="Prezime" required />
+        <input type="text" asp-for="NoviTurista.Pol" placeholder="Pol" required />
+        <label>Datum rodjenja <input type="date" asp-for="NoviTurista.DatumRodjenja" required /></label>
+        <input type="text" asp-for="NoviTurista.Email" placeholder="Email" required />
+        <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisnicko ime" required />
+        <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
+        <div style="margin: 5px;"><input type="submit" value="Registruj se"/> </div>
+
        	<div class="d-flex justify-content-center links">
-				Imas nalog?<a href="/Prijava">Prijavi se</a>
+    			<div style="margin: 10px;">Imas nalog?<a href="/Prijava">Prijavi se</a></div>
 				</div>
      </form> 
      </div>

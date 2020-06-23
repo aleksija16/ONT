@@ -15,7 +15,15 @@ ViewData["Title"]="Ture";
     </ul>
 </nav>
 }
-<div class="row" style="margin: 0 -70px;">
+@if(SessionClass.TipKorisnika=="T")
+{
+<nav aria-label="Page navigation">  
+    <ul class="pagination justify-content-end">
+        <li class="page-item"><a class="page-link" asp-page="./TuraDodaj">Kreirajte svoju custom turu</a></li>
+    </ul>
+</nav>
+}
+<div class="row">
 @foreach (var  tura in Model.SveTure) 
 {<div class="column">
     <div class="flip-card-ture">

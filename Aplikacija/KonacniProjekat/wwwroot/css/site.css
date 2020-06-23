@@ -71,9 +71,18 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+.row{
+  margin: 0 -50px;  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
 
+.column
+{
+  margin: 2%;
+}
 
-.registracija, .prijava {
+.registracija, .prijava, .izmeni, .dodaj {
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -82,7 +91,10 @@ body {
   min-height: 100%;
   padding: 20px;
 }
-
+.prijava{
+  
+  margin-top: 10%;
+}
 #formContent {
   border-radius: 10px 10px 10px 10px;
   padding: 30px;

@@ -25,7 +25,7 @@ namespace KonacniProjekat
         public async Task OnGetAsync(){
             SessionId = SessionClass.SessionId;
 
-            IQueryable<Ture> qTure=dbContext.Ture;
+            IQueryable<Ture> qTure=dbContext.Ture.Where(x=>x.TipTure=="T");
             SveTure=await qTure.ToListAsync();
         }
         
