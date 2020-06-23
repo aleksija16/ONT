@@ -12,7 +12,7 @@
 <form method="post">
     <div class="izmeni">
     <div id="formContent">
-    <label class="form-control">Naziv ture:</label> <input asp-for="OvaTura.NazivTure" class="form-control margin-input-izmena" placeholder="OvaTura.Naziv" />
+    <label class="form-control">Naziv ture:</label> <input asp-for="OvaTura.NazivTure" class="form-control margin-input-izmena" />
     <label class="form-control">Dan održavanja:</label> 
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
@@ -23,16 +23,16 @@
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
         
     <label class="form-control select-fit-text">Vreme održavanja:</label>    
-        <input type="time" class="form-control select-fit-text margin-input-izmena" asp-for="OvaTura.VremeOdrzavanja" />                                                   
+        <input type="time" class="form-control select-fit-text margin-input-izmena" asp-for="OvaTura.VremeOdrzavanja" required/>                                                   
 
     <label class="form-control">Mesto polaska:</label>     
-        <input type="text" asp-for="OvaTura.MestoPolaska" class="form-control margin-input-izmena" placeholder="OvaTura.MestoPolaska" />                                                  
+        <input type="text" asp-for="OvaTura.MestoPolaska" class="form-control margin-input-izmena" />                                                  
 
     <label class="form-control">Kapacitet:</label>    
-        <input type="number" class="form-control margin-input-izmena" min="1" max="100" asp-for="OvaTura.Kapacitet" />
+        <input type="number" class="form-control margin-input-izmena" min="1" max="100" asp-for="OvaTura.Kapacitet" required/>
 
     <label class="form-control">Vodič:</label>
-        <select class="form-control select-fit-text margin-input-izmena" id="izborVodicaIzmena" asp-for="@Model.IzabraniVodic" asp-items="@Model.SviVodici">
+        <select class="form-control select-fit-text margin-input-izmena" id="izborVodicaIzmena" asp-for="@Model.IzabraniVodic" asp-items="@Model.SviVodici" required>
             <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
         </select>
 

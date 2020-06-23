@@ -25,6 +25,8 @@
     
    <div class="dodaj">
     <div id="formContent">        
+        <input type="hidden" asp-for="@Model.NijePostavljenDan" />
+        <input type="hidden" asp-for="@Model.NijePostavljenaZnamenitost" />
         @if (SessionClass.TipKorisnika == "A")
         {
           <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
@@ -59,7 +61,7 @@
         }
         <input asp-for="NovaTura.Kapacitet" min="1" max="100" required />
 
-        <select asp-for="IzabraniVodic" asp-items="@Model.SviVodici">
+        <select asp-for="IzabraniVodic" asp-items="@Model.SviVodici" required>
             <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
         </select>
 
@@ -85,7 +87,21 @@
         }
     </div>  
     </div>
+
+    @if (Model.NijePostavljenaZnamenitost)
+    {
+      <div class="alert alert-danger" role="alert" style="text-align: center;">Morate odabrati bar jednu znamenitost u turi.</div>
+    }
+
+    @if(Model.NijePostavljenDan)
+    {
+      <div class="alert alert-danger" role="alert" style="text-align: center;">Morate izabrati bar jedan dan održavanja ture.</div> 
+    }
+
+
+
 </form>
+
 }
 else{
   <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici. Novu turu može da kreira samo Administrator, a Custom rezervaciju može samo turista da napravi.</div> 

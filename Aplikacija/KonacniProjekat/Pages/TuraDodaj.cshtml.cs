@@ -40,13 +40,28 @@ namespace KonacniProjekat
         [BindProperty]
         public IList<int> IzabraneZnamenitosti {get; set;}
 
+        [BindProperty]
+        public bool NijePostavljenDan { get; set;}
+
+        [BindProperty]
+        public bool NijePostavljenaZnamenitost {get; set;}
+
         public async Task<IActionResult> OnGetAsync()
         {
             SessionId = SessionClass.SessionId;
 
-            IQueryable<string> qVodici=dbContext.Vodici.Select(x=>x.ImeVodica);
-            SviVodici=new SelectList(await qVodici.ToListAsync());
+            IQueryable<Vodici> qVodici = dbContext.Vodici.OrderBy(x => x.IdVodica);
+            IList<uint> SviVodiciId = await qVodici.Select(x => x.IdVodica).ToListAsync();
+            IList<string> SviVodiciImena = await qVodici.Select(x => x.ImeVodica).ToListAsync();
+            IList<string> SviVodiciPrezimena = await qVodici.Select(x => x.PrezimeVodica).ToListAsync();
 
+            IList<string> SviVodiciObicnaLista = new List<string>();
+            for (var i=0; i<SviVodiciId.Count(); i++)
+            {
+                SviVodiciObicnaLista.Add(SviVodiciImena[i] + " " + SviVodiciPrezimena[i] + " [" + SviVodiciId[i].ToString() + "]");
+            }
+
+            SviVodici = new SelectList(SviVodiciObicnaLista);
         
            SveZnamenitosti = await dbContext.Znamenitosti.ToListAsync();
 
@@ -93,10 +108,17 @@ namespace KonacniProjekat
 
                 daniOdrzavanjaTure += ", ";
             }
-            daniOdrzavanjaTure = daniOdrzavanjaTure.Remove(daniOdrzavanjaTure.Length - 2);
-            NovaTura.DanOdrzavanja = daniOdrzavanjaTure;
+            if (daniOdrzavanjaTure != "")
+            {
+                daniOdrzavanjaTure = daniOdrzavanjaTure.Remove(daniOdrzavanjaTure.Length - 2);
+                NovaTura.DanOdrzavanja = daniOdrzavanjaTure;    
+            }
 
-            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.ImeVodica==IzabraniVodic);
+            IzabraniVodic = IzabraniVodic.Substring(IzabraniVodic.IndexOf('[') + 1);
+            IzabraniVodic = IzabraniVodic.Trim(']');          
+
+
+            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.IdVodica == (uint) Convert.ToInt32(IzabraniVodic));
             NovaTura.IdVodicaNavigation=await qIzabraniVodic.FirstOrDefaultAsync();
 
        
@@ -126,7 +148,11 @@ namespace KonacniProjekat
 
             NovaTura.NazivTure = "Custom rezervacija uz nalog: " + SessionClass.ImeKorisnika;
             
-            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.ImeVodica==IzabraniVodic);
+            IzabraniVodic = IzabraniVodic.Substring(IzabraniVodic.IndexOf('[') + 1);
+            IzabraniVodic = IzabraniVodic.Trim(']');          
+
+
+            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.IdVodica == (uint) Convert.ToInt32(IzabraniVodic));
             NovaTura.IdVodicaNavigation=await qIzabraniVodic.FirstOrDefaultAsync();
 
             dbContext.Ture.Add(NovaTura);

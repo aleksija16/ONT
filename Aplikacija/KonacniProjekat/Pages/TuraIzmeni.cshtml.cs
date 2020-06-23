@@ -63,7 +63,7 @@ namespace KonacniProjekat
             IList<string> SviVodiciObicnaLista = new List<string>();
             for (var i=0; i<SviVodiciId.Count(); i++)
             {
-                SviVodiciObicnaLista.Add(SviVodiciImena[i] + " " + SviVodiciPrezimena[i] + " [Id:" + SviVodiciId[i].ToString() + "]");
+                SviVodiciObicnaLista.Add(SviVodiciImena[i] + " " + SviVodiciPrezimena[i] + " [" + SviVodiciId[i].ToString() + "]");
             }
 
             
@@ -121,13 +121,23 @@ namespace KonacniProjekat
 
                 daniOdrzavanjaOveTure += ", ";
             }
-            daniOdrzavanjaOveTure = daniOdrzavanjaOveTure.Remove(daniOdrzavanjaOveTure.Length - 2);
-            OvaTura.DanOdrzavanja = daniOdrzavanjaOveTure;
+            if (daniOdrzavanjaOveTure != "")
+            {
+                daniOdrzavanjaOveTure = daniOdrzavanjaOveTure.Remove(daniOdrzavanjaOveTure.Length - 2);
+                OvaTura.DanOdrzavanja = daniOdrzavanjaOveTure;    
+            }
+
+
+            IzabraniVodic = IzabraniVodic.Substring(IzabraniVodic.IndexOf('[') + 1);
+            IzabraniVodic = IzabraniVodic.Trim(']');          
+
+
+            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.IdVodica == (uint) Convert.ToInt32(IzabraniVodic));
+            OvaTura.IdVodicaNavigation=await qIzabraniVodic.FirstOrDefaultAsync();
 
             IQueryable<ZnamenitostiUTurama> qZnamenitostiUTuri = dbContext.ZnamenitostiUTurama.Include(x => x.IdZnamenitostiZutNavigation).Where(x => x.IdTureZut == (uint)id);
             VecZnamenitostiUOvojTuri = await qZnamenitostiUTuri.Select(x => x.IdZnamenitostiZutNavigation).ToListAsync();
-
-            
+           
 
             for (int i=IzabraneZnamenitosti.Count()- 1; i>=0; i--)
             {
