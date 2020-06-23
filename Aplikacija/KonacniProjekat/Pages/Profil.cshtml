@@ -18,7 +18,11 @@
 
   <div class="tab-content">
     <div id="podaci" class="tab-pane fade in active">
-      <p>@SessionClass.ImeKorisnika</p>
+      <p>Ime i prezime: @SessionClass.ImeKorisnika</p>
+      <p>Datum rođenja: @Model.Korisnik.IdTuristeKNavigation.DatumRodjenja</p>
+      <p>Email: @Model.Korisnik.IdTuristeKNavigation.Email</p>
+      <p>Korisnicko ime: @Model.Korisnik.Username</p>
+      <p>Lozinka: @Model.Korisnik.Password</p>
     </div>
     <div id="rezervacije" class="tab-pane fade">
       <h3>Rezervacije</h3>
@@ -27,8 +31,8 @@
     <table class="table table-bordered">
         <thead>
             <th>ID rezervacije</th>
-            <th>Id ture</th>
-            <th>ID turiste</th>
+            <th>Naziv ture</th>
+            <th>Vodič</th>
             <th>Datum</th>
         </thead>
         <tbody>
@@ -37,8 +41,8 @@
                 {
                     <tr>
                         <td>@rezervacija.IdRezervacije</td>
-                        <td>@rezervacija.IdTureR</td>
-                        <td>@rezervacija.IdTuristeR</td>
+                        <td>@rezervacija.IdTureRNavigation.NazivTure</td>
+                        <td>@rezervacija.IdVodicaRNavigation.ImeVodica @rezervacija.IdVodicaRNavigation.PrezimeVodica</td>
                         <td>@rezervacija.Datum</td>
                     </tr>
                 }
@@ -55,8 +59,8 @@
     <table class="table table-bordered">
         <thead>
             <th>ID ocene</th>
-            <th>Id vodica</th>
-             <th>Id ture</th>
+            <th>Vodič</th>
+             <th>Tura</th>
             <th>Ocene</th>
            
         </thead>
@@ -66,8 +70,8 @@
                 {
                     <tr>
                         <td>@ocene.IdOcenjivanja</td>
-                        <td>@ocene.IdVodicaO</td>
-                        <td>@ocene.IdTureO</td>
+                        <td>@ocene.IdVodicaONavigation.ImeVodica @ocene.IdVodicaONavigation.PrezimeVodica</td>
+                        <td>@ocene.IdTureONavigation.NazivTure</td>
                         <td>@ocene.Ocena</td>
                     </tr>
                 }
@@ -81,16 +85,16 @@
 <div>
     <table class="table table-bordered">
         <thead>
-            <th>ID kviza</th>
+            <th>Naziv kviza</th>
             <th>Poeni</th>
-            <th>datum radjenja</th>
+            <th>Datum rađenja</th>
         </thead>
         <tbody>
             <form method="get">
                 @foreach (var hof in Model.SviHOF)
                 {
                     <tr>
-                        <td>@hof.IdKvizaHof</td>
+                        <td>@hof.IdKvizaHofNavigation.NazivKviza</td>
                         <td>@hof.Poeni</td>
                         <td>@hof.DatumRadjenja</td>
                     </tr>
@@ -114,7 +118,12 @@ else if(SessionClass.TipKorisnika=="V")
 
   <div class="tab-content">
     <div id="podaci" class="tab-pane fade in active">
-      <p>@SessionClass.ImeKorisnika</p>
+      <p>Ime i prezime: @SessionClass.ImeKorisnika</p>
+      <p>Datum rođenja: @Model.Korisnik.IdVodicaKNavigation.DatumRodjenja</p>
+      <p>Licenca: @Model.Korisnik.IdVodicaKNavigation.Licenca</p>
+      <p>Email: @Model.Korisnik.IdVodicaKNavigation.Email</p>
+      <p>Korisnicko ime: @Model.Korisnik.Username</p>
+      <p>Lozinka: @Model.Korisnik.Password</p>
     </div>
     <div id="rezervacije" class="tab-pane fade">
       <h3>Rezervacije</h3>
@@ -123,7 +132,7 @@ else if(SessionClass.TipKorisnika=="V")
     <table class="table table-bordered">
         <thead>
             <th>ID rezervacije</th>
-            <th>Id ture</th>
+            <th>Naziv ture</th>
             <th>ID turiste</th>
             <th>Datum</th>
         </thead>
@@ -133,8 +142,8 @@ else if(SessionClass.TipKorisnika=="V")
                 {
                     <tr>
                         <td>@rezervacija.IdRezervacije</td>
-                        <td>@rezervacija.IdTureR</td>
-                        <td>@rezervacija.IdTuristeR</td>
+                        <td>@rezervacija.IdTureRNavigation.NazivTure</td>
+                        <td>@rezervacija.IdTuristeRNavigation.ImeTuriste @rezervacija.IdTuristeRNavigation.PrezimeTuriste</td>
                         <td>@rezervacija.Datum</td>
                     </tr>
                 }
@@ -151,7 +160,7 @@ else if(SessionClass.TipKorisnika=="V")
     <table class="table table-bordered">
         <thead>
             <th>ID ocene</th>
-             <th>Id ture</th>
+             <th>Naziv ture</th>
             <th>Ocene</th>
            
         </thead>
@@ -161,7 +170,7 @@ else if(SessionClass.TipKorisnika=="V")
                 {
                     <tr>
                         <td>@ocene.IdOcenjivanja</td>
-                        <td>@ocene.IdTureO</td>
+                        <td>@ocene.IdTureONavigation.NazivTure</td>
                         <td>@ocene.Ocena</td>
                     </tr>
                 }
