@@ -89,10 +89,13 @@ ViewData["Title"] = "Znamenitosti";
         <h6 class="m-0 font-weight-bold text-primary">Slike znamenitosti</h6>
       </div>
       <div class="card-body">
+        
+        <div  style="width: 1000px; overflow-x: auto; white-space: nowrap; ">
     @foreach (var slika in Model.Slike)
     {
          <img class="img-fluid rounded mb-5 mb-md-0" src="images/znamenitosti/@slika.Slika" alt="" style="width:1000px;height:600px;">
     }
+    </div>
     
       </div>
     </div>  

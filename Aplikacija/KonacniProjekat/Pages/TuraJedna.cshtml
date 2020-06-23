@@ -209,14 +209,14 @@
       <h6 class="m-0 font-weight-bold text-primary">Znamenitosti u turi</h6>
     </div>
     <div class="card-body">
-        @* <div  style="width: 1300px; height:450px; overflow-x: auto; white-space: nowrap; "> *@
+        <div  style="width: 1000px; overflow-x: auto; white-space: nowrap; ">
         @foreach (var znamenitosti in Model.ZnamenitostiUTuri)
         {
           <a asp-page="./ZnamenitostJedna" asp-route-id="@znamenitosti.IdZnamenitosti">   
             <img class="img-fluid rounded mb-7 mb-md-0" src="images/znamenitosti/@znamenitosti.Slika" alt="" style="width:1000px;height:600px;">
           </a>  
         }
-        @* </div> *@
+        </div>
     </div>
   </div>
 </div>       
