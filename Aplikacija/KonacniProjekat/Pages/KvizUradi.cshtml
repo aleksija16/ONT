@@ -4,12 +4,16 @@
     ViewData["Title"]="Radi kviz";
 }
 
-
-
-<form method="post">
+@if (Model.VecJeRadioKviz != null && Model.VecJeRadioKviz != 0)
+{
+     <div class="alert alert-danger" role="alert" style="text-align: center;">Već ste radili ovaj kviz.</div> 
+}
+else
+{
+    <form method="post">
 
     <div class="text-center">
-        @*<h2 class="display-4">Kviz: @Model.KvizZaIzradu.NazivKviza</h2>*@
+        <h2 class="display-4">Kviz: @Model.NazivKviza</h2>
     </div>
     
     @{
@@ -25,17 +29,17 @@
     <input type="hidden" asp-for="@Model.BrojTacnihOdgovora" />
     <input type="hidden" asp-for="@Model.ZavrsenKviz" />
     <input type="hidden" asp-for="@Model.PorukaZaKorisnikaNepopunjenKviz" />
+    <input type="hidden" asp-for="@Model.VecJeRadioKviz" />
+    <input type="hidden" asp-for="@Model.NazivKviza" />
 
     <div class="formaKAK">
         <ol type="1">
             
             @for(var i=0; i<Model.PitanjaZaIzradu.Count(); i++)
             {
-                
                 <li>
-                    <div class="naziv">@Model.PitanjaZaIzradu[i].TekstPitanja</div>
+                    <div class="naziv"><h3><b>@Model.PitanjaZaIzradu[i].TekstPitanja</b></h3></div>
                     <ol type="a">
-                        
                 
                         
                         @{
@@ -83,11 +87,11 @@
                             value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" required  />
                             @Model.PitanjaZaIzradu[i].OdgovorC
                         </li>
-                       
+                        
                     </ol>
 
                 </li>
-                
+               
                 
             }
             
@@ -123,6 +127,7 @@
             Odgovorili ste tačno na @Model.BrojTacnihOdgovora pitanje.
         </div>
     }   
+}
 }
 
 <div class="text-center">

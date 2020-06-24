@@ -40,17 +40,23 @@ namespace KonacniProjekat
         [BindProperty]
         public bool ZavrsenKviz {get; set;}
 
+        [BindProperty]
+        public int? VecJeRadioKviz {get; set;}
+
+        [BindProperty]
+        public string NazivKviza {get; set;}
+
         public KvizUradiModel(OrganizacijaContext db)
         {
             dbContext = db;
         }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id, int? radio)
         {
             SessionId = SessionClass.SessionId;
             KvizId = id;
 
-
+            VecJeRadioKviz = (int?)radio;
  
             if(SessionId != null)
             {                
@@ -59,11 +65,18 @@ namespace KonacniProjekat
                 else DostupanPrikaz = false;
             }
             else DostupanPrikaz = false;
-            
+
             if (!DostupanPrikaz) return StatusCode(403);
 
 
             KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)id);
+
+            if (await dbContext.HallOfFame.Where(x => x.IdKvizaHof == (uint)KvizId).Where(y => y.IdTuristeHof == SessionClass.SessionId).FirstOrDefaultAsync() != null)
+            {
+                VecJeRadioKviz = 1;
+            }
+
+            NazivKviza = KvizZaIzradu.NazivKviza;
 
             if (KvizZaIzradu == null)
             {
@@ -85,7 +98,6 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnPost()
         {
-            //KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)KvizId);
 
             PitanjaZaIzradu = await dbContext.Pitanja.Where(x=>x.IdKviza == (uint)KvizId).ToListAsync();
 
