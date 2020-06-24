@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KonacniProjekat.Models
 {
@@ -9,6 +10,7 @@ namespace KonacniProjekat.Models
         public uint? IdTuristeR { get; set; }
         public uint? IdTureR { get; set; }
         public uint? IdVodicaR { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Datum { get; set; }
         public uint? BrojOsoba { get; set; }
 

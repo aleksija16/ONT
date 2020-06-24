@@ -9,33 +9,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KonacniProjekat
 {
-    public class TuraObrisiModel : PageModel
+    public class VodicObrisiModel : PageModel
     {
         [BindProperty]
-        public int? SessionId{get;set;}
-
-        [BindProperty]
-        public int TuraId{get;set;}
-
-        public Ture TuraZaBrisanje {get; set;}
-        public readonly OrganizacijaContext dbContext;
-        [BindProperty]
+        public Vodici VodicZaBrisanje {get; set;}
+         [BindProperty]
         public IList<Rezervacije> Rezervacije {get;set;}
-        public int provera=0;
-        public TuraObrisiModel(OrganizacijaContext db){
+        public readonly OrganizacijaContext dbContext;
+
+        public VodicObrisiModel(OrganizacijaContext db){
             dbContext=db;
         }
+        public int provera=0;
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            SessionId = SessionClass.SessionId;
-            TuraId=id;
-
-            TuraZaBrisanje=await dbContext.Ture.Where( x => x.IdTure ==(uint)TuraId).FirstOrDefaultAsync();
+            VodicZaBrisanje=await dbContext.Vodici.Where( x => x.IdVodica ==(uint)id).FirstOrDefaultAsync();
             IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(x=>x.Datum>DateTime.Now);
-            Rezervacije= await qRezervacije.Where(a =>a.IdTureR==(uint)id).ToListAsync();
+            Rezervacije= await qRezervacije.Where(a =>a.IdVodicaR==(uint)id).ToListAsync();
              foreach(var item in Rezervacije)
              {
-                 if(item.IdTureR==(uint)id)
+                 if(item.IdVodicaR==(uint)id)
                  {
                     provera=1;
                  }
@@ -44,19 +37,17 @@ namespace KonacniProjekat
         }
 
         public async Task<IActionResult> OnPostAsync(int id){
-            
-            TuraId=id;
-    
-            TuraZaBrisanje=await dbContext.Ture.FindAsync((uint)TuraId);
+        
+            VodicZaBrisanje=await dbContext.Vodici.FindAsync((uint)id);
 
-            if(TuraZaBrisanje==null){
+            if(VodicZaBrisanje==null){
                 return NotFound();
             }
 
-            dbContext.Ture.Remove(TuraZaBrisanje);
+            dbContext.Vodici.Remove(VodicZaBrisanje);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToPage("./TuraSve");
+            return RedirectToPage("./VodicSvi");
         }
     }
 }

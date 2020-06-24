@@ -7,6 +7,15 @@
 <div class="text-center">
     <h1 class="display-4">Vodici</h1>
 </div>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<nav aria-label="Page navigation">  
+    <ul class="pagination justify-content-end">
+        <li class="page-item"><a class="page-link" asp-page="./VodicDodaj">Dodaj vodiča</a></li>
+    </ul>
+</nav>
+}
 <div class="row">
 @foreach (var vodic in Model.Vodici) 
 {
@@ -21,6 +30,10 @@
     <div class="flip-card-back-vodic">
       <h2>@vodic.ImeVodica @vodic.PrezimeVodica</h2>
  <a asp-page="./VodicJedan" asp-route-id="@vodic.IdVodica" style="color:#262626; font-size:18px; position: absolute;left: 0; right: 0; bottom:2px">Prikazi detalje <i class='fas fa-id-card-alt' style="color: black;" ></i></a>
+    @if(SessionClass.TipKorisnika=="A")
+    {
+   <div><a asp-page="./VodicObrisi"  asp-route-id="@vodic.IdVodica">Obriši vodiča <i class='fas fa-user-alt-slash'></i></a></div> 
+    }
     </div>
   </div>
  </div>

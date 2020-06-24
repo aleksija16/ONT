@@ -27,5 +27,18 @@ namespace KonacniProjekat
         {
             Vodici = await dbContext.Vodici.ToListAsync();
         }
+
+         public async Task<IActionResult> OnPostObrisiAsync(uint id)
+        {
+            Vodici PostojiVodic = await dbContext.Vodici.FindAsync(id);
+
+            if (PostojiVodic != null)
+            {
+                dbContext.Vodici.Remove(PostojiVodic);
+                await dbContext.SaveChangesAsync();
+            }
+            return RedirectToPage();
+
+        }
     }
 }
