@@ -30,7 +30,12 @@ namespace KonacniProjekat
         [BindProperty(SupportsGet=true)]
         public string IzabranaZnamenitostString {get; set;}
 
+        [BindProperty(SupportsGet=true)]
+        public string IzabranaTuraString {get; set;}
+
         public SelectList IzborZnamenitostiLista {get; set;}
+
+        public SelectList IzborTuraLista {get; set;}
         
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -49,7 +54,12 @@ namespace KonacniProjekat
 
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
             IzborZnamenitostiLista = new SelectList(qZnamenitosti.ToList());
+            
+            IQueryable<string> qTure = dbContext.Ture.Where(x => x.TipTure == "T").Select(X=>X.NazivTure);
+            IzborTuraLista = new SelectList(await qTure.ToListAsync());
+            
             return this.Page();
+            
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -62,7 +72,7 @@ namespace KonacniProjekat
             OvajKviz.IdKviza = (uint)KvizId;   
        
             IQueryable<Znamenitosti> qIzabranaZnamenitost = dbContext.Znamenitosti.Where(x=>x.NazivZnamenitosti == IzabranaZnamenitostString);
-
+            IQueryable<Ture> qIzabranaTura = dbContext.Ture.Where(x=>x.NazivTure == IzabranaTuraString);
 
             if(IzabranaZnamenitostString == "")
             {
@@ -71,6 +81,15 @@ namespace KonacniProjekat
             else
             {
                 OvajKviz.IdZnamenitostiKNavigation = await qIzabranaZnamenitost.FirstOrDefaultAsync();
+            }
+
+             if (IzabranaTuraString=="")
+            {
+                OvajKviz.IdTureKNavigation = null;
+            }
+            else
+            {
+                OvajKviz.IdTureKNavigation = await qIzabranaTura.FirstOrDefaultAsync();
             }
 
             dbContext.Kvizovi.Attach(OvajKviz).State = EntityState.Modified;
