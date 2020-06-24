@@ -26,16 +26,16 @@
     <input type="hidden" asp-for="@Model.ZavrsenKviz" />
     <input type="hidden" asp-for="@Model.PorukaZaKorisnikaNepopunjenKviz" />
 
-    <div class="kvizUradi">
+    <div class="formaKAK">
         <ol type="1">
             
             @for(var i=0; i<Model.PitanjaZaIzradu.Count(); i++)
             {
-                <div class="PitanjeBorder">
+                
                 <li>
-                    <div class="PitanjeDiv"><h3><b>@Model.PitanjaZaIzradu[i].TekstPitanja</b></h3></div>
+                    <div class="naziv">@Model.PitanjaZaIzradu[i].TekstPitanja</div>
                     <ol type="a">
-                        <div class="PUnutrasnjiDiv">
+                        
                 
                         
                         @{
@@ -83,11 +83,11 @@
                             value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" required  />
                             @Model.PitanjaZaIzradu[i].OdgovorC
                         </li>
-                        </div>
+                       
                     </ol>
 
                 </li>
-                </div>
+                
                 
             }
             

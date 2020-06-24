@@ -7,7 +7,7 @@
 <div class="text-center">
     <h1 class="=display-4">Anketa za turu: @Model.OvaTura.NazivTure</h1>
 </div>
-
+<div class="formaKAK">
 <form method="post">
     <ol type="1">
         <li>
@@ -21,19 +21,7 @@
                 <option value="NekiDrugiTip">Neki drugi tip</option>
             </select>
         </li>
-        <li>
-            <label class="form-control select-fit-text">Za vreme izvođenja ture, vreme je bilo uglavnom:</label>
-            <select class="form-control select-fit-text" asp-for="@Model.OcenaTure.VremenskiUslovi">
-                <option value="Sunčano">Suncano</option>
-                <option value="Oblačno">Oblačno</option>
-                <option value="Kišovito">Kišovito</option>
-                <option value="DelimičnoSunčano">Delimično sunčano</option>
-                <option value="Kišovito">Kišovito</option>
-                <option value="SaSnegom">Sa snegom</option>
-                <option value="Nevreme">Nevreme</option>
-                <option value="Drugo">...</option>           
-            </select>
-        </li>
+        
         <li>
             <label class="form-control select-fit-text">Organizovanost ture:</label>
             <div class="centerAnketa">
@@ -55,13 +43,7 @@
                 <input class="inputUzRangeAnketa" id="inputRangeInformisanostVodica" readonly value="" />
             </div>         
         </li>
-        <li>
-            <label class="form-control select-fit-text">Društvena atmosfera:</label>
-            <div class="centerAnketa">
-                <div class="rangeAnketa">&#128577;<input class="custom-range border-0" type="range" id="drustAtmosfera" min="0" max="100" asp-for="@Model.OcenaTure.DrustvenaAtmosfera" onchange="updateTextInputRangeDrustvenaAtmosfera(this.value);"/> &#128516;</div>
-                <input class="inputUzRangeAnketa" id="inputRangeDrustvenaAtmosfera" readonly value="" />
-            </div>
-        </li>
+       
         <li>
             <label class="form-control select-fit-text">Najzanimljivija znamenitost u ovoj turi:</label>
             <select class="form-control select-fit-text" asp-for="IzabranaNajzanimljivijaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
@@ -91,3 +73,4 @@
         <button type="submit">Oceni turu</button>
     </div>
 </form>
+</div>
