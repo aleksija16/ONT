@@ -10,13 +10,11 @@ namespace KonacniProjekat.Models
         public uint? IdTureAnk { get; set; }
         public uint? IdVodicaAnk { get; set; }
         public uint? KonacnaOcena { get; set; }
-        public string VremenskiUslovi { get; set; }
         public string Komentar { get; set; }
         public uint? OrganizovanostTure { get; set; }
         public uint? InformisanostVodica { get; set; }
         public uint? FizickaZahtevnostTure { get; set; }
         public string TipTuriste { get; set; }
-        public string DrustvenaAtmosfera { get; set; }
         public string NajinteresantnijaZnamenitost { get; set; }
         public string NajdosadnijaZnamenitost { get; set; }
 
