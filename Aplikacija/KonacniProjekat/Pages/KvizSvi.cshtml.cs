@@ -25,6 +25,10 @@ namespace KonacniProjekat
         [BindProperty]
         public IList<string> NajboljiRezultatPoKvizuString {get; set;}
 
+        [BindProperty]
+        public IList<Kvizovi> KvizTura {get; set;}
+        public IList<Kvizovi> KvizZnamenitosti { get; set; }
+
         public KvizSviModel(OrganizacijaContext db)
         {
             dbContext = db;
@@ -32,6 +36,16 @@ namespace KonacniProjekat
         public async Task OnGetAsync()
         {
             SessionId = SessionClass.SessionId;
+            KvizTura = await dbContext.Kvizovi.Where(x=>x.IdTureK != null).ToListAsync();
+            foreach(var kviz in KvizTura)
+            {
+                kviz.IdTureKNavigation=await dbContext.Ture.Where(x=>x.IdTure==kviz.IdTureK).FirstOrDefaultAsync();
+            }
+            KvizZnamenitosti= await dbContext.Kvizovi.Where(x=>x.IdZnamenitostiK!=null).ToListAsync();
+            foreach(var kviz in KvizZnamenitosti)
+            {
+                kviz.IdZnamenitostiKNavigation=await dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==kviz.IdZnamenitostiK).FirstOrDefaultAsync();
+            }
 
             IQueryable<Kvizovi> qKvizovi = dbContext.Kvizovi.Include(x=>x.IdZnamenitostiKNavigation).OrderBy(x=>x.IdKviza);
             SviKvizovi = await qKvizovi.ToListAsync();

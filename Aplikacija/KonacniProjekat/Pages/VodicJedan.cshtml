@@ -5,7 +5,7 @@
 
 <form method="get">
 <div class="cardVodic" style="text-align: center ">
-  <img src="images/@Model.TrenutniVodic.Slika" style="width:300px;height:250px; display: block; margin-left: auto; margin-right: auto;">
+  <img src="images/@Model.TrenutniVodic.Slika" style="width:50%;height:45%; display: block; margin-left: auto; margin-right: auto;">
   <h1>@Model.TrenutniVodic.ImeVodica @Model.TrenutniVodic.PrezimeVodica</h1>
    </br>
   <p class="title"> <img src="https://image.flaticon.com/icons/svg/1/1700.svg" style="width: 20px; height:20px">Licenca: @Model.TrenutniVodic.Licenca</p>
@@ -16,12 +16,12 @@
    </br>
   @if(SessionClass.TipKorisnika=="T")
   {
-  <a asp-page="./VodicOceni" asp-route-id="@Model.TrenutniVodic.IdVodica" style="color:#ff66a3; font-size:18px">Oceni <i class="fas fa-thumbs-up"></i> <i class="fas fa-thumbs-down"></i></a>
+  <a asp-page="./VodicOceni" asp-route-id="@Model.TrenutniVodic.IdVodica" style="color:#84c1ff; font-size:19px">Oceni <i class="fas fa-thumbs-up"></i> <i class="fas fa-thumbs-down"></i></a>
   }
 </div>
 </form>
 
 <div>
- <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#ff66a3;">Lista vodiča</a>
+ <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#84c1ff;">Lista vodiča</a>
 </div>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
