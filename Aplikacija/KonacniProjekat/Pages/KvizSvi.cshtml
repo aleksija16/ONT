@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <div class="text-center">
     <h1 class="display-4">Kvizovi</h1>
 </div>
@@ -26,6 +25,7 @@
 
  <div class="tab-content">
     <div id="ture" class="tab-pane fade in active">
+     <div style="overflow-y: scroll;  height: 440px;margin-top:20px;">
       <table class="table table-bordered">
         <thead>
             <th>ID kviza</th>
@@ -36,12 +36,12 @@
             <th>Broj učesnika</th>
             @if (SessionClass.TipKorisnika == "A")
             {
-                <th></th>
-                <th></th>  
+                <th><i class="fas fa-info-circle"></i></th>
+                <th><i class="fas fa-edit"></i></th>  
             }
             else if (SessionClass.TipKorisnika == "T")
             {
-                <th></th> 
+                <th><i class="fas fa-play"></i></th> 
             }
         </thead>
 
@@ -97,8 +97,10 @@
         </tbody>
     </table>
     </div>
+    </div>
 
     <div id="znamenitosti" class="tab-pane fade">
+    <div style="overflow-y: scroll;  height: 440px; margin-top:20px;">
       <table class="table table-bordered">
         <thead>
             <th>ID kviza</th>
@@ -168,6 +170,7 @@
             </form>
         </tbody>
     </table>
+    </div>
     </div>
 </div>
 

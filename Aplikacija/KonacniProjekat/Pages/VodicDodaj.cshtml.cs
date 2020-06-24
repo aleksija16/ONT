@@ -49,7 +49,7 @@ namespace KonacniProjekat
                 dbContext.Korisnici.Add(NoviKorisnik);
                
                 await dbContext.SaveChangesAsync();
-                return RedirectToPage("./VodicSviNalozi");
+                return RedirectToPage("./VodicSvi");
             }
        }
     }
