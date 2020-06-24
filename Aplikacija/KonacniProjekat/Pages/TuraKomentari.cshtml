@@ -1,0 +1,26 @@
+﻿@page
+@model MyApp.Namespace.TuraKomentariModel
+@{
+}
+
+<div class=text-center>
+    <h1 class="display-4">Komentari za turu: @Model.Tura.NazivTure</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./TuraSve">Prikazi listu tura</a></li>
+  </ul>
+</nav>
+
+<div class="formaKAK">
+    <ol type="1">
+    @foreach (var k in Model.RezultatiAnketa)
+    {
+            
+        <li class="naziv">@k.Komentar</li>
+    
+    }
+    </ol>
+</div>
+
