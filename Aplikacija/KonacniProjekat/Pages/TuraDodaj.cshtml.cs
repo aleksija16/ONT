@@ -84,33 +84,33 @@ namespace KonacniProjekat
                 switch (i)
                 {
                     case 1:
-                        daniOdrzavanjaTure += "Ponedeljak";
+                        daniOdrzavanjaTure += "1";
                         break;
                     case 2:
-                        daniOdrzavanjaTure += "Utorak";
+                        daniOdrzavanjaTure += "2";
                         break;
                     case 3:
-                        daniOdrzavanjaTure += "Sreda";
+                        daniOdrzavanjaTure += "3";
                         break;
                     case 4:
-                        daniOdrzavanjaTure += "Četvrtak";
+                        daniOdrzavanjaTure += "4";
                         break;
                     case 5:
-                        daniOdrzavanjaTure += "Petak";
+                        daniOdrzavanjaTure += "5";
                         break;
                     case 6:
-                        daniOdrzavanjaTure += "Subota";
+                        daniOdrzavanjaTure += "6";
                         break;
                     case 7:
-                        daniOdrzavanjaTure += "Nedelja";
+                        daniOdrzavanjaTure += "0";
                         break;
                 }
 
-                daniOdrzavanjaTure += ", ";
+                daniOdrzavanjaTure += " ";
             }
             if (daniOdrzavanjaTure != "")
             {
-                daniOdrzavanjaTure = daniOdrzavanjaTure.Remove(daniOdrzavanjaTure.Length - 2);
+                daniOdrzavanjaTure = daniOdrzavanjaTure.Trim();
                 NovaTura.DanOdrzavanja = daniOdrzavanjaTure;    
             }
 

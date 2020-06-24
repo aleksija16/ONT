@@ -5,7 +5,8 @@
 }
 
 <div class="text-center">
-    <h1 class="=display-4">Rezervacija za turu: @Model.OvaTura.NazivTure</h1>
+    <h1 class="display-4">Rezervacija za turu: @Model.OvaTura.NazivTure</h1>
+    <h5>Ova tura se održava danima: @Model.DaniOdrzavanja</h5>
 </div>
 
 <div class="rezervacija fadeInDown">
@@ -15,9 +16,10 @@
     <input type="hidden" asp-for="@Model.KapacitetTure" />
     <input type="hidden" asp-for="@Model.TuraId" />
     <input type="hidden" asp-for="@Model.NeuspesnaRezervacija" />
+    <input type="hidden" asp-for="@Model.NetacnaRezervacija" />
 
     <label class="form-control select-fit-text">Datum odrzavanja:</label>
-        <input type="date" asp-for="RezervacijaTure.Datum" class="form-control" placeholder="Datum odrzavanja"  />
+        <input type="date" min="@Model.DanasnjiDatum" asp-for="RezervacijaTure.Datum" class="form-control" placeholder="Datum odrzavanja"  required/>
 
     <label class="form-control">Broj osoba:</label>
         <input asp-for="RezervacijaTure.BrojOsoba" class="form-control" min="1"; max="100"; placeholder="Broj osoba" required  />
@@ -31,6 +33,11 @@
 </form>
 </div>
 </div>
+
+@if(Model.NetacnaRezervacija!=null && Model.NetacnaRezervacija != 0)
+{
+    <div class="alert alert-danger" role="alert" style="text-align: center;">Ova tura se ne održava tog dana. Izaberite odgovarajući dan.</div>   
+}
 
 @if(Model.NeuspesnaRezervacija!=null && Model.NeuspesnaRezervacija!=0){
      <div class="alert alert-danger" role="alert" style="text-align: center;">Popunjen je kapacitet ove ture. Smanjite broj osoba ili rezervisite drugu turu.</div> 

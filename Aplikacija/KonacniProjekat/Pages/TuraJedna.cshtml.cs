@@ -25,6 +25,9 @@ namespace KonacniProjekat
         public Ture Tura {get; set;}
 
         [BindProperty]
+        public string DaniOdrzavanja {get; set;}
+
+        [BindProperty]
         public Anketa RezultatiAnkete{get;set;}
 
         [BindProperty]
@@ -63,6 +66,46 @@ namespace KonacniProjekat
             {
                 return NotFound();
             }
+
+            DaniOdrzavanja = " ";
+            string dani =  Tura.DanOdrzavanja;
+            if (dani != null) {
+                string[] danPoDan = dani.Split(' ');
+            for (int j = 0; j < danPoDan.Count(); j++)
+            { int i = Convert.ToInt32(danPoDan[j]);
+                switch (i)
+                {
+                    case 1:
+                        DaniOdrzavanja += "ponedeljak";
+                        break;
+                    case 2:
+                        DaniOdrzavanja += "utorak";
+                        break;
+                    case 3:
+                        DaniOdrzavanja += "sreda";
+                        break;
+                    case 4:
+                        DaniOdrzavanja += "četvrtak";
+                        break;
+                    case 5:
+                        DaniOdrzavanja += "petak";
+                        break;
+                    case 6:
+                        DaniOdrzavanja += "subota";
+                        break;
+                    case 0:
+                        DaniOdrzavanja += "nedelja";
+                        break;
+                }
+
+                DaniOdrzavanja += ", ";
+            }
+            if (DaniOdrzavanja != " ")
+            {
+                DaniOdrzavanja = DaniOdrzavanja.Remove(DaniOdrzavanja.Length - 2);    
+            }
+            }
+            
 
             IList<Anketa> SviRezultatiAnketa = await dbContext.Anketa.Where(x => x.IdTureAnk == id).ToListAsync();
 
