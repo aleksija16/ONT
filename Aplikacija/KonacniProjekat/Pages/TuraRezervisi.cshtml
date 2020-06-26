@@ -44,16 +44,16 @@
     </div>
 }
 else{
-        <div class="alert alert-danger" role="alert" style="text-align: center;">Ova tura još uvek nema dodate dane održavanja. Možete rezervisati neku od drugih tura.</div>   
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Ova tura još uvek nema dodate dane održavanja. Možete rezervisati neku od drugih tura. <i class="fas fa-exclamation-triangle"></i></div>   
 }
 
 
 
 @if(Model.NetacnaRezervacija!=null && Model.NetacnaRezervacija != 0)
 {
-    <div class="alert alert-danger" role="alert" style="text-align: center;">Ova tura se ne održava tog dana. Izaberite odgovarajući dan.</div>   
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Ova tura se ne održava tog dana. Izaberite odgovarajući dan. <i class="fas fa-exclamation-triangle"></i></div>   
 }
 
 @if(Model.NeuspesnaRezervacija!=null && Model.NeuspesnaRezervacija!=0){
-     <div class="alert alert-danger" role="alert" style="text-align: center;">Popunjen je kapacitet ove ture. Smanjite broj osoba ili rezervisite drugu turu.</div> 
+     <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Popunjen je kapacitet ove ture. Smanjite broj osoba ili rezervisite drugu turu. <i class="fas fa-exclamation-triangle"></i></div> 
 }

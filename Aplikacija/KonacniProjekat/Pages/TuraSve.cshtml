@@ -32,17 +32,17 @@ ViewData["Title"]="Ture";
                  <h1> @tura.NazivTure  </h1> 
             </div>
             <div class="back-ture">
-                <div><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikazi detalje</a></div>
+                <div><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikaži detalje <i class="fas fa-info-circle"></i></a></div>
                 @if(SessionClass.TipKorisnika=="T")
                 {
-                <div><a asp-page="./TuraRezervisi" asp-route-id="@tura.IdTure">Rezervisi turu</a></div>
-                <div><a asp-page="./TuraOceni" asp-route-id="@tura.IdTure">Oceni turu</a></div>
+                <div><a asp-page="./TuraRezervisi" asp-route-id="@tura.IdTure">Rezerviši turu <i class="far fa-calendar-plus"></i></a></div>
+                <div><a asp-page="./TuraOceni" asp-route-id="@tura.IdTure">Oceni turu <i class="fas fa-star-half-alt"></i></a></div>
                 }
               @if(SessionClass.TipKorisnika=="A")
               {
-                <div><a asp-page="./TuraIzmeni" asp-route-id="@tura.IdTure">Izmeni turu</a></div>
-				<div><a asp-page="./TuraObrisi"  asp-route-id="@tura.IdTure">Obrisi turu</a></div>
-                <div><a asp-page="./TuraKomentari"  asp-route-id="@tura.IdTure">Prikazi komentare</a></div>
+                <div><a asp-page="./TuraIzmeni" asp-route-id="@tura.IdTure">Izmeni turu <i class="fas fa-edit"></i></a></div>
+				<div><a asp-page="./TuraObrisi"  asp-route-id="@tura.IdTure">Obriši turu <i class="fas fa-trash-alt"></i></a></div>
+                <div><a asp-page="./TuraKomentari"  asp-route-id="@tura.IdTure">Prikaži komentare <i class="far fa-comments"></i></a></div>
               }
             </div>
         </div>

@@ -25,17 +25,17 @@
           <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisničko ime" required />
           <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
           <input type="file"  asp-for="NoviVodic.Slika" placeholder="Slika" required />
-       <button type="submit">Registruj se</button>
+       <button type="submit">Registruj vodiča <i class="far fa-id-badge"></i></button>
      </form>
      </div>
 </div>
 
 @if (Model.PostojiVec)
 {
-        <div class="alert alert-danger" role="alert" style="text-align: center;">Korisnik sa tim korisničkim imenom već postoji.</div> 
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Korisnik sa tim korisničkim imenom već postoji. <i class="fas fa-exclamation-triangle"></i></div> 
 }
 }
 else{
-  <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici, samo admin može da kreira nalog</div> 
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da kreira nalog. <i class="fas fa-exclamation-triangle"></i></div> 
 }
 

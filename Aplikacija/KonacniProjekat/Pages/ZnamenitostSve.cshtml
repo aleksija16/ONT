@@ -40,11 +40,11 @@ ViewData["Title"]="Znamenitosti";
             </div>
             <div class="back-znamenitosti">
                     <div class="text-center"><h2>@znamenitost.NazivZnamenitosti</h2></div>
-                    <div><a asp-page="./ZnamenitostJedna" asp-route-id="@znamenitost.IdZnamenitosti">Vidi znamenitost</a></div>
+                    <div><a asp-page="./ZnamenitostJedna" asp-route-id="@znamenitost.IdZnamenitosti">Prikaži detalje <i class="fas fa-info-circle"></i></a></div>
                       @if(SessionClass.TipKorisnika=="A"){
-                    <div><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost</a></div>
-                    <div><a asp-page="./ZnamenitostObrisi" asp-route-id="@znamenitost.IdZnamenitosti">Obrisi znamenitost</a></div>
-                            <div><a asp-page="./ZnamenitostSlika" asp-route-id="@znamenitost.IdZnamenitosti">Dodaj sliku</a></div>
+                    <div><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost <i class="fas fa-edit"></i></a></div>
+                    <div><a asp-page="./ZnamenitostObrisi" asp-route-id="@znamenitost.IdZnamenitosti">Obriši znamenitost <i class="fas fa-trash-alt"></i></a></div>
+                            <div><a asp-page="./ZnamenitostSlika" asp-route-id="@znamenitost.IdZnamenitosti">Dodaj sliku <i class="fas fa-images"></i></a></div>
                       }
             </div>
         </div>

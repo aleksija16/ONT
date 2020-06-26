@@ -2,6 +2,11 @@
 @model KonacniProjekat.VodicOceniModel
 @{
 }
+
+<div>
+ <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#84c1ff;">Lista vodiča</a>
+</div>
+
 @if(SessionClass.TipKorisnika=="T"){
 <div class="cardVodic" style="text-align: center; height:200px">
 <form method="post">
@@ -34,7 +39,7 @@
       <button type="submit" class="btn btn-primary">Oceni</button>
   }
   else{
-    <label style="color:red">Ne mozete da ocenite vodica s kojim niste bili na turi!</label>
+    <label style="color:red"><i class="fas fa-exclamation-triangle"></i> Ne mozete da ocenite vodica s kojim niste bili na turi! <i class="fas fa-exclamation-triangle"></i></label>
     
 <div>
  <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#ff66a3;">Lista vodiča</a>
@@ -44,7 +49,7 @@
 </div>
 }
 else{
-  <div class="alert alert-danger" role="alert" style="text-align: center;">Niste prijavljeni kao turista, ne možete da ocenite vodiča</div> 
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Niste prijavljeni kao turista, ne možete da ocenite vodiča. <i class="fas fa-exclamation-triangle"></i></div> 
 }
 
 

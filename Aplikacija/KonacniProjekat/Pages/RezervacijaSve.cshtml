@@ -30,10 +30,10 @@ ViewData["Title"]="Rezervacije";
                             <td>@rezervacija.IdRezervacije</td>
                             <td>@rezervacija.Datum</td>
                             <td>@rezervacija.BrojOsoba</td>
-                            <td><a asp-page="./RezervacijaJedna" asp-route-id="@rezervacija.IdRezervacije">Vidi rezervaciju</a></td>
+                            <td><a asp-page="./RezervacijaJedna" asp-route-id="@rezervacija.IdRezervacije">Prikaži detalje <i class="fas fa-calendar-day"></i></a></td>
                             @if (SessionClass.TipKorisnika == "T")
                             {
-                                <td><a asp-page="./RezervacijaOtkazi" asp-route-id="@rezervacija.IdRezervacije">Otkaži rezervaciju</a></td>
+                                <td><a asp-page="./RezervacijaOtkazi" asp-route-id="@rezervacija.IdRezervacije">Otkaži rezervaciju <i class="fas fa-calendar-times"></i></a></td>
                             }
                         </tr>
                     }
@@ -45,5 +45,5 @@ ViewData["Title"]="Rezervacije";
 }
 else
 {
-        <div class="alert alert-danger" role="alert" style="text-align: center;">Morate biti ulogovani da biste videli svoje rezervacije.</div>
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Morate biti ulogovani da biste videli svoje rezervacije. <i class="fas fa-exclamation-triangle"></i></div>
 }

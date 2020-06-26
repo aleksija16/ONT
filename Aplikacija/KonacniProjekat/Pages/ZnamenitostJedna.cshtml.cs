@@ -29,7 +29,7 @@ namespace KonacniProjekat
             SessionId = SessionClass.SessionId;            
 
             TrenutnaZnamenitost=await dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==id).FirstOrDefaultAsync();
-           Slike = await dbContext.Slike.Where(x=>x.IdZnamenitost==id).ToListAsync();
+            Slike = await dbContext.Slike.Where(x=>x.IdZnamenitost==id).ToListAsync();
 
             if(TrenutnaZnamenitost==null){
                 return NotFound();

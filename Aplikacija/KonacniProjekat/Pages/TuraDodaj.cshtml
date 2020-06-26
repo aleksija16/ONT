@@ -93,12 +93,12 @@
   </form>
 
   if(Model.ZauzetVodic != null && Model.ZauzetVodic != 0){
-        <div class="alert alert-danger" role="alert" style="text-align: center;">Izabrani vodič već vodi redovnu turu tog dana ili ima rezervacije za taj dan od strane nekog drugog korisnika. Izaberite drugog vodiča ili drugi datum.</div>    
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Izabrani vodič već vodi redovnu turu tog dana ili ima rezervacije za taj dan od strane nekog drugog korisnika. Izaberite drugog vodiča ili drugi datum. <i class="fas fa-exclamation-triangle"></i></div>    
   }
 
   
 
 }
 else{
-  <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici. Novu turu može da kreira samo Administrator, a Custom rezervaciju može samo turista da napravi.</div> 
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici. Novu turu može da kreira samo Administrator, a Custom rezervaciju može samo turista da napravi. <i class="fas fa-exclamation-triangle"></i></div> 
 }
