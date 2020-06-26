@@ -59,10 +59,13 @@ namespace KonacniProjekat
             else if(IzabraniTip=="Spomenici"){
                 SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
             }
-            else if(IzabraniTip=="Okolina Nisa"){
+            else if(IzabraniTip=="Okolina Niša"){
                 SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
             }
-            else if(IzabraniTip=="Prikazi sve")
+            else if(IzabraniTip=="Crkve i manastiri"){
+                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
+            }
+            else if(IzabraniTip=="Prikaži sve")
             {
                 SveZnamenitosti=await qZnamenitosti.ToListAsync();
             }
