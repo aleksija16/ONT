@@ -10,11 +10,18 @@ ViewData["Title"] = "Rezervacije";
   </ul>
 </nav>
 
-<div class="card">
-  <div class="container">
+<div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Podaci o rezervaciji</h6>
+      </div>
+      <div class="card-body">
+
 <form method="get">
-    <div><h4>Id rezervacije</h4>@Model.TrenutnaRezervacija.IdRezervacije</div>
-    <div><h4>Tura</h4>
+
+    <div class="naziv">Id rezervacije: </div>
+      <div class="vrednost">@Model.TrenutnaRezervacija.IdRezervacije</div>
+
+    <div class="naziv">Tura</div>
       @if (Model.TrenutnaRezervacija.IdTureRNavigation.TipTure == "T")
       {
         <a asp-page="./TuraJedna" asp-route-id="@Model.TrenutnaRezervacija.IdTureR">@Model.TrenutnaRezervacija.IdTureRNavigation.NazivTure</a>
@@ -32,19 +39,22 @@ ViewData["Title"] = "Rezervacije";
           }
         </ul>
       }
-    </div>
 
-    <div><h4>Datum</h4>@Model.TrenutnaRezervacija.Datum</div>
+
+    <div class="naziv">Datum </div>
+    <div class="vrednost">@Model.TrenutnaRezervacija.Datum</div>
+
     @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
     {
-      <div><h4>Vodič</h4><a asp-page="./VodicJedan" asp-route-id="@Model.TrenutnaRezervacija.IdVodicaR">@Model.TrenutnaRezervacija.IdVodicaRNavigation.ImeVodica @Model.TrenutnaRezervacija.IdVodicaRNavigation.PrezimeVodica</a></div>
+      <div class="naziv">Vodič</div><a asp-page="./VodicJedan" asp-route-id="@Model.TrenutnaRezervacija.IdVodicaR">@Model.TrenutnaRezervacija.IdVodicaRNavigation.ImeVodica @Model.TrenutnaRezervacija.IdVodicaRNavigation.PrezimeVodica</a>
     }
     @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "V")
     {
-      <div><h4>Turista</h4>@Model.TrenutnaRezervacija.IdTuristeRNavigation.ImeTuriste @Model.TrenutnaRezervacija.IdTuristeRNavigation.PrezimeTuriste</div>
+      <div class="naziv">Turista </div>
+      <div class="vrednost">@Model.TrenutnaRezervacija.IdTuristeRNavigation.ImeTuriste @Model.TrenutnaRezervacija.IdTuristeRNavigation.PrezimeTuriste</div>
     }
     
-    <div><h4>Broj osoba</h4>@Model.TrenutnaRezervacija.BrojOsoba</div>
+    <div class="naziv">Broj osoba</div>
+    <div class="vrednost">@Model.TrenutnaRezervacija.BrojOsoba</div>
 </form>
  </div>
-</div>
