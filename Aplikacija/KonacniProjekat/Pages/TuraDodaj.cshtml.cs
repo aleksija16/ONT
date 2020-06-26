@@ -41,12 +41,15 @@ namespace KonacniProjekat
         public IList<int> IzabraneZnamenitosti {get; set;}
 
         [BindProperty]
-        public bool NijePostavljenDan { get; set;}
+        public string DanasnjiDatum {get; set;}
 
         [BindProperty]
-        public bool NijePostavljenaZnamenitost {get; set;}
+        public string NajkasnijiDatum {get; set;}
 
-        public async Task<IActionResult> OnGetAsync()
+        [BindProperty]
+        public int? ZauzetVodic {get; set;}
+
+        public async Task<IActionResult> OnGetAsync(int? zauzet)
         {
             SessionId = SessionClass.SessionId;
 
@@ -55,6 +58,36 @@ namespace KonacniProjekat
             IList<string> SviVodiciImena = await qVodici.Select(x => x.ImeVodica).ToListAsync();
             IList<string> SviVodiciPrezimena = await qVodici.Select(x => x.PrezimeVodica).ToListAsync();
 
+            ZauzetVodic = zauzet;
+
+            if (SessionClass.TipKorisnika == "T")
+            {
+                String month = DateTime.Now.Month.ToString();
+                if (DateTime.Now.Month < 10)
+                {
+                    month = month.Insert(0, "0");
+                }
+                String day = DateTime.Now.Day.ToString();
+                if (DateTime.Now.Day < 10)
+                {
+                    day = day.Insert(0, "0");
+                }
+                DanasnjiDatum = DateTime.Now.Year.ToString() + "-" + month + "-" + day;
+
+                DateTime NajkasnijiDan = DateTime.Now.AddMonths(6);
+                String monthFuture = NajkasnijiDan.Month.ToString();
+                if (NajkasnijiDan.Month < 10)
+                {
+                    monthFuture = monthFuture.Insert(0, "0");
+                }
+                String dayFuture = NajkasnijiDan.Day.ToString();
+                if (NajkasnijiDan.Day < 10)
+                {
+                    dayFuture = dayFuture.Insert(0, "0");
+                }
+                NajkasnijiDatum = NajkasnijiDan.Year.ToString() + "-" + monthFuture + "-" + dayFuture;
+            }
+
             IList<string> SviVodiciObicnaLista = new List<string>();
             for (var i=0; i<SviVodiciId.Count(); i++)
             {
@@ -62,8 +95,7 @@ namespace KonacniProjekat
             }
 
             SviVodici = new SelectList(SviVodiciObicnaLista);
-        
-           SveZnamenitosti = await dbContext.Znamenitosti.ToListAsync();
+            SveZnamenitosti = await dbContext.Znamenitosti.ToListAsync();
 
             return this.Page();
         }
@@ -144,15 +176,42 @@ namespace KonacniProjekat
                 return this.Page();
             }
 			
+
 			NovaTura.TipTure = "C";
 
             NovaTura.NazivTure = "Custom rezervacija uz nalog: " + SessionClass.ImeKorisnika;
             
+            uint IzabraniVodicId;
             IzabraniVodic = IzabraniVodic.Substring(IzabraniVodic.IndexOf('[') + 1);
-            IzabraniVodic = IzabraniVodic.Trim(']');          
+            IzabraniVodicId = Convert.ToUInt32(IzabraniVodic.Trim(']'));          
+
+            int no = (int)NovaRezervacija.Datum.DayOfWeek;
+            IQueryable<string> sveTureSaOvimVodicem = dbContext.Ture.Where(x => x.IdVodica == IzabraniVodicId).Where(x => x.TipTure == "T").Select(x => x.DanOdrzavanja);
+            List<string> listaTuraDaniOdrzavanja = await sveTureSaOvimVodicem.ToListAsync();
+
+            foreach (var dani in listaTuraDaniOdrzavanja)
+            {
+                if (dani == null || dani.Contains(no.ToString()))
+                {
+                    ZauzetVodic = 1;
+                    return RedirectToPage("./TuraDodaj", new {zauzet=ZauzetVodic});
+                }
+            }     
+            
+            IQueryable<DateTime> sveRezervacijeSaOvimVodicem = dbContext.Rezervacije.Where(x => x.IdVodicaR == IzabraniVodicId).Select(x => x.Datum);
+            List<DateTime> listaDatumaRezervacija = await sveRezervacijeSaOvimVodicem.ToListAsync();
+            
+            foreach (var datum in listaDatumaRezervacija)
+            {
+                if (datum == NovaRezervacija.Datum)
+                {
+                    ZauzetVodic = 1;
+                    return RedirectToPage("./TuraDodaj", new {zauzet = ZauzetVodic});
+                }
+            }
 
 
-            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.IdVodica == (uint) Convert.ToInt32(IzabraniVodic));
+            IQueryable<Vodici> qIzabraniVodic=dbContext.Vodici.Where(x=>x.IdVodica == Convert.ToUInt32(IzabraniVodicId));
             NovaTura.IdVodicaNavigation=await qIzabraniVodic.FirstOrDefaultAsync();
 
             dbContext.Ture.Add(NovaTura);

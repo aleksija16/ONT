@@ -49,11 +49,33 @@ namespace KonacniProjekat
         [BindProperty]
         public string DanasnjiDatum {get; set;}
 
+        [BindProperty]
+        public string NajkasnijiDatum {get; set;}
+
+        [BindProperty]
+        public bool NeispravnaTura {get; set;}
+
         public async Task<IActionResult>OnGetAsync(int? id, int? neuspesno, int? netacno)
         {
+
             if(id!=null){
                 TuraId=(int)id;
             }      
+            else return NotFound();
+
+            OvaTura=await dbContext.Ture.Where( x => x.IdTure == (uint)id).FirstOrDefaultAsync();
+
+            if(OvaTura == null)
+            {
+                return NotFound();
+            }
+
+            if(OvaTura.DanOdrzavanja == null)
+            {
+                NeispravnaTura = true;
+                return this.Page();   
+            }
+
 
             NeuspesnaRezervacija = (int?)neuspesno;      
             NetacnaRezervacija = (int?)netacno;
@@ -63,21 +85,25 @@ namespace KonacniProjekat
             {
                 month = month.Insert(0, "0");
             }
-
             String day = DateTime.Now.Day.ToString();
             if (DateTime.Now.Day < 10)
             {
                 day = day.Insert(0, "0");
             }
-
             DanasnjiDatum = DateTime.Now.Year.ToString() + "-" + month + "-" + day;
 
-            OvaTura=await dbContext.Ture.Where( x => x.IdTure == (uint)id).FirstOrDefaultAsync();
-
-            if(OvaTura == null)
-            {
-                return NotFound();
-            }
+            DateTime NajkasnijiDan = DateTime.Now.AddMonths(6);
+                String monthFuture = NajkasnijiDan.Month.ToString();
+                if (NajkasnijiDan.Month < 10)
+                {
+                    monthFuture = monthFuture.Insert(0, "0");
+                }
+                String dayFuture = NajkasnijiDan.Day.ToString();
+                if (NajkasnijiDan.Day < 10)
+                {
+                    dayFuture = dayFuture.Insert(0, "0");
+                }
+                NajkasnijiDatum = NajkasnijiDan.Year.ToString() + "-" + monthFuture + "-" + dayFuture;
 
             DaniOdrzavanja = " ";
             string dani =  OvaTura.DanOdrzavanja;

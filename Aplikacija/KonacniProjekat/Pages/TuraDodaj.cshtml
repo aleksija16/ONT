@@ -11,22 +11,21 @@
 </nav>
 @if(SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
 {
-<form method="post">
-       <div class="text-center">
-        @if (SessionClass.TipKorisnika == "A")
-        {
-          <h2 class="display 4">Nova tura</h2>
-        }
-        else
-        {
-          <h2 class="display 4">Custom rezervacija</h2>
-        }
+  
+  <form method="post">
+    <div class="text-center">
+      @if (SessionClass.TipKorisnika == "A")
+      {
+        <h2 class="display 4">Nova tura</h2>
+      }
+      else
+      {
+        <h2 class="display 4">Custom rezervacija</h2>
+      }
     </div>
     
-   <div class="dodaj">
-    <div id="formContent">        
-        <input type="hidden" asp-for="@Model.NijePostavljenDan" />
-        <input type="hidden" asp-for="@Model.NijePostavljenaZnamenitost" />
+    <div class="dodaj">
+      <div id="formContent">        
         @if (SessionClass.TipKorisnika == "A")
         {
           <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
@@ -44,7 +43,8 @@
         else
         {
           <label class="form-control select-fit-text">Datum odrzavanja:</label>
-          <div class="forma-check"><input type="date" asp-for="NovaRezervacija.Datum" required/></div>
+          <div class="forma-check"><input type="date" min="@Model.DanasnjiDatum" 
+            max="@Model.NajkasnijiDatum" asp-for="NovaRezervacija.Datum" required/></div>
         }
         
         <label>Vreme odrzavanja: <input type="time" asp-for="NovaTura.VremeOdrzavanja" required /></label>
@@ -62,15 +62,15 @@
         <input asp-for="NovaTura.Kapacitet" min="1" max="100" required />
 
         <select asp-for="IzabraniVodic" asp-items="@Model.SviVodici" required>
-            <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
+          <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
         </select>
 
         <label class="form-control select-fit-text">Izaberite znamenitosti:</label>
         @foreach (var znamenitost in Model.SveZnamenitosti)
         {
-            <div class="forma-check">
-                <input type="checkbox" name="IzabraneZnamenitosti[]" value="@znamenitost.IdZnamenitosti" /> <h6>@znamenitost.NazivZnamenitosti</h6>
-            </div>
+          <div class="forma-check">
+            <input type="checkbox" name="IzabraneZnamenitosti[]" value="@znamenitost.IdZnamenitosti" /> <h6>@znamenitost.NazivZnamenitosti</h6>
+          </div>
         } 
          
         @if (SessionClass.TipKorisnika == "A")
@@ -85,22 +85,18 @@
             Kreiraj custom rezervaciju
           </button>
         }
-    </div>  
+      </div>  
     </div>
 
-    @if (Model.NijePostavljenaZnamenitost)
-    {
-      <div class="alert alert-danger" role="alert" style="text-align: center;">Morate odabrati bar jednu znamenitost u turi.</div>
-    }
-
-    @if(Model.NijePostavljenDan)
-    {
-      <div class="alert alert-danger" role="alert" style="text-align: center;">Morate izabrati bar jedan dan održavanja ture.</div> 
-    }
 
 
+  </form>
 
-</form>
+  if(Model.ZauzetVodic != null && Model.ZauzetVodic != 0){
+        <div class="alert alert-danger" role="alert" style="text-align: center;">Izabrani vodič već vodi redovnu turu tog dana ili ima rezervacije za taj dan od strane nekog drugog korisnika. Izaberite drugog vodiča ili drugi datum.</div>    
+  }
+
+  
 
 }
 else{
