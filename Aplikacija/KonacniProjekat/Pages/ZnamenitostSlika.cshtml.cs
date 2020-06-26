@@ -22,9 +22,19 @@ namespace KonacniProjekat
         [BindProperty]
         public Znamenitosti TrenutnaZnamenitost{get;set;}
 
+        public int ZnamenitostId{get;set;}
+
         [BindProperty]
         public Slike NovaSlika{get;set;}
-        public void OnGet(){
+        public async Task<IActionResult> OnGet(int id){
+
+            SessionId = SessionClass.SessionId;
+
+            ZnamenitostId=id;
+
+            TrenutnaZnamenitost=await dbContext.Znamenitosti.Where( x => x.IdZnamenitosti == (uint)ZnamenitostId).FirstOrDefaultAsync();
+
+            return Page();
        }
 
 

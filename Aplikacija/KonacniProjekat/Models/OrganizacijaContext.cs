@@ -511,7 +511,7 @@ namespace KonacniProjekat.Models
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.CenaUlaznice)
-                    .HasColumnType("varchar(45)")
+                    .HasColumnType("varchar(200)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
