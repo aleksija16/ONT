@@ -14,7 +14,7 @@
 @if(SessionClass.TipKorisnika == "A") 
 {
     <div class="text-right">
-        <h3><a asp-page="./KvizDodaj">Dodaj kviz</a></h3>
+        <h3><a asp-page="./KvizDodaj">Dodaj kviz <i class="fas fa-plus-circle"></i></a></h3>
     </div>
 }
 
@@ -84,12 +84,12 @@
                         </td>
                         @if (SessionClass.TipKorisnika == "A")
                         {
-                            <td><a asp-page="./KvizJedan" asp-route-id="@kviz.IdKviza">Vidi kviz</a></td>
-                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kviz.IdKviza">Izmeni kviz</a></td>
+                            <td><a asp-page="./KvizJedan" asp-route-id="@kviz.IdKviza">Vidi kviz <i class="fas fa-newspaper"></i></a></td>
+                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kviz.IdKviza">Izmeni kviz <i class="fas fa-file-signature"></i></a></td>
                         }
                         else if (SessionClass.TipKorisnika == "T")
                         {
-                            <td><a asp-page="./KvizUradi" asp-route-id="@kviz.IdKviza">Uradi kviz</a></td>
+                            <td><a asp-page="./KvizUradi" asp-route-id="@kviz.IdKviza">Uradi kviz <i class="fas fa-play"></i></a></td>
                         }                        
                     </tr>
                 }
@@ -158,12 +158,12 @@
                         </td>
                         @if (SessionClass.TipKorisnika == "A")
                         {
-                            <td><a asp-page="./KvizJedan" asp-route-id="@kvizZ.IdKviza">Vidi kviz</a></td>
-                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kvizZ.IdKviza">Izmeni kviz</a></td>
+                            <td><a asp-page="./KvizJedan" asp-route-id="@kvizZ.IdKviza">Vidi kviz <i class="fas fa-newspaper"></i></a></td>
+                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kvizZ.IdKviza">Izmeni kviz <i class="fas fa-file-signature"></i></a></td>
                         }
                         else if (SessionClass.TipKorisnika == "T")
                         {
-                            <td><a asp-page="./KvizUradi" asp-route-id="@kvizZ.IdKviza">Uradi kviz</a></td>
+                            <td><a asp-page="./KvizUradi" asp-route-id="@kvizZ.IdKviza">Uradi kviz <i class="fas fa-play"></i></a></td>
                         }                        
                     </tr>
                 }
