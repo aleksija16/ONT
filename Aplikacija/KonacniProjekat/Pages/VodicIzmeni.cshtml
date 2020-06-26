@@ -1,0 +1,38 @@
+@page
+@model KonacniProjekat.VodicIzmeniModel
+@{
+ViewData["Title"]="Izmena vodiča";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Izmena vodiča</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./VodiciSvi">Prikazi listu vodiča</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<form method="post">
+    <div class="izmeni">
+        <div id="formContent">
+        <input type="hidden" asp-for="VodicId"/>
+        <label class="form-control">Ime: </label> <input asp-for="OvajVodic.ImeVodica" class="form-control" />
+        <label class="form-control">Prezime:</label> <input asp-for="OvajVodic.PrezimeVodica" class="form-control" />
+        <label class="form-control">Datum rođenja:</label> <input asp-for="OvajVodic.DatumRodjenja" class="form-control"/>
+        <label class="form-control">Pol:</label> <input asp-for="OvajVodic.Pol" class="from-control" />
+        <label class="form-control">Broj telefona:</label> <input asp-for="OvajVodic.BrojTelefona" class="form-control" />
+        <label class="form-control">Licenca:</label> <input asp-for="OvajVodic.Licenca" class="form-control" />
+        <label class="form-control">Email:</label> <input asp-for="OvajVodic.Email" class="form-control" />
+        <label class="form-control">Profilna slika:</label> <input asp-for="OvajVodic.Slika" class="form-control" />
+        <button type="submit">Sacuvaj izmene</button>
+        </div>
+    </div>
+</form>
+}
+ else{
+    <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici</div> 
+}
