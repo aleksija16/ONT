@@ -108,10 +108,31 @@ body {
   background-image: linear-gradient(315deg, #84c1ff  0%, #eaf4ff  74%);
 }
 
+.dugme {
+	box-shadow: 3px 4px 0px 0px #52abff;
+	background:linear-gradient(to bottom, #f8fbff 5%, #84c2ff 100%);
+	background-color:#f8fbff;
+	border-radius:15px;
+	border:1px solid #84c2ff;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:17px;
+	padding:7px 25px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #84c2ff;
+  margin: 10px;
+}
+.dugme:hover {
+	background:linear-gradient(to bottom, #84c2ff 5%, #f8fbff 100%);
+	background-color:#84c2ff;
+}
+.dugme:active {
+	position:relative;
+	top:1px;
+}
 
-input[type=button]:hover, input[type=submit]:hover{
-  background-color: #84c1ff ;
-} 
 input[type=text], input[type="password"], input[type="date"],label {
   background-color: #f8fbff ;
   background-image: linear-gradient(315deg, #f8fbff  0%, #d6eaff 74%);
