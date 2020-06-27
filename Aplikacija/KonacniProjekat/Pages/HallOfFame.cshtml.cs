@@ -25,7 +25,7 @@ namespace KonacniProjekat
         public async Task OnGetAsync(int id)
         {
             sviKvizovi = await dbContext.Kvizovi.ToListAsync();   
-            SviHOF = await dbContext.HallOfFame.Where(x=>x.IdKvizaHof==id).ToListAsync();
+            SviHOF = await dbContext.HallOfFame.Where(x=>x.IdKvizaHof==id).OrderByDescending(x=>x.Poeni).ToListAsync();
             foreach(var hof in SviHOF)
             {
                     hof.IdKvizaHofNavigation = await dbContext.Kvizovi.Where(x=>x.IdKviza==hof.IdKvizaHof).FirstOrDefaultAsync();
