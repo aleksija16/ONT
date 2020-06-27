@@ -44,8 +44,9 @@ namespace KonacniProjekat
        }
 
 
-       public async Task<IActionResult> OnPostAsync()
+       public async Task<IActionResult> OnPostAsync(int id)
        {
+           ZnamenitostId=id;
         
            if(!ModelState.IsValid)
            {
@@ -57,7 +58,7 @@ namespace KonacniProjekat
            dbContext.Znamenitosti.Attach(TrenutnaZnamenitost).State=EntityState.Modified;
            await dbContext.SaveChangesAsync();
 
-           return RedirectToPage("./ZnamenitostSve");
+           return RedirectToPage("./ZnamenitostJedna", new {id = id});
            }
        
     }
