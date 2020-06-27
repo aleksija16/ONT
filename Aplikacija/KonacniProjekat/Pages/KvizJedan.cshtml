@@ -19,43 +19,48 @@
   <li class="page-item">
     <a class="page-link" asp-page="./KvizDodajPitanje" asp-route-id="@Model.OvajKviz.IdKviza">Dodaj pitanje u kviz</a> 
       </li>
-    }                  
+    }               
   </ul>
 </nav>
 
 
 
 
-
-<div>
-    <table class="table table-bordered">
-        <thead>
-            <th></th>
-            <th>Pitanje</th>
-            <th>Tačan odgovor</th>
-            <th>Svi odgovori</th>
-            <th></th>
-            <th></th>
-        </thead>
+@if(SessionClass.TipKorisnika == "A")
+{
+  <div>
+      <table class="table table-bordered">
+          <thead>
+              <th></th>
+              <th>Pitanje</th>
+              <th>Tačan odgovor</th>
+              <th>Svi odgovori</th>
+              <th></th>
+              <th></th>
+          </thead>
         
-        @foreach (var pitanje in Model.PitanjaUzKviz)
-        {
-            <tr>
-                <td>@Model.PitanjaUzKviz.IndexOf(pitanje)</td>
-                <td>@pitanje.TekstPitanja</td>
-                <td>@pitanje.TacanOdgovor</td>
-                <td>
-                    <ul>
-                        <li>@pitanje.OdgovorA</li>   
-                        <li>@pitanje.OdgovorB</li>
-                        <li>@pitanje.OdgovorC</li>
-                    </ul>
-                </td>
-                <td><a asp-page="./KvizIzmeniPitanje" asp-route-id="@pitanje.IdPitanja">Izmeni pitanje</a></td>
-                <td><a asp-page="./KvizObrisiPitanje" asp-route-id="@pitanje.IdPitanja">Obriši pitanje</a></td>
-            </tr>
-        }
-    </table>
-</div>
-
+          @foreach (var pitanje in Model.PitanjaUzKviz)
+          {
+              <tr>
+                  <td>@Model.PitanjaUzKviz.IndexOf(pitanje)</td>
+                  <td>@pitanje.TekstPitanja</td>
+                  <td>@pitanje.TacanOdgovor</td>
+                  <td>
+                      <ul>
+                          <li>@pitanje.OdgovorA</li>   
+                          <li>@pitanje.OdgovorB</li>
+                          <li>@pitanje.OdgovorC</li>
+                      </ul>
+                  </td>
+                  <td><a asp-page="./KvizIzmeniPitanje" asp-route-id="@pitanje.IdPitanja">Izmeni pitanje</a></td>
+                  <td><a asp-page="./KvizObrisiPitanje" asp-route-id="@pitanje.IdPitanja">Obriši pitanje</a></td>
+              </tr>
+          }
+      </table>
+  </div>
+}
+else
+{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da pristupi informacijama o kvizu. <i class="fas fa-exclamation-triangle"></i></div>      
+}
 

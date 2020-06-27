@@ -15,22 +15,29 @@
 	</ul>
 </nav>
 
-<form method="post">
-    <div class="izmeni">
-        <div id="formContent">
-            <input type="hidden" asp-for="KvizId" />
-            <input type="hidden" asp-for="SessionId" />
-            <label class="form-control">Naziv kviza:</label> <input asp-for="OvajKviz.NazivKviza" class="form-control" placeholder="OvajKviz.Naziv kviza" required/>
-            <label class="form-control">Znamenitost:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista" required>
-                                                                    <option value="">Bez znamenitosti</option>
-                                                                    <option value="" selected disabled hidden>Izaberite za koju znamenitost je vezan kviz.</option>
-                                                                </select>
-             <label class="form-control">Tura:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzabranaTuraString" style="display:block;" asp-items="Model.IzborTuraLista" required>
-                                                                    <option value="">Bez ture</option>
-                                                                    <option value="" selected disabled hidden>Izaberite za koju turu je vezan kviz.</option>
-                                                                </select>
+@if(SessionClass.TipKorisnika == "A")
+{
+    <form method="post">
+      <div class="izmeni">
+         <div id="formContent">
+                <input type="hidden" asp-for="KvizId" />
+                <input type="hidden" asp-for="SessionId" />
+                <label class="form-control">Naziv kviza:</label> <input asp-for="OvajKviz.NazivKviza" class="form-control" placeholder="OvajKviz.Naziv kviza" required/>
+                <label class="form-control">Znamenitost:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista" required>
+                                                                        <option value="">Bez znamenitosti</option>
+                                                                        <option value="" selected disabled hidden>Izaberite za koju znamenitost je vezan kviz.</option>
+                                                                    </select>
+             <label     class="form-control">Tura:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzabranaTuraString" style="display:block;" asp-items="Model.IzborTuraLista" required>
+                                                                        <option value="">Bez ture</option>
+                                                                        <option value="" selected disabled hidden>Izaberite za koju turu je vezan kviz.</option>
+                                                                    </select>
 
-            <button type="submit">Izmeni kviz</button>
+                <button type="submit" class="dugme">Izmeni kviz</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+}
+else
+{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da dodaje pitanja u kviz. <i class="fas fa-exclamation-triangle"></i></div>   
+}

@@ -31,15 +31,7 @@ namespace KonacniProjekat
         
         public IActionResult OnGet(int id)
         {
-            if (SessionClass.TipKorisnika != "A")
-            {
-                
-                return this.StatusCode(403);
-            }
-
             KvizId = id;
-
-          
 
             return this.Page();
         }

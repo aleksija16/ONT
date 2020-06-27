@@ -13,23 +13,29 @@
     <li class="page-item"><a class="page-link" asp-page="./KvizJedan" asp-route-id="@Model.KvizId"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz kviza</a></li>
   </ul>
 </nav>
-
-<form method="post">
-    <div class="dodaj" >
-        <div id="formContent">
-             <input type="hidden" asp-for="KvizId" />
-            <input type="hidden" asp-for="SessionId" />
-            <label class="form-control">Pitanje:</label> <input asp-for="NovoPitanje.TekstPitanja" placeholder="Unesite tekst pitanja" />
-            <label class="form-control">Odgovor A:</label> <input asp-for="NovoPitanje.OdgovorA" placeholder="A" />
-            <label class="form-control">Odgovor B:</label> <input asp-for="NovoPitanje.OdgovorB" placeholder="B" />
-            <label class="form-control">Odgovor C:</label> <input asp-for="NovoPitanje.OdgovorC" placeholder="C" />
-            <label class="form-control select-fit-text">Tačan odgovor je pod:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzborTacnogOdgovoraInt">
-                                                                            <option value="1">A</option>
-                                                                            <option value="2">B</option>
-                                                                            <option value="3">C</option>
-                                                                            <option value="" selected disabled hidden>Izaberite koji odgovor je tačan.</option>
-                                                                        </select>
-           <button type="submit">Dodaj pitanje</button>
+@if (SessionClass.TipKorisnika == "A") 
+{
+    <form method="post">
+        <div class="dodaj" >
+            <div id="formContent">
+                 <input type="hidden" asp-for="KvizId" />
+                <input type="hidden" asp-for="SessionId" />
+                <label class="form-control">Pitanje:</label> <input asp-for="NovoPitanje.TekstPitanja" placeholder="Unesite tekst pitanja" />
+                <label class="form-control">Odgovor A:</label> <input asp-for="NovoPitanje.OdgovorA" placeholder="A" />
+                <label class="form-control">Odgovor B:</label> <input asp-for="NovoPitanje.OdgovorB" placeholder="B" />
+                <label class="form-control">Odgovor C:</label> <input asp-for="NovoPitanje.OdgovorC" placeholder="C" />
+                <label class="form-control select-fit-text">Tačan odgovor je pod:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzborTacnogOdgovoraInt">
+                                                                                <option value="1">A</option>
+                                                                                <option value="2">B</option>
+                                                                                <option value="3">C</option>
+                                                                                <option value="" selected disabled hidden>Izaberite koji odgovor je tačan.</option>
+                                                                            </select>
+             <button type="submit" class="dugme">Dodaj pitanje</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+}
+else
+{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da dodaje pitanja u kviz. <i class="fas fa-exclamation-triangle"></i></div>   
+}
