@@ -39,11 +39,6 @@ namespace KonacniProjekat
         
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (SessionClass.TipKorisnika != "A")
-            {
-                return StatusCode(403);
-            }
-
             KvizId = id;
             OvajKviz = await dbContext.Kvizovi.FindAsync((uint)KvizId);
 

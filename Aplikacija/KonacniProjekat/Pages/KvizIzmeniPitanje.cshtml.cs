@@ -33,11 +33,6 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (SessionClass.TipKorisnika != "A")
-            {
-                return this.StatusCode(403);
-            }
-            
             PitanjeId = id;
 
             OvoPitanje = await dbContext.Pitanja.Include(x=>x.IdKvizaNavigation).Where(x=>x.IdPitanja == (uint)PitanjeId).FirstOrDefaultAsync();

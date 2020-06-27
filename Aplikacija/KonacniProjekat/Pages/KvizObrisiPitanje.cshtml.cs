@@ -29,16 +29,11 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (SessionClass.TipKorisnika == "A")
-            {
-                PitanjeId = id;
-                PitanjeZaBrisanje = await dbContext.Pitanja.Include(x=>x.IdKvizaNavigation).Where(x=>x.IdPitanja == (uint)PitanjeId).FirstOrDefaultAsync();
-                if (PitanjeZaBrisanje == null) return NotFound();
+            PitanjeId = id;
+            PitanjeZaBrisanje = await dbContext.Pitanja.Include(x=>x.IdKvizaNavigation).Where(x=>x.IdPitanja == (uint)PitanjeId).FirstOrDefaultAsync();
+            if (PitanjeZaBrisanje == null) return NotFound();
                 
-                return this.Page();
-            }
-            
-            return this.StatusCode(403);
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync()

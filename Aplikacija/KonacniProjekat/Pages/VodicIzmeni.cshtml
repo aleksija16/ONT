@@ -20,15 +20,15 @@ ViewData["Title"]="Izmena vodiča";
     <div class="izmeni">
         <div id="formContent">
         <input type="hidden" asp-for="VodicId"/>
-        <label class="form-control">Ime: </label> <input asp-for="OvajVodic.ImeVodica" class="form-control" />
-        <label class="form-control">Prezime:</label> <input asp-for="OvajVodic.PrezimeVodica" class="form-control" />
-        <label class="form-control">Datum rođenja:</label> <input asp-for="OvajVodic.DatumRodjenja" class="form-control"/>
-        <label class="form-control">Pol:</label> <input asp-for="OvajVodic.Pol" class="from-control" />
-        <label class="form-control">Broj telefona:</label> <input asp-for="OvajVodic.BrojTelefona" class="form-control" />
-        <label class="form-control">Licenca:</label> <input asp-for="OvajVodic.Licenca" class="form-control" />
-        <label class="form-control">Email:</label> <input asp-for="OvajVodic.Email" class="form-control" />
-        <label class="form-control">Profilna slika:</label> <input asp-for="OvajVodic.Slika" class="form-control" />
-        <button type="submit">Sacuvaj izmene</button>
+        <label class="form-control">Ime: </label> <textarea class="form-control text-area-fit" asp-for="OvajVodic.ImeVodica" class="form-control"></textarea>
+        <label class="form-control">Prezime:</label> <textarea class="form-control text-area-fit" asp-for="OvajVodic.PrezimeVodica" class="form-control" ></textarea>
+        <label class="form-control">Datum rođenja:</label> <input type="date" asp-for="OvajVodic.DatumRodjenja" class="form-control"/>
+        <label class="form-control">Pol:</label> <textarea class="form-control text-area-fit" asp-for="OvajVodic.Pol" class="from-control" ></textarea>
+        <label class="form-control">Broj telefona:</label> <textarea class="form-control text-area-fit" asp-for="OvajVodic.BrojTelefona" class="form-control" ></textarea>
+        <label class="form-control">Licenca:</label> <textarea class="form-control text-area-fit" asp-for="OvajVodic.Licenca" class="form-control" ></textarea>
+        <label class="form-control">Email:</label> <textarea class="form-control text-area-fit" asp-for="OvajVodic.Email" class="form-control" ></textarea>
+        <label class="form-control">Profilna slika:</label> <textarea class="form-control text-area-fit" asp-for="OvajVodic.Slika" class="form-control"></textarea>
+        <button type="submit" class="dugme">Sačuvaj izmene</button>
         </div>
     </div>
 </form>

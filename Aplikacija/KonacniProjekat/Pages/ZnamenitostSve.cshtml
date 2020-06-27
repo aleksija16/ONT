@@ -19,11 +19,14 @@ ViewData["Title"]="Znamenitosti";
 }
 
 <form method="post">
-<div>  
-<select class="js-example-basic-single js-states form-control select-fit-text" asp-for="IzabraniTip" asp-items="Model.SviTipovi" >
-  <option >Prikaži sve</option>
-</select>
-<button type="submit" class="dugme">Prikaži</button>
+<div class="filriranje"> 
+    <div id="formContent"> 
+    <p>Filtriraj znamenitosti po tipu: </p>
+   <select class="js-example-basic-single js-states form-control select-fit-text" asp-for="IzabraniTip" asp-items="Model.SviTipovi" style="margin: 0 auto;">
+        <option >Prikaži sve</option>
+    </select>
+        <button type="submit" class="dugme">Prikaži</button>
+    </div>
 </div>
 
 <div class="row">
