@@ -9,7 +9,7 @@
     <li class="page-item"><a class="page-link" asp-page="./TuraJedna" asp-route-id="@Model.OvaTura.IdTure"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz ture</a></li>
   </ul>
 </nav>
-
+					  						 																																												  
 <div class="text-center">
     <h1 class="=display-4">Anketa za turu: @Model.OvaTura.NazivTure</h1>
 </div>
@@ -19,12 +19,12 @@
         <li>
             <label class="form-control select-fit-text">Tip Vaše ture:</label>
             <select class="form-control select-fit-text" asp-for="@Model.OcenaTure.TipTuriste">
-                <option value="PorodicniOdmor">Porodicni odmor</option>
-                <option value="OdmorSaPrijateljima">Odmor sa prijateljima</option>
-                <option value="UčeničkaEkskurzija">Učenička ekskurzija</option>
-                <option value="StudentskaEkskurzija">Studentska ekskurzija</option>
-                <option value="PoslovniTip">Poslovni tip</option>
-                <option value="NekiDrugiTip">Neki drugi tip</option>
+                <option value="Porodični odmor">Porodicni odmor</option>
+                <option value="Odmor sa prijateljima">Odmor sa prijateljima</option>
+                <option value="Učenička ekskurzija">Učenička ekskurzija</option>
+                <option value="Studentska ekskurzija">Studentska ekskurzija</option>
+                <option value="Poslovno">Poslovni tip</option>
+                <option value="Drugo">Neki drugi tip</option>
             </select>
         </li>
         

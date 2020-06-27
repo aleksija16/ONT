@@ -68,7 +68,7 @@ namespace KonacniProjekat
 
             dbContext.Pitanja.Attach(OvoPitanje).State = EntityState.Modified;  
             await dbContext.SaveChangesAsync();
-            return RedirectToPage("./KvizJedan", new {id = SessionId, kviz = KvizId});
+            return RedirectToPage("./KvizJedan", new {id = KvizId});
         
 
         }

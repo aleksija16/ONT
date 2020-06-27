@@ -20,7 +20,7 @@ ViewData["Title"]="Izmena znamenitosti";
     <div class="izmeni">
         <div id="formContent">
         <input type="hidden" asp-for="ZnamenitostId"/>
-        <label class="form-control">Naziv: </label> <input asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" />
+        <label class="form-control">Naziv: </label> <input asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" required/>
         <label class="form-control">Lokacija:</label> <input asp-for="TrenutnaZnamenitost.Lokacija" class="form-control" />
         <label class="form-control">Opis:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.Opis"></textarea> 
         <label class="form-control">Radno vreme:</label> <input asp-for="TrenutnaZnamenitost.RadnoVreme" class="form-control" />
@@ -34,5 +34,5 @@ ViewData["Title"]="Izmena znamenitosti";
 </form>
 }
  else{
-    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da izmeni znamenitost. <i class="fas fa-exclamation-triangle"></i></div> 
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da izmeni znamenitost. <i class="fas fa-exclamation-triangle"></i></div>
 }

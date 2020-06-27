@@ -33,10 +33,25 @@ namespace KonacniProjekat
         public int[] IzabraniDani {get; set;}
 
         [BindProperty]
+        public string VecIzabraniDaniString {get; set;}
+
+        [BindProperty]
+        public string DaniOdrzavanjaPreIzmene {get; set;}
+
+        [BindProperty]
         public IList<int> IzabraneZnamenitosti {get; set;}
 
         [BindProperty]
+        public IList<int> ZnamenitostiZaUklanjanje {get; set;}
+
+        [BindProperty]
         public IList<Znamenitosti> VecZnamenitostiUOvojTuri {get; set;}
+
+        [BindProperty]
+        public IList<Znamenitosti> ZnamenitostiKojeNisuUTuri {get; set;}
+
+        [BindProperty]
+        public string VecZnamenitostiUOvojTuriString {get; set;}
 
         public readonly OrganizacijaContext dbContext;
 
@@ -47,8 +62,9 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            TuraId = id;
           
-            OvaTura = await dbContext.Ture.FindAsync((uint)id);
+            OvaTura = await dbContext.Ture.Include(x => x.IdVodicaNavigation).Where( x => x.IdTure == (uint)id).FirstOrDefaultAsync();
 
             if (OvaTura == null)
             {
@@ -65,15 +81,74 @@ namespace KonacniProjekat
             {
                 SviVodiciObicnaLista.Add(SviVodiciImena[i] + " " + SviVodiciPrezimena[i] + " [" + SviVodiciId[i].ToString() + "]");
             }
+            SviVodici = new SelectList(SviVodiciObicnaLista);
+
+            if (OvaTura.IdVodica != null)
+            {
+                IzabraniVodic = "";
+                IzabraniVodic = OvaTura.IdVodicaNavigation.ImeVodica + " " + OvaTura.IdVodicaNavigation.PrezimeVodica+ " [" + OvaTura.IdVodica.ToString() + "]";
+            }
+            
+            DaniOdrzavanjaPreIzmene = OvaTura.DanOdrzavanja;
+
+            VecIzabraniDaniString = "";
+            if (OvaTura.DanOdrzavanja != null)
+            {
+                String[] daniString = OvaTura.DanOdrzavanja.Split(' ');
+                int[] VecIzabraniDani = new int[daniString.Length];
+                for (int i=0; i<daniString.Count(); i++)
+                {
+                    VecIzabraniDani[i] = Convert.ToInt32(daniString[i]);
+                    switch(VecIzabraniDani[i])
+                    {
+                        case 0:
+                            VecIzabraniDaniString += "nedelja";
+                            break;
+                        case 1:
+                            VecIzabraniDaniString += "ponedeljak";
+                            break;
+                        case 2:
+                            VecIzabraniDaniString += "utorak";
+                            break;
+                        case 3:
+                            VecIzabraniDaniString += "sreda";
+                            break;
+                        case 4:
+                            VecIzabraniDaniString += "četvrtak";
+                            break;
+                        case 5:
+                            VecIzabraniDaniString += "petak";
+                            break;
+                        case 6:
+                            VecIzabraniDaniString += "subota";
+                            break;
+                    }
+
+                    VecIzabraniDaniString += ", ";
+                }
+                if (VecIzabraniDaniString != "")
+                {
+                    VecIzabraniDaniString = VecIzabraniDaniString.Remove(VecIzabraniDaniString.Length - 2);    
+                }
+            
+            }
 
             
 
-            SviVodici = new SelectList(SviVodiciObicnaLista);
-
-            SveZnamenitostiLista = await dbContext.Znamenitosti.ToListAsync();
-
             IQueryable<ZnamenitostiUTurama> qZnamenitostiUTuri = dbContext.ZnamenitostiUTurama.Include(x => x.IdZnamenitostiZutNavigation).Where(x => x.IdTureZut == (uint)TuraId);
             VecZnamenitostiUOvojTuri = await qZnamenitostiUTuri.Select(x => x.IdZnamenitostiZutNavigation).ToListAsync();
+
+            IQueryable<Znamenitosti> qZnamenitostiNisuUTuri = dbContext.Znamenitosti;
+            ZnamenitostiKojeNisuUTuri = await qZnamenitostiNisuUTuri.ToListAsync();
+
+            VecZnamenitostiUOvojTuriString = "";
+            foreach (var znam in VecZnamenitostiUOvojTuri)
+            {
+                ZnamenitostiKojeNisuUTuri.Remove(znam);
+                VecZnamenitostiUOvojTuriString = VecZnamenitostiUOvojTuriString.Insert(VecZnamenitostiUOvojTuriString.Length, znam.NazivZnamenitosti);
+                VecZnamenitostiUOvojTuriString = VecZnamenitostiUOvojTuriString.Insert(VecZnamenitostiUOvojTuriString.Length, ", ");
+            }
+            VecZnamenitostiUOvojTuriString = VecZnamenitostiUOvojTuriString.Trim().Trim(',');
 
             return this.Page();
         }
@@ -126,7 +201,10 @@ namespace KonacniProjekat
                 daniOdrzavanjaOveTure = daniOdrzavanjaOveTure.Trim();
                 OvaTura.DanOdrzavanja = daniOdrzavanjaOveTure;    
             }
-
+            else
+            {
+                OvaTura.DanOdrzavanja = DaniOdrzavanjaPreIzmene;
+            }
 
             IzabraniVodic = IzabraniVodic.Substring(IzabraniVodic.IndexOf('[') + 1);
             IzabraniVodic = IzabraniVodic.Trim(']');          
@@ -139,34 +217,51 @@ namespace KonacniProjekat
             VecZnamenitostiUOvojTuri = await qZnamenitostiUTuri.Select(x => x.IdZnamenitostiZutNavigation).ToListAsync();
            
 
-            for (int i=IzabraneZnamenitosti.Count()- 1; i>=0; i--)
-            {
-                Znamenitosti vecJeUtabeliZut = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == IzabraneZnamenitosti[i]).Select(x => x.IdZnamenitostiZutNavigation).FirstOrDefaultAsync();
 
-                ZnamenitostiUTurama novaVezaZut = new ZnamenitostiUTurama();
-                novaVezaZut.IdTureZut = (uint)id;
-                novaVezaZut.IdZnamenitostiZut = (uint)IzabraneZnamenitosti[i];
+            // for (int i=IzabraneZnamenitosti.Count()- 1; i>=0; i--)
+            // {
+            //     Znamenitosti vecJeUtabeliZut = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == IzabraneZnamenitosti[i]).Select(x => x.IdZnamenitostiZutNavigation).FirstOrDefaultAsync();
+
+            //     ZnamenitostiUTurama novaVezaZut = new ZnamenitostiUTurama();
+            //     novaVezaZut.IdTureZut = (uint)id;
+            //     novaVezaZut.IdZnamenitostiZut = (uint)IzabraneZnamenitosti[i];
                 
-                if (vecJeUtabeliZut == null)
-                {
-                    await dbContext.ZnamenitostiUTurama.AddAsync(novaVezaZut);
-                }
-                else {
-                    VecZnamenitostiUOvojTuri.Remove(vecJeUtabeliZut);
-                }
-                IzabraneZnamenitosti.Remove(IzabraneZnamenitosti[i]);                             
+            //     if (vecJeUtabeliZut == null)
+            //     {
+            //         await dbContext.ZnamenitostiUTurama.AddAsync(novaVezaZut);
+            //     }
+            //     else {
+            //         VecZnamenitostiUOvojTuri.Remove(vecJeUtabeliZut);
+            //     }
+            //     IzabraneZnamenitosti.Remove(IzabraneZnamenitosti[i]);                             
+            // }
+            // await dbContext.SaveChangesAsync();
+
+            // for (int i=0; i<VecZnamenitostiUOvojTuri.Count(); i++)
+            // {
+            //     ZnamenitostiUTurama viseNePostojiVezaZut = new ZnamenitostiUTurama();
+            //     viseNePostojiVezaZut.IdTureZut = (uint)id;
+            //     viseNePostojiVezaZut.IdZnamenitostiZut = VecZnamenitostiUOvojTuri[i].IdZnamenitosti;
+            //     viseNePostojiVezaZut.IdZnamenitostiUTurama = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == viseNePostojiVezaZut.IdZnamenitostiZut).Select(x => x.IdZnamenitostiUTurama).FirstOrDefaultAsync();
+
+            //     dbContext.ZnamenitostiUTurama.Remove(viseNePostojiVezaZut);
+            // }
+
+            for (int i = ZnamenitostiZaUklanjanje.Count() - 1; i>=0; i--)
+            {
+                ZnamenitostiUTurama zutZaUklanjanje = await dbContext.ZnamenitostiUTurama.Where(x => x.IdTureZut == (uint)TuraId).Where(x => x.IdZnamenitostiZut == (uint)ZnamenitostiZaUklanjanje[i]).FirstOrDefaultAsync();
+                dbContext.ZnamenitostiUTurama.Remove(zutZaUklanjanje);
             }
             await dbContext.SaveChangesAsync();
 
-            for (int i=0; i<VecZnamenitostiUOvojTuri.Count(); i++)
+            for (int i = IzabraneZnamenitosti.Count() - 1; i>=0; i--)
             {
-                ZnamenitostiUTurama viseNePostojiVezaZut = new ZnamenitostiUTurama();
-                viseNePostojiVezaZut.IdTureZut = (uint)id;
-                viseNePostojiVezaZut.IdZnamenitostiZut = VecZnamenitostiUOvojTuri[i].IdZnamenitosti;
-                viseNePostojiVezaZut.IdZnamenitostiUTurama = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == viseNePostojiVezaZut.IdZnamenitostiZut).Select(x => x.IdZnamenitostiUTurama).FirstOrDefaultAsync();
-
-                dbContext.ZnamenitostiUTurama.Remove(viseNePostojiVezaZut);
+                ZnamenitostiUTurama novaZut = new ZnamenitostiUTurama();
+                novaZut.IdTureZut = (uint)TuraId;
+                novaZut.IdZnamenitostiZut = (uint)IzabraneZnamenitosti[i];
+                await dbContext.ZnamenitostiUTurama.AddAsync(novaZut);
             }
+            await dbContext.SaveChangesAsync();
 
             dbContext.Ture.Attach(OvaTura).State = EntityState.Modified;
             await dbContext.SaveChangesAsync();
