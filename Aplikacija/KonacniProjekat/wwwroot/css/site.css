@@ -91,6 +91,16 @@ body {
   min-height: 100%;
   padding: 20px;
 }
+.filtriranje
+{
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 40%;
+  min-height: 40%;
+  padding: 20px; 
+}
 .prijava{
   
   margin-top: 10%;

@@ -26,14 +26,14 @@ ViewData["Title"]="Ture";
 }
 
 <form method="post">
-<div>  
-    <label>Filtriraj ture po vodiču koji ih vodi: </label>
-    <select class="js-example-basic-single js-states form-control select-fit-text" asp-for="IzabraniVodic" asp-items="Model.SviVodiciLista" >
+<div class="filriranje"> 
+    <div id="formContent"> 
+    <p>Filtriraj ture po vodiču koji ih vodi: </p>
+    <select class="js-example-basic-single js-states form-control select-fit-text" asp-for="IzabraniVodic" asp-items="Model.SviVodiciLista" style="margin: 0 auto;">
         <option >Prikaži sve</option>
     </select>
-</div>
-<div>
-    <button type="submit" class="dugme">Prikaži</button>
+        <button type="submit" class="dugme">Prikaži</button>
+    </div>
 </div>
 
 <div class="row">
