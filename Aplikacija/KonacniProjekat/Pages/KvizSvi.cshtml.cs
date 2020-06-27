@@ -29,6 +29,8 @@ namespace KonacniProjekat
         public IList<Kvizovi> KvizTura {get; set;}
         public IList<Kvizovi> KvizZnamenitosti { get; set; }
 
+        public IList<Kvizovi> KvizOstali {get; set;}
+
         public KvizSviModel(OrganizacijaContext db)
         {
             dbContext = db;
@@ -46,6 +48,7 @@ namespace KonacniProjekat
             {
                 kviz.IdZnamenitostiKNavigation=await dbContext.Znamenitosti.Where(x=>x.IdZnamenitosti==kviz.IdZnamenitostiK).FirstOrDefaultAsync();
             }
+            KvizOstali = await dbContext.Kvizovi.Where(x => x.IdTureK == null).Where(x => x.IdZnamenitostiK == null).ToListAsync();
 
             IQueryable<Kvizovi> qKvizovi = dbContext.Kvizovi.Include(x=>x.IdZnamenitostiKNavigation).OrderBy(x=>x.IdKviza);
             SviKvizovi = await qKvizovi.ToListAsync();

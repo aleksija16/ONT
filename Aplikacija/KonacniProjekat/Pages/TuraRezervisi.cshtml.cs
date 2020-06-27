@@ -70,7 +70,7 @@ namespace KonacniProjekat
                 return NotFound();
             }
 
-            if(OvaTura.DanOdrzavanja == null)
+            if(OvaTura.DanOdrzavanja == null || OvaTura.IdVodica == null)
             {
                 NeispravnaTura = true;
                 return this.Page();   

@@ -52,6 +52,17 @@ namespace KonacniProjekat
                  return NotFound();
             }
 
+            if(OvajKviz.IdTureK != null)
+            {
+                IzabranaTuraString = await dbContext.Ture.Where(x => x.IdTure == OvajKviz.IdTureK).Select(x => x.NazivTure).FirstOrDefaultAsync();
+            }
+            
+            if(OvajKviz.IdZnamenitostiK != null)
+            {
+                IzabranaZnamenitostString = await dbContext.Znamenitosti.Where(x => x.IdZnamenitosti == OvajKviz.IdZnamenitostiK).Select(x => x.NazivZnamenitosti).FirstOrDefaultAsync();
+            }
+
+
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
             IzborZnamenitostiLista = new SelectList(qZnamenitosti.ToList());
             
@@ -94,7 +105,7 @@ namespace KonacniProjekat
 
             dbContext.Kvizovi.Attach(OvajKviz).State = EntityState.Modified;
             await dbContext.SaveChangesAsync();
-            return RedirectToPage("./KvizSvi", new { id = SessionId});
+            return RedirectToPage("./KvizSvi");
         }
     }
 }
