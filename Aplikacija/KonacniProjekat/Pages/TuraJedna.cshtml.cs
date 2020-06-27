@@ -33,26 +33,20 @@ namespace KonacniProjekat
         [BindProperty]
         public List<string> NajinteresantnijeZnamenitostiNaziv {get; set;}
 
-        // [BindProperty]
-        // public List<int> NajinteresantnijeZnamenitostiBrojPieChart {get; set;}
-
         [BindProperty]
         public List<string> NajdosadnijeZnamenitostiNaziv {get; set;}
-                
-        // [BindProperty]
-        // public List<int> NajdosadnijeZnamenitostiBrojPieChart {get; set;}
 
         [BindProperty]
         public IList<string> TipTuristeNaziv {get; set;}        
-
-        // [BindProperty]
-        // public List<int> TipTuristeBrojPieChart {get; set;}
 
         [BindProperty]
         public Vodici VodicTure{get;set;}
 
         [BindProperty]
         public IList<Znamenitosti> ZnamenitostiUTuri{get;set;}
+
+        [BindProperty]
+        public bool NeispravnaTura {get; set;}
 
          public async Task<IActionResult> OnGetAsync(uint? id)
         {
@@ -65,6 +59,15 @@ namespace KonacniProjekat
             if (Tura == null)
             {
                 return NotFound();
+            }
+
+            if (Tura.DanOdrzavanja == null || Tura.IdVodica == null)
+            {
+                NeispravnaTura = true;
+            }
+            else
+            {
+                NeispravnaTura = false;
             }
 
             DaniOdrzavanja = " ";
