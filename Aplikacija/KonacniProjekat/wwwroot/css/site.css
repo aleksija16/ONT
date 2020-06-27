@@ -102,7 +102,6 @@ body {
   padding: 20px; 
 }
 .prijava{
-  
   margin-top: 10%;
 }
 #formContent {
@@ -143,7 +142,7 @@ body {
 	top:1px;
 }
 
-input[type=text], input[type="password"], input[type="date"],label {
+input[type=text], input[type="password"], input[type="date"],label, input[type="number"], input[type=number] input[type="time"], textarea {
   background-color: #f8fbff ;
   background-image: linear-gradient(315deg, #f8fbff  0%, #d6eaff 74%);
   border: none;
@@ -153,7 +152,8 @@ input[type=text], input[type="password"], input[type="date"],label {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 5px;
+  margin: auto;
+  margin-top: 5px;
   width: 85%;
   border: 2px solid #84c1ff;
   transition: all 0.5s ease-in-out;
@@ -247,7 +247,8 @@ input[type=text]:placeholder
 
 
 .cardVodic {
-  box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 10px 10px 0 rgba(153, 213, 255, 0.2);
+  border: #bee6ff solid 0.5px;
   transition: 0.8s;
   width: 40%;
   min-height: 100%;
@@ -436,6 +437,7 @@ background-image: linear-gradient(315deg, #eaf4ff   0%, #84c1ff  79%);
   width: 100%;
   min-height: 100%;
   padding: 20px;
+  margin-top: 10%;
 }
 
 /*ZA REZERVACIJU*/
@@ -733,5 +735,17 @@ background-image: linear-gradient(315deg, #eaf4ff   0%, #84c1ff  79%);
 } 
 
 
+/*Profil*/
+.cardProfil
+{
+  box-shadow: 0 10px 10px 0 rgba(153, 213, 255, 0.2);
+  transition: 0.8s;
+  width: 40%;
+  min-height: 100%;
+  border: #bee6ff solid 0.5px;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
   
 

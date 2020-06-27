@@ -23,6 +23,15 @@
   <img src="images/@Model.TrenutniVodic.Slika" style="width:50%;height:45%; display: block; margin-left: auto; margin-right: auto;">
   <h1>@Model.TrenutniVodic.ImeVodica @Model.TrenutniVodic.PrezimeVodica</h1>
    </br>
+  <p class="title"><i class="fas fa-birthday-cake"></i> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.TrenutniVodic.DatumRodjenja))</p>
+   @if(@Model.TrenutniVodic.Pol=="Ž")
+            {
+                <p class="title">Pol: <i class="fas fa-female"></i></p>
+            }
+            else
+            {
+                <p class="title">Pol: <i class="fas fa-male"></i></p>
+            }
   <p class="title"> <img src="https://image.flaticon.com/icons/svg/1/1700.svg" style="width: 20px; height:20px">Licenca: @Model.TrenutniVodic.Licenca</p>
   <p class="title">Ocena: @Model.TrenutniVodic.Ocena <i class="fas fa-hand-holding-heart"></i></p>
   </br>

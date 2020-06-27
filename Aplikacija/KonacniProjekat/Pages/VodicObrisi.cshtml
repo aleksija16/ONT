@@ -15,10 +15,9 @@
 {
   <div class="brisi-ture fadeInDown">
   <div id="formContent">
-    <label class="form-control select-fit-text" >
-            <h5>Da li ste sigurni da želite da obrišete sledećeg vodiča: @Model.VodicZaBrisanje.ImeVodica @Model.VodicZaBrisanje.PrezimeVodica ?</h5>
-    </label>
-
+    <h5>Da li ste sigurni da želite da obrišete sledećeg vodiča:</h5>
+    <p class="title">@Model.VodicZaBrisanje.ImeVodica @Model.VodicZaBrisanje.PrezimeVodica</p>  
+    <h5>?</h5>
     <button type="submit" class="btn btn-danger">Da</button>
     <a asp-page="./VodicSvi" >Ne</a>
   </div>

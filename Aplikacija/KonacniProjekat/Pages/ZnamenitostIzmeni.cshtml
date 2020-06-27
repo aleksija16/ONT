@@ -20,15 +20,15 @@ ViewData["Title"]="Izmena znamenitosti";
     <div class="izmeni">
         <div id="formContent">
         <input type="hidden" asp-for="ZnamenitostId"/>
-        <label class="form-control">Naziv: </label> <input asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" required/>
-        <label class="form-control">Lokacija:</label> <input asp-for="TrenutnaZnamenitost.Lokacija" class="form-control" />
+        <label class="form-control">Naziv: </label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" required></textarea>
+        <label class="form-control">Lokacija:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.Lokacija" class="form-control"></textarea>
         <label class="form-control">Opis:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.Opis"></textarea> 
-        <label class="form-control">Radno vreme:</label> <input asp-for="TrenutnaZnamenitost.RadnoVreme" class="form-control" />
-        <label class="form-control">Broj telefona:</label> <input asp-for="TrenutnaZnamenitost.BrojTelefona" class="form-control" />
-        <label class="form-control">Cena ulaznice:</label> <input asp-for="TrenutnaZnamenitost.CenaUlaznice" class="form-control" />
-        <label class="form-control">Tip:</label> <input asp-for="TrenutnaZnamenitost.Tip" class="form-control" />
+        <label class="form-control">Radno vreme:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.RadnoVreme" class="form-control"></textarea>
+        <label class="form-control">Broj telefona:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.BrojTelefona" class="form-control"></textarea>
+        <label class="form-control">Cena ulaznice:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.CenaUlaznice" class="form-control"></textarea>
+        <label class="form-control">Tip:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.Tip" class="form-control"></textarea>
         <label class="form-control">Naslovna slika:</label> <input asp-for="TrenutnaZnamenitost.Slika" class="form-control" />
-        <button type="submit">Sacuvaj izmene</button>
+        <button type="submit" class="dugme">Sačuvaj izmene</button>
         </div>
     </div>
 </form>
