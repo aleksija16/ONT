@@ -35,11 +35,6 @@ namespace KonacniProjekat
 
         public async Task<IActionResult> OnGetAsync()
         {
-            if (SessionClass.TipKorisnika != "A")
-            {
-                return this.StatusCode(403);
-            }    
-            
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
             IzborZnamenitostiLista = new SelectList(await qZnamenitosti.ToListAsync());
 
