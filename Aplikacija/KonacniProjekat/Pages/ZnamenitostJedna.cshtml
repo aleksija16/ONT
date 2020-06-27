@@ -10,8 +10,12 @@ ViewData["Title"] = "Znamenitosti";
 
 <nav aria-label="Page navigation">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostSve">Prikazi listu znamenitosti</a></li>
-  </ul>
+    <li class="page-item"><a  class="page-link" asp-page="./ZnamenitostSve"><i class='fas fa-arrow-circle-left'></i>Prikaži listu znamenitosti</a></li>
+     @if(SessionClass.TipKorisnika=="A"){
+    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostIzmeni" asp-route-id="@Model.TrenutnaZnamenitost.IdZnamenitosti">Izmeni znamenitost <i class="fas fa-edit"></i></a></li>
+    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostObrisi" asp-route-id="@Model.TrenutnaZnamenitost.IdZnamenitosti">Obriši znamenitost <i class="fas fa-trash-alt"></i></a></li>
+     <li class="page-item"><a class="page-link" asp-page="./ZnamenitostSlika" asp-route-id="@Model.TrenutnaZnamenitost.IdZnamenitosti">Dodaj sliku <i class="fas fa-images"></i></a></li>
+     }</ul>
 </nav>
 
 <div class="card shadow mb-4 ">

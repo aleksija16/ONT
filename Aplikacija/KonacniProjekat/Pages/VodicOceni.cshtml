@@ -3,9 +3,11 @@
 @{
 }
 
-<div>
- <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#84c1ff;">Lista vodiča</a>
-</div>
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./VodicSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu vodiča</a></li>
+  </ul>
+</nav>
 
 @if(SessionClass.TipKorisnika=="T"){
 <div class="cardVodic" style="text-align: center; height:200px">
@@ -36,7 +38,7 @@
         }
         }
         </select>
-      <button type="submit" class="dugme">Oceni</button>
+      <button type="submit" class="btn btn-primary">Oceni</button>
   }
   else{
     <label style="color:red"><i class="fas fa-exclamation-triangle"></i> Ne mozete da ocenite vodica s kojim niste bili na turi! <i class="fas fa-exclamation-triangle"></i></label>

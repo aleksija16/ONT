@@ -8,12 +8,12 @@
     <h1 class="display-4">Izmena kviza: @Model.OvajKviz.NazivKviza</h1>
 </div>
 
-
 <nav aria-label="Page navigation">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" asp-page="./KvizSvi">Prikazi listu kvizova</a></li>
+    <li class="page-item"><a class="page-link" asp-page="./KvizJedan" asp-route-id="@Model.KvizId"><i class='fas fa-arrow-circle-left'>Vrati se na prikaz kviza</a></li>
   </ul>
 </nav>
+
 
 <form method="post">
     <div class="izmeni">
@@ -30,7 +30,7 @@
                                                                     <option value="" selected disabled hidden>Izaberite za koju turu je vezan kviz.</option>
                                                                 </select>
 
-            <button type="submit" class="dugme">Izmeni kviz</button>
+            <button type="submit">Izmeni kviz</button>
         </div>
     </div>
 </form>

@@ -6,7 +6,7 @@
 
 <nav aria-label="Page navigation">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" asp-page="./TuraSve">Vrati se nazad</a></li>
+    <li class="page-item"><a class="page-link" asp-page="./TuraJedna" asp-route-id="@Model.OvaTura.IdTure"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz ture</a></li>
   </ul>
 </nav>
 
@@ -36,7 +36,7 @@
         
 
                 <div>
-                    <button type="submit" class="dugme">Rezerviši turu</button>
+                    <button type="submit">Rezerviši turu</button>
                 </div>
     
             </form>

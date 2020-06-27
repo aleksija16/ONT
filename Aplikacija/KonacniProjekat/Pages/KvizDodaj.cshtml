@@ -8,6 +8,12 @@
     <h2 class="display 4">Novi kviz</h2>
 </div>
 
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./KvizSvi"><i class='fas fa-arrow-circle-left'>Prikaži listu kvizova</a></li>
+  </ul>
+</nav>
+
 <form method="post">
     <div class="dodaj">
         <div id="formContent">
@@ -20,7 +26,7 @@
                                                                     <option value="">Bez ture</option>
                                                                     <option value="" selected disabled hidden>Izaberite za koju turu je vezan kviz.</option>
                                                                 </select>
-            <button type="submit" class="dugme">Dodaj novi kviz</button>
+            <button type="submit">Dodaj novi kviz</button>
         </div>
     </div>
 </form>

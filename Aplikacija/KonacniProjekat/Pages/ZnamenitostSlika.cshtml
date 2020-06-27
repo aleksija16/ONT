@@ -10,7 +10,7 @@ ViewData["Title"]="Izmena znamenitosti";
 
 <nav aria-label="Page navigation">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostSve">Prikazi listu znamenitosti</a></li>
+    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostJedna" asp-route-id="@Model.TrenutnaZnamenitost.IdZnamenitosti"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz znamenitosti</a></li>
   </ul>
 </nav>
 
@@ -20,7 +20,7 @@ ViewData["Title"]="Izmena znamenitosti";
     <div class="prijava">
         <div id="formContent">
          <label class="form-control">Dodajte sliku:</label> <input type="file" asp-for="NovaSlika.Slika"  placeholder="Slika" required />
-         <button type="submit" class="dugme">Dodaj Sliku</button>
+         <button type="submit">Dodaj Sliku</button>
         </div>
     </div>
 </form>

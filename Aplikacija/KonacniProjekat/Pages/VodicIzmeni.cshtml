@@ -10,7 +10,7 @@ ViewData["Title"]="Izmena vodiča";
 
 <nav aria-label="Page navigation">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" asp-page="./VodiciSvi">Prikazi listu vodiča</a></li>
+    <li class="page-item"><a class="page-link" asp-page="./VodicJedan" asp-route-id="@Model.OvajVodic.IdVodica"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz vodiča</a></li>
   </ul>
 </nav>
 
@@ -28,7 +28,7 @@ ViewData["Title"]="Izmena vodiča";
         <label class="form-control">Licenca:</label> <input asp-for="OvajVodic.Licenca" class="form-control" />
         <label class="form-control">Email:</label> <input asp-for="OvajVodic.Email" class="form-control" />
         <label class="form-control">Profilna slika:</label> <input asp-for="OvajVodic.Slika" class="form-control" />
-        <button type="submit" class="dugme">Sačuvaj izmene</button>
+        <button type="submit">Sacuvaj izmene</button>
         </div>
     </div>
 </form>
