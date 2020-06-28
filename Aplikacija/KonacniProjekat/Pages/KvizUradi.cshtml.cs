@@ -58,7 +58,7 @@ namespace KonacniProjekat
 
             VecJeRadioKviz = (int?)radio;
  
-            if(SessionId != null)
+            /*if(SessionId != null)
             {                
                 if(SessionClass.TipKorisnika == "T" )
                     DostupanPrikaz = true;
@@ -67,7 +67,7 @@ namespace KonacniProjekat
             else DostupanPrikaz = false;
 
             if (!DostupanPrikaz) return StatusCode(403);
-
+            */
 
             KvizZaIzradu = await dbContext.Kvizovi.FindAsync((uint)id);
 

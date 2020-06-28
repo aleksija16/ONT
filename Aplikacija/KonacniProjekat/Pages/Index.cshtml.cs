@@ -14,16 +14,16 @@ namespace KonacniProjekat.Pages
         public int? SessionId {get; set;}
         public readonly OrganizacijaContext dbContext;
 
-        private readonly ILogger<IndexModel> _logger;
+        [BindProperty]
+        public IList<Znamenitosti> SveZnamenitosti{get;set;}
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(OrganizacijaContext db)
         {
-            _logger = logger;
+            dbContext = db;
         }
-
         public void OnGet()
         {
-
+            SveZnamenitosti = dbContext.Znamenitosti.ToList();
         }
     }
 }

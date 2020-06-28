@@ -29,7 +29,7 @@
     </div>
     <div class="flip-card-back-vodic">
       <h2>@vodic.ImeVodica @vodic.PrezimeVodica</h2>
-      <div><a asp-page="./VodicJedan" asp-route-id="@vodic.IdVodica">Prikazi detalje <i class='fas fa-id-card-alt'></i></a></div>
+      <div><a asp-page="./VodicJedan" asp-route-id="@vodic.IdVodica">Prikaži detalje <i class='fas fa-id-card-alt'></i></a></div>
       @if(SessionClass.TipKorisnika=="A")
       {
         <div><a asp-page="./VodicObrisi"  asp-route-id="@vodic.IdVodica">Obriši nalog vodiču <i class='fas fa-user-alt-slash'></i></a></div> 
