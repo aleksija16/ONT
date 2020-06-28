@@ -20,6 +20,8 @@ namespace KonacniProjekat.Models
         public string Pol { get; set; }
         [DataType(DataType.Date)]
         public DateTime? DatumRodjenja { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         public virtual Korisnici Korisnici { get; set; }

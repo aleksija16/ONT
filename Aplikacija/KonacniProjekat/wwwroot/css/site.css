@@ -89,7 +89,8 @@ body {
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding: 20px;
+  padding: 20px; 
+  justify-content: center;
 }
 .filtriranje
 {
@@ -142,7 +143,7 @@ body {
 	top:1px;
 }
 
-input[type=text], input[type="password"], input[type="date"],label, input[type="number"], input[type=number] input[type="time"], textarea {
+input[type=text], input[type="password"], input[type="date"],label, input[type="number"], input[type="time"], select {
   background-color: #f8fbff ;
   background-image: linear-gradient(315deg, #f8fbff  0%, #d6eaff 74%);
   border: none;
@@ -159,7 +160,15 @@ input[type=text], input[type="password"], input[type="date"],label, input[type="
   transition: all 0.5s ease-in-out;
   border-radius: 5px 5px 5px 5px;
 }
-
+textarea
+{
+  width: 100%;
+  background-color: #f8fbff ;
+  background-image: linear-gradient(330deg, #f8fbff  0%, #ebf3fb 100%);
+  margin: auto;
+  margin-top:5px;
+  color: black;
+}
 input[type=text]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
@@ -174,7 +183,7 @@ input[type=text]:placeholder
 
 .form-control
 {
-  width: 150px;
+  width: 85%;
 }
 .custom div
 {

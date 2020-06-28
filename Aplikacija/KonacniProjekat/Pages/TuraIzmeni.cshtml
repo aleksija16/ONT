@@ -22,7 +22,7 @@
     <div id="formContent">
         <input type="hidden" asp-for="@Model.TuraId" />
         <input type="hidden" asp-for="@Model.DaniOdrzavanjaPreIzmene" />
-    <label class="form-control">Naziv ture:</label>  <textarea class="form-control text-area-fit" asp-for="OvaTura.NazivTure" class="form-control margin-input-izmena" required ></textarea>
+    <label class="form-control">Naziv ture:</label>  <textarea class="form-control" style=" width: 90%;" asp-for="OvaTura.NazivTure" required ></textarea>
     <label class="form-control select-fit-text"><b>Trenutno se tura održava danima: @Model.VecIzabraniDaniString</b></label>
     <label class="form-control select-fit-text">Izaberite <b>sve</b> dane održavanja ove ture:</label> 
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
@@ -34,21 +34,21 @@
         <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
         
     <label class="form-control select-fit-text">Vreme održavanja:</label>    
-        <input type="time" class="form-control select-fit-text margin-input-izmena" asp-for="OvaTura.VremeOdrzavanja" required/>                                                   
+        <input type="time" class="form-control select-fit-text" asp-for="OvaTura.VremeOdrzavanja" required/>                                                   
 
     <label class="form-control">Mesto polaska:</label>     
-         <textarea class="form-control text-area-fit" asp-for="OvaTura.MestoPolaska" class="form-control margin-input-izmena" ></textarea>                                                  
+         <textarea style=" width: 90%;" class="form-control" asp-for="OvaTura.MestoPolaska" ></textarea>                                                  
 
     <label class="form-control">Kapacitet:</label>    
         <input type="number" class="form-control" min="1" max="100" asp-for="OvaTura.Kapacitet" required/>
 
     <label class="form-control select-fit-text">Vodič ove ture:</label>
-        <select class="form-control select-fit-text margin-input-izmena" id="izborVodicaIzmena" asp-for="@Model.IzabraniVodic" asp-items="@Model.SviVodici" required>
+        <select class="form-control select-fit-text" id="izborVodicaIzmena" asp-for="@Model.IzabraniVodic" asp-items="@Model.SviVodici" required>
             <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
         </select>
 
     <label class="form-control">Opis</label> 
-        <textarea class="form-control text-area-fit" asp-for="OvaTura.Opis"> </textarea> 
+        <textarea class="form-control" style=" width: 90%;" asp-for="OvaTura.Opis"> </textarea> 
 
     <div><label class="form-control select-fit-text"><b>Znamenitosti koje su već u ovoj turi: @Model.VecZnamenitostiUOvojTuriString</b></label></div>
     

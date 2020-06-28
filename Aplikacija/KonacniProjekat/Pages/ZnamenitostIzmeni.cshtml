@@ -20,19 +20,20 @@ ViewData["Title"]="Izmena znamenitosti";
     <div class="izmeni">
         <div id="formContent">
         <input type="hidden" asp-for="ZnamenitostId"/>
-        <label class="form-control">Naziv: </label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.NazivZnamenitosti" class="form-control" required></textarea>
-        <label class="form-control">Lokacija:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.Lokacija" class="form-control"></textarea>
-        <label class="form-control">Opis:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.Opis"></textarea> 
-        <label class="form-control">Radno vreme:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.RadnoVreme" class="form-control"></textarea>
-        <label class="form-control">Broj telefona:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.BrojTelefona" class="form-control"></textarea>
-        <label class="form-control">Cena ulaznice:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.CenaUlaznice" class="form-control"></textarea>
-        <label class="form-control">Tip:</label> <textarea class="form-control text-area-fit" asp-for="TrenutnaZnamenitost.Tip" class="form-control"></textarea>
+        <label class="form-control">Naziv: </label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.NazivZnamenitosti"  required></textarea>
+        <label class="form-control">Lokacija:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Lokacija"></textarea>
+        <label class="form-control">Opis:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Opis"></textarea> 
+        <label class="form-control">Radno vreme:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.RadnoVreme"></textarea>
+        <label class="form-control">Broj telefona:</label> <textarea class="form-control " asp-for="TrenutnaZnamenitost.BrojTelefona"></textarea>
+        <label class="form-control">Cena ulaznice:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.CenaUlaznice"></textarea>
+        <label class="form-control">Tip:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Tip"></textarea>
         <label class="form-control">Naslovna slika:</label> <input asp-for="TrenutnaZnamenitost.Slika" class="form-control" />
         <button type="submit" class="dugme">Sačuvaj izmene</button>
         </div>
     </div>
 </form>
 }
- else{
+else
+{
     <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da izmeni znamenitost. <i class="fas fa-exclamation-triangle"></i></div>
 }
