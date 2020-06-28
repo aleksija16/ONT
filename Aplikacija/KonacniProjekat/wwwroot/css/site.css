@@ -725,7 +725,7 @@ background-image: linear-gradient(315deg, #eaf4ff   0%, #84c1ff  79%);
 .formaKAK
 {
   position: relative;
-	width: 450px;
+	width: 100%;
 	padding: 50px;
 	margin: 0 auto;
 	background-color: #fff;
