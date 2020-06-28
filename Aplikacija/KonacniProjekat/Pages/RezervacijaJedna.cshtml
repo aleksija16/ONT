@@ -42,8 +42,9 @@ ViewData["Title"] = "Rezervacije";
 
 
     <div class="naziv">Datum </div>
-    <div class="vrednost">@Model.TrenutnaRezervacija.Datum</div>
-
+    <div class="vrednost">@Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.TrenutnaRezervacija.Datum))</div>
+    <div class="naziv">Vreme </div>
+    <div class="vrednost"> @Model.TrenutnaRezervacija.IdTureRNavigation.VremeOdrzavanja</div>
     @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
     {
       <div class="naziv">Vodič</div><a asp-page="./VodicJedan" asp-route-id="@Model.TrenutnaRezervacija.IdVodicaR">@Model.TrenutnaRezervacija.IdVodicaRNavigation.ImeVodica @Model.TrenutnaRezervacija.IdVodicaRNavigation.PrezimeVodica</a>

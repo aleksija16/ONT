@@ -13,7 +13,8 @@
                 <label class="form-control select-fit-text">
                     <h5>Da li ste sigurni da želite da otkažete sledeću rezervaciju?</h5>
                     <h5>Naziv ture: @Model.RezervacijaZaOtkazivanje.IdTureRNavigation.NazivTure</h5> 
-                    <h5>Datum: @Model.RezervacijaZaOtkazivanje.Datum</h5>
+                    <h5>Datum:  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.RezervacijaZaOtkazivanje.Datum))</h5>
+                    <h5>Vreme: @Model.RezervacijaZaOtkazivanje.IdTureRNavigation.VremeOdrzavanja</h5>
                     <h5>Broj osoba uz rezervaciju: @Model.RezervacijaZaOtkazivanje.BrojOsoba</h5>
                 </label>
 

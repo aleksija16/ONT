@@ -43,6 +43,7 @@
                     <th>Naziv ture</th>
                     <th>Vodič</th>
                     <th>Datum</th>
+                    <th>Vreme</th>
                 </thead>
                 <tbody>
                 <form method="get">
@@ -52,7 +53,8 @@
                             <td>@rezervacija.IdRezervacije</td>
                             <td>@rezervacija.IdTureRNavigation.NazivTure</td>
                             <td>@rezervacija.IdVodicaRNavigation.ImeVodica @rezervacija.IdVodicaRNavigation.PrezimeVodica</td>
-                            <td>@rezervacija.Datum</td>
+                            <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", @rezervacija.Datum))</td>
+                            <td>@rezervacija.IdTureRNavigation.VremeOdrzavanja</td>
                         </tr>
                     }
                 </form>
@@ -61,7 +63,7 @@
         </div>
     </div>
     <div id="ocenjivanje" class="tab-pane fade">
-        <h3>Ocene koje ste dali vodicima</h3>   
+        <h3>Ocene koje ste dali vodičima</h3>   
         <div>
             <table class="table table-bordered">
                 <thead>
@@ -152,6 +154,7 @@ else if(SessionClass.TipKorisnika=="V")
             <th>Naziv ture</th>
             <th>ID turiste</th>
             <th>Datum</th>
+            <th>Vreme</th>
         </thead>
         <tbody>
             <form method="get">
@@ -161,7 +164,8 @@ else if(SessionClass.TipKorisnika=="V")
                         <td>@rezervacija.IdRezervacije</td>
                         <td>@rezervacija.IdTureRNavigation.NazivTure</td>
                         <td>@rezervacija.IdTuristeRNavigation.ImeTuriste @rezervacija.IdTuristeRNavigation.PrezimeTuriste</td>
-                        <td>@rezervacija.Datum</td>
+                        <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", @rezervacija.Datum))</td>
+                        <td>@rezervacija.IdTureRNavigation.VremeOdrzavanja</td>
                     </tr>
                 }
             </form>

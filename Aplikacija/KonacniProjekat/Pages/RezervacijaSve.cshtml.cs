@@ -31,6 +31,10 @@ namespace KonacniProjekat
                 {
                     IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije;
                     SveRezervacije=await qRezervacije.ToListAsync();
+                    foreach(var rezervacija in SveRezervacije)
+                    {
+                        rezervacija.IdTureRNavigation= await dbContext.Ture.Where(x=>x.IdTure == rezervacija.IdTureR).FirstOrDefaultAsync();
+                    }
                     return;
                 }
 
@@ -38,6 +42,10 @@ namespace KonacniProjekat
                 {
                     IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(x => x.IdTuristeR == SessionId);
                     SveRezervacije = await qRezervacije.ToListAsync();
+                           foreach(var rezervacija in SveRezervacije)
+                    {
+                        rezervacija.IdTureRNavigation= await dbContext.Ture.Where(x=>x.IdTure == rezervacija.IdTureR).FirstOrDefaultAsync();
+                    }
                     return;
                 }
 
@@ -45,6 +53,10 @@ namespace KonacniProjekat
                 {
                     IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(x => x.IdVodicaR == SessionId);
                     SveRezervacije=await qRezervacije.ToListAsync();
+                           foreach(var rezervacija in SveRezervacije)
+                    {
+                        rezervacija.IdTureRNavigation= await dbContext.Ture.Where(x=>x.IdTure == rezervacija.IdTureR).FirstOrDefaultAsync();
+                    }
                     return;
                 }
 

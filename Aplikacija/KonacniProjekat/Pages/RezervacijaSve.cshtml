@@ -15,6 +15,7 @@ ViewData["Title"]="Rezervacije";
             <thead>
                 <th>ID rezervacije</th>
                 <th>Datum</th>
+                <th>Vreme održavanja</th>
                 <th>Broj osoba</th>
                 <th></th>
                 @if (SessionClass.TipKorisnika == "T")
@@ -28,7 +29,8 @@ ViewData["Title"]="Rezervacije";
                     {
                         <tr>
                             <td>@rezervacija.IdRezervacije</td>
-                            <td>@rezervacija.Datum</td>
+                            <td> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @rezervacija.Datum))</td>
+                            <td>@rezervacija.IdTureRNavigation.VremeOdrzavanja</td>
                             <td>@rezervacija.BrojOsoba</td>
                             <td><a asp-page="./RezervacijaJedna" asp-route-id="@rezervacija.IdRezervacije">Prikaži detalje <i class="fas fa-calendar-day"></i></a></td>
                             @if (SessionClass.TipKorisnika == "T")
