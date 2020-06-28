@@ -50,25 +50,16 @@ namespace KonacniProjekat
             IQueryable<Znamenitosti> qIzabranaZnamenitost=dbContext.Znamenitosti.Where(x=>x.Tip==IzabraniTip);
 
             
-            if(IzabraniTip=="Atrakcije"){
-                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
-            }
-            else if(IzabraniTip=="Muzeji"){
-                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
-            }
-            else if(IzabraniTip=="Spomenici"){
-                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
-            }
-            else if(IzabraniTip=="Okolina Niša"){
-                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
-            }
-            else if(IzabraniTip=="Crkve i manastiri"){
-                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
-            }
-            else if(IzabraniTip=="Prikaži sve")
+                
+            if(IzabraniTip=="Prikaži sve")
             {
                 SveZnamenitosti=await qZnamenitosti.ToListAsync();
             }
+            else
+            {
+                SveZnamenitosti=await qIzabranaZnamenitost.ToListAsync();
+            }
+
             return Page();
             
 

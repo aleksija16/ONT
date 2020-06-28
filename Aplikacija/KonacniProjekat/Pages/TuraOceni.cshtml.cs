@@ -31,6 +31,9 @@ namespace KonacniProjekat
         
         public SelectList IzborZnamenitostiLista {get; set;}
 
+        [BindProperty]
+        public bool VecPopunjenaAnketa {get; set;}
+
         public readonly OrganizacijaContext dbContext;
 
         public TuraOceniModel(OrganizacijaContext db)
@@ -49,10 +52,23 @@ namespace KonacniProjekat
                 return NotFound();
             }
 
-            IQueryable<string> qZnamenitosti = dbContext.ZnamenitostiUTurama.Include(x => x.IdZnamenitostiZutNavigation).Where(X=>X.IdTureZut == (uint)TuraId)
-                                                .Select(x =>x.IdZnamenitostiZutNavigation.NazivZnamenitosti);
-            IzborZnamenitostiLista = new SelectList(await qZnamenitosti.ToListAsync());
+            if (SessionClass.TipKorisnika == "T")
+            {
+                Anketa postojiAnketa = await dbContext.Anketa.Where(x => x.IdTuristeAnk == SessionClass.SessionId).Where(x => x.IdTureAnk == (uint)id).FirstOrDefaultAsync();
+                if (postojiAnketa != null)
+                {
+                    VecPopunjenaAnketa = true;
+                    return this.Page();
+                }
 
+
+                IQueryable<string> qZnamenitosti = dbContext.ZnamenitostiUTurama.Include(x => x.IdZnamenitostiZutNavigation).Where(X=>X.IdTureZut == (uint)TuraId)
+                                                .Select(x =>x.IdZnamenitostiZutNavigation.NazivZnamenitosti);
+                IzborZnamenitostiLista = new SelectList(await qZnamenitosti.ToListAsync());
+
+            }
+
+            
             return this.Page();            
         }
 
