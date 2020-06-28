@@ -13,16 +13,24 @@
   </ul>
 </nav>
 
-<div class="formaKAK">
-    <ol type="1">
-    @foreach (var k in Model.RezultatiAnketa)
-    {
-      @if(k.Komentar!=null){
+<div class="formaKAK" style="width: 100%;">
 
-         
+    @if(Model.RezultatiAnketa==null || Model.RezultatiAnketa.Count()==0)
+    {
+        <div class="vrednost">Trenutno nema komentara.</div>
+    }
+
+    else{
+      foreach (var k in Model.RezultatiAnketa)
+    {
+          if(k.Komentar!=null)
+          {
+            <ol type="1">
         <li class="naziv">@k.Komentar</li>
+    </ol>
+          }
+          
         }
     }
-    </ol>
 </div>
 

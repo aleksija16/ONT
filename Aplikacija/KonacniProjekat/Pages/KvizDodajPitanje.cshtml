@@ -20,11 +20,11 @@
             <div id="formContent">
                  <input type="hidden" asp-for="KvizId" />
                 <input type="hidden" asp-for="SessionId" />
-                <label class="form-control">Pitanje:</label> <input asp-for="NovoPitanje.TekstPitanja" placeholder="Unesite tekst pitanja" />
-                <label class="form-control">Odgovor A:</label> <input asp-for="NovoPitanje.OdgovorA" placeholder="A" />
-                <label class="form-control">Odgovor B:</label> <input asp-for="NovoPitanje.OdgovorB" placeholder="B" />
-                <label class="form-control">Odgovor C:</label> <input asp-for="NovoPitanje.OdgovorC" placeholder="C" />
-                <label class="form-control select-fit-text">Tačan odgovor je pod:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzborTacnogOdgovoraInt">
+                <label class="form-control">Pitanje:</label> <input asp-for="NovoPitanje.TekstPitanja" placeholder="Unesite tekst pitanja" required />
+                <label class="form-control">Odgovor A:</label> <input asp-for="NovoPitanje.OdgovorA" placeholder="A" required />
+                <label class="form-control">Odgovor B:</label> <input asp-for="NovoPitanje.OdgovorB" placeholder="B" required />
+                <label class="form-control">Odgovor C:</label> <input asp-for="NovoPitanje.OdgovorC" placeholder="C" required />
+                <label class="form-control select-fit-text">Tačan odgovor je pod:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzborTacnogOdgovoraInt" required>
                                                                                 <option value="1">A</option>
                                                                                 <option value="2">B</option>
                                                                                 <option value="3">C</option>
