@@ -52,17 +52,17 @@ namespace KonacniProjekat
                 return NotFound();
             }
 
-             IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(Y=>Y.IdTuristeR == SessionClass.SessionId);
+            if (SessionClass.TipKorisnika == "T")
+            {
+                 IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(Y=>Y.IdTuristeR == SessionClass.SessionId);
              TuristaRezervacije= await qRezervacije.Where(a =>a.IdTureR==(uint)id).Where(x=>x.Datum<DateTime.Now).ToListAsync();
              foreach(var item in TuristaRezervacije)
              {
-                 if(item.IdVodicaR==(uint)id)
+                 if(item.IdTureR==(uint)id)
                  {
                     provera=1;
                  }
              }
-            if (SessionClass.TipKorisnika == "T")
-            {
                 Anketa postojiAnketa = await dbContext.Anketa.Where(x => x.IdTuristeAnk == SessionClass.SessionId).Where(x => x.IdTureAnk == (uint)id).FirstOrDefaultAsync();
                 if (postojiAnketa != null)
                 {
