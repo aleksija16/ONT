@@ -329,7 +329,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdTureRNavigation)
                     .WithMany(p => p.Rezervacije)
                     .HasForeignKey(d => d.IdTureR)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdTureR");
 
                 entity.HasOne(d => d.IdTuristeRNavigation)
@@ -341,7 +341,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdVodicaRNavigation)
                     .WithMany(p => p.Rezervacije)
                     .HasForeignKey(d => d.IdVodicaR)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdVodicaR");
             });
 
@@ -363,6 +363,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdZnamenitostNavigation)
                     .WithMany(p => p.Slike)
                     .HasForeignKey(d => d.IdZnamenitost)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdZnamenitost");
             });
 
