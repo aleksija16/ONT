@@ -12,11 +12,16 @@
 
 @if(SessionClass.TipKorisnika == "T")
 {
+     @if(@Model.provera==0)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Ne možete da ocenite turu na kojoj niste bili!<i class="fas fa-exclamation-triangle"></i></div>         
+    }
+    else{
     @if (!Model.VecPopunjenaAnketa)
     {
         <div class="text-center">
         <h1 class="=display-4">Anketa za turu: @Model.OvaTura.NazivTure</h1>
-    </div>
+        </div>
 
     <div class="formaKAK">
         <form method="post">
@@ -91,9 +96,7 @@
     {
         <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već ste popunili anketu za ovu turu. <i class="fas fa-exclamation-triangle"></i></div>         
     }
-
-
-    
+    }
 }
 else
 {

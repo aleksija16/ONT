@@ -33,9 +33,9 @@ namespace KonacniProjekat
 
         [BindProperty]
         public bool VecPopunjenaAnketa {get; set;}
-
+        public IList<Rezervacije> TuristaRezervacije {get;set;}
         public readonly OrganizacijaContext dbContext;
-
+        public int provera=0;
         public TuraOceniModel(OrganizacijaContext db)
         {
             dbContext = db;
@@ -52,6 +52,15 @@ namespace KonacniProjekat
                 return NotFound();
             }
 
+             IQueryable<Rezervacije> qRezervacije = dbContext.Rezervacije.Where(Y=>Y.IdTuristeR == SessionClass.SessionId);
+             TuristaRezervacije= await qRezervacije.Where(a =>a.IdTureR==(uint)id).Where(x=>x.Datum<DateTime.Now).ToListAsync();
+             foreach(var item in TuristaRezervacije)
+             {
+                 if(item.IdVodicaR==(uint)id)
+                 {
+                    provera=1;
+                 }
+             }
             if (SessionClass.TipKorisnika == "T")
             {
                 Anketa postojiAnketa = await dbContext.Anketa.Where(x => x.IdTuristeAnk == SessionClass.SessionId).Where(x => x.IdTureAnk == (uint)id).FirstOrDefaultAsync();
