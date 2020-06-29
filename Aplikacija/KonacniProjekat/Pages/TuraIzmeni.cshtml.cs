@@ -25,6 +25,9 @@ namespace KonacniProjekat
         public int? PostojiVec {get; set;}
 
         [BindProperty]
+        public string TrenutniNaziv {get; set;}
+
+        [BindProperty]
         public IList<Znamenitosti> SveZnamenitostiLista {get; set;}
 
         public SelectList SviVodici {get; set;}
@@ -75,6 +78,8 @@ namespace KonacniProjekat
             {
                 return NotFound();
             }
+
+            TrenutniNaziv = OvaTura.NazivTure;
 
             IQueryable<Vodici> qVodici = dbContext.Vodici.OrderBy(x => x.IdVodica);
             IList<uint> SviVodiciId = await qVodici.Select(x => x.IdVodica).ToListAsync();
@@ -168,12 +173,18 @@ namespace KonacniProjekat
             OvaTura.IdTure = (uint) id;
             OvaTura.TipTure = await dbContext.Ture.Where(x => x.IdTure == (uint)id).Select(x => x.TipTure).FirstOrDefaultAsync();
 
-            Ture PostojiTura = await dbContext.Ture.Where(x => x.NazivTure == OvaTura.NazivTure).FirstOrDefaultAsync();
-            if (PostojiTura != null)
+            if (TrenutniNaziv != OvaTura.NazivTure)
             {
-                PostojiVec = 1;
-                return RedirectToPage("./TuraIzmeni", new{id = TuraId, postoji = PostojiVec});
+                Ture PostojiTura = await dbContext.Ture.Where(x => x.NazivTure == OvaTura.NazivTure).FirstOrDefaultAsync();
+                if (PostojiTura != null)
+                {
+                    PostojiVec = 1;
+                    OvaTura.NazivTure = TrenutniNaziv;
+                    return RedirectToPage("./TuraIzmeni", new{id = TuraId, postoji = PostojiVec});
+                }
             }
+
+            
 
             if(IzabraniVodic == null)
             {
@@ -227,37 +238,7 @@ namespace KonacniProjekat
 
             IQueryable<ZnamenitostiUTurama> qZnamenitostiUTuri = dbContext.ZnamenitostiUTurama.Include(x => x.IdZnamenitostiZutNavigation).Where(x => x.IdTureZut == (uint)id);
             VecZnamenitostiUOvojTuri = await qZnamenitostiUTuri.Select(x => x.IdZnamenitostiZutNavigation).ToListAsync();
-           
-
-
-            // for (int i=IzabraneZnamenitosti.Count()- 1; i>=0; i--)
-            // {
-            //     Znamenitosti vecJeUtabeliZut = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == IzabraneZnamenitosti[i]).Select(x => x.IdZnamenitostiZutNavigation).FirstOrDefaultAsync();
-
-            //     ZnamenitostiUTurama novaVezaZut = new ZnamenitostiUTurama();
-            //     novaVezaZut.IdTureZut = (uint)id;
-            //     novaVezaZut.IdZnamenitostiZut = (uint)IzabraneZnamenitosti[i];
-                
-            //     if (vecJeUtabeliZut == null)
-            //     {
-            //         await dbContext.ZnamenitostiUTurama.AddAsync(novaVezaZut);
-            //     }
-            //     else {
-            //         VecZnamenitostiUOvojTuri.Remove(vecJeUtabeliZut);
-            //     }
-            //     IzabraneZnamenitosti.Remove(IzabraneZnamenitosti[i]);                             
-            // }
-            // await dbContext.SaveChangesAsync();
-
-            // for (int i=0; i<VecZnamenitostiUOvojTuri.Count(); i++)
-            // {
-            //     ZnamenitostiUTurama viseNePostojiVezaZut = new ZnamenitostiUTurama();
-            //     viseNePostojiVezaZut.IdTureZut = (uint)id;
-            //     viseNePostojiVezaZut.IdZnamenitostiZut = VecZnamenitostiUOvojTuri[i].IdZnamenitosti;
-            //     viseNePostojiVezaZut.IdZnamenitostiUTurama = await qZnamenitostiUTuri.Where(x => x.IdZnamenitostiZut == viseNePostojiVezaZut.IdZnamenitostiZut).Select(x => x.IdZnamenitostiUTurama).FirstOrDefaultAsync();
-
-            //     dbContext.ZnamenitostiUTurama.Remove(viseNePostojiVezaZut);
-            // }
+        
 
             for (int i = ZnamenitostiZaUklanjanje.Count() - 1; i>=0; i--)
             {

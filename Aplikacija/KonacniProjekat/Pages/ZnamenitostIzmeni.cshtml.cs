@@ -62,13 +62,17 @@ namespace KonacniProjekat
                return Page();
            }
 
-           Znamenitosti PostojiZnamenitost = await dbContext.Znamenitosti.Where(x => x.NazivZnamenitosti == TrenutnaZnamenitost.NazivZnamenitosti).FirstOrDefaultAsync();
-           if (PostojiZnamenitost != null)
-           {
-                PostojiVec = 1;
-                TrenutnaZnamenitost.NazivZnamenitosti = TrenutniNaziv;
-                return RedirectToPage("./ZnamenitostIzmeni", new{id = ZnamenitostId, postoji = PostojiVec});
-           }
+            if (TrenutniNaziv != TrenutnaZnamenitost.NazivZnamenitosti)
+            {
+                Znamenitosti PostojiZnamenitost = await dbContext.Znamenitosti.Where(x => x.NazivZnamenitosti == TrenutnaZnamenitost.NazivZnamenitosti).FirstOrDefaultAsync();
+                if (PostojiZnamenitost != null)
+                {
+                    PostojiVec = 1;
+                    TrenutnaZnamenitost.NazivZnamenitosti = TrenutniNaziv;
+                    return RedirectToPage("./ZnamenitostIzmeni", new{id = ZnamenitostId, postoji = PostojiVec});
+                }
+            }
+           
 
            TrenutnaZnamenitost.IdZnamenitosti=(uint)ZnamenitostId;
            

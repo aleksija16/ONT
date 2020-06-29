@@ -85,14 +85,19 @@ namespace KonacniProjekat
             }
 
             OvajKviz.IdKviza = (uint)KvizId;   
-       
-            Kvizovi PostojiKviz = await dbContext.Kvizovi.Where(x => x.NazivKviza == OvajKviz.NazivKviza).FirstOrDefaultAsync();
-            if (PostojiKviz != null)
+
+            if (TrenutniNaziv != OvajKviz.NazivKviza)
             {
-                PostojiVec = 1;
-                OvajKviz.NazivKviza = TrenutniNaziv;
-                return RedirectToPage("./KvizIzmeni", new{id = KvizId, postoji = PostojiVec});
+                Kvizovi PostojiKviz = await dbContext.Kvizovi.Where(x => x.NazivKviza == OvajKviz.NazivKviza).FirstOrDefaultAsync();
+                if (PostojiKviz != null)
+                {
+                    PostojiVec = 1;
+                    OvajKviz.NazivKviza = TrenutniNaziv;
+                    return RedirectToPage("./KvizIzmeni", new{id = KvizId, postoji = PostojiVec});
+                }
             }
+       
+            
 
             IQueryable<Znamenitosti> qIzabranaZnamenitost = dbContext.Znamenitosti.Where(x=>x.NazivZnamenitosti == IzabranaZnamenitostString);
             IQueryable<Ture> qIzabranaTura = dbContext.Ture.Where(x=>x.NazivTure == IzabranaTuraString);
