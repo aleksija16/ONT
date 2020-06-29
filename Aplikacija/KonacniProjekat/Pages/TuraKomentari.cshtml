@@ -1,0 +1,36 @@
+﻿@page
+@model MyApp.Namespace.TuraKomentariModel
+@{
+}
+
+<div class=text-center>
+    <h1 class="display-4">Komentari za turu: @Model.Tura.NazivTure</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./TuraJedna" asp-route-id="@Model.Tura.IdTure"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz ture</a></li>
+  </ul>
+</nav>
+
+<div class="formaKAK" style="width: 100%;">
+
+    @if(Model.RezultatiAnketa==null || Model.RezultatiAnketa.Count()==0)
+    {
+        <div class="vrednost">Trenutno nema komentara.</div>
+    }
+
+    else{
+      foreach (var k in Model.RezultatiAnketa)
+    {
+          if(k.Komentar!=null)
+          {
+            <ol type="1">
+        <li class="naziv">@k.Komentar</li>
+    </ol>
+          }
+          
+        }
+    }
+</div>
+

@@ -1,0 +1,47 @@
+﻿@page
+@model KonacniProjekat.VodicSviModel
+@{
+}
+
+<form method="get">
+<div class="text-center">
+    <h1 class="display-4">Vodiči</h1>
+</div>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<nav aria-label="Page navigation">  
+    <ul class="pagination justify-content-end">
+        <li class="page-item"><a class="page-link" asp-page="./VodicDodaj">Dodaj vodiča <i class='fas fa-user-plus'></i></a></li>
+    </ul>
+</nav>
+}
+<div class="row">
+@foreach (var vodic in Model.Vodici) 
+{
+<div class="column">
+ <div class="flip-card-vodic">
+  <div class="flip-card-inner-vodic">
+    <div class="flip-card-front-vodic">
+      @if(@vodic.Slika!=null)
+      {
+      <img src="images/@vodic.Slika" alt="Avatar" style="width:200px;height:200px; border-radius: 50px 20px;">}
+    </div>
+    <div class="flip-card-back-vodic">
+      <h2>@vodic.ImeVodica @vodic.PrezimeVodica</h2>
+      <div><a asp-page="./VodicJedan" asp-route-id="@vodic.IdVodica">Prikaži detalje <i class='fas fa-id-card-alt'></i></a></div>
+      @if(SessionClass.TipKorisnika=="A")
+      {
+        <div><a asp-page="./VodicObrisi"  asp-route-id="@vodic.IdVodica">Obriši nalog vodiču <i class='fas fa-user-alt-slash'></i></a></div> 
+        <div><a asp-page="./VodicIzmeni" asp-route-id="@vodic.IdVodica">Izmeni nalog vodiču <i class="fas fa-user-edit"></i></a></div>
+      }
+    </div>
+  </div>
+ </div>
+  </div>
+}
+</div>
+</form>
+
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

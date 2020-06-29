@@ -1,0 +1,48 @@
+﻿@page
+@model KonacniProjekat.VodicDodajModel
+@{
+}
+<div class="text-center">
+    <h1 class="display-4">Kreiranje naloga - Vodič</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./VodicSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu vodiča</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika=="A"){
+<div class="registracija fadeInDown">
+<div id="formContent">
+<form method="post">
+          <input type="text" asp-for="NoviVodic.ImeVodica" placeholder="Ime" required />
+          <input type="text" asp-for="NoviVodic.PrezimeVodica" placeholder="Prezime" required />
+          <label>Pol: 
+          <select asp-for="NoviVodic.Pol" placeholder="Pol" required>
+            <option value="" selected disabled hidden>Pol</option>
+            <option>Ž</option>
+            <option>M</option>
+          </select>
+          </label>
+          <label>Datum rođenja <input type="date" asp-for="NoviVodic.DatumRodjenja" required /></label>
+          <input type="text" asp-for="NoviVodic.BrojTelefona" placeholder="Broj telefona" required />
+          <input type="text" asp-for="NoviVodic.Email" placeholder="Email" required />
+          <input type="text" asp-for="NoviVodic.Licenca" placeholder="Licenca" required />
+          <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisničko ime" required />
+          <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
+          <input type="file"  asp-for="NoviVodic.Slika" placeholder="Slika" required />
+       <button type="submit" class="dugme">Registruj vodiča <i class="far fa-id-badge"></i></button>
+     </form>
+     </div>
+</div>
+
+@if (Model.PostojiVec)
+{
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Korisnik sa tim korisničkim imenom već postoji. <i class="fas fa-exclamation-triangle"></i></div> 
+}
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da kreira nalog. <i class="fas fa-exclamation-triangle"></i></div> 
+}
+

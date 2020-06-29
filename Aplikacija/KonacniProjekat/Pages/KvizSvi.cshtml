@@ -1,0 +1,325 @@
+﻿@page
+@model KonacniProjekat.KvizSviModel
+@{
+    ViewData["Title"]="Kvizovi";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="text-center">
+    <h1 class="display-4">Kvizovi</h1>
+</div>
+
+@if(SessionClass.TipKorisnika == "A") 
+{
+    <div class="text-right">
+        <h3><a asp-page="./KvizDodaj">Dodaj kviz <i class="fas fa-plus-circle"></i></a></h3>
+    </div>
+}
+
+ <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#ture">Kvizovi vezani za ture</a></li>
+    <li><a data-toggle="tab" href="#znamenitosti">Kvizovi vezani za znamenitosti</a></li>
+    <li><a data-toggle="tab" href="#ostali">Ostali kvizovi</a></li>
+  </ul>
+
+ <div class="tab-content">
+    <div id="ture" class="tab-pane fade in active">
+        <div style="overflow-y: scroll;  height: 440px;margin-top:20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <th>ID kviza</th>
+                    <th>Naziv kviza</th>
+                    <th>Tura</th>
+                    <th>Broj pitanja</th>
+                    <th>Najbolji rezultat</th>
+                    <th>Broj učesnika</th>
+                    @if (SessionClass.TipKorisnika == "A")
+                    {
+                    <th><i class="fas fa-info-circle"></i></th>
+                    <th><i class="fas fa-edit"></i></th>  
+                    }
+                    else if (SessionClass.TipKorisnika == "T")
+                    {
+                    <th><i class="fas fa-play"></i></th> 
+                    }
+                </thead>
+
+                <tbody>
+                    <form method="get">
+                    @foreach (var kviz in Model.KvizTura)
+                    {
+                        <tr>
+                            <td>@kviz.IdKviza</td>
+                            <td>@kviz.NazivKviza</td>
+                            <td>
+                                @kviz.IdTureKNavigation.NazivTure
+                            </td>
+                            <td>@if ((int)kviz.IdKviza > Model.BrojPitanjaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojPitanjaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                            </td>
+                            <td>
+                            @if ((int)kviz.IdKviza > Model.NajboljiRezultatPoKvizuString.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.NajboljiRezultatPoKvizuString[(int)kviz.IdKviza - 1]
+                            }
+                            </td>
+                            <td>
+                            @if ((int)kviz.IdKviza > Model.BrojUcesnikaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojUcesnikaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                            </td>
+                            @if (SessionClass.TipKorisnika == "A")
+                            {
+                            <td><a asp-page="./KvizJedan" asp-route-id="@kviz.IdKviza">Vidi kviz <i class="fas fa-newspaper"></i></a></td>
+                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kviz.IdKviza">Izmeni kviz <i class="fas fa-file-signature"></i></a></td>
+                            }
+                            else if (SessionClass.TipKorisnika == "T")
+                            {
+                            <td><a asp-page="./KvizUradi" asp-route-id="@kviz.IdKviza">Uradi kviz <i class="fas fa-play"></i></a></td>
+                            }                        
+                        </tr>
+                    }
+                    </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="znamenitosti" class="tab-pane fade">
+        <div style="overflow-y: scroll;  height: 440px; margin-top:20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <th>ID kviza</th>
+                    <th>Naziv kviza</th>
+                    <th>Znamenitost</th>
+                    <th>Broj pitanja</th>
+                    <th>Najbolji rezultat</th>
+                    <th>Broj učesnika</th>
+                    @if (SessionClass.TipKorisnika == "A")
+                    {
+                    <th></th>
+                    <th></th>  
+                    }
+                    else if (SessionClass.TipKorisnika == "T")
+                    {
+                    <th></th> 
+                    }
+                </thead>
+
+                <tbody>
+                    <form method="get">
+                        @foreach (var kvizZ in Model.KvizZnamenitosti)
+                        {
+                            <tr>
+                                <td>@kvizZ.IdKviza</td>
+                                <td>@kvizZ.NazivKviza</td>
+                                <td>
+                                    @kvizZ.IdZnamenitostiKNavigation.NazivZnamenitosti
+                                </td>
+                                <td>@if ((int)kvizZ.IdKviza > Model.BrojPitanjaPoKvizu.Count())
+                                {
+                                }
+                                else
+                                {
+                                    @Model.BrojPitanjaPoKvizu[(int)kvizZ.IdKviza-1]
+                                }
+                                </td>
+                                <td>
+                                @if ((int)kvizZ.IdKviza > Model.NajboljiRezultatPoKvizuString.Count())
+                                {
+                                }
+                                else
+                                {
+                                @Model.NajboljiRezultatPoKvizuString[(int)kvizZ.IdKviza - 1]
+                                }
+                                </td>
+                                <td>
+                                @if ((int)kvizZ.IdKviza > Model.BrojUcesnikaPoKvizu.Count())
+                                {
+                                }
+                                else
+                                {
+                                    @Model.BrojUcesnikaPoKvizu[(int)kvizZ.IdKviza-1]
+                                }
+                                </td>
+                                @if (SessionClass.TipKorisnika == "A")
+                                {
+                                <td><a asp-page="./KvizJedan" asp-route-id="@kvizZ.IdKviza">Vidi kviz <i class="fas fa-newspaper"></i></a></td>
+                                <td><a asp-page="./KvizIzmeni" asp-route-id="@kvizZ.IdKviza">Izmeni kviz <i class="fas fa-file-signature"></i></a></td>
+                                }
+                                else if (SessionClass.TipKorisnika == "T")
+                                {
+                                <td><a asp-page="./KvizUradi" asp-route-id="@kvizZ.IdKviza">Uradi kviz <i class="fas fa-play"></i></a></td>
+                                }                        
+                            </tr>
+                        }
+                    </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="ostali" class="tab-pane fade">
+        <div style="overflow-y: scroll;  height: 440px;margin-top:20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <th>ID kviza</th>
+                    <th>Naziv kviza</th>
+                    <th>Broj pitanja</th>
+                    <th>Najbolji rezultat</th>
+                    <th>Broj učesnika</th>
+                    @if (SessionClass.TipKorisnika == "A")
+                    {
+                    <th><i class="fas fa-info-circle"></i></th>
+                    <th><i class="fas fa-edit"></i></th>  
+                    }
+                    else if (SessionClass.TipKorisnika == "T")
+                    {
+                    <th><i class="fas fa-play"></i></th> 
+                    }
+                </thead>
+
+                <tbody>
+                    <form method="get">
+                    @foreach (var kviz in Model.KvizOstali)
+                    {
+                        <tr>
+                            <td>@kviz.IdKviza</td>
+                            <td>@kviz.NazivKviza</td>
+                            <td>@if ((int)kviz.IdKviza > Model.BrojPitanjaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojPitanjaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                            </td>
+                            <td>
+                            @if ((int)kviz.IdKviza > Model.NajboljiRezultatPoKvizuString.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.NajboljiRezultatPoKvizuString[(int)kviz.IdKviza - 1]
+                            }
+                            </td>
+                            <td>
+                            @if ((int)kviz.IdKviza > Model.BrojUcesnikaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojUcesnikaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                            </td>
+                            @if (SessionClass.TipKorisnika == "A")
+                            {
+                            <td><a asp-page="./KvizJedan" asp-route-id="@kviz.IdKviza">Vidi kviz <i class="fas fa-newspaper"></i></a></td>
+                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kviz.IdKviza">Izmeni kviz <i class="fas fa-file-signature"></i></a></td>
+                            }
+                            else if (SessionClass.TipKorisnika == "T")
+                            {
+                            <td><a asp-page="./KvizUradi" asp-route-id="@kviz.IdKviza">Uradi kviz <i class="fas fa-play"></i></a></td>
+                            }                        
+                        </tr>
+                    }
+                    </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@*
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID kviza</th>
+            <th>Naziv kviza</th>
+            <th>Znamenitost</th>
+            <th>Broj pitanja</th>
+            <th>Najbolji rezultat</th>
+            <th>Broj učesnika</th>
+            @if (SessionClass.TipKorisnika == "A")
+            {
+                <th></th>
+                <th></th>  
+            }
+            else if (SessionClass.TipKorisnika == "T")
+            {
+                <th></th> 
+            }
+        </thead>
+
+        <tbody>
+            <form method="get">
+                @foreach (var kviz in Model.SviKvizovi)
+                {
+                    <tr>
+                        <td>@kviz.IdKviza</td>
+                        <td>@kviz.NazivKviza</td>
+                        <td>@if (kviz.IdZnamenitostiKNavigation == null)
+                            {
+                            }                               
+                            else
+                            {
+                                @kviz.IdZnamenitostiKNavigation.NazivZnamenitosti
+                            }
+                        </td>
+                        <td>@if ((int)kviz.IdKviza > Model.BrojPitanjaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojPitanjaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                        </td>
+                        <td>
+                            @if ((int)kviz.IdKviza > Model.NajboljiRezultatPoKvizuString.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.NajboljiRezultatPoKvizuString[(int)kviz.IdKviza - 1]
+                            }
+                        </td>
+                        <td>
+                            @if ((int)kviz.IdKviza > Model.BrojUcesnikaPoKvizu.Count())
+                            {
+                            }
+                            else
+                            {
+                                @Model.BrojUcesnikaPoKvizu[(int)kviz.IdKviza-1]
+                            }
+                        </td>
+                        @if (SessionClass.TipKorisnika == "A")
+                        {
+                            <td><a asp-page="./KvizJedan" asp-route-id="@kviz.IdKviza">Vidi kviz</a></td>
+                            <td><a asp-page="./KvizIzmeni" asp-route-id="@kviz.IdKviza">Izmeni kviz</a></td>
+                        }
+                        else if (SessionClass.TipKorisnika == "T")
+                        {
+                            <td><a asp-page="./KvizUradi" asp-route-id="@kviz.IdKviza">Uradi kviz</a></td>
+                        }                        
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+*@

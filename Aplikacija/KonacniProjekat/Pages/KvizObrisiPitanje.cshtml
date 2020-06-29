@@ -1,0 +1,27 @@
+﻿@page
+@model KonacniProjekat.KvizObrisiPitanjeModel
+@{
+    ViewData["Title"]="Brisanje pitanja";
+}
+
+@if(SessionClass.TipKorisnika == "A")
+{
+    <form method="post">
+        <input type="hidden" asp-for="@Model.PitanjeId" />
+              <div class="brisi-ture fadeInDown">
+                <div id="formContent">
+                    <h5>Da li ste sigurni da želite da obrišete sledeće pitanje:</h5>
+                     <p class="title">"@Model.PitanjeZaBrisanje.TekstPitanja"</p>
+                    <h5>iz kviza </h5>
+                      <p class="title">"@Model.PitanjeZaBrisanje.IdKvizaNavigation.NazivKviza"</p>
+                               <h5>?</h5> 
+                <button type="submit" class="btn btn-danger">Obriši pitanje</button>    
+                <a asp-page="./KvizJedan" asp-route-id="@Model.PitanjeZaBrisanje.IdKviza">Vrati se na prikaz kviza</a>
+                </div>
+              </div>
+    </form>
+}
+else
+{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da obriše pitanje. <i class="fas fa-exclamation-triangle"></i></div>      
+}

@@ -1,0 +1,44 @@
+﻿@page
+@model KonacniProjekat.ZnamenitostDodajModel
+@{
+ViewData["Title"]="Nova znamenitost";
+}
+
+<div class="text-center">
+    <h2 class="display 4">Nova znamenitost</h2>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostSve"><i class='fas fa-arrow-circle-left'></i>Prikaži listu znamenitosti</a></li>
+  </ul>
+</nav>
+
+   @if(SessionClass.TipKorisnika=="A"){
+<form method="post">
+  <input type="hidden" asp-for="@Model.PostojiVec" />
+
+      @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+      {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji znamenitost sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+      }
+
+    <div class="dodaj">
+        <div id="formContent">
+        <label class="form-control">Naziv:</label> <input asp-for="NovaZnamenitost.NazivZnamenitosti" class="form-control" placeholder="Naziv" required />
+        <label class="form-control">Lokacija:</label> <input asp-for="NovaZnamenitost.Lokacija" class="form-control" placeholder="Lokacija" required />
+        <label class="form-control">Opis:</label> <input asp-for="NovaZnamenitost.Opis" class="form-control" placeholder="Opis" required />
+        <label class="form-control">Radno vreme:</label> <input asp-for="NovaZnamenitost.RadnoVreme" class="form-control" placeholder="Radno vreme" required />
+        <label class="form-control">Broj telefona:</label> <input asp-for="NovaZnamenitost.BrojTelefona" class="form-control" placeholder="Broj telefona" />
+        <label class="form-control">Cena ulaznice:</label> <input asp-for="NovaZnamenitost.CenaUlaznice" class="form-control" placeholder="Cena ulaznice" />
+        <label class="form-control">Tip:</label> <input asp-for="NovaZnamenitost.Tip" class="form-control" placeholder="Tip" />
+        <label class="form-control">Dodajte sliku:</label> <input type="file" asp-for="NovaZnamenitost.Slika"  placeholder="Slika" required />
+       
+        <button type="submit" class="dugme">Dodaj novu znamenitost</button>
+        </div>
+    </div>
+</form>
+}
+ else{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da dodaje znamenitosti. <i class="fas fa-exclamation-triangle"></i></div> 
+    }

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+<link rel="icon" href="images/logic.png">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="
+  background:-color #d6eaff   ;  background-image: linear-gradient(315deg,  #d6eaff    0%,#f8fbff  50%);"> 
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                 <a  asp-area="" asp-page="/Index">
+                                  <img src="images/logic.png" style="height:90px"class="img-fluid">
+
+                 </a>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class=" nav navbar-right navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ONama">O Nama</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Kontakt</a>
+                        </li>
+                        @if(SessionClass.TipKorisnika!="" && SessionClass.SessionId!=null)
+                        {
+                  <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="@SessionClass.SessionId" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">@SessionClass.ImeKorisnika</span>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="@SessionClass.SessionId">
+                @if(SessionClass.TipKorisnika=="T" || SessionClass.TipKorisnika=="V")
+                {
+                <a class="nav-link text-dark" asp-area="" asp-page="/Profil">Profil <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i></a>
+                }
+                <a class="nav-link text-dark" asp-area="" asp-page="/Odjava">Odjavi se <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i></a>
+               
+              </div>
+            </li>
+
+                      
+                        }
+                         else
+                         {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Prijava">Prijavi se</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Registracija">Registruj se</a>
+                        </li>
+                         }
+
+                    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bars fa-1x"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/VodicSvi">Vodiči</a>
+          <a class="dropdown-item" href="/TuraSve">Ture</a>
+          <a class="dropdown-item" href="/ZnamenitostSve">Znamenitosti</a>
+          <a class="dropdown-item" href="/RezervacijaSve">Rezervacije</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/HallOfFame?id=1">Hall Of Fame</a>
+           <a class="dropdown-item" href="/KvizSvi">Kvizovi</a>
+        </div>
+      </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - ONT - <a asp-area="" asp-page="/Privacy">Kontakt</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

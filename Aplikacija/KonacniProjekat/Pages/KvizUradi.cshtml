@@ -1,0 +1,152 @@
+﻿@page
+@model KonacniProjekat.KvizUradiModel
+@{
+    ViewData["Title"]="Radi kviz";
+}
+
+@if(SessionClass.TipKorisnika=="T")
+{
+@if (Model.VecJeRadioKviz != null && Model.VecJeRadioKviz != 0)
+{
+     <div class="alert alert-danger" role="alert" style="text-align: center;"> <i class="fas fa-exclamation-triangle"></i> Već ste radili ovaj kviz. <i class="fas fa-exclamation-triangle"></i></div> 
+}
+else
+{
+    <form method="post">
+
+    <div class="text-center">
+        <h2 class="display-4">Kviz: @Model.NazivKviza</h2>
+    </div>
+
+    <nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./KvizSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu kvizova</a></li>
+  </ul>
+</nav>
+    
+    @{
+        string Disabled="";
+        if (Model.ZavrsenKviz)
+        {
+            Disabled = "disabledKviz";
+        }
+    } 
+
+    <input type="hidden" asp-for="@Model.SessionId" />
+    <input type="hidden" asp-for="@Model.KvizId" />
+    <input type="hidden" asp-for="@Model.BrojTacnihOdgovora" />
+    <input type="hidden" asp-for="@Model.ZavrsenKviz" />
+    <input type="hidden" asp-for="@Model.PorukaZaKorisnikaNepopunjenKviz" />
+    <input type="hidden" asp-for="@Model.VecJeRadioKviz" />
+    <input type="hidden" asp-for="@Model.NazivKviza" />
+
+    <div class="formaKAK">
+        <ol type="1">
+            
+            @for(var i=0; i<Model.PitanjaZaIzradu.Count(); i++)
+            {
+                <li>
+                    <div class="naziv"><h3><b>@Model.PitanjaZaIzradu[i].TekstPitanja</b></h3></div>
+                    <ol type="a">
+                
+                        
+                        @{
+                            string CorrectA="";
+                            if(Model.ZavrsenKviz)
+                            {
+                                if(Model.PitanjaZaIzradu[i].OdgovorA == Model.PitanjaZaIzradu[i].TacanOdgovor)
+                                    CorrectA="correctAnswer";
+                                else CorrectA = "incorrectAnswer";
+                            }
+                        }
+                        <li class="@CorrectA">                            
+                            <input class="@Disabled @CorrectA" type="radio" name="KorisnikoviOdgovori[@i]"
+                                value="@Model.PitanjaZaIzradu[i].OdgovorA" asp-for="KorisnikoviOdgovori[i]" required 
+                                oninvalid="nepopunjenKviz();" />
+                            @Model.PitanjaZaIzradu[i].OdgovorA
+                        </li>
+
+                        @{
+                            string CorrectB="";
+                            if(Model.ZavrsenKviz)
+                            {
+                                if(Model.PitanjaZaIzradu[i].OdgovorB == Model.PitanjaZaIzradu[i].TacanOdgovor)
+                                    CorrectB="correctAnswer";
+                                else CorrectB = "incorrectAnswer";
+                            }
+                        }
+                        <li class="@CorrectB">
+                            <input class="@Disabled @CorrectB" type="radio" name="KorisnikoviOdgovori[@i]"
+                            value="@Model.PitanjaZaIzradu[i].OdgovorB" asp-for="KorisnikoviOdgovori[i]" required />
+                            @Model.PitanjaZaIzradu[i].OdgovorB
+                        </li> 
+ 
+                        @{
+                            string CorrectC="";
+                            if(Model.ZavrsenKviz)
+                            {
+                                if(Model.PitanjaZaIzradu[i].OdgovorC == Model.PitanjaZaIzradu[i].TacanOdgovor)
+                                    CorrectC="correctAnswer";
+                                else CorrectC = "incorrectAnswer";
+                            }
+                        }
+                        <li class="@CorrectC">
+                            <input class="@Disabled @CorrectC" type="radio" name="KorisnikoviOdgovori[@i]"
+                            value="@Model.PitanjaZaIzradu[i].OdgovorC" asp-for="KorisnikoviOdgovori[i]" required  />
+                            @Model.PitanjaZaIzradu[i].OdgovorC
+                        </li>
+                        
+                    </ol>
+
+                </li>
+               
+                
+            }
+            
+        </ol>
+    </div>
+
+    @if(!Model.ZavrsenKviz)
+    {
+        <div>
+            <output style="color:red; background-color:lightred;" id="ObavestenjeONepopunjenomKvizu" />
+        </div>
+
+        <div>
+            <button type="submit" class="dugme" style=" position: relative; margin-left: 45%;">Završi kviz</button>
+        </div>
+    }
+    
+
+</form>
+
+
+@if(Model.BrojTacnihOdgovora != null) 
+{
+    @if(Model.BrojTacnihOdgovora != 11 && Model.BrojTacnihOdgovora%10 != 1)
+    {
+        <div class="form-control select-fit-text">
+            Odgovorili ste tačno na @Model.BrojTacnihOdgovora pitanja.
+        </div>
+    }
+    else
+    {
+        <div class="form-control select-fit-text">
+            Odgovorili ste tačno na @Model.BrojTacnihOdgovora pitanje.
+        </div>
+    }   
+}
+}
+<div class="text-center">
+    <h6 class="display-6"><a asp-page="./KvizSvi" asp-route-id="@Model.SessionId">Vrati se na listu svih kvizova</a></h6>
+</div>
+}
+else
+{
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./KvizSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu kvizova</a></li>   
+  </ul>
+</nav>
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Morate biti ulogovani kao turista da bi radili kviz. <i class="fas fa-exclamation-triangle"></i></div>      
+}

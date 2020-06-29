@@ -1,0 +1,36 @@
+﻿@page
+@model KonacniProjekat.RegistracijaModel
+@{
+}
+
+<div class="registracija">
+<div id="formContent">
+<form method="post">
+        <input type="text" asp-for="NoviTurista.ImeTuriste" placeholder="Ime" required />
+        <input type="text" asp-for="NoviTurista.PrezimeTuriste" placeholder="Prezime" required />
+        <label>Pol: 
+        <select asp-for="NoviTurista.Pol" placeholder="Pol" required>
+                <option value="" selected disabled hidden>Pol</option>
+                <option>Ž</option>
+                <option>M</option>
+        </select>
+        </label>
+        <label>Datum rođenja <input type="date" asp-for="NoviTurista.DatumRodjenja" required /></label>
+        <input type="text" asp-for="NoviTurista.Email" placeholder="Email" required />
+        <input type="text" asp-for="NoviKorisnik.Username" placeholder="Korisničko ime" required />
+        <input type="text"  asp-for="NoviKorisnik.Password" placeholder="Lozinka" required />
+        <div style="margin: 8px;"><input type="submit" value="Registruj se" class="dugme"/> </div>
+
+       	<div class="d-flex justify-content-center links">
+    			<div>Imaš nalog? <a href="/Prijava">Prijavi se <i class="fas fa-sign-in-alt"></i></a></div>
+				</div>
+     </form> 
+     </div>
+</div>
+
+@if (Model.PostojiVec)
+{
+        <div class="alert alert-danger" role="alert" style="text-align: center;"> <i class="fas fa-exclamation-triangle"></i> Korisnik sa tim korisničkim imenom već postoji. <i class="fas fa-exclamation-triangle"></i></div> 
+}
+
+

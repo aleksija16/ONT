@@ -1,0 +1,61 @@
+﻿@page
+@model KonacniProjekat.RezervacijaJednaModel
+@{
+ViewData["Title"] = "Rezervacije";
+}
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./RezervacijaSve"><i class="fas fa-calendar-alt"></i>Prikaži listu svih rezervacija</a></li>
+  </ul>
+</nav>
+
+<div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Podaci o rezervaciji</h6>
+      </div>
+      <div class="card-body">
+
+<form method="get">
+
+    <div class="naziv">Id rezervacije: </div>
+      <div class="vrednost">@Model.TrenutnaRezervacija.IdRezervacije</div>
+
+    <div class="naziv">Tura</div>
+      @if (Model.TrenutnaRezervacija.IdTureRNavigation.TipTure == "T")
+      {
+        <a asp-page="./TuraJedna" asp-route-id="@Model.TrenutnaRezervacija.IdTureR">@Model.TrenutnaRezervacija.IdTureRNavigation.NazivTure</a>
+      }
+      else
+      {
+          @Model.TrenutnaRezervacija.IdTureRNavigation.NazivTure
+        
+
+        <div>Znamenitosti u turi: </div>
+        <ul>
+          @foreach (var znam in Model.ZnamenitostiUCustomRezervaciji)
+          {
+            <li><a asp-page="./ZnamenitostJedna" asp-route-id="@znam.IdZnamenitosti">@znam.NazivZnamenitosti</a></li>    
+          }
+        </ul>
+      }
+
+
+    <div class="naziv">Datum </div>
+    <div class="vrednost">@Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.TrenutnaRezervacija.Datum))</div>
+    <div class="naziv">Vreme </div>
+    <div class="vrednost"> @Model.TrenutnaRezervacija.IdTureRNavigation.VremeOdrzavanja</div>
+    @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
+    {
+      <div class="naziv">Vodič</div><a asp-page="./VodicJedan" asp-route-id="@Model.TrenutnaRezervacija.IdVodicaR">@Model.TrenutnaRezervacija.IdVodicaRNavigation.ImeVodica @Model.TrenutnaRezervacija.IdVodicaRNavigation.PrezimeVodica</a>
+    }
+    @if (SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "V")
+    {
+      <div class="naziv">Turista </div>
+      <div class="vrednost">@Model.TrenutnaRezervacija.IdTuristeRNavigation.ImeTuriste @Model.TrenutnaRezervacija.IdTuristeRNavigation.PrezimeTuriste</div>
+    }
+    
+    <div class="naziv">Broj osoba</div>
+    <div class="vrednost">@Model.TrenutnaRezervacija.BrojOsoba</div>
+</form>
+ </div>

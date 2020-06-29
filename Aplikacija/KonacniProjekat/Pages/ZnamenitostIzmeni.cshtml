@@ -1,0 +1,48 @@
+﻿@page
+@model KonacniProjekat.ZnamenitostIzmeniModel
+@{
+ViewData["Title"]="Izmena znamenitosti";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.TrenutnaZnamenitost.NazivZnamenitosti</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostJedna" asp-route-id="@Model.TrenutnaZnamenitost.IdZnamenitosti"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz znamenitosti</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<form method="post">
+
+  <input type="hidden" asp-for="@Model.PostojiVec" />
+
+      @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+      {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji znamenitost sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+      }
+
+    <div class="izmeni">
+        <div id="formContent">
+        <input type="hidden" asp-for="@Model.ZnamenitostId"/>
+        <input type="hidden" asp-for="@Model.TrenutniNaziv" />
+        <label class="form-control">Naziv: </label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.NazivZnamenitosti"  required></textarea>
+        <label class="form-control">Lokacija:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Lokacija"></textarea>
+        <label class="form-control">Opis:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Opis"></textarea> 
+        <label class="form-control">Radno vreme:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.RadnoVreme"></textarea>
+        <label class="form-control">Broj telefona:</label> <textarea class="form-control " asp-for="TrenutnaZnamenitost.BrojTelefona"></textarea>
+        <label class="form-control">Cena ulaznice:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.CenaUlaznice"></textarea>
+        <label class="form-control">Tip:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Tip"></textarea>
+        <label class="form-control">Naslovna slika:</label> <input asp-for="TrenutnaZnamenitost.Slika" class="form-control" />
+        <button type="submit" class="dugme">Sačuvaj izmene</button>
+        </div>
+    </div>
+</form>
+}
+else
+{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da izmeni znamenitost. <i class="fas fa-exclamation-triangle"></i></div>
+}

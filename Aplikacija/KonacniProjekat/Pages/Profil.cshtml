@@ -1,0 +1,235 @@
+@page
+@model ProfilModel
+@{
+    ViewData["Title"] = "Profil";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+@if(SessionClass.TipKorisnika=="T")
+{
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#podaci">Podaci</a></li>
+    <li><a data-toggle="tab" href="#rezervacije">Rezervacije</a></li>
+    <li><a data-toggle="tab" href="#ocenjivanje">Ocenjivanje</a></li>
+    <li><a data-toggle="tab" href="#hof">Kvizovi</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="podaci" class="tab-pane fade in active">
+        <div class="cardProfil" style="text-align: center; width: 70%;" >
+            <h1>@SessionClass.ImeKorisnika</h1>
+            <br/>
+            <p class="title"><i class="fas fa-birthday-cake"></i> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.Korisnik.IdTuristeKNavigation.DatumRodjenja))</p>
+            <p class="title"><i class="far fa-envelope-open"></i> @Model.Korisnik.IdTuristeKNavigation.Email</p>
+            @if(@Model.Korisnik.IdTuristeKNavigation.Pol=="Ž")
+            {
+                <p class="title">Pol: <i class="fas fa-female"></i></p>
+            }
+            else
+            {
+                <p class="title">Pol: <i class="fas fa-male"></i></p>
+            }
+             <p class="title" style="background-color:#f2f2f2; color: #8c8c8c">Korisničko ime i lozinka: @Model.Korisnik.Username | @Model.Korisnik.Password</p>
+        </div>   
+    </div>
+    <div id="rezervacije" class="tab-pane fade">
+        <h3>Rezervacije</h3>      
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <th>ID rezervacije</th>
+                    <th>Naziv ture</th>
+                    <th>Vodič</th>
+                    <th>Datum</th>
+                </thead>
+                <tbody>
+                <form method="get">
+                    @foreach (var rezervacija in Model.SveRezervacije)
+                    {
+                        <tr>
+                            <td>@rezervacija.IdRezervacije</td>
+                            <td>@rezervacija.IdTureRNavigation.NazivTure</td>
+                            <td>@rezervacija.IdVodicaRNavigation.ImeVodica @rezervacija.IdVodicaRNavigation.PrezimeVodica</td>
+                            <td>@rezervacija.Datum</td>
+                        </tr>
+                    }
+                </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="ocenjivanje" class="tab-pane fade">
+        <h3>Ocene koje ste dali vodičima</h3>   
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <th>ID ocene</th>
+                    <th>Vodič</th>
+                    <th>Tura</th>
+                    <th>Ocene</th>
+                </thead>
+                <tbody>
+                    <form method="get">
+                        @foreach (var ocene in Model.SveOcene)
+                        {
+                        <tr>
+                                <td>@ocene.IdOcenjivanja</td>
+                                <td>@ocene.IdVodicaONavigation.ImeVodica @ocene.IdVodicaONavigation.PrezimeVodica</td>
+                                @if(ocene.IdTureO!=null)
+                                {
+                                    <td>@ocene.IdTureONavigation.NazivTure</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                <td>@ocene.Ocena</td>
+                            </tr>
+                        }
+                    </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="hof" class="tab-pane fade">
+        <h3>HOF</h3>    
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <th>Naziv kviza</th>
+                    <th>Poeni</th>
+                    <th>Datum rađenja</th>
+                </thead>
+                <tbody>
+                    <form method="get">
+                        @foreach (var hof in Model.SviHOF)
+                        {
+                            <tr>
+                                <td>@hof.IdKvizaHofNavigation.NazivKviza</td>
+                                <td>@hof.Poeni</td>
+                                <td>@hof.DatumRadjenja</td>
+                            </tr>
+                        }
+                    </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}
+else if(SessionClass.TipKorisnika=="V")
+{
+    
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#podaci">Podaci</a></li>
+    <li><a data-toggle="tab" href="#rezervacije">Rezervacije</a></li>
+    <li><a data-toggle="tab" href="#ocenjivanje">Ocenjivanje</a></li>
+    <li><a data-toggle="tab" href="#ture">Ture</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="podaci" class="tab-pane fade in active">
+      <div class="cardProfil" style="text-align: center ">
+            <h1>@SessionClass.ImeKorisnika</h1>
+            <br/>
+            <p class="title"><i class="fas fa-birthday-cake"></i> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.Korisnik.IdVodicaKNavigation.DatumRodjenja))</p>
+            <p class="title"><i class="far fa-envelope-open"></i> @Model.Korisnik.IdVodicaKNavigation.Email</p>
+            <p class="title"><i class="fas fa-phone"></i> @Model.Korisnik.IdVodicaKNavigation.BrojTelefona </p> 
+            @if(@Model.Korisnik.IdVodicaKNavigation.Pol=="Ž")
+            {
+                <p class="title">Pol: <i class="fas fa-female"></i></p>
+            }
+            else
+            {
+                <p class="title">Pol: <i class="fas fa-male"></i></p>
+            }
+            <p class="title"> <img src="https://image.flaticon.com/icons/svg/1/1700.svg" style="width: 20px; height:20px"> @Model.Korisnik.IdVodicaKNavigation.Licenca</p>
+            <p class="title" style="background-color:#f2f2f2; color: #8c8c8c">Korisničko ime i lozinka: @Model.Korisnik.Username | @Model.Korisnik.Password</p>
+        </div>   
+    </div>
+    <div id="rezervacije" class="tab-pane fade">
+      <h3>Rezervacije</h3>
+      
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID rezervacije</th>
+            <th>Naziv ture</th>
+            <th>ID turiste</th>
+            <th>Datum</th>
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var rezervacija in Model.SveRezervacije)
+                {
+                    <tr>
+                        <td>@rezervacija.IdRezervacije</td>
+                        <td>@rezervacija.IdTureRNavigation.NazivTure</td>
+                        <td>@rezervacija.IdTuristeRNavigation.ImeTuriste @rezervacija.IdTuristeRNavigation.PrezimeTuriste</td>
+                        <td>@rezervacija.Datum</td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+
+    </div>
+    <div id="ocenjivanje" class="tab-pane fade">
+      <h3>Ocene koje ste dobili</h3>
+     
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID ocene</th>
+             <th>Naziv ture</th>
+            <th>Ocene</th>
+           
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var ocene in Model.SveOcene)
+                {
+                    <tr>
+                        <td>@ocene.IdOcenjivanja</td>
+                        <td>@ocene.IdTureONavigation.NazivTure</td>
+                        <td>@ocene.Ocena</td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+    </div>
+    <div id="ture" class="tab-pane fade">
+      <h3>Ture</h3>    
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>ID ture</th>
+            <th>Naziv Ture</th>
+            <th>Dan odrzavanja</th>
+            <th>Vreme odrzavanja</th>
+            <th>Mesto polaska</th>
+        </thead>
+        <tbody>
+            <form method="get">
+                @foreach (var ture in Model.SveTure)
+                {
+                    <tr>
+                        <td>@ture.IdTure</td>
+                        <td>@ture.NazivTure</td>
+                        <td>@ture.DanOdrzavanja</td>
+                        <td>@ture.VremeOdrzavanja</td>
+                        <td>@ture.MestoPolaska</td>
+                    </tr>
+                }
+            </form>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+}

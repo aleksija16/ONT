@@ -1,0 +1,22 @@
+﻿@page
+@model KonacniProjekat.ZnamenitostObrisiModel
+@{
+     ViewData["Title"]="Brisanje znamenitosti";
+}
+   @if(SessionClass.TipKorisnika=="A"){
+<div class="brisi-ture fadeInDown">
+<div id="formContent">
+<form method="post">
+            <h5>Da li ste sigurni da želite da obrišete sledeću znamenitosti:</h5>
+            <p class="title">@Model.ZnamenitostZaBrisanje.NazivZnamenitosti</p> 
+           <h5> ?</h5>
+    <button type="submit" class="btn btn-danger">Da</button>
+    <a asp-page="./ZnamenitostSve" >Ne</a>
+
+</form>
+</div>
+</div>
+   }
+ else{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da obriše znamenitost. <i class="fas fa-exclamation-triangle"></i></div> 
+}

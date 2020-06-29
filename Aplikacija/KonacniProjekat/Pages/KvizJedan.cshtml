@@ -1,0 +1,66 @@
+﻿@page
+@model KonacniProjekat.KvizJedanModel
+@{
+    ViewData["Title"] = "Kviz";
+}
+
+<div class=text-center>
+    <h1 class="display-4">@Model.OvajKviz.NazivKviza</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./KvizSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu kvizova</a></li>
+  @if (SessionClass.TipKorisnika == "A")
+    {
+  <li class="page-item">
+    <a class="page-link" asp-page="./KvizIzmeni" asp-route-id="@Model.OvajKviz.IdKviza">Izmeni kviz</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" asp-page="./KvizDodajPitanje" asp-route-id="@Model.OvajKviz.IdKviza">Dodaj pitanje u kviz</a> 
+      </li>
+    }               
+  </ul>
+</nav>
+
+
+
+
+@if(SessionClass.TipKorisnika == "A")
+{
+  <div>
+      <table class="table table-bordered">
+          <thead>
+              <th></th>
+              <th>Pitanje</th>
+              <th>Tačan odgovor</th>
+              <th>Svi odgovori</th>
+              <th></th>
+              <th></th>
+          </thead>
+        
+          @foreach (var pitanje in Model.PitanjaUzKviz)
+          {
+              <tr>
+                  <td>@Model.PitanjaUzKviz.IndexOf(pitanje)</td>
+                  <td>@pitanje.TekstPitanja</td>
+                  <td>@pitanje.TacanOdgovor</td>
+                  <td>
+                      <ul>
+                          <li>@pitanje.OdgovorA</li>   
+                          <li>@pitanje.OdgovorB</li>
+                          <li>@pitanje.OdgovorC</li>
+                      </ul>
+                  </td>
+                  <td><a asp-page="./KvizIzmeniPitanje" asp-route-id="@pitanje.IdPitanja">Izmeni pitanje</a></td>
+                  <td><a asp-page="./KvizObrisiPitanje" asp-route-id="@pitanje.IdPitanja">Obriši pitanje</a></td>
+              </tr>
+          }
+      </table>
+  </div>
+}
+else
+{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da pristupi informacijama o kvizu. <i class="fas fa-exclamation-triangle"></i></div>      
+}
+

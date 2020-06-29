@@ -1,0 +1,46 @@
+﻿@page
+@model KonacniProjekat.VodicJedanModel
+@{
+}
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./VodicSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu vodiča</a></li>
+  @if(SessionClass.TipKorisnika=="A")
+      {
+  <li class="page-item">
+        <a class="page-link" asp-page="./VodicObrisi"  asp-route-id="@Model.TrenutniVodic.IdVodica">Obriši nalog vodiču <i class='fas fa-user-alt-slash'></i></a> 
+  </li>
+  <li class="page-item">
+        <a class="page-link" asp-page="./VodicIzmeni" asp-route-id="@Model.TrenutniVodic.IdVodica">Izmeni nalog vodiču <i class="fas fa-user-edit"></i></a>
+  </li>
+  }
+  </ul>
+</nav>
+
+<form method="get">
+<div class="cardVodic" style="text-align: center; width: 55%;">
+  <img src="images/@Model.TrenutniVodic.Slika" style="width:50%;height:45%; display: block; margin-left: auto; margin-right: auto;">
+  <h1>@Model.TrenutniVodic.ImeVodica @Model.TrenutniVodic.PrezimeVodica</h1>
+   </br>
+  <p class="title"><i class="fas fa-birthday-cake"></i> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.TrenutniVodic.DatumRodjenja))</p>
+   @if(@Model.TrenutniVodic.Pol=="Ž")
+            {
+                <p class="title">Pol: <i class="fas fa-female"></i></p>
+            }
+            else
+            {
+                <p class="title">Pol: <i class="fas fa-male"></i></p>
+            }
+  <p class="title"> <img src="https://image.flaticon.com/icons/svg/1/1700.svg" style="width: 20px; height:20px">Licenca: @Model.TrenutniVodic.Licenca</p>
+  <p class="title">Ocena: @Model.TrenutniVodic.Ocena <i class="fas fa-hand-holding-heart"></i></p>
+  </br>
+  </br>
+  <p class="title" style="background-color:#f2f2f2; color: #8c8c8c"><i class="fas fa-phone-square-alt"></i> @Model.TrenutniVodic.BrojTelefona | <i class="fas fa-envelope-open-text"></i> @Model.TrenutniVodic.Email</p>
+   </br>
+  @if(SessionClass.TipKorisnika=="T")
+  {
+  <a asp-page="./VodicOceni" asp-route-id="@Model.TrenutniVodic.IdVodica" style="color:#84c1ff; font-size:19px">Oceni <i class="fas fa-thumbs-up"></i> <i class="fas fa-thumbs-down"></i></a>
+  }
+</div>
+</form>

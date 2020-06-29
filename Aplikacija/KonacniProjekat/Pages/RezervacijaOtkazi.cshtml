@@ -1,0 +1,30 @@
+﻿@page
+@model KonacniProjekat.RezervacijaOtkaziModel
+@{
+    ViewData["Title"]="Otkazivanje rezervacije";
+}
+
+@if(SessionClass.TipKorisnika == "T")
+{
+    <div class="brisi-rezervaciju fadeinDown">
+        <div id="formContent">
+            <form method="post">
+                <input type="hidden" asp-for="@Model.RezervacijaId"/>
+                <label class="form-control select-fit-text">
+                    <h5>Da li ste sigurni da želite da otkažete sledeću rezervaciju?</h5>
+                    <h5>Naziv ture: @Model.RezervacijaZaOtkazivanje.IdTureRNavigation.NazivTure</h5> 
+                    <h5>Datum:  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @Model.RezervacijaZaOtkazivanje.Datum))</h5>
+                    <h5>Vreme: @Model.RezervacijaZaOtkazivanje.IdTureRNavigation.VremeOdrzavanja</h5>
+                    <h5>Broj osoba uz rezervaciju: @Model.RezervacijaZaOtkazivanje.BrojOsoba</h5>
+                </label>
+
+                <button type="submit" class="btn btn-danger">Da</button>
+                <a asp-page="./RezervacijaSve">Ne</a>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo turisti mogu da rezervišu i otkazuju rezervacije. <i class="fas fa-exclamation-triangle"></i></div>
+}

@@ -1,0 +1,282 @@
+﻿@page
+@model KonacniProjekat.TuraJednaModel
+@{
+}
+
+<div class=text-center>
+    <h1 class="display-4">@Model.Tura.NazivTure</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./TuraSve"><i class='fas fa-arrow-circle-left'></i>Prikaži listu tura</a></li>
+  @if(SessionClass.TipKorisnika=="T" && !Model.NeispravnaTura)
+  {
+    <li class="page-item">
+      <a class="page-link" asp-page="./TuraRezervisi" asp-route-id="@Model.Tura.IdTure">Rezerviši turu <i class="far fa-calendar-plus"></i></a>
+    </li>
+     <li class="page-item"> 
+      <a class="page-link" asp-page="./TuraOceni" asp-route-id="@Model.Tura.IdTure">Oceni turu <i class="fas fa-star-half-alt"></i></a>             
+    </li>
+  }
+
+  @if(SessionClass.TipKorisnika=="A")
+  {
+    <li class="page-item">
+      <a class="page-link" asp-page="./TuraIzmeni" asp-route-id="@Model.Tura.IdTure">Izmeni turu <i class="fas fa-edit"></i></a>
+    </li>
+    <li class="page-item">
+		  <a class="page-link" asp-page="./TuraObrisi"  asp-route-id="@Model.Tura.IdTure">Obriši turu <i class="fas fa-trash-alt"></i></a>
+    </li>              
+    <li class="page-item">               
+      <a class="page-link" asp-page="./TuraKomentari"  asp-route-id="@Model.Tura.IdTure">Prikaži komentare <i class="far fa-comments"></i></a>           
+    </li>
+  }
+
+  </ul>
+</nav>
+
+@if (SessionClass.TipKorisnika == "T" && Model.NeispravnaTura)
+{ 
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i>Ova tura je trenutno nepotpuna.<i class="fas fa-exclamation-triangle"></i></div>  
+}
+else if (SessionClass.TipKorisnika == "A" && Model.NeispravnaTura)
+{
+    
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i>Ova tura trenutno nema postavljenog vodiča ili dane održavanja. Izmenite turu tako da budu postavljeni i dani održavanja i vodič.<i class="fas fa-exclamation-triangle"></i></div> 
+}
+
+
+  @* <div class="row"> *@
+<div class="card shadow mb-4 ">
+
+
+  <div class="TuraJednaGlavniDiv">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Podaci o turi</h6>
+      </div>
+      <div class="card-body">
+      
+        <div class="naziv-rezAnk">Naziv</div>
+        <div class="vrednost-rezAnk">@Model.Tura.NazivTure</div>
+                  
+        <div class="naziv-rezAnk">Dani održavanja</div>
+        @if (Model.DaniOdrzavanja != null && Model.DaniOdrzavanja!=" ")
+        {
+          <div class="vrednost-rezAnk">@Model.DaniOdrzavanja</div>
+        }
+        else
+        {
+          <div class="vrednost-rezAnk">Trenutno nema dane održavanja.</div>
+        }
+
+        <div class="naziv-rezAnk">Vreme održavanja</div>
+        <div class="vrednost-rezAnk">@Model.Tura.VremeOdrzavanja</div>
+
+        <div class="naziv-rezAnk">Mesto polaska</div>
+        <div class="vrednost-rezAnk">@Model.Tura.MestoPolaska</div>
+
+        <div class="naziv-rezAnk">Opis</div>
+        <div class="vrednost-rezAnk">@Model.Tura.Opis</div>
+
+        <div class="naziv-rezAnk">Vodič</div>
+
+        @if (Model.VodicTure != null)
+        {
+          <div class="vrednost-rezAnk">
+            <a asp-page="./VodicJedan" asp-route-id="@Model.VodicTure.IdVodica"> @Model.VodicTure.ImeVodica @Model.VodicTure.PrezimeVodica</a>
+          </div>
+        }
+        else
+        {
+          <div class="vrednost-rezAnk">Trenutno nema vodiča.</div>
+        }
+        
+
+        <div class="naziv-rezAnk">Znamenitosti</div>
+        @if (Model.ZnamenitostiUTuri != null && Model.ZnamenitostiUTuri.Count() != 0)
+        {
+          @foreach (var znamenitost in @Model.ZnamenitostiUTuri)
+          {
+            <div class="vrednost-rezAnk">@znamenitost.NazivZnamenitosti</div>      
+          }
+        }
+        else
+        {
+          <div class="vrednost-rezAnk">Trenutno nema znamenitosti.</div> 
+        }
+      
+      </div>
+    </div>                  
+
+
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Rezultati ankete</h6>
+      </div>
+      <div class="card-body">
+      
+        <div class="naziv-rezAnk">Tip ture</div>
+        @{
+          if(Model.TipTuristeNaziv == null || Model.TipTuristeNaziv.Count() == 0)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          { 
+            <div>Korisnici najčešće biraju ovu turu za:</div>
+            <ol type="1">
+            @foreach(var tip in Model.TipTuristeNaziv)
+              if(tip != null)
+              {
+                <li>@tip</li>
+              }
+          </ol> 
+          }
+        }
+
+        <div class="naziv-rezAnk">Organizovanost ture</div>
+        @{
+          String Organizovanost;
+        
+
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.OrganizovanostTure == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+         
+          Organizovanost = Model.RezultatiAnkete.OrganizovanostTure.ToString() + "%";
+          
+          <div class="vrednost-rezAnk">@Model.RezultatiAnkete.OrganizovanostTure</div>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-info" style="width:@Organizovanost;" role="progressbar" aria-valuemin="0" aria-valuemax="100" >
+            </div>
+          </div>
+          }
+
+        }       
+        <hr class="hr-ONT" />
+
+        <div class="naziv-rezAnk">Fizička zahtevnost</div>
+        @{
+          String Zahtevnost;
+
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.FizickaZahtevnostTure == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+            Zahtevnost = Model.RezultatiAnkete.FizickaZahtevnostTure.ToString() + "%";
+            <div class="vrednost-rezAnk">@Model.RezultatiAnkete.FizickaZahtevnostTure</div>
+            <div class="progress mb-4">
+              <div class="progress-bar bg-info" style="width:@Zahtevnost;" role="progressbar" aria-valuemin="0" aria-valuemax="100" >
+              </div>
+            </div>
+          }
+        }
+        <hr class="hr-ONT"/>
+
+        <div class="naziv-rezAnk">Informisanost vodiča</div>
+        @{
+          String Informisanost;
+
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.InformisanostVodica == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+            Informisanost = Model.RezultatiAnkete.InformisanostVodica.ToString() + "%";
+            <div class="vrednost-rezAnk">@Model.RezultatiAnkete.InformisanostVodica</div>
+            <div class="progress mb-4">
+              <div class="progress-bar bg-info" style="width:@Informisanost;" role="progressbar" aria-valuemin="0" aria-valuemax="100" >
+              </div>
+            </div>
+          }
+        }
+        <hr class="hr-ONT"/>
+
+        <div class="naziv-rezAnk">Najinteresantnije znamenitosti</div>
+        @if(Model.NajinteresantnijeZnamenitostiNaziv == null || Model.NajinteresantnijeZnamenitostiNaziv.Count() == 0)
+        {
+          <div class="vrednost-rezAnk">Nema podataka.</div>
+        }
+        else 
+        {
+          <ol type="1">
+            @foreach(var znam in Model.NajinteresantnijeZnamenitostiNaziv)
+              if(znam!= null)
+              {
+                <li>@znam</li>
+              }
+          </ol>
+        }
+        <hr class="hr-ONT"/>
+
+        <div class="naziv-rezAnk">Najmanje interesantne znamenitosti</div>
+        @if(Model.NajdosadnijeZnamenitostiNaziv == null || Model.NajdosadnijeZnamenitostiNaziv.Count() == 0)
+        {
+          <div class="vrednost-rezAnk">Nema podataka.</div>
+        }
+        else
+        {
+          <ol type="1">
+            @foreach(var znam in Model.NajdosadnijeZnamenitostiNaziv)
+              if(znam!= null)
+              {
+                <li>@znam</li>
+              }
+          </ol> 
+        }
+        <hr class="hr-ONT"/>
+      
+        <div class="naziv-rezAnk">Srednja ocena ture</div>
+        @{
+          String Ocena;
+          if(Model.RezultatiAnkete == null || Model.RezultatiAnkete.KonacnaOcena == null)
+          {
+            <div class="vrednost-rezAnk">Nema podataka.</div>
+          }
+          else
+          {
+            Ocena = (Model.RezultatiAnkete.KonacnaOcena/0.1).ToString() + "%";
+            <div class="vrednost-rezAnk">@Model.RezultatiAnkete.KonacnaOcena</div>
+            <div class="progress mb-4">
+              <div class="progress-bar bg-info" style="width:@Ocena;" role="progressbar" aria-valuemin="0" aria-valuemax="10" >
+              </div>
+            </div>
+          }
+        }
+        <hr class="hr-ONT"/>
+
+      </div>
+    </div>  
+  </div>                
+  
+
+
+ 
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Znamenitosti u turi</h6>
+    </div>
+    <div class="card-body">
+		<div  style="width: 100%; overflow-x: auto; white-space: nowrap; ">
+        @foreach (var znamenitosti in Model.ZnamenitostiUTuri)
+        {
+          <a asp-page="./ZnamenitostJedna" asp-route-id="@znamenitosti.IdZnamenitosti">   
+            <img class="img-fluid rounded mb-7 mb-md-0" src="images/znamenitosti/@znamenitosti.Slika" alt="" style="height:500px;">
+          </a>  
+        }
+        </div>
+    </div>
+  </div>
+</div>       
+
+
+
+

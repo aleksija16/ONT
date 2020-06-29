@@ -1,0 +1,107 @@
+﻿@page
+@model KonacniProjekat.TuraOceniModel
+@{
+    ViewData["Title"] = "Radi anketu";
+}
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./TuraJedna" asp-route-id="@Model.OvaTura.IdTure"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz ture</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika == "T")
+{
+     @if(@Model.provera==0)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Ne možete da ocenite turu na kojoj niste bili!<i class="fas fa-exclamation-triangle"></i></div>         
+    }
+    else{
+    @if (!Model.VecPopunjenaAnketa)
+    {
+        <div class="text-center">
+        <h1 class="=display-4">Anketa za turu: @Model.OvaTura.NazivTure</h1>
+        </div>
+
+    <div class="formaKAK">
+        <form method="post">
+            <ol type="1">
+                <li>
+                    <label class="form-control select-fit-text">Tip Vaše ture:</label>
+                    <select class="form-control select-fit-text" asp-for="@Model.OcenaTure.TipTuriste">
+                        <option value="Porodični odmor">Porodicni odmor</option>
+                        <option value="Odmor sa prijateljima">Odmor sa prijateljima</option>
+                        <option value="Učenička ekskurzija">Učenička ekskurzija</option>
+                        <option value="Studentska ekskurzija">Studentska ekskurzija</option>
+                        <option value="Poslovno">Poslovni tip</option>
+                        <option value="Drugo">Neki drugi tip</option>
+                    </select>
+                </li>
+        
+                <li>
+                    <label class="form-control select-fit-text">Organizovanost ture:</label>
+                    <div class="centerAnketa">
+                        <div class="rangeAnketa">&#128078;<input class="custom-range border-0" type="range" id="orgTure" min="0" max="100" asp-for="@Model.OcenaTure.OrganizovanostTure" onchange="updateTextInputRangeOrganizovanostTure(this.value);"/> &#128077;</div>
+                        <input class="inputUzRangeAnketa" id="inputRangeOrganizovanostTure" readonly value="" />
+                    </div>
+                </li>
+                <li>
+                    <label class="form-control select-fit-text">Tura je bila fizički zahtevna:</label>
+                    <div class="centerAnketa">
+                        <div class="rangeAnketa" > &#128526;<input class="custom-range border-0" type="range" id="fizZahtTure" min="0" max="100" asp-for="@Model.OcenaTure.FizickaZahtevnostTure" onchange="updateTextInputRangeFizickaZahtevnostTure(this.value);"/> &#128555;</div>
+                        <input class="inputUzRangeAnketa" id="inputRangeFizickaZahtevnostTure" readonly value="" />
+                    </div>
+                </li>
+                <li>
+                    <label class="form-control select-fit-text">Informisanost vodiča:</label>
+                    <div class="centerAnketa">
+                        <div class="rangeAnketa">&#128168;<input class="custom-range border-0" type="range" id="infVodica" min="0" max="100" asp-for="@Model.OcenaTure.InformisanostVodica" onchange="updateTextInputRangeInformisanostVodica(this.value);"/> &#128214;</div>
+                        <input class="inputUzRangeAnketa" id="inputRangeInformisanostVodica" readonly value="" />
+                    </div>         
+                </li>
+       
+                <li>
+                    <label class="form-control select-fit-text">Najzanimljivija znamenitost u ovoj turi:</label>
+                    <select class="form-control select-fit-text" asp-for="IzabranaNajzanimljivijaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
+                    </select>
+                </li>
+                <li>
+                    <label class="form-control select-fit-text">Najmanje zanimljiva znamenitost u ovoj turi:</label>
+                    <select class="form-control select-fit-text" asp-for="IzabranaNajdosadnijaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
+                    </select>
+                </li>
+                <li>
+                    <label class="form-control select-fit-text">Komentar:</label>
+                    <div class="centerAnketa">
+                        <textarea class="form-control" style="width: 80%;" asp-for="@Model.OcenaTure.Komentar"> </textarea>
+                    </div>
+                </li>
+                <li>
+                    <label class="form-control select-fit-text">Konačna ocena ture:</label>
+                    <div class="centerAnketa">
+                        <div class="rangeAnketa">&#10134;<input class="custom-range border-0" type="range" id="konOcena" min="0" max="10" asp-for="@Model.OcenaTure.KonacnaOcena" onchange="updateTextInputRangeKonacnaOcena(this.value);"/> &#10133;</div>
+                        <input class="inputUzRangeAnketa" id="inputRangeKonacnaOcena" readonly value="" />
+                    </div>
+                </li>
+            </ol>
+
+            <div>
+               <div> 
+                   <button type="submit" class="dugme" style=" position: relative; margin-left: 45%;">Oceni turu</button>
+               </div>
+            </div>
+        </form>
+    </div>
+    
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već ste popunili anketu za ovu turu. <i class="fas fa-exclamation-triangle"></i></div>         
+    }
+    }
+}
+else
+{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo turista može da oceni turu. <i class="fas fa-exclamation-triangle"></i></div> 
+}
+

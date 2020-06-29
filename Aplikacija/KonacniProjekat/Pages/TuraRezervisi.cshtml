@@ -1,0 +1,59 @@
+﻿@page
+@model KonacniProjekat.TuraRezervisiModel
+@{
+    ViewData["Title"] = "Rezervisi turu";
+}
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./TuraJedna" asp-route-id="@Model.OvaTura.IdTure"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz ture</a></li>
+  </ul>
+</nav>
+
+@if (!Model.NeispravnaTura)
+{
+    <div class="text-center">
+        <h1 class="display-4">Rezervacija za turu: @Model.OvaTura.NazivTure</h1>
+        <h5>Ova tura se održava danima: @Model.DaniOdrzavanja</h5>
+    </div>
+
+    <div class="rezervacija fadeInDown">
+        <div id="formContent">
+            <form method="post">
+
+                <input type="hidden" asp-for="@Model.KapacitetTure" />
+                <input type="hidden" asp-for="@Model.TuraId" />
+                <input type="hidden" asp-for="@Model.NeuspesnaRezervacija" />
+                <input type="hidden" asp-for="@Model.NetacnaRezervacija" />
+
+                <label class="form-control select-fit-text">Datum odrzavanja:</label>
+                    <input type="date" min="@Model.DanasnjiDatum" 
+                        max="@Model.NajkasnijiDatum" asp-for="RezervacijaTure.Datum" class="form-control" placeholder="Datum odrzavanja"  required/>
+
+                <label class="form-control">Broj osoba:</label>
+                    <input asp-for="RezervacijaTure.BrojOsoba" class="form-control" min="1"; max="100"; placeholder="Broj osoba" required  />
+
+        
+
+                <div>
+                    <button type="submit" class="dugme">Rezerviši turu</button>
+                </div>
+    
+            </form>
+        </div>
+    </div>
+}
+else{
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Ova tura još uvek nema dodate dane održavanja ili vodiča. Možete rezervisati neku od drugih tura. <i class="fas fa-exclamation-triangle"></i></div>   
+}
+
+
+
+@if(Model.NetacnaRezervacija!=null && Model.NetacnaRezervacija != 0)
+{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Ova tura se ne održava tog dana. Izaberite odgovarajući dan. <i class="fas fa-exclamation-triangle"></i></div>   
+}
+
+@if(Model.NeuspesnaRezervacija!=null && Model.NeuspesnaRezervacija!=0){
+     <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Popunjen je kapacitet ove ture. Smanjite broj osoba ili rezervisite drugu turu. <i class="fas fa-exclamation-triangle"></i></div> 
+}

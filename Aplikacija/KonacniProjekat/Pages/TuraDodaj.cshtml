@@ -1,0 +1,112 @@
+﻿@page
+@model KonacniProjekat.TuraDodajModel
+@{
+    ViewData["Title"]="Nova tura";
+}
+
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./TuraSve"><i class='fas fa-arrow-circle-left'></i>Prikaži listu tura</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika == "A" || SessionClass.TipKorisnika == "T")
+{
+  
+  <form method="post">
+    <div class="text-center">
+      @if (SessionClass.TipKorisnika == "A")
+      {
+        <h2 class="display 4">Nova tura</h2>
+      }
+      else
+      {
+        <h2 class="display 4">Custom rezervacija</h2>
+      }
+    </div>
+    
+
+    <input type="hidden" asp-for="@Model.PostojiVec" />
+    <div class="dodaj">
+      <div id="formContent">        
+        @if (SessionClass.TipKorisnika == "A")
+        {
+
+          @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+          {
+            <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji tura sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+          }
+
+          <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
+          <label class="form-control select-fit-text">Dan odrzavanja:</label>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="3" /> <h6>Sreda</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="4" /> <h6>Četvrtak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="5" /> <h6>Petak</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="6" /> <h6>Subota</h6> </div>
+          <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
+
+          <textarea class="text-area-fit" asp-for="NovaTura.Opis" placeholder="Opis" required > </textarea>  
+        }
+        else
+        {
+          <label class="form-control select-fit-text">Datum odrzavanja:</label>
+          <div class="forma-check"><input type="date" min="@Model.DanasnjiDatum" 
+            max="@Model.NajkasnijiDatum" asp-for="NovaRezervacija.Datum" required/></div>
+        }
+        
+        <label>Vreme odrzavanja: <input type="time" asp-for="NovaTura.VremeOdrzavanja" required /></label>
+                                                        
+        <input asp-for="NovaTura.MestoPolaska" placeholder="Mesto polaska" required />
+
+        @if (SessionClass.TipKorisnika == "A")
+        {
+          <label class="form-control select-fit-text">Kapacitet:</label>
+        }
+        else
+        {
+          <label class="form-control select-fit-text">Broj osoba:</label>          
+        }
+        <input asp-for="NovaTura.Kapacitet" min="1" max="100" required />
+
+        <select asp-for="IzabraniVodic" asp-items="@Model.SviVodici" required>
+          <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
+        </select>
+
+        <label class="form-control select-fit-text">Izaberite znamenitosti:</label>
+        @foreach (var znamenitost in Model.SveZnamenitosti)
+        {
+          <div class="forma-check">
+            <input type="checkbox" name="IzabraneZnamenitosti[]" value="@znamenitost.IdZnamenitosti" /> <h6>@znamenitost.NazivZnamenitosti</h6>
+          </div>
+        } 
+         
+        @if (SessionClass.TipKorisnika == "A")
+        {
+          <button type="submit" class="dugme" asp-page-handler="Tura">
+            Dodaj novu turu
+          </button>
+        }
+        else
+        {
+          <button type="submit" class="dugme" asp-page-handler="Rezervacija">
+            Kreiraj custom rezervaciju
+          </button>
+        }
+      </div>  
+    </div>
+
+  </form>
+
+  if(Model.ZauzetVodic != null && Model.ZauzetVodic != 0){
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Izabrani vodič već vodi redovnu turu tog dana ili ima rezervacije za taj dan od strane nekog drugog korisnika. Izaberite drugog vodiča ili drugi datum. <i class="fas fa-exclamation-triangle"></i></div>    
+  }
+
+  
+
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici. Novu turu može da kreira samo Administrator, a Custom rezervaciju može samo turista da napravi. <i class="fas fa-exclamation-triangle"></i></div> 
+}

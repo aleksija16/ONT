@@ -1,0 +1,30 @@
+﻿@page
+@model KonacniProjekat.TuraObrisiModel
+@{
+    ViewData["Title"]="Brisanje ture";
+}
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<form method="post">
+@if(@Model.provera==0)
+{
+  <div class="brisi-ture fadeInDown">
+  <div id="formContent">
+            <h5>Da li ste sigurni da želite da obrišete sledeću turu: </h5> 
+            <p class="title"> "@Model.TuraZaBrisanje.NazivTure"</p>
+            <h5>?</h5>
+    <button type="submit" class="btn btn-danger">Da</button>
+    <a asp-page="./TuraSve" >Ne</a>
+  </div>
+  </div> 
+}
+else
+{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"> <i class="fas fa-exclamation-triangle"></i> Ne možete da obrisete turu koja je rezervisana. <i class="fas fa-exclamation-triangle"></i></div> 
+}
+</form>
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da obriše turu. <i class="fas fa-exclamation-triangle"></i></div> 
+}

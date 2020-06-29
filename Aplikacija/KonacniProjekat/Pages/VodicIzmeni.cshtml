@@ -1,0 +1,42 @@
+@page
+@model KonacniProjekat.VodicIzmeniModel
+@{
+ViewData["Title"]="Izmena vodiča";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Izmena vodiča</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./VodicJedan" asp-route-id="@Model.OvajVodic.IdVodica"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz vodiča</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<form method="post">
+    <div class="izmeni">
+        <div id="formContent">
+        <input type="hidden" asp-for="VodicId"/>
+        <label class="form-control">Ime: </label> <textarea  asp-for="OvajVodic.ImeVodica" class="form-control"></textarea>
+        <label class="form-control">Prezime:</label> <textarea asp-for="OvajVodic.PrezimeVodica" class="form-control" ></textarea>
+        <label class="form-control">Datum rođenja:</label> <input type="date" asp-for="OvajVodic.DatumRodjenja" class="form-control"/>
+         <select asp-for="OvajVodic.Pol" placeholder="Pol" required>
+            <option value="" selected disabled hidden>Pol</option>
+            <option>Ž</option>
+            <option>M</option>
+          </select>
+        <label class="form-control">Broj telefona:</label> <textarea  asp-for="OvajVodic.BrojTelefona" class="form-control" ></textarea>
+        <label class="form-control">Licenca:</label> <textarea  asp-for="OvajVodic.Licenca" class="form-control" ></textarea>
+        <label class="form-control">Email:</label> <textarea  asp-for="OvajVodic.Email" class="form-control" ></textarea>
+        <label class="form-control">Profilna slika:</label> <textarea  asp-for="OvajVodic.Slika" class="form-control"></textarea>
+        <button type="submit" class="dugme">Sačuvaj izmene</button>
+        </div>
+    </div>
+</form>
+}
+ else{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samoo admin može da izmeni nalog vodiču. <i class="fas fa-exclamation-triangle"></i></div> 
+}

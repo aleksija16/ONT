@@ -1,0 +1,44 @@
+﻿@page
+@model KonacniProjekat.KvizDodajModel
+@{
+    ViewData["Title"]="Novi kviz";
+}
+
+<div class="text-center">
+    <h2 class="display 4">Novi kviz</h2>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./KvizSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu kvizova</a></li>
+  </ul>
+</nav>
+ @if (SessionClass.TipKorisnika == "A")    
+ {           
+    <form method="post">
+        <input type="hidden" asp-for="@Model.PostojiVec" />
+        <div class="dodaj">
+            <div id="formContent">
+                <label class="form-control">Naziv kviza:</label> <input asp-for="NoviKviz.NazivKviza" class="form-control" placeholder="Naziv kviza" />
+                <label class="form-control">Znamenitost:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista">
+                                                                        <option value="">Bez znamenitosti</option>
+                                                                        <option value="" selected disabled hidden>Izaberite za koju znamenitost je vezan kviz.</option>
+                                                                    </select>
+                <label class="form-control">Tura:</label>    <select class="form-control select-fit-text margin-input-izmena" asp-for="IzabranaTuraString" style="display:block;" asp-items="Model.IzborTuraLista">
+                                                                        <option value="">Bez ture</option>
+                                                                        <option value="" selected disabled hidden>Izaberite za koju turu je vezan kviz.</option>
+                                                                    </select>
+                <button type="submit" class="dugme">Dodaj novi kviz</button>
+            </div>
+        </div>
+    </form>
+
+    @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji kviz sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+    }
+ }
+ else
+ {
+     <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da kreira kviz. <i class="fas fa-exclamation-triangle"></i></div> 
+ }

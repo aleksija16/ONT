@@ -1,0 +1,58 @@
+﻿@page
+@model KonacniProjekat.VodicOceniModel
+@{
+}
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./VodicSvi"><i class='fas fa-arrow-circle-left'></i>Prikaži listu vodiča</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika=="T"){
+<div class="cardVodic" style="text-align: center; height:200px">
+<form method="post">
+  @if(@Model.provera==1)
+  {
+        <label for="ocene">Oceni vodiča</label>
+        <select class="form-control" id="ocene" asp-for="JednaOcena.Ocena" style="display: block;margin: 0 auto;">
+          <option>10</option>
+          <option>9</option>
+          <option>8</option>
+          <option>7</option>
+          <option>6</option>
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+        <select class="form-control" id="ture" asp-for="JednaOcena.IdTureO" style="display: block;margin: 0 auto;">
+        @foreach (var rezervacija in Model.TuristaRezervacije)
+        { @foreach (var tura in Model.SveTure)
+        {
+          @if(rezervacija.IdTureR==tura.IdTure)
+          {
+         <option value="@rezervacija.IdTureR">@rezervacija.IdTureRNavigation.NazivTure</option> 
+          }
+        }
+        }
+        </select>
+      <button type="submit" class="btn btn-primary">Oceni</button>
+  }
+  else{
+    <label style="color:red"><i class="fas fa-exclamation-triangle"></i> Ne mozete da ocenite vodica s kojim niste bili na turi! <i class="fas fa-exclamation-triangle"></i></label>
+    
+<div>
+ <i class='fas fa-arrow-circle-left'></i><a asp-page="./VodicSvi" style="color:#ff66a3;">Lista vodiča</a>
+</div>
+  }
+</form>
+</div>
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Niste prijavljeni kao turista, ne možete da ocenite vodiča. <i class="fas fa-exclamation-triangle"></i></div> 
+}
+
+
+ 

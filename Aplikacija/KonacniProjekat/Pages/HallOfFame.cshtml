@@ -1,0 +1,52 @@
+﻿@page
+@model KonacniProjekat.HallOfFameModel
+@{
+
+}
+<ul class="nav nav-pills">
+      @foreach (var kviz in Model.sviKvizovi)
+      {
+  <li class="nav-item">
+    <div class="hof"> 
+      @if(kviz.IdKviza==@Model.trenutniKviz.IdKviza)
+    {  
+       <a  class="nav-link active" href="/HallOfFame?id=@kviz.IdKviza">@kviz.NazivKviza</a>
+    }
+   else
+   {
+     <a  class="nav-link" href="/HallOfFame?id=@kviz.IdKviza">@kviz.NazivKviza</a>
+   }
+    </div>
+     </li>
+
+      }
+</ul>
+<h3 style="margin-left: 40%;"><a  class="nav-link" href="/KvizUradi?id=@Model.trenutniKviz.IdKviza">@Model.trenutniKviz.NazivKviza</a></h3>
+<div style="overflow-y: scroll;  height: 450px;">
+  <table class="table tabela-hof">  
+<thead>
+      <tr>
+        <th></th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Poeni</th>
+        <th>Datum rađenja</th>
+      </tr>
+    </thead> 
+  <tbody>
+  
+@foreach (var hof in Model.SviHOF)
+{ 
+   <tr>
+      <td> <i class="fas fa-trophy"></i></td>
+        <td>@hof.IdTuristeHofNavigation.ImeTuriste</td>
+        <td>@hof.IdTuristeHofNavigation.PrezimeTuriste</td>
+        <td>@hof.Poeni</td>
+        <td> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", hof.DatumRadjenja))</td>
+   </tr>
+}
+  </tbody>
+</table>
+</div>
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

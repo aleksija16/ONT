@@ -1,0 +1,30 @@
+@page
+@model KonacniProjekat.ZnamenitostSlikaModel
+@{
+ViewData["Title"]="Izmena znamenitosti";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.TrenutnaZnamenitost.NazivZnamenitosti</h1>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" asp-page="./ZnamenitostJedna" asp-route-id="@Model.TrenutnaZnamenitost.IdZnamenitosti"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz znamenitosti</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<form method="post">
+    <div class="prijava">
+        <div id="formContent">
+         <label class="form-control">Dodajte sliku:</label> <input type="file" asp-for="NovaSlika.Slika"  placeholder="Slika" required />
+         <div><button type="submit" class="dugme">Dodaj Sliku</button></div>
+        </div>
+    </div>
+</form>
+}
+ else{
+    <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da dodaje slike. <i class="fas fa-exclamation-triangle"></i></div> 
+}

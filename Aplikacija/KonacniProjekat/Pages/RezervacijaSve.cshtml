@@ -1,0 +1,58 @@
+﻿@page
+@model KonacniProjekat.RezervacijaSveModel
+@{
+ViewData["Title"]="Rezervacije";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Rezervacije</h1>
+</div>
+
+@if(SessionClass.TipKorisnika != null)
+{
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <th>ID rezervacije</th>
+                <th>Datum</th>
+                <th>Vreme održavanja</th>
+                <th>Broj osoba</th>
+                <th></th>
+                @if (SessionClass.TipKorisnika == "T")
+                {
+                    <th></th>
+                }
+            </thead>
+            <tbody>
+                <form method="get">
+                    @foreach (var rezervacija in Model.SveRezervacije)
+                    {
+                        <tr>
+                            <td>@rezervacija.IdRezervacije</td>
+                            <td> @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @rezervacija.Datum))</td>
+                            <td>@rezervacija.IdTureRNavigation.VremeOdrzavanja</td>
+                            <td>@rezervacija.BrojOsoba</td>
+                            <td><a asp-page="./RezervacijaJedna" asp-route-id="@rezervacija.IdRezervacije">Prikaži detalje <i class="fas fa-calendar-day"></i></a></td>
+                            @if (SessionClass.TipKorisnika == "T")
+                            {
+                                @if(@rezervacija.Datum>DateTime.Now)
+                                {
+                                    <td><a asp-page="./RezervacijaOtkazi" asp-route-id="@rezervacija.IdRezervacije">Otkaži rezervaciju <i class="fas fa-calendar-times"></i></a></td>
+                                }
+                                else
+                                {
+                                  <td></td>  
+                                }
+                            }
+                        </tr>
+                    }
+                </form>
+            </tbody>
+        </table>
+    </div>
+
+}
+else
+{
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Morate biti ulogovani da biste videli svoje rezervacije. <i class="fas fa-exclamation-triangle"></i></div>
+}

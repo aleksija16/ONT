@@ -1,0 +1,61 @@
+﻿@page
+@model KonacniProjekat.ZnamenitostSveModel
+@{
+ViewData["Title"]="Znamenitosti";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Znamenitosti</h1>
+</div>
+
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<nav aria-label="Page navigation">  
+    <ul class="pagination justify-content-end">
+        <li class="page-item"><a class="page-link" asp-page="./ZnamenitostDodaj">Dodaj znamenitost <i class="fas fa-plus-circle"></i></a></li>
+    </ul>
+</nav> 
+}
+
+<form method="post">
+<div class="filriranje"> 
+    <div id="formContent"> 
+    <p>Filtriraj znamenitosti po tipu: </p>
+   <select class="js-example-basic-single js-states form-control select-fit-text" asp-for="IzabraniTip" asp-items="Model.SviTipovi" style="margin: 0 auto;">
+        <option >Prikaži sve</option>
+    </select>
+        <button type="submit" class="dugme">Prikaži</button>
+    </div>
+</div>
+
+<div class="row">
+@foreach (var znamenitost in Model.SveZnamenitosti) 
+{
+     <div class="column">
+    <div class="flip-card-znamenitosti">
+        <div class="inner-znamenitosti">
+            <div class="front-znamenitosti">
+                @if(@znamenitost.Slika!=null)
+                {
+                    <img src="images/znamenitosti/@znamenitost.Slika" alt="Avatar" style="width:300px;height:200px; border-radius: 50px 20px;  "> 
+                }
+            </div>
+            <div class="back-znamenitosti">
+                    <div class="text-center"><h2>@znamenitost.NazivZnamenitosti</h2></div>
+                    <div><a asp-page="./ZnamenitostJedna" asp-route-id="@znamenitost.IdZnamenitosti">Prikaži detalje <i class="fas fa-info-circle"></i></a></div>
+                      @if(SessionClass.TipKorisnika=="A"){
+                    <div><a asp-page="./ZnamenitostIzmeni" asp-route-id="@znamenitost.IdZnamenitosti">Izmeni znamenitost <i class="fas fa-edit"></i></a></div>
+                    <div><a asp-page="./ZnamenitostObrisi" asp-route-id="@znamenitost.IdZnamenitosti">Obriši znamenitost <i class="fas fa-trash-alt"></i></a></div>
+                            <div><a asp-page="./ZnamenitostSlika" asp-route-id="@znamenitost.IdZnamenitosti">Dodaj sliku <i class="fas fa-images"></i></a></div>
+                      }
+            </div>
+        </div>
+    </div>
+    </div> 
+}
+</div>
+</form>
+
+<link href="path/to/select2.min.css" rel="stylesheet" />
+<script src="path/to/select2.min.js"></script>

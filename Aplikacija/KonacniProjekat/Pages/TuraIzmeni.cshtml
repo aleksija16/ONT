@@ -1,0 +1,96 @@
+﻿@page
+@model KonacniProjekat.TuraIzmeniModel
+@{
+    ViewData["Title"] = "Izmeni turu";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Izmena ture: @Model.OvaTura.NazivTure</h2>
+</div>
+
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+        <li class="page-item"><a class="page-link" asp-page="./TuraJedna" asp-route-id="@Model.OvaTura.IdTure"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz ture</a></li>
+  </ul>
+</nav>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+<form method="post">
+    <div class="izmeni">
+    <div id="formContent">
+        <input type="hidden" asp-for="@Model.TuraId" />
+        <input type="hidden" asp-for="@Model.DaniOdrzavanjaPreIzmene" />
+        <input type="hidden" asp-for="@Model.PostojiVec" />
+        <input type="hidden" asp-for="@Model.TrenutniNaziv" />
+
+        @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji tura sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+    }
+
+    <label class="form-control">Naziv ture:</label>  <textarea class="form-control" style=" width: 90%;" asp-for="OvaTura.NazivTure" required ></textarea>
+    <label class="form-control select-fit-text"><b>Trenutno se tura održava danima: @Model.VecIzabraniDaniString</b></label>
+    <label class="form-control select-fit-text">Izaberite <b>sve</b> dane održavanja ove ture:</label> 
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="2" /> <h6>Utorak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="3" /> <h6>Sreda</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="4" /> <h6>Četvrtak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="5" /> <h6>Petak</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="6" /> <h6>Subota</h6> </div>
+        <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="7" /> <h6>Nedelja</h6> </div>
+        
+    <label class="form-control select-fit-text">Vreme održavanja:</label>    
+        <input type="time" class="form-control select-fit-text" asp-for="OvaTura.VremeOdrzavanja" required/>                                                   
+
+    <label class="form-control">Mesto polaska:</label>     
+         <textarea style=" width: 90%;" class="form-control" asp-for="OvaTura.MestoPolaska" ></textarea>                                                  
+
+    <label class="form-control">Kapacitet:</label>    
+        <input type="number" class="form-control" min="1" max="100" asp-for="OvaTura.Kapacitet" required/>
+
+    <label class="form-control select-fit-text">Vodič ove ture:</label>
+        <select class="form-control select-fit-text" id="izborVodicaIzmena" asp-for="@Model.IzabraniVodic" asp-items="@Model.SviVodici" required>
+            <option value="" selected disabled hidden>Izaberite vodiča koji će voditi turu.</option>
+        </select>
+
+    <label class="form-control">Opis</label> 
+        <textarea class="form-control" style=" width: 90%;" asp-for="OvaTura.Opis"> </textarea> 
+
+    <div><label class="form-control select-fit-text"><b>Znamenitosti koje su već u ovoj turi: @Model.VecZnamenitostiUOvojTuriString</b></label></div>
+    
+    <div>@if (Model.VecZnamenitostiUOvojTuri.Count() != 0)
+        {
+            <label class="form-control select-fit-text">Izaberite koje od ovih znamenitosti želite da uklonite iz ove ture</label> 
+            @foreach (var znamenitost in Model.VecZnamenitostiUOvojTuri)
+            {
+                <div class="forma-check">
+                    <input type="checkbox" name="ZnamenitostiZaUklanjanje[]" value="@znamenitost.IdZnamenitosti" /> <h6>@znamenitost.NazivZnamenitosti</h6>
+                </div>
+            }
+        }
+    </div>
+    <div>
+        @if (Model.ZnamenitostiKojeNisuUTuri.Count() != 0)
+        {
+            <label class="form-control select-fit-text">Izaberite koje od ovih znamenitosti želite da dodate u ovu turu</label>
+            @foreach (var znamenitost in Model.ZnamenitostiKojeNisuUTuri)
+            {
+                <div class="forma-check">
+                    <input type="checkbox" name="IzabraneZnamenitosti[]" value="@znamenitost.IdZnamenitosti" /> <h6>@znamenitost.NazivZnamenitosti</h6>
+                </div>
+            }  
+        }
+    </div>           
+                                                       
+    <div>
+        <button type="submit" class="dugme">Sačuvajte izmene</button>
+    </div>                                              
+    </div>
+    </div>                                                
+</form>
+}
+else{
+  <div class="alert alert-danger" role="alert" style="text-align: center;">Nemate pristup ovoj stranici, samo admin može da izmeni turu</div> 
+}

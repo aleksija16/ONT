@@ -1,0 +1,55 @@
+﻿@page
+@model KonacniProjekat.KvizIzmeniModel
+@{
+    ViewData["Title"]="Izmena kviza";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Izmena kviza: @Model.OvajKviz.NazivKviza</h1>
+</div>
+
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		<li class="page-item"><a class="page-link" asp-page="./KvizJedan" asp-route-id="@Model.KvizId"><i class='fas fa-arrow-circle-left'></i>Vrati se na prikaz kviza</a></li>
+	</ul>
+</nav>
+
+@if(SessionClass.TipKorisnika == "A")
+{
+    <form method="post">
+        <input type="hidden" asp-for="@Model.PostojiVec" />
+        <input type="hidden" asp-for="@Model.TrenutniNaziv" />
+        <input type="hidden" asp-for="@Model.KvizId" />
+        
+      <div class="izmeni">
+         <div id="formContent">
+                <input type="hidden" asp-for="KvizId" />
+                <input type="hidden" asp-for="SessionId" />
+                <label class="form-control">Naziv kviza:</label> <textarea asp-for="OvajKviz.NazivKviza" class="form-control" value="OvajKviz.Naziv kviza" required></textarea>
+                <label class="form-control">Znamenitost:</label>    <select class="form-control select-fit-text" asp-for="IzabranaZnamenitostString" style="display:block;" asp-items="Model.IzborZnamenitostiLista" >
+                                                                        <option value="">Bez znamenitosti</option>
+                                                                        <option value="" selected disabled hidden>Izaberite za koju znamenitost je vezan kviz.</option>
+                                                                    </select>
+             <label     class="form-control">Tura:</label>    <select class="form-control select-fit-text" asp-for="IzabranaTuraString" style="display:block;" asp-items="Model.IzborTuraLista" >
+                                                                        <option value="">Bez ture</option>
+                                                                        <option value="" selected disabled hidden>Izaberite za koju turu je vezan kviz.</option>
+                                                                    </select>
+
+                <button type="submit" class="dugme">Izmeni kviz</button>
+            </div>
+        </div>
+        
+    </form>
+
+    @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji kviz sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+    }
+
+}
+else
+{
+  <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da dodaje pitanja u kviz. <i class="fas fa-exclamation-triangle"></i></div>   
+}
+

@@ -1,0 +1,78 @@
+﻿@page
+@model KonacniProjekat.TuraSveModel
+@{
+ViewData["Title"]="Ture";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ture</h1>
+</div>
+
+@if(SessionClass.TipKorisnika=="A")
+{
+    <nav aria-label="Page navigation">  
+        <ul class="pagination justify-content-end">
+            <li class="page-item"><a class="page-link" asp-page="./TuraDodaj">Dodaj turu <i class="far fa-calendar-plus"></i></a></li>
+        </ul>
+    </nav>
+}
+@if(SessionClass.TipKorisnika=="T")
+{
+    <nav aria-label="Page navigation">  
+        <ul class="pagination justify-content-end">
+            <li class="page-item"><a class="page-link" asp-page="./TuraDodaj">Kreirajte svoju custom turu <i class="far fa-calendar-plus"></i></a></li>
+        </ul>
+    </nav>
+}
+
+<form method="post">
+<div class="filriranje"> 
+    <div id="formContent"> 
+    <p>Filtriraj ture po vodiču koji ih vodi: </p>
+    <select class="js-example-basic-single js-states form-control select-fit-text" asp-for="IzabraniVodic" asp-items="Model.SviVodiciLista" style="margin: 0 auto;">
+        <option >Prikaži sve</option>
+    </select>
+        <button type="submit" class="dugme">Prikaži</button>
+    </div>
+</div>
+
+<div class="row">
+    @if (Model.SveTure.Count() != 0)
+    {
+        @foreach (var  tura in Model.SveTure) 
+        {
+        <div class="column">
+            <div class="flip-card-ture">
+                <div class="inner-ture">
+                    <div class="front-ture">
+                        <h2 class="text-center"> @tura.NazivTure  </h2> 
+                    </div>
+                    <div class="back-ture">
+                        <div><a asp-page="./TuraJedna" asp-route-id="@tura.IdTure">Prikaži detalje <i class="fas fa-info-circle"></i></a></div>
+                    @if(SessionClass.TipKorisnika=="T")
+                    {
+                        <div><a asp-page="./TuraRezervisi" asp-route-id="@tura.IdTure">Rezerviši turu <i class="far fa-calendar-plus"></i></a></div>
+                        <div><a asp-page="./TuraOceni" asp-route-id="@tura.IdTure">Oceni turu <i class="fas fa-star-half-alt"></i></a></div>
+                    }
+                    @if(SessionClass.TipKorisnika=="A")
+                    {
+                        <div><a asp-page="./TuraIzmeni" asp-route-id="@tura.IdTure">Izmeni turu <i class="fas fa-edit"></i></a></div>
+				        <div><a asp-page="./TuraObrisi"  asp-route-id="@tura.IdTure">Obriši turu <i class="fas fa-trash-alt"></i></a></div>
+                        <div><a asp-page="./TuraKomentari"  asp-route-id="@tura.IdTure">Prikaži komentare <i class="far fa-comments"></i></a></div>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Izabrani vodič ne vodi nijednu turu. <i class="fas fa-exclamation-triangle"></i></div>
+    }
+
+</div>
+</form>
+
+<link href="path/to/select2.min.css" rel="stylesheet" />
+<script src="path/to/select2.min.js"></script>
