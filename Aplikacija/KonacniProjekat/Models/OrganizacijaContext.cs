@@ -262,9 +262,6 @@ namespace KonacniProjekat.Models
                 entity.HasIndex(e => e.IdKviza)
                     .HasName("IdKviza_idx");
 
-                entity.HasIndex(e => e.IdZnamenitosti)
-                    .HasName("IdZnamenitosti_idx");
-
                 entity.Property(e => e.OdgovorA)
                     .IsRequired()
                     .HasColumnType("varchar(1000)")
@@ -300,12 +297,6 @@ namespace KonacniProjekat.Models
                     .HasForeignKey(d => d.IdKviza)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdKviza");
-
-                entity.HasOne(d => d.IdZnamenitostiNavigation)
-                    .WithMany(p => p.Pitanja)
-                    .HasForeignKey(d => d.IdZnamenitosti)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("IdZnamenitosti");
             });
 
             modelBuilder.Entity<Rezervacije>(entity =>
@@ -329,7 +320,6 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdTureRNavigation)
                     .WithMany(p => p.Rezervacije)
                     .HasForeignKey(d => d.IdTureR)
-                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdTureR");
 
                 entity.HasOne(d => d.IdTuristeRNavigation)
@@ -341,7 +331,6 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdVodicaRNavigation)
                     .WithMany(p => p.Rezervacije)
                     .HasForeignKey(d => d.IdVodicaR)
-                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdVodicaR");
             });
 

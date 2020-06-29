@@ -11,10 +11,8 @@ namespace KonacniProjekat.Models
         public string OdgovorB { get; set; }
         public string OdgovorC { get; set; }
         public string TacanOdgovor { get; set; }
-        public uint? IdZnamenitosti { get; set; }
         public uint? IdKviza { get; set; }
 
         public virtual Kvizovi IdKvizaNavigation { get; set; }
-        public virtual Znamenitosti IdZnamenitostiNavigation { get; set; }
     }
 }
