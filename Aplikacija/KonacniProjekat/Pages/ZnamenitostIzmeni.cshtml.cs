@@ -20,27 +20,36 @@ namespace KonacniProjekat
         }
         
         [BindProperty]
-       public Znamenitosti TrenutnaZnamenitost{get;set;}
+        public Znamenitosti TrenutnaZnamenitost{get;set;}
 
-         [BindProperty]
+        [BindProperty]
         public int ZnamenitostId{get;set;}
 
         [BindProperty]
+        public int? PostojiVec {get; set;}
+
+        [BindProperty]
         public Slike NovaSlika{get;set;}
-         //int zid;
-       public async Task<IActionResult> OnGetAsync(int id){
+
+        [BindProperty]
+        public string TrenutniNaziv {get; set;}
+
+        public async Task<IActionResult> OnGetAsync(int id, int? postoji){
 
         SessionId = SessionClass.SessionId;
 
         ZnamenitostId=id;
-           
-         TrenutnaZnamenitost = await dbContext.Znamenitosti.FindAsync((uint)ZnamenitostId);
+        PostojiVec = postoji;
 
-           if(TrenutnaZnamenitost==null)
-           {
-               return RedirectToPage("./ZnamenitostSve");
-           }
-           return Page();
+        TrenutnaZnamenitost = await dbContext.Znamenitosti.FindAsync((uint)ZnamenitostId);
+
+        if(TrenutnaZnamenitost==null)
+        {
+            return RedirectToPage("./ZnamenitostSve");
+        }
+        TrenutniNaziv = TrenutnaZnamenitost.NazivZnamenitosti;
+
+        return Page();
        }
 
 
@@ -51,6 +60,14 @@ namespace KonacniProjekat
            if(!ModelState.IsValid)
            {
                return Page();
+           }
+
+           Znamenitosti PostojiZnamenitost = await dbContext.Znamenitosti.Where(x => x.NazivZnamenitosti == TrenutnaZnamenitost.NazivZnamenitosti).FirstOrDefaultAsync();
+           if (PostojiZnamenitost != null)
+           {
+                PostojiVec = 1;
+                TrenutnaZnamenitost.NazivZnamenitosti = TrenutniNaziv;
+                return RedirectToPage("./ZnamenitostIzmeni", new{id = ZnamenitostId, postoji = PostojiVec});
            }
 
            TrenutnaZnamenitost.IdZnamenitosti=(uint)ZnamenitostId;

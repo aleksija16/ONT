@@ -26,10 +26,18 @@
       }
     </div>
     
+
+    <input type="hidden" asp-for="@Model.PostojiVec" />
     <div class="dodaj">
       <div id="formContent">        
         @if (SessionClass.TipKorisnika == "A")
         {
+
+          @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+          {
+            <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji tura sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+          }
+
           <input asp-for="NovaTura.NazivTure" placeholder="Naziv" required  />
           <label class="form-control select-fit-text">Dan odrzavanja:</label>
           <div class="forma-check"><input type="checkbox" name="IzabraniDani[]" value="1" /> <h6>Ponedeljak</h6> </div>
@@ -89,8 +97,6 @@
         }
       </div>  
     </div>
-
-
 
   </form>
 

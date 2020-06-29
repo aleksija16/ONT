@@ -25,7 +25,13 @@ namespace KonacniProjekat
         public int KvizId {get; set;}
 
         [BindProperty]
+        public int? PostojiVec {get; set;}
+
+        [BindProperty]
         public Kvizovi OvajKviz {get; set;}
+
+        [BindProperty]
+        public string TrenutniNaziv {get; set;}
 
         [BindProperty(SupportsGet=true)]
         public string IzabranaZnamenitostString {get; set;}
@@ -37,10 +43,12 @@ namespace KonacniProjekat
 
         public SelectList IzborTuraLista {get; set;}
         
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id, int? postoji)
         {
             KvizId = id;
             OvajKviz = await dbContext.Kvizovi.FindAsync((uint)KvizId);
+
+            PostojiVec = postoji;
 
             if(OvajKviz == null)
             {
@@ -57,6 +65,7 @@ namespace KonacniProjekat
                 IzabranaZnamenitostString = await dbContext.Znamenitosti.Where(x => x.IdZnamenitosti == OvajKviz.IdZnamenitostiK).Select(x => x.NazivZnamenitosti).FirstOrDefaultAsync();
             }
 
+            TrenutniNaziv = OvajKviz.NazivKviza;
 
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
             IzborZnamenitostiLista = new SelectList(qZnamenitosti.ToList());
@@ -77,6 +86,14 @@ namespace KonacniProjekat
 
             OvajKviz.IdKviza = (uint)KvizId;   
        
+            Kvizovi PostojiKviz = await dbContext.Kvizovi.Where(x => x.NazivKviza == OvajKviz.NazivKviza).FirstOrDefaultAsync();
+            if (PostojiKviz != null)
+            {
+                PostojiVec = 1;
+                OvajKviz.NazivKviza = TrenutniNaziv;
+                return RedirectToPage("./KvizIzmeni", new{id = KvizId, postoji = PostojiVec});
+            }
+
             IQueryable<Znamenitosti> qIzabranaZnamenitost = dbContext.Znamenitosti.Where(x=>x.NazivZnamenitosti == IzabranaZnamenitostString);
             IQueryable<Ture> qIzabranaTura = dbContext.Ture.Where(x=>x.NazivTure == IzabranaTuraString);
 

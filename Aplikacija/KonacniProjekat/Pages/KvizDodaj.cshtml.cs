@@ -22,7 +22,10 @@ namespace KonacniProjekat
 
         [BindProperty]
         public Kvizovi NoviKviz {get; set;}
-        
+
+        [BindProperty]
+        public int? PostojiVec {get; set;}
+
         [BindProperty(SupportsGet=true)]
         public string IzabranaZnamenitostString {get; set;}
 
@@ -33,7 +36,7 @@ namespace KonacniProjekat
 
         public SelectList IzborTuraLista {get; set;}
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? postoji)
         {
             IQueryable<string> qZnamenitosti = dbContext.Znamenitosti.Select(X=>X.NazivZnamenitosti);
             IzborZnamenitostiLista = new SelectList(await qZnamenitosti.ToListAsync());
@@ -41,6 +44,8 @@ namespace KonacniProjekat
             IQueryable<string> qTure = dbContext.Ture.Where(x => x.TipTure == "T").Select(X=>X.NazivTure);
             IzborTuraLista = new SelectList(await qTure.ToListAsync());
            
+            PostojiVec = postoji;
+
            return this.Page();
         }
 
@@ -70,6 +75,13 @@ namespace KonacniProjekat
             else
             {
                 NoviKviz.IdTureKNavigation = await qIzabranaTura.FirstOrDefaultAsync();
+            }
+
+            Kvizovi PostojiKviz = await dbContext.Kvizovi.Where(x => x.NazivKviza == NoviKviz.NazivKviza).FirstOrDefaultAsync();
+            if (PostojiKviz != null)
+            {
+                PostojiVec = 1;
+                return RedirectToPage("./KvizDodaj", new{postoji = PostojiVec});
             }
 
             dbContext.Kvizovi.Add(NoviKviz);

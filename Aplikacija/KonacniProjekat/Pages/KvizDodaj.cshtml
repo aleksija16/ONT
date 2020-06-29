@@ -16,6 +16,7 @@
  @if (SessionClass.TipKorisnika == "A")    
  {           
     <form method="post">
+        <input type="hidden" asp-for="@Model.PostojiVec" />
         <div class="dodaj">
             <div id="formContent">
                 <label class="form-control">Naziv kviza:</label> <input asp-for="NoviKviz.NazivKviza" class="form-control" placeholder="Naziv kviza" />
@@ -31,6 +32,11 @@
             </div>
         </div>
     </form>
+
+    @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji kviz sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+    }
  }
  else
  {

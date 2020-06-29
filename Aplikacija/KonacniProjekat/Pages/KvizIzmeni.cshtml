@@ -18,6 +18,9 @@
 @if(SessionClass.TipKorisnika == "A")
 {
     <form method="post">
+        <input type="hidden" asp-for="@Model.PostojiVec" />
+        <input type="hidden" asp-for="@Model.TrenutniNaziv" />
+        <input type="hidden" asp-for="@Model.KvizId" />
       <div class="izmeni">
          <div id="formContent">
                 <input type="hidden" asp-for="KvizId" />
@@ -35,9 +38,17 @@
                 <button type="submit" class="dugme">Izmeni kviz</button>
             </div>
         </div>
+        
     </form>
+
+    @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji kviz sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+    }
+
 }
 else
 {
   <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Nemate pristup ovoj stranici, samo admin može da dodaje pitanja u kviz. <i class="fas fa-exclamation-triangle"></i></div>   
 }
+

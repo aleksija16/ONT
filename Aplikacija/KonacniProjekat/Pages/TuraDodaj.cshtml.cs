@@ -24,6 +24,9 @@ namespace KonacniProjekat
         public Ture NovaTura { get; set; }
 
         [BindProperty]
+        public int? PostojiVec {get; set;}
+
+        [BindProperty]
         public Rezervacije NovaRezervacija {get; set;}
 
         [BindProperty]
@@ -49,7 +52,7 @@ namespace KonacniProjekat
         [BindProperty]
         public int? ZauzetVodic {get; set;}
 
-        public async Task<IActionResult> OnGetAsync(int? zauzet)
+        public async Task<IActionResult> OnGetAsync(int? zauzet, int? postoji)
         {
             SessionId = SessionClass.SessionId;
 
@@ -59,6 +62,8 @@ namespace KonacniProjekat
             IList<string> SviVodiciPrezimena = await qVodici.Select(x => x.PrezimeVodica).ToListAsync();
 
             ZauzetVodic = zauzet;
+            PostojiVec = postoji;
+
 
             if (SessionClass.TipKorisnika == "T")
             {
@@ -109,6 +114,13 @@ namespace KonacniProjekat
             }
 			
 			NovaTura.TipTure="T";
+
+            Ture PostojiTura = await dbContext.Ture.Where(x => x.NazivTure == NovaTura.NazivTure).FirstOrDefaultAsync();
+            if(PostojiTura != null)
+            {
+                PostojiVec = 1;
+                return RedirectToPage("./TuraDodaj", new{postoji = PostojiVec});
+            }
 
             string daniOdrzavanjaTure = "";
             foreach (int i in IzabraniDani)

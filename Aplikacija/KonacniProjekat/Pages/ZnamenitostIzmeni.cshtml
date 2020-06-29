@@ -17,9 +17,18 @@ ViewData["Title"]="Izmena znamenitosti";
 @if(SessionClass.TipKorisnika=="A")
 {
 <form method="post">
+
+  <input type="hidden" asp-for="@Model.PostojiVec" />
+
+      @if (Model.PostojiVec != null && Model.PostojiVec != 0)
+      {
+        <div class="alert alert-danger" role="alert" style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Već postoji znamenitost sa tim nazivom. <i class="fas fa-exclamation-triangle"></i></div>
+      }
+
     <div class="izmeni">
         <div id="formContent">
-        <input type="hidden" asp-for="ZnamenitostId"/>
+        <input type="hidden" asp-for="@Model.ZnamenitostId"/>
+        <input type="hidden" asp-for="@Model.TrenutniNaziv" />
         <label class="form-control">Naziv: </label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.NazivZnamenitosti"  required></textarea>
         <label class="form-control">Lokacija:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Lokacija"></textarea>
         <label class="form-control">Opis:</label> <textarea class="form-control" asp-for="TrenutnaZnamenitost.Opis"></textarea> 

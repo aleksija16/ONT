@@ -22,6 +22,9 @@ namespace KonacniProjekat
         public Ture OvaTura {get; set;}
 
         [BindProperty]
+        public int? PostojiVec {get; set;}
+
+        [BindProperty]
         public IList<Znamenitosti> SveZnamenitostiLista {get; set;}
 
         public SelectList SviVodici {get; set;}
@@ -60,11 +63,13 @@ namespace KonacniProjekat
             dbContext = db;
         }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id, int? postoji)
         {
             TuraId = id;
           
             OvaTura = await dbContext.Ture.Include(x => x.IdVodicaNavigation).Where( x => x.IdTure == (uint)id).FirstOrDefaultAsync();
+
+            PostojiVec = postoji;
 
             if (OvaTura == null)
             {
@@ -162,6 +167,13 @@ namespace KonacniProjekat
 
             OvaTura.IdTure = (uint) id;
             OvaTura.TipTure = await dbContext.Ture.Where(x => x.IdTure == (uint)id).Select(x => x.TipTure).FirstOrDefaultAsync();
+
+            Ture PostojiTura = await dbContext.Ture.Where(x => x.NazivTure == OvaTura.NazivTure).FirstOrDefaultAsync();
+            if (PostojiTura != null)
+            {
+                PostojiVec = 1;
+                return RedirectToPage("./TuraIzmeni", new{id = TuraId, postoji = PostojiVec});
+            }
 
             if(IzabraniVodic == null)
             {
