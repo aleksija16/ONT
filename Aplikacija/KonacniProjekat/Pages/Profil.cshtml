@@ -61,7 +61,7 @@
         </div>
     </div>
     <div id="ocenjivanje" class="tab-pane fade">
-        <h3>Ocene koje ste dali vodicima</h3>   
+        <h3>Ocene koje ste dali vodičima</h3>   
         <div>
             <table class="table table-bordered">
                 <thead>
@@ -77,7 +77,14 @@
                         <tr>
                                 <td>@ocene.IdOcenjivanja</td>
                                 <td>@ocene.IdVodicaONavigation.ImeVodica @ocene.IdVodicaONavigation.PrezimeVodica</td>
-                                <td>@ocene.IdTureONavigation.NazivTure</td>
+                                @if(ocene.IdTureO!=null)
+                                {
+                                    <td>@ocene.IdTureONavigation.NazivTure</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
                                 <td>@ocene.Ocena</td>
                             </tr>
                         }
