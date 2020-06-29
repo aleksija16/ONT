@@ -56,7 +56,7 @@ namespace KonacniProjekat.Models
                 entity.HasIndex(e => e.IdVodicaAnk)
                     .HasName("IdVodicaAnk_idx");
 
-				entity.Property(e => e.IdAnkete).HasColumnType("int(10) unsigned");																   
+                entity.Property(e => e.IdAnkete).HasColumnType("int(10) unsigned");																   
 				entity.Property(e => e.FizickaZahtevnostTure).HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.IdTureAnk).HasColumnType("int(10) unsigned");
@@ -65,12 +65,12 @@ namespace KonacniProjekat.Models
 
                 entity.Property(e => e.IdVodicaAnk).HasColumnType("int(10) unsigned");
 
-                entity.Property(e => e.InformisanostVodica).HasColumnType("int(10) unsigned");						  																																																																											   																					  
-				entity.Property(e => e.Komentar)
+                entity.Property(e => e.InformisanostVodica).HasColumnType("int(10) unsigned");
+                entity.Property(e => e.Komentar)
                     .HasColumnType("varchar(1000)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
-				entity.Property(e => e.KonacnaOcena).HasColumnType("int(10) unsigned");																	   
+                entity.Property(e => e.KonacnaOcena).HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.NajdosadnijaZnamenitost)
                     .HasColumnType("varchar(45)")
@@ -82,7 +82,7 @@ namespace KonacniProjekat.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-				 entity.Property(e => e.OrganizovanostTure).HasColumnType("int(10) unsigned");																			 
+                entity.Property(e => e.OrganizovanostTure).HasColumnType("int(10) unsigned");
                 entity.Property(e => e.TipTuriste)
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
@@ -91,7 +91,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdTureAnkNavigation)
                     .WithMany(p => p.Anketa)
                     .HasForeignKey(d => d.IdTureAnk)
-                    .OnDelete(DeleteBehavior.SetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("IdTureAnk");
 
                 entity.HasOne(d => d.IdTuristeAnkNavigation)
@@ -103,7 +103,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdVodicaAnkNavigation)
                     .WithMany(p => p.Anketa)
                     .HasForeignKey(d => d.IdVodicaAnk)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("IdVodicaAnk");
             });
 
@@ -206,7 +206,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdTureKNavigation)
                     .WithMany(p => p.Kvizovi)
                     .HasForeignKey(d => d.IdTureK)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("IdTureK");
 
                 entity.HasOne(d => d.IdZnamenitostiKNavigation)
@@ -238,6 +238,7 @@ namespace KonacniProjekat.Models
                 entity.HasOne(d => d.IdTureONavigation)
                     .WithMany(p => p.OcenjivanjeVodica)
                     .HasForeignKey(d => d.IdTureO)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("IdTureO");
 
                 entity.HasOne(d => d.IdTuristeONavigation)
